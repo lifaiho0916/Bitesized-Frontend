@@ -41,6 +41,8 @@ export const biteAction = {
             dispatch({ type: SET_LOADING_TRUE })
             dispatch({ type: SET_BITE, payload: null })
             dispatch({ type: SET_DIALOG_STATE, payload: "" })
+            dispatch({ type: SET_BITES, payload: [] })
+            dispatch({ type: SET_USERS, payload: [] })
             const responses = await Promise.all([
                 api.getAllBites(),
                 api.getOwnersOfBites()

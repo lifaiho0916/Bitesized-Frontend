@@ -30,7 +30,7 @@ const TeaserCardPopUp = (props: any) => {
   return (
     <div className="teaser-pop-up-wrapper" style={display ? { visibility: 'visible', opacity: 1 } : {}}>
       <div className="teaser-main-wrapper"
-        style={{ width: `${width > 500 ? 500 : width}px`, height: `${(width > 500 ? 500 : width) * 1.71}px` }}
+        style={{ width: `${width > 500 ? 500 : width}px`, height: `${(width > 500 ? 500 : width) * 1.76}px` }}
         onClick={() => { setPlay(!play) }}>
         <ReactPlayer
           className="react-player"

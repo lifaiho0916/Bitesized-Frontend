@@ -177,7 +177,7 @@ const CreateBite = () => {
             />
             <div className="create-bite">
                 <div className="uploaded-vidoes"
-                    style={{ height: bite.videos.length === 0 ? '0px' : width > 940 ? '480px' : '160px' }}
+                    style={{ height: bite.videos.length === 0 ? '0px' : width > 940 ? '495px' : '160px' }}
                 >
                     {bite.videos.map((video: any, index: any) => (
                         <div className="uploaded-video" key={index}>

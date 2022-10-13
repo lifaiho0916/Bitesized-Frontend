@@ -58,15 +58,7 @@ const Header = () => {
     return true;
   }
 
-  const gotoHome = () => {
-    if (location.pathname === '/dareme/create' && isDaremeData()) dispatch({ type: SET_DIALOG_STATE, payload: { type: "createDareMe", state: true } });
-    else {
-      dispatch({ type: SET_USERS, payload: [] });
-      dispatch({ type: SET_DAREMES, payload: [] });
-      navigate("/");
-    }
-  }
-
+  const gotoHome = () => { navigate("/") }
   const gotoAdminHome = () => { navigate('/admin') }
   const gotoCreate = () => { navigate("/bite/create_type") }
 

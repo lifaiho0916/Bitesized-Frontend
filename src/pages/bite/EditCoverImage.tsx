@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import AvatarEditor from 'react-avatar-editor'
-import ContainerBtn from "../../components/general/containerBtn"
 import { BackIcon } from "../../assets/svg"
 import NextBtn from "../../assets/img/next-grey.png"
 import { SET_BITE } from "../../redux/types"
@@ -92,7 +91,7 @@ const EditCoverImage = () => {
                         ref={setEditorRef}
                         image={bite.videos[videoIndex]?.coverUrl.preview}
                         width={220}
-                        height={377}
+                        height={389}
                         border={15}
                         color={[0, 0, 0, 0.6]} // RGBA
                         scale={1.0}
