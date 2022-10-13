@@ -252,7 +252,7 @@ const CreateBite = () => {
                             id={`element${index}`}
                             key={index}
                             url={video.videoUrl.preview}
-                            onReady={() => { if (video.coverUrl === null) getFirstFrame(index) }}
+                            onReady={() => { if (video.coverUrl === null) setTimeout(() => getFirstFrame(index), 1000) }}
                         />
                     ))}
                 </div>

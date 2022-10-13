@@ -1,12 +1,11 @@
 import { useState, useRef } from "react"
 import ReactPlayer from "react-player"
-import { MuteVolumeIcon, UnMuteVolumeIcon, PlayIcon } from "../../assets/svg"
+import { PlayIcon } from "../../assets/svg"
 import "../../assets/styles/TeaserCardStyle.scss"
 
 const TeaserCard = (props: any) => {
   const { cover, teaser, type, border } = props
   const [play, setPlay] = useState(false)
-  const [muted, setMuted] = useState(true)
   const playerRef = useRef<ReactPlayer | null>(null)
 
   return (
@@ -14,8 +13,7 @@ const TeaserCard = (props: any) => {
       onClick={() => {
         if (play) {
           setPlay(false)
-          setMuted(true)
-          playerRef.current ?.seekTo(0)
+          playerRef.current?.seekTo(0)
         }
       }}
     >
@@ -35,19 +33,21 @@ const TeaserCard = (props: any) => {
             style={{ borderRadius: border ? border : '0px' }}
             ref={playerRef}
             url={teaser}
-            muted={muted}
             playing={play}
             playsinline={true}
+            config={{
+              file: {
+                attributes: {
+                  controlsList: 'nodownload noremoteplayback noplaybackrate',
+                  disablePictureInPicture: true,
+                }
+              }
+            }}
+            controls
             onProgress={(progress) => {
-              if (progress.playedSeconds >= progress.loadedSeconds) playerRef.current ?.seekTo(0);
+              if (progress.playedSeconds >= progress.loadedSeconds) playerRef.current?.seekTo(0);
             }}
           />
-          <div className="mute-icon" onClick={(e) => {
-            e.stopPropagation()
-            setMuted(!muted)
-          }}>
-            {muted === true ? <MuteVolumeIcon color="white" /> : <UnMuteVolumeIcon color="white" />}
-          </div>
         </>
       }
       {!play &&
