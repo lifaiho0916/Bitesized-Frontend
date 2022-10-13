@@ -17,8 +17,10 @@ export const CreateBite = (data: any) => API.post('/api/bite/create', data)
 
 export const getAllBites = () => API.get('/api/bite')
 export const unLockBite = (id: any, data: any) => API.put(`/api/bite/${id}/unlock`, data)
+export const getBitesByPersonalisedUrl = (url: any) => API.get(`/api/bite/personalurl/${url}`)
 
 export const getOwnersOfBites = () => API.get('/api/auth/owners')
+export const getUserByPersonalisedUrl = (url: any) => API.get(`/api/auth/personalurl/${url}`)
 
 export const googleSignin = (data: any) => API.post('/api/auth/googleSignin', data);
 export const googleSignup = (data: any) => API.post('/api/auth/googleSignup', data);

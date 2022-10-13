@@ -68,17 +68,17 @@ const AuthRoute = (props: routeProps) => {
         if (props.routeType === 'private') {
             if (localStorage.getItem(`${process.env.REACT_APP_CREATO_TOKEN}`)) {
                 const decoded: any = decode(token);
-                if (decoded.exp * 1000 < new Date().getTime()) dispatch(authAction.logout(navigate));
-            } else navigate("/");
+                if (decoded.exp * 1000 < new Date().getTime()) dispatch(authAction.logout(navigate))
+            } else navigate("/")
         }
-    }, [navigate, props.routeType]);
+    }, [navigate, props.routeType])
 
     useEffect(() => {
         if (localStorage.getItem(`${process.env.REACT_APP_CREATO_TOKEN}`)) {
             const decoded: any = decode(token)
             if (decoded.exp * 1000 < new Date().getTime()) dispatch(authAction.logout(navigate))
             else dispatch(authAction.getAuthData())
-        } else navigate("/")
+        }
     }, [])
 
     return (

@@ -6,10 +6,8 @@ import Button from "../general/button"
 import Avatar from "../general/avatar"
 import {
   EditIcon,
-  // FacebookIcon,
   InstagramIcon,
   MoreIcon,
-  // TwitterIcon,
   YoutubeIcon,
 } from "../../assets/svg"
 import { SET_PROFILE_DATA } from "../../redux/types"
@@ -72,12 +70,12 @@ const ProfileHeader = (props: any) => {
   }, [profileUser, contexts.CREATOR_CATEGORY_LIST])
 
   useEffect(() => {
-    if (user && profileUser) {
-      profileUser.subscribed_users.forEach((item: any) => {
-        if (item + "" === user.id + "") setSubscribed(true)
-      })
-    }
-  }, [user, profileUser]);
+    // if (user && profileUser) {
+    //   profileUser.subscribed_users.forEach((item: any) => {
+    //     if (item + "" === user.id + "") setSubscribed(true)
+    //   })
+    // }
+  }, [user, profileUser])
 
   const subscribedUser = async () => {
     try {

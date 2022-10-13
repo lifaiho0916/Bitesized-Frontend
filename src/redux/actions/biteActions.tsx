@@ -59,6 +59,27 @@ export const biteAction = {
         }
     },
 
+    getProfileSessions: (personalisedUrl: any) => async (dispatch: Dispatch<any>) => {
+        try {
+            dispatch({ type: SET_LOADING_TRUE })
+            dispatch({ type: SET_BITES, payload: [] })
+            dispatch({ type: SET_USERS, payload: [] })
+            const responses = await Promise.all([
+                api.getBitesByPersonalisedUrl(personalisedUrl),
+                api.getUserByPersonalisedUrl(personalisedUrl)
+            ])
+
+            dispatch({ type: SET_LOADING_FALSE })
+            if (responses[0].data.success && responses[1].data.success) {
+                dispatch({ type: SET_BITES, payload: responses[0].data.payload.bites })
+                dispatch({ type: SET_USERS, payload: responses[1].data.payload.users })
+            }
+        } catch (err) {
+            console.log(err)
+            dispatch({ type: SET_LOADING_FALSE })
+        }
+    },
+
     unLockBite: (id: any, currency: any, amount: any, rate: any, token: any) => async (dispatch: Dispatch<any>, getState: any) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
