@@ -125,7 +125,6 @@ const BiteCardHome = (props: any) => {
                                     }
                                 }}
                                 url={`${process.env.REACT_APP_SERVER_URL}/${bite.videos[videoIndex].videoUrl}`}
-                                muted={true}
                                 playing={play}
                                 playsinline={true}
                                 controls

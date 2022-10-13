@@ -214,6 +214,7 @@ const Auth = (props: any) => {
               </div>
             )}
             onSuccess={responseGoogleSuccess}
+            onFailure={(err) => console.log(err)}
             cookiePolicy={"single_host_origin"}
           />
           {/* <FacebookLogin
