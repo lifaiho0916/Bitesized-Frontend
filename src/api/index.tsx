@@ -18,9 +18,11 @@ export const CreateBite = (data: any) => API.post('/api/bite/create', data)
 export const getAllBites = () => API.get('/api/bite')
 export const unLockBite = (id: any, data: any) => API.put(`/api/bite/${id}/unlock`, data)
 export const getBitesByPersonalisedUrl = (url: any, userId: any) => API.get(`/api/bite/personalurl/${url}${userId ? `?userId=${userId}` : ''}`)
+export const getBitesList = () => API.get('/api/bite/bites')
 
 export const getOwnersOfBites = () => API.get('/api/auth/owners')
 export const getUserByPersonalisedUrl = (url: any) => API.get(`/api/auth/personalurl/${url}`)
+export const getCreatorsByCategory = (data: any) => API.post('/api/auth/creators', data)
 
 export const googleSignin = (data: any) => API.post('/api/auth/googleSignin', data);
 export const googleSignup = (data: any) => API.post('/api/auth/googleSignup', data);
@@ -38,7 +40,6 @@ export const getUserFromUrl = (data: any) => API.post('/api/auth/userFromUrl', d
 export const getTipState = () => API.get('/api/auth/tip_state')
 export const setLanguage = (data: any) => API.post('/api/auth/setting/lang', data);
 export const inviteFriend = (data: any) => API.post('/api/auth/invite_friend', data)
-export const getCreatorsByCategory = (data: any) => API.post('/api/auth/creators', data)
 //Dareme API
 export const publishDareme = () => API.post('/api/dareme/publish');
 export const getDraftDareme = () => API.post('/api/dareme/draft');

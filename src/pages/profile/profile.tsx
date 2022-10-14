@@ -89,6 +89,7 @@ const Profile = () => {
         bite={bite}
         handleSubmit={() => {
           dispatch({ type: SET_DIALOG_STATE, payload: "" })
+          navigate(`/${user.personalisedUrl}`)
         }}
       />
       <PaymentForm
@@ -108,7 +109,11 @@ const Profile = () => {
         {isSame ?
           <>
             <div className="profile-menu">
-              <ProfileMenu menu={code === null ? "purchase" : "mybites"} url={authuser ? authuser.personalisedUrl : ''} />
+              <ProfileMenu
+                selectedText={code === null ? "My Purchases" : "My Bites"}
+                texts={["My Purchases", "My Bites"]}
+                urls={authuser ? [authuser.personalisedUrl, `${authuser.personalisedUrl}?mybites`] : ["", ""]}
+              />
             </div>
             <div className="creators-bite">
               {(bites.length > 0 && authuser) ?

@@ -1,4 +1,5 @@
 .creator-comp-wrapper {
+  box-sizing: border-box;
   width: 320px;
   padding: 15px 10px;
   background: #FFFFFF;
@@ -30,8 +31,7 @@
 
   .buttons {
     margin: 20px auto 0px auto;
-    width: 280px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
   }
 }

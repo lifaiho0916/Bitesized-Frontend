@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Avatar from '../general/avatar'
 import Button from '../general/button'
 import { LanguageContext } from '../../routes/authRoute'
-import CONSTANT from '../../constants/constant'
-import { TipIcon, ProfileIcon } from '../../assets/svg'
+import { ProfileIcon } from '../../assets/svg'
 import '../../assets/styles/profile/components/creatorStyle.scss'
 
 const Creator = (props: any) => {
@@ -27,19 +26,13 @@ const Creator = (props: any) => {
         ))}
       </div>
       <div className="buttons">
-        <Button 
-          text={"FanWall"}
+        <Button
+          text={"Profile"}
           fillStyle="outline"
           color="primary"
-          icon={[<ProfileIcon color="#EFA058" />,<ProfileIcon color="white" />,<ProfileIcon color="white" />]}
-          handleSubmit={() => { navigate(`/${user?.personalisedUrl}/fanwall`) }}
-        />
-        <Button 
-          text={"Tip Donuts"}
-          fillStyle="outline"
-          color="primary"
-          icon={[<TipIcon color="#EFA058" />, <TipIcon color="white" />, <TipIcon color="white" />]} 
-          handleSubmit={() => { navigate(`/${user?.personalisedUrl}/tip`) }}
+          width={"80px"}
+          icon={[<ProfileIcon color="#EFA058" />, <ProfileIcon color="white" />, <ProfileIcon color="white" />]}
+          handleSubmit={() => { navigate(`/${user?.personalisedUrl}`) }}
         />
       </div>
     </div>

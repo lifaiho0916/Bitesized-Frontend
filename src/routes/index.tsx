@@ -3,11 +3,14 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import AuthRoute from './authRoute'
 import Auth from "../pages/auth"
 import Home from "../pages/home"
-import Create from '../pages/create'
 
 import CreateType from '../pages/bite/CreateType'
 import CreateBite from '../pages/bite/CreateBite'
 import EditCoverImage from '../pages/bite/EditCoverImage'
+
+import Profile from '../pages/profile/profile'
+import Creators from '../pages/profile/creators'
+import Bites from '../pages/profile/Bites'
 
 import CreateDareme from "../pages/dareme/create/createDareme"
 import UploadVideo from "../pages/dareme/create/uploadVideo"
@@ -28,7 +31,6 @@ import FundmeVoters from '../pages/fundme/fund/fundmeVoters'
 import FundmeResult from '../pages/fundme/fund/fundmeResult'
 import FundmeDonutWish from '../pages/fundme/fund/donutWish'
 
-import Profile from '../pages/profile/profile'
 import ProfileFanwall from '../pages/profile/profileFanwall'
 import ProfileEdit from '../pages/profile/edit/profileEdit'
 
@@ -43,7 +45,6 @@ import Language from '../pages/profile/setting/language'
 import ShopDonuts from '../pages/profile/shopDonuts'
 import Socialaccount from '../pages/profile/edit/socialAccount'
 import Categories from '../pages/profile/edit/categories'
-import Creators from '../pages/profile/creators'
 
 import DareMeDetails from '../pages/dareme/dare/DareMeDetails'
 import DaremeVoters from '../pages/dareme/dare/daremeVoters'
@@ -104,7 +105,10 @@ const AppRoutes = () => {
       <Route path="bite/create/paid" element={<AuthRoute child={<CreateBite />} routeType="private" />} />
       <Route path="bite/create/edit_thumbnail" element={<AuthRoute child={<EditCoverImage />} routeType="private" />} />
 
-      <Route path="create" element={<AuthRoute child={<Create />} routeType="private" />} />
+      <Route path="/:creatorLink" element={<AuthRoute child={<Profile />} />} />
+      <Route path="creators" element={<AuthRoute child={<Creators />} />} />
+      <Route path="bites" element={<AuthRoute child={<Bites />} />} />
+
       <Route path="dareme/create" element={<AuthRoute child={<CreateDareme />} routeType="private" />} />
       <Route path="/:creatorLink/tip" element={<AuthRoute child={<TipDonut />} />} />
       <Route path="/tipmethod" element={<AuthRoute child={<TipMethod />} />} />
@@ -128,10 +132,6 @@ const AppRoutes = () => {
       <Route path="fundme/:fundmeId/voters" element={<AuthRoute child={<FundmeVoters />} routeType="private" />} />
       <Route path="fundme/result/:fundmeId" element={<AuthRoute child={<FundmeResult />} />} />
 
-      <Route path="/:creatorLink" element={<AuthRoute child={<Profile />} />} />
-      <Route path="/:creatorLink/fanwall" element={<AuthRoute child={<ProfileFanwall />} />} />
-
-      <Route path="creators" element={<AuthRoute child={<Creators />} />} />
       <Route path="myaccount/edit" element={<AuthRoute child={<ProfileEdit />} routeType="private" />} />
       <Route path="myaccount/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
       <Route path="myaccount/edit/connect_social" element={<AuthRoute child={<Socialaccount />} routeType="private" />} />

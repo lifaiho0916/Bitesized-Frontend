@@ -37,6 +37,7 @@ const Home = () => {
     return category
   }
   const gotoCreators = () => { navigate('/creators') }
+  const gotoBites = () => { navigate('/bites') }
   const gotoCreatoProfile = (url: any) => {
     dispatch({ type: SET_USERS, payload: [] })
     navigate(url)
@@ -79,6 +80,7 @@ const Home = () => {
         bite={bite}
         handleSubmit={() => {
           dispatch({ type: SET_DIALOG_STATE, payload: "" })
+          navigate(`/${user.personalisedUrl}`)
         }}
       />
       <PaymentForm
@@ -96,6 +98,7 @@ const Home = () => {
       {bites.length > 0 &&
         <div className="section" style={{ marginTop: '20px' }}>
           <div className="title">Bite-sized Knowledge 💡</div>
+          <div className="see-more" onClick={gotoBites}>See More</div>
           <div className="daremes scroll-bar">
             {bites.map((bite: any, i: any) => (
               <div className="dareme" key={i}>
