@@ -4,12 +4,12 @@ import { useNavigate, useLocation, useSearchParams } from "react-router-dom"
 import { biteAction } from "../../redux/actions/biteActions"
 import ProfileHeader from "../../components/profile/profileHeader"
 import ProfileMenu from "../../components/profileMenu"
-import ContainerBtn from "../../components/general/containerBtn"
+import Button from "../../components/general/button"
 import BiteCardProfile from "../../components/bite/BiteCardProfile"
 import PurchaseModal from "../../components/modals/PurchaseModal"
 import PaymentForm from "../../components/stripe/paymentForm"
 import UnLockFreeModal from "../../components/modals/UnLockFreeModal"
-import { CreatoCoinIcon } from "../../assets/svg"
+import { AddIcon, CreatoCoinIcon } from "../../assets/svg"
 import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE } from "../../redux/types"
 import "../../assets/styles/profile/profileStyle.scss"
 
@@ -37,7 +37,7 @@ const Profile = () => {
   useEffect(() => {
     const personalisedUrl = location.pathname.substring(1)
     dispatch(biteAction.getProfileSessions(personalisedUrl, user?.id))
-  }, [location, dispatch, user])
+  }, [location.pathname, dispatch, user])
 
   useEffect(() => {
     if (authuser && user && user.id === authuser._id) setIsSame(true)
@@ -110,7 +110,69 @@ const Profile = () => {
             <div className="profile-menu">
               <ProfileMenu menu={code === null ? "purchase" : "mybites"} url={authuser ? authuser.personalisedUrl : ''} />
             </div>
-            
+            <div className="creators-bite">
+              {(bites.length > 0 && authuser) ?
+                <div className="bite-card">
+                  {bites.filter((bite: any) => {
+                    if (code === null) return String(bite.owner._id) !== String(authuser._id)
+                    else return String(bite.owner._id) === String(authuser._id)
+                  }).sort((first: any, second: any) => {
+                    if (user) {
+                      let firstDate: any = "2222"
+                      let secondDate: any = "2222"
+                      let firstIndex = first.purchasedUsers.findIndex((purchaseInfo: any) => String(purchaseInfo.purchasedBy) === String(user.id))
+                      let secondIndex = second.purchasedUsers.findIndex((purchaseInfo: any) => String(purchaseInfo.purchasedBy) === String(user.id))
+                      if (firstIndex !== -1) firstDate = first.purchasedUsers[firstIndex].purchasedAt
+                      if (secondIndex !== -1) secondDate = second.purchasedUsers[secondIndex].purchasedAt
+                      if (firstDate > secondDate) return 1
+                      else if (firstDate < secondDate) return -1
+                      else {
+                        if (first.date < second.date) return 1
+                        else if (first.date > second.date) return -1
+                        return 0
+                      }
+                    } else {
+                      if (first.currency && second.currency === null) return 1
+                      else if (first.currency === null && second.currency) return -1
+                      else {
+                        if (first.date < second.date) return 1
+                        else if (first.date > second.date) return -1
+                        return 0
+                      }
+                    }
+                  })
+                    .map((bite: any, index: any) => (
+                      <div className="profile-bite" key={index}>
+                        <BiteCardProfile bite={bite} setBite={setBite} same={isSame} />
+                      </div>
+                    ))}
+                </div> :
+                <div className="no-data">
+                  <span>There is no "Bite" yet </span>
+                  {code !== null &&
+                    <div
+                      style={{
+                        marginTop: '20px',
+                        display: 'flex',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      <Button
+                        text="Create"
+                        fillStyle="fill"
+                        color="primary"
+                        shape="rounded"
+                        width={"300px"}
+                        icon={[
+                          <AddIcon color="white" />, <AddIcon color="white" />, <AddIcon color="white" />
+                        ]}
+                        handleSubmit={() => navigate('/bite/create_type')}
+                      />
+                    </div>
+                  }
+                </div>
+              }
+            </div>
           </>
           :
           <div className="creators-bite">
@@ -154,11 +216,6 @@ const Profile = () => {
               :
               <div className="no-data">
                 <span>There is no "Bite" yet </span>
-                {/* {(authuser && user && user.personalisedUrl === authuser.personalisedUrl) ?
-                  <div style={{ width: '330px', margin: '0px auto' }} onClick={() => { navigate("/create") }}>
-                    <ContainerBtn text="Create" styleType="fill" icon={[<AddIcon color="white" />, <AddIcon color="white" />]} />
-                  </div>
-                } */}
               </div>
             }
           </div>

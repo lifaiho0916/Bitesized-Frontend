@@ -9,7 +9,7 @@ import NextBtn from "../../assets/img/next-bright.png"
 import "../../assets/styles/bite/BiteCardProfileStyle.scss"
 
 const BiteCardProfile = (props: any) => {
-    const { bite, setBite } = props
+    const { bite, setBite, same } = props
     const navigate = useNavigate()
     const contexts = useContext(LanguageContext)
     const userState = useSelector((state: any) => state.auth)
@@ -76,10 +76,14 @@ const BiteCardProfile = (props: any) => {
     return (
         <div className="bite-card-profile-wrapper">
             <div className="unlock-purchase-info"
-                style={{ background: bite.currency ? lock ? '#30D8CE' : '#65E265' : '#F8907A' }}
+                style={{
+                    background:
+                        same ? (user && user.id === bite.owner._id) ? '#EFA058' : '#65E265'
+                            : bite.currency ? lock ? '#30D8CE' : '#65E265' : '#F8907A'
+                }}
             >
-                {(user && user.id === bite.owner._id) ?
-                    <span style={{ marginRight: '5px' }}>My Bite</span>
+                {same ?
+                    <span style={{ marginRight: '5px' }}>{(user && user.id === bite.owner._id) ? 'My Bite' : 'Unlocked'}</span>
                     :
                     <span style={{ marginRight: '5px' }}>{bite.currency ? lock ? displayPrice(bite.currency, bite.price) : 'Unlocked' : 'Free'}</span>
                 }
