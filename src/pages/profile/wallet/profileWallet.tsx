@@ -14,7 +14,6 @@ import Dialog from "../../../components/general/dialog";
 import Button from "../../../components/general/button";
 import Title from "../../../components/general/title";
 import ContainerBtn from "../../../components/general/containerBtn";
-import PayoutDonuts from "../../../components/stripe/payoutDonuts";
 import { LanguageContext } from "../../../routes/authRoute";
 import { SET_PREVIOUS_ROUTE, SET_TRANSACTIONS } from "../../../redux/types";
 import { transactionActions } from "../../../redux/actions/transactionActions";
@@ -76,26 +75,6 @@ const ProfileWallet = () => {
         <Title title={contexts.HEADER_TITLE.MY_DONUTS} back={() => { navigate(`/${user.personalisedUrl}`) }} />
       </div>
       <div className="profile-wallet">
-        <PayoutDonuts 
-          display={stripePayout}
-          exit={() => { setStripePayout(false) }}
-          wrapExit={() => { setStripePayout(false) }}
-          amount={amount}
-          maxnum={Math.floor(user?.wallet / 10.0) * 10}
-          setAmount={setAmount}
-          buttons={[
-            {
-              text: 'Payout',
-              handleClick: () => {
-                if(Number(amount) > (Math.floor(user?.wallet / 10.0) * 10)) alert('Payout error')
-                else {
-                  setStripePayout(false)
-                  dispatch(paymentAction.stripePayout(Number(amount)))
-                }
-              }
-            }
-          ]}
-        />
         <Dialog
           display={openConnectStripe}
           wrapExit={() => { setOpenConnectStripe(false); }}

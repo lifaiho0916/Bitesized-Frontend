@@ -22,23 +22,12 @@ import Balance from '../pages/profile/wallet/balance'
 import Invitefriends from '../pages/profile/setting/inviteFriends'
 import Payment from '../pages/profile/setting/payment'
 import Language from '../pages/profile/setting/language'
-import ShopDonuts from '../pages/profile/shopDonuts'
 import Socialaccount from '../pages/profile/edit/socialAccount'
 import Categories from '../pages/profile/edit/categories'
 
 import AdminHome from '../pages/admin/home'
 import UserList from '../pages/admin/userList'
-import DareMeList from '../pages/admin/dareme/dareMeList'
-import AdminDaremeDetail from '../pages/admin/dareme/AdminDaremeDetail'
-import DareMeTitile from '../pages/admin/dareme/dareMeTitle'
-import DareMeOptions from '../pages/admin/dareme/dareMeOptions'
-import FundMeList from '../pages/admin/fundme/fundMeList'
-import AdminFundmeDetail from '../pages/admin/fundme/AdminFundmeDetail'
-import FundMeTitle from '../pages/admin/fundme/fundMeTitle'
 
-import AdminTransactions from '../pages/admin/transactions/adminTransactions'
-import UserTransactions from '../pages/admin/transactions/userTransactions'
-import ReferralLinkDetail from '../pages/admin/referral/referralLinkDetail'
 import Error404 from '../pages/error/error404'
 
 ////// ADMIN NOTIFICATIONS /////////
@@ -70,7 +59,6 @@ const AppRoutes = () => {
       <Route path="myaccount/wallet" element={<AuthRoute child={<ProfileWallet />} routeType="private" />} />
       <Route path="myaccount/wallet/donuts-transactions" element={<AuthRoute child={<Balance />} routeType="private" />} />
       <Route path="myaccount/wallet/earning" element={<AuthRoute child={<Earning />} routeType="private" />} />
-      <Route path="myaccount/shop" element={<AuthRoute child={<ShopDonuts />} routeType="private" />} />
       <Route path="myaccount/setting" element={<AuthRoute child={<GeneralSetting />} routeType="private" />} />
       <Route path="myaccount/setting/language" element={<AuthRoute child={<Language />} routeType="private" />} />
       <Route path="myaccount/setting/invitefriends" element={<AuthRoute child={<Invitefriends />} routeType="private" />} />
@@ -79,21 +67,10 @@ const AppRoutes = () => {
 
       <Route path="admin" element={<AuthRoute child={<AdminHome />} routeType="private" />} />
       <Route path="admin/users" element={<AuthRoute child={<UserList />} routeType="private" />} />
-      <Route path="admin/daremes" element={<AuthRoute child={<DareMeList />} routeType="private" />} />
-      <Route path="admin/daremes/details/:daremeId" element={<AuthRoute child={<AdminDaremeDetail />} routeType="private" />} />
-      <Route path="admin/daremes/details/:daremeId/title" element={<AuthRoute child={<DareMeTitile />} routeType="private" />} />
-      <Route path="admin/daremes/details/:daremeId/options" element={<AuthRoute child={<DareMeOptions />} routeType="private" />} />
-      <Route path="admin/fundmes" element={<AuthRoute child={<FundMeList />} routeType="private" />} />
-      <Route path="admin/fundmes/details/:fundmeId" element={<AuthRoute child={<AdminFundmeDetail />} routeType="private" />} />
-      <Route path="admin/fundmes/details/:fundmeId/title" element={<AuthRoute child={<FundMeTitle />} routeType="private" />} />
-      <Route path="admin/fundmes/details/:fundmeId/options" element={<AuthRoute child={<DareMeOptions />} routeType="private" />} />
-      <Route path="admin/transactions" element={<AuthRoute child={<AdminTransactions />} routeType="private" />} />
-      <Route path="admin/transactions/user" element={<AuthRoute child={<UserTransactions />} routeType="private" />} />
       <Route path="admin/notifications" element={<AuthRoute child={<Notifications />} routeType="private" />} />
       <Route path="admin/notifications/new" element={<AuthRoute child={<NotificationNew />} routeType="private" />} />
       <Route path="admin/notifications/setting" element={<AuthRoute child={<NotificationSetting />} routeType="private" />} />
       <Route path="admin/notifications/history" element={<AuthRoute child={<NotificationHistory />} routeType="private" />} />
-      <Route path="admin/referral_links/:userId" element={<AuthRoute child={<ReferralLinkDetail />} routeType="private" />} />
 
       <Route path="/not-founder-cover" element={<Error404 />} />
       <Route path="*" element={<Navigate to="/not-founder-cover" replace />} />
