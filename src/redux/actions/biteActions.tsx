@@ -59,13 +59,13 @@ export const biteAction = {
         }
     },
 
-    getProfileSessions: (personalisedUrl: any) => async (dispatch: Dispatch<any>) => {
+    getProfileSessions: (personalisedUrl: any, userId: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
             dispatch({ type: SET_BITES, payload: [] })
             dispatch({ type: SET_USERS, payload: [] })
             const responses = await Promise.all([
-                api.getBitesByPersonalisedUrl(personalisedUrl),
+                api.getBitesByPersonalisedUrl(personalisedUrl, userId),
                 api.getUserByPersonalisedUrl(personalisedUrl)
             ])
 

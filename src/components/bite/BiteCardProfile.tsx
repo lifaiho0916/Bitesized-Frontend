@@ -2,7 +2,6 @@ import { useState, useContext, useEffect } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import ReactPlayer from "react-player"
-import Avatar from "../general/avatar"
 import Button from "../general/button"
 import { LanguageContext } from "../../routes/authRoute"
 import { ClockIcon, NoOfPeopleIcon, PlayIcon, UnlockIcon } from "../../assets/svg"
@@ -79,7 +78,11 @@ const BiteCardProfile = (props: any) => {
             <div className="unlock-purchase-info"
                 style={{ background: bite.currency ? lock ? '#30D8CE' : '#65E265' : '#F8907A' }}
             >
-                <span>{bite.currency ? lock ? displayPrice(bite.currency, bite.price) : 'Unlocked' : 'Free'}</span>&nbsp;&nbsp;
+                {(user && user.id === bite.owner._id) ?
+                    <span style={{ marginRight: '5px' }}>My Bite</span>
+                    :
+                    <span style={{ marginRight: '5px' }}>{bite.currency ? lock ? displayPrice(bite.currency, bite.price) : 'Unlocked' : 'Free'}</span>
+                }
                 {bite.purchasedUsers.length > 0 &&
                     <>
                         <NoOfPeopleIcon color="white" width={18} height={18} />

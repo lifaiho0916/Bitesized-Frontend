@@ -10,7 +10,7 @@ const ProfileMenu = (props: any) => {
       <div className={props.menu === "purchase" ? "dareme-fanwall-active" : 'dareme-fanwall'} onClick={() => { navigate(`/${url}`) }}>
         My purchases
       </div>
-      <div className={props.menu === "mine" ? 'dareme-fanwall-active' : "dareme-fanwall"} onClick={() => { navigate(`/${url}/fanwall`) }}>
+      <div className={props.menu === "mybites" ? 'dareme-fanwall-active' : "dareme-fanwall"} onClick={() => { navigate(`/${url}?mybites`) }}>
         My Bites
       </div>
     </div>
