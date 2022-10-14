@@ -6,7 +6,7 @@ import ProfileHeader from "../../components/profile/profileHeader"
 import ProfileMenu from "../../components/profileMenu"
 import ContainerBtn from "../../components/general/containerBtn"
 import DareMeProfileCard from "../../components/profile/dareMeProfileCard"
-import { Dare2Icon, HotIcon, AddIcon, RewardIcon, CreatoCoinIcon } from "../../assets/svg"
+import { CreatoCoinIcon } from "../../assets/svg"
 import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE } from "../../redux/types"
 import { LanguageContext } from "../../routes/authRoute"
 import "../../assets/styles/profile/profileStyle.scss"
@@ -16,11 +16,9 @@ const Profile = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const contexts = useContext(LanguageContext)
-  const daremeState = useSelector((state: any) => state.dareme)
-  const fundmeState = useSelector((state: any) => state.fundme)
+  const biteState = useSelector((state: any) => state.bite)
   const userState = useSelector((state: any) => state.auth)
-  const { daremes } = daremeState
-  const { fundmes } = fundmeState
+  const { bites } = biteState
   const { user, users } = userState
   const authuser = users.length ? users[0] : null
   const [isSame, setIsSame] = useState(false)
@@ -51,32 +49,13 @@ const Profile = () => {
               <CreatoCoinIcon color="#EFA058" width={30} height={30} />
               <p>{authuser ? authuser.name : ''}'s Bite</p>
             </div>
-            {(daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUser === true).length > 0)
-              || (fundmes.length > 0 && fundmes.filter((fundme: any) => fundme.isUser === true).length > 0) ?
-              <>
-                {(daremes.length > 0 && daremes.filter((dareme: any) => dareme.isUser === true).length > 0) &&
-                  <div className="bite-card">
-                    {daremes.filter((dareme: any) => dareme.isUser === true)
-                      .map((dareme: any, index: any) => (
-                        <div className="profile-bite" key={index}>
-                          <DareMeProfileCard
-                            item={{
-                              id: dareme._id,
-                              title: dareme.title,
-                              teaser: `${process.env.REACT_APP_SERVER_URL}/${dareme.teaser}`,
-                              cover: `${process.env.REACT_APP_SERVER_URL}/${dareme.cover}`,
-                              size: dareme.sizeType,
-                              leftTime: dareme.time,
-                              voters: dareme.voteInfo.length,
-                              donuts: dareme.donuts
-                            }}
-                            handleSubmit={() => { dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${authuser?.personalisedUrl}` }) }}
-                          />
-                        </div>
-                      ))}
+            {bites.length > 0 ?
+              <div className="bite-card">
+                {bites.map((bite: any, index: any) => (
+                  <div className="profile-bite" key={index}>
                   </div>
-                }
-              </>
+                ))}
+              </div>
               :
               <div className="no-data">
                 <span>There is no "Bite" yet </span>

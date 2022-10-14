@@ -7,9 +7,9 @@ import Button from "../general/button"
 import { LanguageContext } from "../../routes/authRoute"
 import { ClockIcon, NoOfPeopleIcon, PlayIcon, UnlockIcon } from "../../assets/svg"
 import NextBtn from "../../assets/img/next-bright.png"
-import "../../assets/styles/bite/BiteCardHomeStyle.scss"
+import "../../assets/styles/bite/BiteCardProfileStyle.scss"
 
-const BiteCardHome = (props: any) => {
+const BiteCardProfile = (props: any) => {
     const { bite, setBite } = props
     const navigate = useNavigate()
     const contexts = useContext(LanguageContext)
@@ -50,8 +50,8 @@ const BiteCardHome = (props: any) => {
         return res
     }
 
-    const findPurchasedUser = (purchaseInfo: any) => {
-        return String(purchaseInfo.purchasedBy) !== String(user.id)
+    const findPurchasedUser = (userId: any) => {
+        return String(userId) !== String(user.id)
     }
 
     const checkUnLock = () => {
@@ -75,7 +75,7 @@ const BiteCardHome = (props: any) => {
     useEffect(() => { checkUnLock() }, [bite, user])
 
     return (
-        <div className="bite-card-home-wrapper">
+        <div className="bite-card-profile-wrapper">
             <div className="top-info">
                 <div className="owner-avatar">
                     <Avatar
@@ -176,4 +176,4 @@ const BiteCardHome = (props: any) => {
     )
 }
 
-export default BiteCardHome
+export default BiteCardProfile
