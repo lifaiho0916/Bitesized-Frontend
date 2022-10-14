@@ -49,18 +49,18 @@
       }
 
       .item {
-        margin: 5px;
+        margin: 5px 15px;
       }
     }
   }
 
   .creators {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 20px auto 0px auto;
+    margin-top: 20px;
 
     .creator {
-      margin: 10px;
+      margin: 15px auto;
+      padding: 0px 20px;
+      max-width: 850px;
     }
   }
 
@@ -75,26 +75,10 @@
   }
 }
 
-@media screen and (min-width: 1020px) {
-  .creator-wrapper {
-    .creators {
-      max-width: 1020px;
-    }
-  }
-}
-
 @media screen and (min-width: 900px) {
   .creator-wrapper {
     .bites {
       max-width: 900px;
-    }
-  }
-}
-
-@media screen and (max-width: 1019px) {
-  .creator-wrapper {
-    .creators {
-      max-width: 680px;
     }
   }
 }
@@ -120,10 +104,6 @@
   .creator-wrapper {
     .page-header {
       margin: 15px auto;
-    }
-
-    .creators {
-      max-width: 340px;
     }
   }
 }

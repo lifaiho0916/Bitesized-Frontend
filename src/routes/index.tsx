@@ -12,26 +12,6 @@ import Profile from '../pages/profile/profile'
 import Creators from '../pages/profile/creators'
 import Bites from '../pages/profile/Bites'
 
-import CreateDareme from "../pages/dareme/create/createDareme"
-import UploadVideo from "../pages/dareme/create/uploadVideo"
-import DaremeTitile from "../pages/dareme/create/daremeTitle"
-import DareOptions from "../pages/dareme/create/dareOptions"
-import Preview from '../pages/dareme/create/preview'
-import CoverImage from '../pages/dareme/create/coverImage'
-import DaremeRewards from '../pages/dareme/create/rewards'
-
-import CreateFundme from '../pages/fundme/create/createFundme'
-import FundUploadVideo from "../pages/fundme/create/uploadVideo"
-import FundmeTitle from "../pages/fundme/create/fundmeTitle"
-import FundmePreview from '../pages/fundme/create/preview'
-import FundCoverImage from '../pages/fundme/create/coverImage'
-import FundMeDetails from '../pages/fundme/fund/FundMeDetails'
-import FundmeRewards from '../pages/fundme/create/rewards'
-import FundmeVoters from '../pages/fundme/fund/fundmeVoters'
-import FundmeResult from '../pages/fundme/fund/fundmeResult'
-import FundmeDonutWish from '../pages/fundme/fund/donutWish'
-
-import ProfileFanwall from '../pages/profile/profileFanwall'
 import ProfileEdit from '../pages/profile/edit/profileEdit'
 
 import ProfileWallet from '../pages/profile/wallet/profileWallet'
@@ -46,19 +26,6 @@ import ShopDonuts from '../pages/profile/shopDonuts'
 import Socialaccount from '../pages/profile/edit/socialAccount'
 import Categories from '../pages/profile/edit/categories'
 
-import DareMeDetails from '../pages/dareme/dare/DareMeDetails'
-import DaremeVoters from '../pages/dareme/dare/daremeVoters'
-import SupportCreator from '../pages/dareme/dare/supportCreator'
-import DareCreator from '../pages/dareme/dare/dareCreator'
-import GameOn from '../pages/dareme/dare/gameOn'
-import DaremeResult from '../pages/dareme/dare/daremeResult'
-import DaremeDonutWish from '../pages/dareme/dare/donutWish'
-
-import PostFanwall from '../pages/fanwall/postFanwall'
-import UploadFanWallVideo from '../pages/fanwall/uploadVideo'
-import FanwallDetails from "../pages/fanwall/fanwallDetail"
-import WatchContent from '../pages/fanwall/watchContent'
-
 import AdminHome from '../pages/admin/home'
 import UserList from '../pages/admin/userList'
 import DareMeList from '../pages/admin/dareme/dareMeList'
@@ -68,30 +35,17 @@ import DareMeOptions from '../pages/admin/dareme/dareMeOptions'
 import FundMeList from '../pages/admin/fundme/fundMeList'
 import AdminFundmeDetail from '../pages/admin/fundme/AdminFundmeDetail'
 import FundMeTitle from '../pages/admin/fundme/fundMeTitle'
-import Tipping from '../pages/admin/tip/tipping'
-import TipProfile from '../pages/admin/tip/tipProfile'
-import FanwallList from '../pages/admin/fanwall/fanwallList'
-import FanwallDetail from '../pages/admin/fanwall/fanwallDetail'
-import PostAdminFanwall from '../pages/admin/fanwall/postFanwall'
-import UploadAdminVideo from '../pages/admin/fanwall/uploadVideo'
 
 import AdminTransactions from '../pages/admin/transactions/adminTransactions'
 import UserTransactions from '../pages/admin/transactions/userTransactions'
-import ReferralLinks from '../pages/admin/referral/referralLinks'
 import ReferralLinkDetail from '../pages/admin/referral/referralLinkDetail'
 import Error404 from '../pages/error/error404'
-
-import TipDonut from '../pages/tip/tipDonut'
-import TipMethod from '../pages/tip/tipMethod'
-import TipEditor from '../pages/admin/tip/tipEditor'
 
 ////// ADMIN NOTIFICATIONS /////////
 import Notifications from '../pages/admin/notification/notifications'
 import NotificationSetting from '../pages/admin/notification/notificationSetting'
 import NotificationNew from '../pages/admin/notification/notificationNew'
 import NotificationHistory from '../pages/admin/notification/notificationHistory'
-
-import CoverImageSelect from '../components/coverImage'
 
 const AppRoutes = () => {
   return (
@@ -109,28 +63,6 @@ const AppRoutes = () => {
       <Route path="creators" element={<AuthRoute child={<Creators />} />} />
       <Route path="bites" element={<AuthRoute child={<Bites />} />} />
 
-      <Route path="dareme/create" element={<AuthRoute child={<CreateDareme />} routeType="private" />} />
-      <Route path="/:creatorLink/tip" element={<AuthRoute child={<TipDonut />} />} />
-      <Route path="/tipmethod" element={<AuthRoute child={<TipMethod />} />} />
-
-      <Route path="dareme/create/teaser" element={<AuthRoute child={<UploadVideo />} routeType="private" />} />
-      <Route path="dareme/create/teaser/cover" element={<AuthRoute child={<CoverImage />} routeType="private" />} />
-      <Route path="dareme/create/title" element={<AuthRoute child={<DaremeTitile />} routeType="private" />} />
-      <Route path="dareme/create/options" element={<AuthRoute child={<DareOptions />} routeType="private" />} />
-      <Route path="dareme/create/rewards" element={<AuthRoute child={<DaremeRewards />} routeType="private" />} />
-      <Route path="dareme/preview" element={<AuthRoute child={<Preview />} routeType="private" />} />
-
-      <Route path="fundme/create" element={<AuthRoute child={<CreateFundme />} routeType="private" />} />
-      <Route path="fundme/create/title" element={<AuthRoute child={<FundmeTitle />} routeType="private" />} />
-      <Route path="fundme/create/teaser/cover" element={<AuthRoute child={<FundCoverImage />} routeType="private" />} />
-      <Route path="fundme/create/rewards" element={<AuthRoute child={<FundmeRewards />} routeType="private" />} />
-      <Route path="fundme/preview" element={<AuthRoute child={<FundmePreview />} routeType="private" />} />
-      <Route path="fundme/create/teaser" element={<AuthRoute child={<FundUploadVideo />} routeType="private" />} />
-      <Route path="fundme/details/:fundmeId" element={<AuthRoute child={<FundMeDetails />} />} />
-      <Route path="fundme/details/:fundmeId/wish" element={<AuthRoute child={<FundmeDonutWish />} routeType="private" />} />
-      <Route path="fundme/:fundmeId/voters" element={<AuthRoute child={<FundmeVoters />} routeType="private" />} />
-      <Route path="fundme/:fundmeId/voters" element={<AuthRoute child={<FundmeVoters />} routeType="private" />} />
-      <Route path="fundme/result/:fundmeId" element={<AuthRoute child={<FundmeResult />} />} />
 
       <Route path="myaccount/edit" element={<AuthRoute child={<ProfileEdit />} routeType="private" />} />
       <Route path="myaccount/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
@@ -145,46 +77,23 @@ const AppRoutes = () => {
       <Route path="myaccount/setting/payment" element={<AuthRoute child={<Payment />} routeType="private" />} />
       <Route path="notifications" element={<AuthRoute child={<ProfileNotifications />} routeType="private" />} />
 
-      <Route path="dareme/details/:daremeId" element={<AuthRoute child={<DareMeDetails />} />} />
-      <Route path="dareme/:daremeId/voters" element={<AuthRoute child={<DaremeVoters />} routeType="private" />} />
-      <Route path="dareme/:daremeId/support/:optionId" element={<AuthRoute child={<SupportCreator />} />} />
-      <Route path="dareme/:daremeId/support/:optionId/wish" element={<AuthRoute child={<DaremeDonutWish />} routeType="private" />} />
-      <Route path="dareme/result/:daremeId" element={<AuthRoute child={<DaremeResult />} />} />
-      <Route path="dareme/dare/:daremeId" element={<AuthRoute child={<DareCreator />} routeType="private" />} />
-      <Route path="dareme/dare/:daremeId/gameon/:optionId" element={<AuthRoute child={<GameOn />} routeType="private" />} />
-
       <Route path="admin" element={<AuthRoute child={<AdminHome />} routeType="private" />} />
       <Route path="admin/users" element={<AuthRoute child={<UserList />} routeType="private" />} />
       <Route path="admin/daremes" element={<AuthRoute child={<DareMeList />} routeType="private" />} />
       <Route path="admin/daremes/details/:daremeId" element={<AuthRoute child={<AdminDaremeDetail />} routeType="private" />} />
       <Route path="admin/daremes/details/:daremeId/title" element={<AuthRoute child={<DareMeTitile />} routeType="private" />} />
       <Route path="admin/daremes/details/:daremeId/options" element={<AuthRoute child={<DareMeOptions />} routeType="private" />} />
-      <Route path="admin/daremes/details/:daremeId/cover" element={<AuthRoute child={<CoverImageSelect />} routeType="private" />} />
       <Route path="admin/fundmes" element={<AuthRoute child={<FundMeList />} routeType="private" />} />
       <Route path="admin/fundmes/details/:fundmeId" element={<AuthRoute child={<AdminFundmeDetail />} routeType="private" />} />
       <Route path="admin/fundmes/details/:fundmeId/title" element={<AuthRoute child={<FundMeTitle />} routeType="private" />} />
       <Route path="admin/fundmes/details/:fundmeId/options" element={<AuthRoute child={<DareMeOptions />} routeType="private" />} />
-      <Route path="admin/fundmes/details/:fundmeId/cover" element={<AuthRoute child={<CoverImageSelect />} routeType="private" />} />
       <Route path="admin/transactions" element={<AuthRoute child={<AdminTransactions />} routeType="private" />} />
       <Route path="admin/transactions/user" element={<AuthRoute child={<UserTransactions />} routeType="private" />} />
-      <Route path="admin/tipping" element={<AuthRoute child={<Tipping />} routeType="private" />} />
-      <Route path="admin/tipping/profile/:url" element={<AuthRoute child={<TipProfile />} routeType="private" />} />
-      <Route path="admin/tipping/profile/:url/:id/edit" element={<AuthRoute child={<TipEditor />} routeType="private" />} />
       <Route path="admin/notifications" element={<AuthRoute child={<Notifications />} routeType="private" />} />
       <Route path="admin/notifications/new" element={<AuthRoute child={<NotificationNew />} routeType="private" />} />
       <Route path="admin/notifications/setting" element={<AuthRoute child={<NotificationSetting />} routeType="private" />} />
       <Route path="admin/notifications/history" element={<AuthRoute child={<NotificationHistory />} routeType="private" />} />
-      <Route path="admin/fanwalls" element={<AuthRoute child={<FanwallList />} routeType="private" />} />
-      <Route path="admin/fanwalls/details/:fanwallId" element={<AuthRoute child={<FanwallDetail />} routeType="private" />} />
-      <Route path="admin/fanwalls/details/post/:itemId" element={<AuthRoute child={<PostAdminFanwall />} routeType="private" />} />
-      <Route path="admin/fanwalls/details/upload" element={<AuthRoute child={<UploadAdminVideo />} routeType="private" />} />
-      <Route path="admin/referral_links" element={<AuthRoute child={<ReferralLinks />} routeType="private" />} />
       <Route path="admin/referral_links/:userId" element={<AuthRoute child={<ReferralLinkDetail />} routeType="private" />} />
-
-      <Route path="fanwall/post/:itemId" element={<AuthRoute child={<PostFanwall />} routeType="private" />} />
-      <Route path="fanwall/post/:itemId/upload" element={<AuthRoute child={<UploadFanWallVideo />} routeType="private" />} />
-      <Route path="fanwall/detail/:fanwallId" element={<AuthRoute child={<FanwallDetails />} />} />
-      <Route path="fanwall/detail/:fanwallId/content" element={<AuthRoute child={<WatchContent />} />} />
 
       <Route path="/not-founder-cover" element={<Error404 />} />
       <Route path="*" element={<Navigate to="/not-founder-cover" replace />} />

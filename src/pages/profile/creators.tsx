@@ -32,8 +32,7 @@ const Creators = () => {
     return false
   }
 
-  useEffect(() => { dispatch(authAction.getCreatorsByCategory(categories)) }, [categories])
-  useEffect(() => { window.scrollTo(0, 0) }, [location])
+  useEffect(() => { dispatch(authAction.getCreatorsByCategory(categories)) }, [categories, dispatch, location])
 
   return (
     <div className="creator-wrapper">

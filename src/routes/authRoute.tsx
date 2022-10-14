@@ -81,6 +81,10 @@ const AuthRoute = (props: routeProps) => {
         }
     }, [])
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [location])
+
     return (
         <LanguageContext.Provider value={contexts}>
             {location.pathname.indexOf('admin') !== -1 ? <Layout1 child={props.child} /> : <Layout child={props.child} />}

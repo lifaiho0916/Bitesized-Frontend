@@ -13,17 +13,21 @@ const Creator = (props: any) => {
 
   return (
     <div className="creator-comp-wrapper">
-      <Avatar
-        avatar={(user && user.avatar) ? user.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${user.avatar}` : user.avatar : ''}
-        size={'mobile'}
-      />
-      <div className="creator-name">
-        <span>{user?.name}</span>
-      </div>
-      <div className="creator-category">
-        {user?.categories.map((category: any, index: any, array: any) => (
-          <span key={index}>{contexts.CREATOR_CATEGORY_LIST[category]}{index < array.length - 1 && "/"}</span>
-        ))}
+      <div className="avatar-userinfo">
+        <Avatar
+          avatar={(user && user.avatar) ? user.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${user.avatar}` : user.avatar : ''}
+          size={'mobile'}
+        />
+        <div className="name-category">
+          <div className="creator-name">
+            <span>{user?.name}</span>
+          </div>
+          <div className="creator-category">
+            {user?.categories.map((category: any, index: any, array: any) => (
+              <span key={index}>{contexts.CREATOR_CATEGORY_LIST[category]}{index < array.length - 1 && "/"}</span>
+            ))}
+          </div>
+        </div>
       </div>
       <div className="buttons">
         <Button

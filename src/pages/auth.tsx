@@ -119,9 +119,7 @@ const Auth = (props: any) => {
       if (props.isSignin) dispatch(authAction.appleSigninUser(userData, navigate, prevRoute))
       else dispatch(authAction.appleSignupUser(userData, navigate, prevRoute))
     }
-  };
-
-  useEffect(() => { window.scrollTo(0, 0) }, [location])
+  }
 
   useEffect(() => {
     if (dlgState.state) {
