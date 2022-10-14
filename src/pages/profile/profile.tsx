@@ -118,8 +118,8 @@ const Profile = () => {
                     else return String(bite.owner._id) === String(authuser._id)
                   }).sort((first: any, second: any) => {
                     if (user) {
-                      let firstDate: any = "2222"
-                      let secondDate: any = "2222"
+                      let firstDate: any = "2322"
+                      let secondDate: any = "2322"
                       let firstIndex = first.purchasedUsers.findIndex((purchaseInfo: any) => String(purchaseInfo.purchasedBy) === String(user.id))
                       let secondIndex = second.purchasedUsers.findIndex((purchaseInfo: any) => String(purchaseInfo.purchasedBy) === String(user.id))
                       if (firstIndex !== -1) firstDate = first.purchasedUsers[firstIndex].purchasedAt

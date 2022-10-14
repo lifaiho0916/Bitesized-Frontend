@@ -28,6 +28,22 @@
     .uploaded-vidoes {
       display: flex;
       justify-content: space-evenly;
+      position: relative;
+
+      .bin-btn {
+        z-index: 1;
+        cursor: pointer;
+        top: -20px;
+        right: -20px;
+        position: absolute;
+        background-color: red;
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
       .uploaded-video {
         display: flex;
@@ -164,6 +180,13 @@
       .uploaded-vidoes {
         .uploaded-video {
           width: 90px;
+
+          .bin-btn {
+            width: 24px;
+            height: 24px;
+            top: -12px;
+            right: -12px;
+          }
 
           .time-duration {
             bottom: 5px;

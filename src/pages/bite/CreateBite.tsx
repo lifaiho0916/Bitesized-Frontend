@@ -9,9 +9,9 @@ import CurrencySelect from "../../components/stripe/CurrencySelect"
 import ContainerBtn from "../../components/general/containerBtn"
 import Dialog from "../../components/general/dialog"
 import Button from "../../components/general/button"
-import { AddIcon, BackIcon, PlayIcon } from "../../assets/svg"
+import { AddIcon, BackIcon, PlayIcon, RemoveIcon } from "../../assets/svg"
 import { biteAction } from "../../redux/actions/biteActions"
-import { SET_BITE, SET_PREVIOUS_ROUTE } from "../../redux/types"
+import { SET_BITE, SET_BITE_THUMBNAILS, SET_PREVIOUS_ROUTE } from "../../redux/types"
 import CONSTANT from "../../constants/constant"
 import "../../assets/styles/bite/CreateBiteStyle.scss"
 
@@ -41,7 +41,7 @@ const CreateBite = () => {
     const [publishEnable, setPublishEnable] = useState(false)
     const [videoIndex, setVideoIndex] = useState(0)
     const [free, setFree] = useState(false)
-    const { bite } = biteState
+    const { bite, thumbnails } = biteState
     const width = useWindowSize()
 
     const [openVideoPopup, setOpenVideoPopUp] = useState(false)
@@ -87,13 +87,16 @@ const CreateBite = () => {
             const video = document.createElement('video')
             video.preload = "metadata"
             video.onloadedmetadata = evt => {
-                let videos: any = bite.videos
+                let videos = bite.videos
+                let thumbs = thumbnails
+                thumbs.push('')
                 videos.push({
                     coverUrl: null,
                     videoUrl: loadFile,
                     duration: video.duration
                 })
                 dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
+                dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
             }
             video.src = URL.createObjectURL(loadFile)
         }
@@ -112,12 +115,21 @@ const CreateBite = () => {
         const file = new File([blob], 'cover.png', blob)
         const cover = Object.assign(file, { preview: url })
         const videos = bite.videos
+        const thumbs = thumbnails
         videos[index].coverUrl = cover
+        thumbs[index] = cover
         dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
+        dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
     }
     const gotoEditThumbnail = () => {
         dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
         navigate('/bite/create/edit_thumbnail')
+    }
+    const removeVideo = (index: any) => {
+        let videos = bite.videos.filter((video: any, i: any) => i !== index)
+        let thumbs = thumbnails.filter((thumb: any, i: any) => i !== index)
+        dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
+        dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
     }
 
     useEffect(() => {
@@ -182,26 +194,36 @@ const CreateBite = () => {
                     {bite.videos.map((video: any, index: any) => (
                         <div className="uploaded-video" key={index}>
                             {width > 940 ?
-                                <TeaserCard
-                                    cover={video.coverUrl ? video.coverUrl.preview : null}
-                                    teaser={video.videoUrl.preview}
-                                    type={"dareme"}
-                                />
+                                <>
+                                    <TeaserCard
+                                        cover={video.coverUrl ? video.coverUrl.preview : null}
+                                        teaser={video.videoUrl.preview}
+                                        type={"dareme"}
+                                    />
+                                    <div className="bin-btn" onClick={() => removeVideo(index)}>
+                                        <RemoveIcon color="white" width={30} height={30} />
+                                    </div>
+                                </>
                                 :
-                                <div className="mobile-part">
-                                    <div className="cover-image">
-                                        {video.coverUrl &&
-                                            <img
-                                                src={video.coverUrl.preview}
-                                                alt="cover Image"
-                                                width={'100%'}
-                                            />
-                                        }
+                                <>
+                                    <div className="mobile-part">
+                                        <div className="cover-image">
+                                            {video.coverUrl &&
+                                                <img
+                                                    src={video.coverUrl.preview}
+                                                    alt="cover Image"
+                                                    width={'100%'}
+                                                />
+                                            }
+                                        </div>
+                                        <div className="play-icon" onClick={() => popUpTeaser(index)}>
+                                            <PlayIcon color="white" />
+                                        </div>
                                     </div>
-                                    <div className="play-icon" onClick={() => popUpTeaser(index)}>
-                                        <PlayIcon color="white" />
+                                    <div className="bin-btn" onClick={() => removeVideo(index)}>
+                                        <RemoveIcon color="white" width={20} height={20} />
                                     </div>
-                                </div>
+                                </>
                             }
                             <div className="time-duration">
                                 <span>{displayDuration(video.duration)}</span>

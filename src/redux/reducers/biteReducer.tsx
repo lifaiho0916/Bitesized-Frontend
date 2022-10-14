@@ -7,7 +7,8 @@ const INITIAL_STATE: any = {
         currency: null,
         videos: []
     },
-    bites: []
+    bites: [],
+    thumbnails: []
 }
 
 const biteReducer = (state: any = INITIAL_STATE, action: any) => {
@@ -24,6 +25,11 @@ const biteReducer = (state: any = INITIAL_STATE, action: any) => {
                 ...state,
                 bites: payload
             }
+        case actionTypes.SET_BITE_THUMBNAILS:
+            return {
+                ...state,
+                thumbnails: payload
+            }
         case actionTypes.SET_BITE_INITIAL:
             return {
                 bite: {
@@ -32,7 +38,8 @@ const biteReducer = (state: any = INITIAL_STATE, action: any) => {
                     currency: null,
                     videos: []
                 },
-                bites: []
+                bites: [],
+                thumbnails: []
             }
         default:
             return state
