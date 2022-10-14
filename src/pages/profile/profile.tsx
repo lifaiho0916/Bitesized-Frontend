@@ -1,21 +1,19 @@
-import { useState, useEffect, useContext, useLayoutEffect } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useLocation } from "react-router-dom"
 import { biteAction } from "../../redux/actions/biteActions"
 import ProfileHeader from "../../components/profile/profileHeader"
 import ProfileMenu from "../../components/profileMenu"
 import ContainerBtn from "../../components/general/containerBtn"
-import DareMeProfileCard from "../../components/profile/dareMeProfileCard"
+import BiteCardProfile from "../../components/bite/BiteCardProfile"
 import { CreatoCoinIcon } from "../../assets/svg"
 import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE } from "../../redux/types"
-import { LanguageContext } from "../../routes/authRoute"
 import "../../assets/styles/profile/profileStyle.scss"
 
 const Profile = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
-  const contexts = useContext(LanguageContext)
   const biteState = useSelector((state: any) => state.bite)
   const userState = useSelector((state: any) => state.auth)
   const { bites } = biteState
@@ -53,6 +51,9 @@ const Profile = () => {
               <div className="bite-card">
                 {bites.map((bite: any, index: any) => (
                   <div className="profile-bite" key={index}>
+                    <BiteCardProfile
+                      bite={bite}
+                    />
                   </div>
                 ))}
               </div>

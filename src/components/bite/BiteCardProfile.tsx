@@ -50,8 +50,8 @@ const BiteCardProfile = (props: any) => {
         return res
     }
 
-    const findPurchasedUser = (userId: any) => {
-        return String(userId) !== String(user.id)
+    const findPurchasedUser = (purchasedInfo: any) => {
+        return String(purchasedInfo.purchasedBy) !== String(user.id)
     }
 
     const checkUnLock = () => {
@@ -76,26 +76,17 @@ const BiteCardProfile = (props: any) => {
 
     return (
         <div className="bite-card-profile-wrapper">
-            <div className="top-info">
-                <div className="owner-avatar">
-                    <Avatar
-                        size="mobile"
-                        avatar={bite.owner.avatar.indexOf('uploads') === -1 ? bite.owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${bite.owner.avatar}`}
-                        handleClick={() => { navigate(`/${bite.owner.personalisedUrl}`) }}
-                    />
-                </div>
-                <div className="ownername-lefttime-wrapper">
-                    <div className="ownername-lefttime">
-                        <div className="owner-name">
-                            <span>{bite.owner.name}</span>
-                        </div>
-                        <div className="left-time">
-                            <ClockIcon color="#DE5A67" width={18} height={18} />&nbsp;<span>{displayTime(bite.time)}</span>
-                        </div>
-                    </div>
-                </div>
+            <div className="unlock-purchase-info"
+                style={{ background: bite.currency ? lock ? '#30D8CE' : '#65E265' : '#F8907A' }}
+            >
+                <span>{bite.currency ? lock ? displayPrice(bite.currency, bite.price) : 'Unlocked' : 'Free'}</span>&nbsp;&nbsp;
+                {bite.purchasedUsers.length > 0 &&
+                    <>
+                        <NoOfPeopleIcon color="white" width={18} height={18} />
+                        <span>&nbsp;{bite.purchasedUsers.length} {bite.currency ? "purchased" : "unlocked"}</span>
+                    </>
+                }
             </div>
-
             <div className="bite-body">
                 <div className="video-part"
                     onClick={() => {
@@ -164,9 +155,8 @@ const BiteCardProfile = (props: any) => {
                         </div>
                     </div>
                 </div>
-                <div className={bite.currency ? "price-purchased" : "price-free"}>
-                    <span>{displayPrice(bite.currency, bite.price)}</span>
-                    {bite.purchasedUsers.length > 0 && <span style={{ marginLeft: '10px' }}><NoOfPeopleIcon color="white" width={18} height={18} />&nbsp;{bite.purchasedUsers.length} {bite.currency ? "purchased" : "unlocked"}</span>}
+                <div className="left-time">
+                    <ClockIcon color="#DE5A67" width={18} height={18} />&nbsp;<span>{displayTime(bite.time)}</span>
                 </div>
                 <div className="bite-title">
                     <span>{bite.title}</span>
