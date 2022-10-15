@@ -4,100 +4,102 @@ import * as api from '../../api'
 
 export const authAction = {
   logout: (navigate: any) => async (dispatch: Dispatch<any>) => {
-    localStorage.clear();
-    dispatch({ type: SET_USER, payload: null });
-    navigate("/");
+    localStorage.clear()
+    dispatch({ type: SET_USER, payload: null })
+    navigate("/")
   },
 
   googleSignupUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
-    api.googleSignup(userData)
-      .then((result) => {
-        const { data } = result;
-        localStorage.clear();
-        localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(data.token));
-        dispatch({ type: SET_USER, payload: data.user });
-        if (data.firstLogin === false) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } })
-        if (data.new) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } })
-        dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' })
+    try {
+      const response = await api.googleSignup(userData)
+      const { data } = response
+      if (data.success) {
+        const { payload } = data
+        localStorage.clear()
+        localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(payload.token))
+        dispatch({ type: SET_USER, payload: payload.user })
         navigate(prevRoute === '' ? '/' : prevRoute)
-      }).catch(err => console.log(err))
+      }
+    } catch (err) {
+      console.log(err)
+    }
   },
 
   googleSigninUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
-    api.googleSignin(userData)
-      .then((result) => {
-        const { data } = result;
-        localStorage.clear();
-        localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(data.token));
-        dispatch({ type: SET_USER, payload: data.user });
-        if (data.firstLogin === false) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } })
-        if (data.new) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } })
-        dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' })
+    try {
+      const response = await api.googleSignin(userData)
+      const { data } = response
+      if (data.success) {
+        const { payload } = data
+        localStorage.clear()
+        localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(payload.token))
+        dispatch({ type: SET_USER, payload: payload.user })
         navigate(prevRoute === '' ? '/' : prevRoute)
-      }).catch(err => {
-        const { data } = err.response
-        if (data.error === 'sing-up methods error') dispatch({ type: SET_DIALOG_STATE, payload: { type: 'error_signup_method', state: true } })
-      });
+      }
+    } catch (err) {
+      console.log(err)
+    }
   },
 
   appleSignupUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
-    api.appleSignup(userData)
-      .then((result) => {
-        const { data } = result;
-        localStorage.clear();
-        localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(data.token));
-        dispatch({ type: SET_USER, payload: data.user });
-        if (data.firstLogin === false) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } })
-        if (data.new) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } })
-        dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' })
+    try {
+      const response = await api.appleSignup(userData)
+      const { data } = response
+      if (data.success) {
+        const { payload } = data
+        localStorage.clear()
+        localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(payload.token))
+        dispatch({ type: SET_USER, payload: payload.user })
         navigate(prevRoute === '' ? '/' : prevRoute)
-      }).catch(err => console.log(err))
+      }
+    } catch (err) {
+      console.log(err)
+    }
   },
 
   appleSigninUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
-    api.appleSignin(userData)
-      .then((result) => {
-        const { data } = result;
-        localStorage.clear();
-        localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(data.token));
-        dispatch({ type: SET_USER, payload: data.user });
-        if (data.firstLogin === false) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome2", state: true } })
-        if (data.new) dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } })
-        dispatch({ type: SET_PREVIOUS_ROUTE, payload: '/' })
+    try {
+      const response = await api.appleSignin(userData)
+      const { data } = response
+      if (data.success) {
+        const { payload } = data
+        localStorage.clear()
+        localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(payload.token))
+        dispatch({ type: SET_USER, payload: payload.user })
         navigate(prevRoute === '' ? '/' : prevRoute)
-      }).catch(err => {
-        const { data } = err.response
-        if (data.error === 'sing-up methods error') dispatch({ type: SET_DIALOG_STATE, payload: { type: 'error_signup_method', state: true } })
-      });
+      }
+    } catch (err) {
+      console.log(err)
+    }
   },
 
-  facebookSignupUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
-    api.facebookSignup(userData)
-      .then((result) => {
-        const { data } = result;
-        localStorage.clear();
-        localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(data.token));
-        dispatch({ type: SET_USER, payload: data.user });
-        if (data.new) {
-          dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } });
-          navigate("/");
-        } else navigate(prevRoute);
-      }).catch(err => console.log(err));
-  },
+  // facebookSignupUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
+  //   api.facebookSignup(userData)
+  //     .then((result) => {
+  //       const { data } = result;
+  //       localStorage.clear();
+  //       localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(data.token));
+  //       dispatch({ type: SET_USER, payload: data.user });
+  //       if (data.new) {
+  //         dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } });
+  //         navigate("/");
+  //       } else navigate(prevRoute);
+  //     }).catch(err => console.log(err));
+  // },
 
-  facebookSigninUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
-    api.facebookSignin(userData)
-      .then((result) => {
-        const { data } = result;
-        localStorage.clear();
-        localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(data.token));
-        dispatch({ type: SET_USER, payload: data.user });
-        if (data.new) {
-          dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } });
-          navigate("/");
-        } else navigate(prevRoute);
-      }).catch(err => console.log(err));
-  },
+  // facebookSigninUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
+  //   api.facebookSignin(userData)
+  //     .then((result) => {
+  //       const { data } = result;
+  //       localStorage.clear();
+  //       localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(data.token));
+  //       dispatch({ type: SET_USER, payload: data.user });
+  //       if (data.new) {
+  //         dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } });
+  //         navigate("/");
+  //       } else navigate(prevRoute);
+  //     }).catch(err => console.log(err));
+  // },
 
   getAuthData: () => async (dispatch: Dispatch<any>) => {
     api.getAuthData()
@@ -189,21 +191,6 @@ export const authAction = {
         dispatch({ type: SET_LOADING_FALSE });
         if (data.success) dispatch({ type: SET_USERS, payload: data.user });
       }).catch(err => console.log(err));
-  },
-
-  getTipState: () => async (dispatch: Dispatch<any>) => {
-    dispatch({ type: SET_LOADING_TRUE })
-    api.getTipState()
-      .then((result) => {
-        const { data } = result
-        dispatch({ type: SET_LOADING_FALSE })
-        if (data.success) {
-          if (data.cnt > 0) {
-            dispatch({ type: SET_TIPAVAILABLE, payload: true })
-            dispatch({ type: SET_TIPFUNCTION, payload: data.tipFunction })
-          }
-        }
-      }).catch(err => console.log(err))
   },
 
   inviteFriend: (code: any, navigate: any) => async (dispatch: Dispatch<any>) => {

@@ -67,7 +67,6 @@ const ProfileEdit = () => {
     window.scrollTo(0, 0)
     dispatch({ type: SET_NAME_EXIST, payload: false })
     dispatch({ type: SET_URL_EXIST, payload: false })
-    dispatch(authAction.getTipState())
   }, [location, dispatch]);
 
   useEffect(() => {
