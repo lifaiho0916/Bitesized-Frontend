@@ -10,7 +10,7 @@ import {
   MoreIcon,
   YoutubeIcon,
 } from "../../assets/svg"
-import { SET_PROFILE_DATA } from "../../redux/types"
+import { SET_NAME_EXIST, SET_PROFILE, SET_URL_EXIST } from "../../redux/types"
 import { subscribeUser } from '../../api'
 import "../../assets/styles/profile/components/profileHeaderStyle.scss"
 
@@ -138,7 +138,18 @@ const ProfileHeader = (props: any) => {
       {same === true &&
         <div className="edit-profile-btn" style={{ justifyContent: width < 680 ? 'center' : 'flex-end' }}>
           <div className="edit-btn" onClick={() => {
-            
+            dispatch({
+              type: SET_PROFILE,
+              payload: {
+                category: [],
+                avatar: null,
+                name: null,
+                personalisedUrl: null,
+                bioText: null
+              }
+            })
+            dispatch({ type: SET_NAME_EXIST, payload: false })
+            dispatch({ type: SET_URL_EXIST, payload: false })
             navigate('/myaccount/edit')
           }}>
             <EditIcon color="white" />&nbsp;<span>Edit profile</span>

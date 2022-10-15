@@ -1,4 +1,4 @@
-import * as actionTypes from '../types';
+import * as actionTypes from '../types'
 
 const INITIAL_STATE: any = {
     user: null,
@@ -9,7 +9,7 @@ const INITIAL_STATE: any = {
     cardNum: null,
     lang: 'CH',
     payment: null,
-    profileData: {
+    profile: {
         category: [],
         avatar: null,
         name: null,
@@ -22,20 +22,30 @@ const authReducer = (state: any = INITIAL_STATE, action: any) => {
     const { payload = null } = action;
     switch (action.type) {
         case actionTypes.SET_USER:
-            state.user = payload;
-            return { ...state };
+            return {
+                ...state,
+                user: payload
+            }
         case actionTypes.SET_USERS:
-            state.users = payload;
-            return { ...state };
-        case actionTypes.SET_PROFILE_DATA:
-            state.profileData = payload;
-            return { ...state };
+            return {
+                ...state,
+                users: payload
+            }
+        case actionTypes.SET_PROFILE:
+            return {
+                ...state,
+                profile: payload
+            }
         case actionTypes.SET_NAME_EXIST:
-            state.nameExist = payload;
-            return { ...state };
+            return { 
+                ...state,
+                nameExist: payload,
+             }
         case actionTypes.SET_URL_EXIST:
-            state.urlExist = payload;
-            return { ...state };
+            return { 
+                ...state,
+                urlExit: payload
+            }
         case actionTypes.SET_STRIPEID:
             state.stripeID = payload.stripeID;
             state.cardNum = payload.cardNum;
@@ -46,16 +56,6 @@ const authReducer = (state: any = INITIAL_STATE, action: any) => {
         case actionTypes.SET_PAYMENT:
             state.payment = payload
             return { ...state }
-        case actionTypes.SET_TIPAVAILABLE:
-            return {
-                ...state,
-                tipAvailable: payload
-            }
-        case actionTypes.SET_TIPFUNCTION:
-            return {
-                ...state,
-                tipFunction: payload
-            }
         case actionTypes.SET_USER_INITIAL: {
             return {
                 user: null,
@@ -64,13 +64,14 @@ const authReducer = (state: any = INITIAL_STATE, action: any) => {
                 urlExist: false,
                 stripeID: null,
                 cardNum: null,
+                lang: 'CH',
                 payment: null,
-                lang: 'EN',
-                profileData: {
+                profile: {
                     category: [],
-                    avatarFile: null,
-                    displayName: null,
-                    creatoUrl: null
+                    avatar: null,
+                    name: null,
+                    personalisedUrl: null,
+                    bioText: null,
                 }
             }
         }

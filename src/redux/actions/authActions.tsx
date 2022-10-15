@@ -1,5 +1,5 @@
 import { Dispatch } from "redux"
-import { SET_DIALOG_STATE, SET_LOADING_FALSE, SET_LOADING_TRUE, SET_NAME_EXIST, SET_USER, SET_USERS, SET_URL_EXIST, SET_TIPAVAILABLE, SET_TIPFUNCTION, SET_PREVIOUS_ROUTE } from "../types";
+import { SET_LOADING_FALSE, SET_LOADING_TRUE, SET_NAME_EXIST, SET_USER, SET_USERS, SET_URL_EXIST, SET_TIPAVAILABLE, SET_TIPFUNCTION, SET_PREVIOUS_ROUTE } from "../types";
 import * as api from '../../api'
 
 export const authAction = {
@@ -102,11 +102,16 @@ export const authAction = {
   // },
 
   getAuthData: () => async (dispatch: Dispatch<any>) => {
-    api.getAuthData()
-      .then((result) => {
-        const { data } = result;
-        dispatch({ type: SET_USER, payload: data.user });
-      }).catch(err => console.log(err));
+    try {
+      const response = await api.getAuthData()
+      const { data } = response
+      if (data.success) {
+        const { payload } = data
+        dispatch({ type: SET_USER, payload: payload.user })
+      }
+    } catch (err) {
+      console.log(err)
+    }
   },
 
   saveProfileInfo: (name: any, creatoUrl: any, category: any, avatar: any, navigate: any) => async (dispatch: Dispatch<any>) => {
@@ -153,20 +158,30 @@ export const authAction = {
       }).catch(err => console.log(err));
   },
 
-  getExistName: (name: any) => async (dispatch: Dispatch<any>) => {
-    api.getExistName({ name: name })
-      .then((result) => {
-        const { data } = result;
-        if (data.success) dispatch({ type: SET_NAME_EXIST, payload: data.isExist });
-      }).catch(err => console.log(err));
+  checkName: (name: any) => async (dispatch: Dispatch<any>) => {
+    try {
+      const response = await api.checkName({ name: name })
+      const { data } = response
+      if (data.success) {
+        const { payload } = data
+        dispatch({ type: SET_NAME_EXIST, payload: payload.exist })
+      }
+    } catch (err) {
+      console.log(err)
+    }
   },
 
-  getExistURL: (url: any) => async (dispatch: Dispatch<any>) => {
-    api.getExistURL({ url: url })
-      .then((result) => {
-        const { data } = result;
-        if (data.success) dispatch({ type: SET_URL_EXIST, payload: data.isExist });
-      }).catch(err => console.log(err));
+  checkUrl: (url: any) => async (dispatch: Dispatch<any>) => {
+    try {
+      const response = await api.checkUrl({ url: url })
+      const { data } = response
+      if (data.success) {
+        const { payload } = data
+        dispatch({ type: SET_URL_EXIST, payload: payload.exist })
+      }
+    } catch (err) {
+      console.log(err)
+    }
   },
 
   setTipFunction: (tipValue: any, userId: any, users: any, index: any) => async (dispatch: Dispatch<any>) => {

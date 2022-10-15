@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { LanguageContext } from "../../../routes/authRoute";
 import { useSelector } from 'react-redux';
-import { SET_PROFILE_DATA } from '../../../redux/types';
+import { SET_PROFILE } from '../../../redux/types';
 import CategoryBtn from "../../../components/general/categoryBtn";
 import Button from '../../../components/general/button';
 import Title from "../../../components/general/title";
@@ -31,7 +31,7 @@ const Categories = () => {
 
   const handleSave = () => {
     const state = { ...profile, category: categories }
-    dispatch({ type: SET_PROFILE_DATA, payload: state });
+    // dispatch({ type: SET_PROFILE_DATA, payload: state });
     navigate(`/myaccount/edit`);
   }
 

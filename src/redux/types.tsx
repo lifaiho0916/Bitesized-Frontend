@@ -1,9 +1,14 @@
-export const GOOGLE_AUTH = 'GOOGLE_AUTH'
+export const SET_USER = 'SET_USER'
+export const SET_USERS = 'SET_USERS'
+export const SET_PROFILE = 'SET_PROFILE'
+export const SET_NAME_EXIST = 'SET_NAME_EXIST'
+export const SET_URL_EXIST = 'SET_URL_EXIST'
 
 export const SET_BITE = 'SET_BITE'
 export const SET_BITES = 'SET_BITES'
 export const SET_BITE_THUMBNAILS = 'SET_BITE_THUMBNAILS'
 export const SET_BITE_INITIAL = 'SET_BITE_INITIAL'
+
 
 export const SET_DAREME_INITIAL = 'SET_DAREME_INITIAL';
 export const SET_DAREME_DETAIL_INITIAL = 'SET_DAREME_DETAIL_INITIAL';
@@ -22,10 +27,6 @@ export const SET_COVER_FILE = "SET_COVER_FILE";
 export const SET_TEASER_FILE1 = "SET_TEASER_FILE1";
 export const SET_COVER_FILE1 = "SET_COVER_FILE1";
 
-export const SET_USER = 'SET_USER';
-export const SET_NAME_EXIST = 'SET_NAME_EXIST';
-export const SET_URL_EXIST = 'SET_URL_EXIST';
-export const SET_USERS = 'SET_USERS';
 export const SET_USER_INITIAL = 'SET_USER_INITIAL';
 export const SET_STRIPEID = 'SET_STRIPEID';
 export const SET_LANGUAGE = 'SET_LANGUAGE';
@@ -46,8 +47,6 @@ export const SET_NEXT_ROUTE = 'SET_NEXT_ROUTE';
 export const SET_DIALOG_STATE = 'SET_DIALOG_STATE';
 export const SET_CURRENT_DAREME = 'SET_CURRENT_DAREME';
 export const SET_CURRENT_FUNDME = 'SET_CURRENT_FUNDME';
-
-export const SET_PROFILE_DATA = 'SET_PROFILE_DATA'
 
 export const SET_ADMIN_TITLE = 'SET_ADMIN_TITLE';
 export const SET_ADMIN_CATEGORY = 'SET_ADMIN_CATEGORY';

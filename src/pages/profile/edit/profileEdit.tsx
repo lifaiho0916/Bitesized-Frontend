@@ -6,7 +6,7 @@ import { authAction } from "../../../redux/actions/authActions"
 import ContainerBtn from "../../../components/general/containerBtn"
 import Button from "../../../components/general/button"
 import Input from "../../../components/general/input"
-import { SET_NAME_EXIST, SET_PROFILE_DATA, SET_URL_EXIST } from "../../../redux/types"
+import { SET_NAME_EXIST, SET_PROFILE, SET_URL_EXIST } from "../../../redux/types"
 import { AddIcon, SpreadIcon, BackIcon } from "../../../assets/svg"
 import Dialog from "../../../components/general/dialog"
 import { LanguageContext } from "../../../routes/authRoute"
@@ -19,12 +19,11 @@ const ProfileEdit = () => {
   let imageEditor: any = null
   const userState = useSelector((state: any) => state.auth)
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const user = userState.user
+  const { user, profile } = userState
   const existName = userState.nameExist
   const existURL = userState.urlExist
-  const profile = userState.profileData
-  const [displayName, setDisplayName] = useState<string>("")
-  const [creatoURL, setCreatoURL] = useState<string>('www.creatogether.io/')
+  const [name, setName] = useState<string>("")
+  const [url, setUrl] = useState<string>('www.creatogether.io/')
   const [openLinkSocial, setOpenLinkSocial] = useState(false)
   const contexts = useContext(LanguageContext)
 
@@ -38,11 +37,11 @@ const ProfileEdit = () => {
         const blob = await res.blob()
         imageFile = new File([blob], 'avatar.png', blob)
       }
-      const url = creatoURL.substring(0, 20)
+      // const url = creatoURL.substring(0, 20)
       if (url !== 'www.creatogether.io/') alert("Wrong Url")
       else {
-        const creato = creatoURL.substring(20)
-        dispatch(authAction.saveProfileInfo(displayName, creato, profile.category, imageFile, navigate))
+        // const creato = creatoURL.substring(20)
+        // dispatch(authAction.saveProfileInfo(displayName, creato, profile.category, imageFile, navigate))
       }
     }
   };
@@ -54,32 +53,19 @@ const ProfileEdit = () => {
     if (files.length > 0) {
       const file = Object.assign(files[0], { preview: URL.createObjectURL(files[0]) })
       const state = { ...profile, avatarFile: file }
-      dispatch({ type: SET_PROFILE_DATA, payload: state })
+      dispatch({ type: SET_PROFILE, payload: state })
     }
   }
 
-  useEffect(() => {
-    dispatch({ type: SET_NAME_EXIST, payload: false })
-    dispatch({ type: SET_URL_EXIST, payload: false })
-  }, [location, dispatch]);
+  useEffect(() => { if (name !== "") dispatch(authAction.checkName(name)) }, [name, dispatch])
+  useEffect(() => { if (url !== "") dispatch(authAction.checkUrl(url)) }, [url, dispatch])
 
   useEffect(() => {
-    if (displayName !== "") dispatch(authAction.getExistName(displayName))
-  }, [displayName, dispatch]);
-
-  useEffect(() => {
-    if (creatoURL) {
-      const creato = creatoURL.substring(20)
-      dispatch(authAction.getExistURL(creato))
+    if (user && profile.name === null) {
+      setName(user.name)
+      setUrl(user.personalisedUrl)
     }
-  }, [creatoURL, dispatch])
-
-  useEffect(() => {
-    if (profile.category) {
-      setDisplayName(profile.displayName)
-      setCreatoURL(profile.creatoUrl)
-    }
-  }, [profile])
+  }, [profile, user])
 
   return (
     <div className="profile-edit-wrapper">
@@ -132,8 +118,8 @@ const ProfileEdit = () => {
             size="small"
             label={contexts.EDIT_PROFILE_LETTER.DISPLAY_NAME}
             wordCount={20}
-            title={displayName ? displayName : ''}
-            setTitle={setDisplayName}
+            title={name ? name : ''}
+            setTitle={setName}
             setFocus={() => { }}
           />
         </div>
@@ -145,13 +131,13 @@ const ProfileEdit = () => {
         <div className="url">
           <Input
             type="input"
-            placeholder="www.creatogether.io/jackychan"
+            placeholder="bitesized.creatogether.io/jackychan"
             label={contexts.EDIT_PROFILE_LETTER.PERSONALISED_URL}
             wordCount={40}
             size="small"
-            title={creatoURL ? creatoURL : ''}
+            title={url ? url : ''}
             isUrl={true}
-            setTitle={setCreatoURL}
+            setTitle={setUrl}
             setFocus={() => { }}
           />
         </div>
@@ -176,8 +162,8 @@ const ProfileEdit = () => {
         <div
           className="categories"
           onClick={() => {
-            const state = { ...profile, displayName: displayName, creatoUrl: creatoURL };
-            dispatch({ type: SET_PROFILE_DATA, payload: state });
+            const state = { ...profile, displayName: name, creatoUrl: url };
+            dispatch({ type: SET_PROFILE, payload: state });
             navigate(`/myaccount/edit/categories`);
           }}
         >
