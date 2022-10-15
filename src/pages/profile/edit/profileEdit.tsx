@@ -1,37 +1,33 @@
-import { useEffect, useState, useRef, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState, useRef, useContext } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
 import AvatarEditor from 'react-avatar-editor'
-import { authAction } from "../../../redux/actions/authActions";
-import Title from "../../../components/general/title";
-import ContainerBtn from "../../../components/general/containerBtn";
-import Button from "../../../components/general/button";
-import Input from "../../../components/general/input";
-import { SET_NAME_EXIST, SET_PROFILE_DATA, SET_URL_EXIST } from "../../../redux/types";
-import { AddIcon, SpreadIcon } from "../../../assets/svg";
-import Dialog from "../../../components/general/dialog";
-import ToggleButton from "../../../components/admin/ToggleButton";
-import { LanguageContext } from "../../../routes/authRoute";
-import { tipAction } from "../../../redux/actions/tipActions";
+import { authAction } from "../../../redux/actions/authActions"
+import Title from "../../../components/general/title"
+import ContainerBtn from "../../../components/general/containerBtn"
+import Button from "../../../components/general/button"
+import Input from "../../../components/general/input"
+import { SET_NAME_EXIST, SET_PROFILE_DATA, SET_URL_EXIST } from "../../../redux/types"
+import { AddIcon, SpreadIcon } from "../../../assets/svg"
+import Dialog from "../../../components/general/dialog"
+import { LanguageContext } from "../../../routes/authRoute"
 import "../../../assets/styles/profile/profileEditStyle.scss"
 
 const ProfileEdit = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const location = useLocation()
   let imageEditor: any = null
-  const userState = useSelector((state: any) => state.auth);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const userState = useSelector((state: any) => state.auth)
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const user = userState.user
-  const tipAvailable = userState.tipAvailable
-  const tipFunction = userState.tipFunction
-  const existName = userState.nameExist;
-  const existURL = userState.urlExist;
-  const profile = userState.profileData;
-  const [displayName, setDisplayName] = useState<string>("");
-  const [creatoURL, setCreatoURL] = useState<string>('www.creatogether.io/');
-  const [openLinkSocial, setOpenLinkSocial] = useState(false);
-  const contexts = useContext(LanguageContext);
+  const existName = userState.nameExist
+  const existURL = userState.urlExist
+  const profile = userState.profileData
+  const [displayName, setDisplayName] = useState<string>("")
+  const [creatoURL, setCreatoURL] = useState<string>('www.creatogether.io/')
+  const [openLinkSocial, setOpenLinkSocial] = useState(false)
+  const contexts = useContext(LanguageContext)
 
   const handleSave = async () => {
     if (existName === false && existURL === false) {
@@ -43,11 +39,11 @@ const ProfileEdit = () => {
         const blob = await res.blob()
         imageFile = new File([blob], 'avatar.png', blob)
       }
-      const url = creatoURL.substring(0, 20);
+      const url = creatoURL.substring(0, 20)
       if (url !== 'www.creatogether.io/') alert("Wrong Url");
       else {
-        const creato = creatoURL.substring(20);
-        dispatch(authAction.saveProfileInfo(displayName, creato, profile.category, imageFile, navigate));
+        const creato = creatoURL.substring(20)
+        dispatch(authAction.saveProfileInfo(displayName, creato, profile.category, imageFile, navigate))
       }
     }
   };
@@ -55,11 +51,11 @@ const ProfileEdit = () => {
   const setEditorRef = (editor: any) => (imageEditor = editor)
 
   const handleFileUpload = (e: any) => {
-    const files = e.target.files;
+    const files = e.target.files
     if (files.length > 0) {
-      const file = Object.assign(files[0], { preview: URL.createObjectURL(files[0]) });
-      const state = { ...profile, avatarFile: file };
-      dispatch({ type: SET_PROFILE_DATA, payload: state });
+      const file = Object.assign(files[0], { preview: URL.createObjectURL(files[0]) })
+      const state = { ...profile, avatarFile: file }
+      dispatch({ type: SET_PROFILE_DATA, payload: state })
     }
   }
 
@@ -70,15 +66,15 @@ const ProfileEdit = () => {
   }, [location, dispatch]);
 
   useEffect(() => {
-    if (displayName !== "") dispatch(authAction.getExistName(displayName));
+    if (displayName !== "") dispatch(authAction.getExistName(displayName))
   }, [displayName, dispatch]);
 
   useEffect(() => {
     if (creatoURL) {
-      const creato = creatoURL.substring(20);
-      dispatch(authAction.getExistURL(creato));
+      const creato = creatoURL.substring(20)
+      dispatch(authAction.getExistURL(creato))
     }
-  }, [creatoURL, dispatch]);
+  }, [creatoURL, dispatch])
 
   useEffect(() => {
     if (profile.category) {
@@ -164,13 +160,6 @@ const ProfileEdit = () => {
             {contexts.EDIT_PROFILE_LETTER.URL_ERROR}
           </span> : ""
         }
-        {tipAvailable &&
-          <div className="tipping-mode">
-            <div><span>Tipping Mode: &nbsp;{tipFunction ? 'Enable' : 'Disable'}</span></div>
-            <div>
-              <ToggleButton toggle={tipFunction} setToggle={() => { dispatch(tipAction.setTipFunctionByUser(!tipFunction)) }} />
-            </div>
-          </div>}
         <div
           className="social-link"
           onClick={() => {

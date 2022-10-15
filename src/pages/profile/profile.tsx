@@ -145,12 +145,11 @@ const Profile = () => {
                         return 0
                       }
                     }
-                  })
-                    .map((bite: any, index: any) => (
-                      <div className="profile-bite" key={index}>
-                        <BiteCardProfile bite={bite} setBite={setBite} same={isSame} />
-                      </div>
-                    ))}
+                  }).map((bite: any, index: any) => (
+                    <div className="profile-bite" key={index}>
+                      <BiteCardProfile bite={bite} setBite={setBite} same={isSame} />
+                    </div>
+                  ))}
                 </div> :
                 <div className="no-data">
                   <span>There is no "Bite" yet </span>

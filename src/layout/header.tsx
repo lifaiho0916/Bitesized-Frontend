@@ -25,17 +25,15 @@ const useWindowSize = () => {
 };
 
 const Header = () => {
-  const width = useWindowSize();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const userState = useSelector((state: any) => state.auth);
-  const daremeState = useSelector((state: any) => state.dareme);
-  const dareme = daremeState.dareme;
-  const contexts = useContext(LanguageContext);
-  const [openSideMenu, setOpenSideMenu] = useState<boolean>(false);
-  const [openLangSelect, setOpenLangSelect] = useState(false);
-  const sideMenuRightPosition = openSideMenu === true ? "0px" : "-300px";
+  const width = useWindowSize()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const userState = useSelector((state: any) => state.auth)
+  const contexts = useContext(LanguageContext)
+  const [openSideMenu, setOpenSideMenu] = useState<boolean>(false)
+  const [openLangSelect, setOpenLangSelect] = useState(false)
+  const sideMenuRightPosition = openSideMenu === true ? "0px" : "-300px"
   const { user, lang } = userState
 
   const handleSubmit = () => {
@@ -51,13 +49,6 @@ const Header = () => {
   };
 
   const showSideMenu = () => { setOpenSideMenu(!openSideMenu) }
-  const isDaremeData = () => {
-    if ((dareme.teaser === null && daremeState.teaserFile === null) && dareme.deadline === null && dareme.category === null && dareme.title === null
-      && (dareme.options.length === 0 || (dareme.options.length > 0 && dareme.options[0].option.title === null && dareme.options[1].option.title === null)))
-      return false;
-    return true;
-  }
-
   const gotoHome = () => { navigate("/") }
   const gotoAdminHome = () => { navigate('/admin') }
   const gotoCreate = () => { navigate("/bite/create_type") }
