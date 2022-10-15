@@ -137,7 +137,10 @@ const ProfileHeader = (props: any) => {
       </div>
       {same === true &&
         <div className="edit-profile-btn" style={{ justifyContent: width < 680 ? 'center' : 'flex-end' }}>
-          <div className="edit-btn" onClick={() => navigate('/myaccount/edit')}>
+          <div className="edit-btn" onClick={() => {
+            
+            navigate('/myaccount/edit')
+          }}>
             <EditIcon color="white" />&nbsp;<span>Edit profile</span>
           </div>
         </div>

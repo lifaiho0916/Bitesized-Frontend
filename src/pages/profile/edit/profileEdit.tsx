@@ -3,12 +3,11 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import AvatarEditor from 'react-avatar-editor'
 import { authAction } from "../../../redux/actions/authActions"
-import Title from "../../../components/general/title"
 import ContainerBtn from "../../../components/general/containerBtn"
 import Button from "../../../components/general/button"
 import Input from "../../../components/general/input"
 import { SET_NAME_EXIST, SET_PROFILE_DATA, SET_URL_EXIST } from "../../../redux/types"
-import { AddIcon, SpreadIcon } from "../../../assets/svg"
+import { AddIcon, SpreadIcon, BackIcon } from "../../../assets/svg"
 import Dialog from "../../../components/general/dialog"
 import { LanguageContext } from "../../../routes/authRoute"
 import "../../../assets/styles/profile/profileEditStyle.scss"
@@ -40,7 +39,7 @@ const ProfileEdit = () => {
         imageFile = new File([blob], 'avatar.png', blob)
       }
       const url = creatoURL.substring(0, 20)
-      if (url !== 'www.creatogether.io/') alert("Wrong Url");
+      if (url !== 'www.creatogether.io/') alert("Wrong Url")
       else {
         const creato = creatoURL.substring(20)
         dispatch(authAction.saveProfileInfo(displayName, creato, profile.category, imageFile, navigate))
@@ -60,7 +59,6 @@ const ProfileEdit = () => {
   }
 
   useEffect(() => {
-    window.scrollTo(0, 0)
     dispatch({ type: SET_NAME_EXIST, payload: false })
     dispatch({ type: SET_URL_EXIST, payload: false })
   }, [location, dispatch]);
@@ -84,11 +82,13 @@ const ProfileEdit = () => {
   }, [profile])
 
   return (
-    <>
-      <div className="title-header">
-        <Title title={contexts.HEADER_TITLE.EDIT_PROFILE} back={() => { if (user) navigate(`/${user.personalisedUrl}`) }} />
+    <div className="profile-edit-wrapper">
+      <div className="page-header">
+        <div onClick={() => navigate(`/${user.personalisedUrl}`)}><BackIcon color="black" /></div>
+        <div className="page-title"><span>Edit Profile</span></div>
+        <div style={{ width: '24px' }}></div>
       </div>
-      <div className="profile-edit-wrapper">
+      <div className="profile-edit">
         <Dialog
           display={openLinkSocial}
           wrapExit={() => { setOpenLinkSocial(false) }}
@@ -121,7 +121,7 @@ const ProfileEdit = () => {
             ref={fileInputRef}
             type="file"
             accept="image/*"
-            value={""}
+            value=""
             onChange={handleFileUpload}
           />
         </div>
@@ -193,13 +193,9 @@ const ProfileEdit = () => {
             handleSubmit={handleSave}
           />
         </div>
-        <div className="description">
-          {/* Please select Categories of your content, choosing a maximum 3
-          categories will increase search rate & create more accurate suggestions. */}
-        </div>
       </div>
-    </>
-  );
-};
+    </div>
+  )
+}
 
-export default ProfileEdit;
+export default ProfileEdit

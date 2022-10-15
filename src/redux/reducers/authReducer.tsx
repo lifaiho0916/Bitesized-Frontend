@@ -9,13 +9,12 @@ const INITIAL_STATE: any = {
     cardNum: null,
     lang: 'CH',
     payment: null,
-    tipAvailable: null,
-    tipFunction: null,
     profileData: {
         category: [],
-        avatarFile: null,
-        displayName: null,
-        creatoUrl: null
+        avatar: null,
+        name: null,
+        personalisedUrl: null,
+        bioText: null,
     }
 }
 
@@ -67,8 +66,6 @@ const authReducer = (state: any = INITIAL_STATE, action: any) => {
                 cardNum: null,
                 payment: null,
                 lang: 'EN',
-                tipAvailable: null,
-                tipFunction: null,
                 profileData: {
                     category: [],
                     avatarFile: null,
