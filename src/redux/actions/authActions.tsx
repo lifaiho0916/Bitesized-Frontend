@@ -1,5 +1,5 @@
 import { Dispatch } from "redux"
-import { SET_LOADING_FALSE, SET_LOADING_TRUE, SET_NAME_EXIST, SET_USER, SET_USERS, SET_URL_EXIST, SET_TIPAVAILABLE, SET_TIPFUNCTION, SET_PREVIOUS_ROUTE } from "../types";
+import { SET_LOADING_FALSE, SET_LOADING_TRUE, SET_NAME_EXIST, SET_USER, SET_USERS, SET_URL_EXIST } from "../types";
 import * as api from '../../api'
 
 export const authAction = {
@@ -182,19 +182,6 @@ export const authAction = {
     } catch (err) {
       console.log(err)
     }
-  },
-
-  setTipFunction: (tipValue: any, userId: any, users: any, index: any) => async (dispatch: Dispatch<any>) => {
-    dispatch({ type: SET_LOADING_TRUE });
-    api.setTipFunction({ tipValue: tipValue, id: userId })
-      .then((result) => {
-        const { data } = result;
-        dispatch({ type: SET_LOADING_FALSE });
-        if (data.success) {
-          users[index].tipFunction = tipValue;
-          dispatch({ type: SET_USERS, payload: users });
-        }
-      }).catch(err => console.log(err));
   },
 
   getUserFromUrl: (url: any) => async (dispatch: Dispatch<any>) => {

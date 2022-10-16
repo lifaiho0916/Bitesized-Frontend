@@ -16,7 +16,6 @@ import ProfileEdit from '../pages/profile/edit/profileEdit'
 
 import ProfileWallet from '../pages/profile/wallet/profileWallet'
 import GeneralSetting from '../pages/profile/setting/generalSetting'
-import ProfileNotifications from '../pages/profile/profileNotifications'
 import Earning from '../pages/profile/wallet/earning'
 import Balance from '../pages/profile/wallet/balance'
 import Invitefriends from '../pages/profile/setting/inviteFriends'
@@ -63,7 +62,6 @@ const AppRoutes = () => {
       <Route path="myaccount/setting/language" element={<AuthRoute child={<Language />} routeType="private" />} />
       <Route path="myaccount/setting/invitefriends" element={<AuthRoute child={<Invitefriends />} routeType="private" />} />
       <Route path="myaccount/setting/payment" element={<AuthRoute child={<Payment />} routeType="private" />} />
-      <Route path="notifications" element={<AuthRoute child={<ProfileNotifications />} routeType="private" />} />
 
       <Route path="admin" element={<AuthRoute child={<AdminHome />} routeType="private" />} />
       <Route path="admin/users" element={<AuthRoute child={<UserList />} routeType="private" />} />

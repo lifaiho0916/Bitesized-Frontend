@@ -1,20 +1,20 @@
-import { useState, useEffect, useContext } from 'react';
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import { LanguageContext } from "../../../routes/authRoute";
-import { useSelector } from 'react-redux';
-import { SET_PROFILE } from '../../../redux/types';
-import CategoryBtn from "../../../components/general/categoryBtn";
-import Button from '../../../components/general/button';
-import Title from "../../../components/general/title";
-import "../../../assets/styles/profile/categoriesStyle.scss";
+import { useState, useEffect, useContext } from 'react'
+import { useNavigate } from "react-router-dom"
+import { useDispatch } from 'react-redux'
+import { LanguageContext } from "../../../routes/authRoute"
+import { useSelector } from 'react-redux'
+import { SET_PROFILE } from '../../../redux/types'
+import CategoryBtn from "../../../components/general/categoryBtn"
+import Button from '../../../components/general/button'
+import Title from "../../../components/general/title"
+import "../../../assets/styles/profile/categoriesStyle.scss"
 
 const Categories = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const contexts = useContext(LanguageContext);
   const authState = useSelector((state: any) => state.auth);
-  const profile = authState.profileData;
+  const { profile } = authState
   const [categories, setCategories] = useState<Array<any>>([]);
 
   const selectCategory = (index: any) => {

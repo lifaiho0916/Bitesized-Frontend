@@ -48,10 +48,10 @@ const AuthRoute = (props: routeProps) => {
             const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
             let lang: any = EN
             let langLetter: any = 'EN'
-            if (timezone === 'Asia/Shanghai' || timezone === 'Asia/Urumqi' || timezone === 'Asia/Hong_Kong' || timezone === 'Asia/Chongqing') {
-                lang = CH
-                langLetter = 'CH'
-            }
+            // if (timezone === 'Asia/Shanghai' || timezone === 'Asia/Urumqi' || timezone === 'Asia/Hong_Kong' || timezone === 'Asia/Chongqing') {
+            //     lang = CH
+            //     langLetter = 'CH'
+            // }
             dispatch({ type: SET_LANGUAGE, payload: langLetter })
             setContexts(lang)
         }

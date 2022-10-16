@@ -6,7 +6,7 @@ import { authAction } from "../../../redux/actions/authActions"
 import ContainerBtn from "../../../components/general/containerBtn"
 import Button from "../../../components/general/button"
 import Input from "../../../components/general/input"
-import { SET_NAME_EXIST, SET_PROFILE, SET_URL_EXIST } from "../../../redux/types"
+import { SET_PROFILE } from "../../../redux/types"
 import { AddIcon, SpreadIcon, BackIcon } from "../../../assets/svg"
 import Dialog from "../../../components/general/dialog"
 import { LanguageContext } from "../../../routes/authRoute"
@@ -19,31 +19,30 @@ const ProfileEdit = () => {
   let imageEditor: any = null
   const userState = useSelector((state: any) => state.auth)
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const { user, profile } = userState
-  const existName = userState.nameExist
-  const existURL = userState.urlExist
-  const [name, setName] = useState<string>("")
-  const [url, setUrl] = useState<string>('www.creatogether.io/')
+  const { user, profile, nameExist, urlExist } = userState
+  const [name, setName] = useState<string>(profile.name)
+  const [url, setUrl] = useState<string>(profile.personalisedUrl)
+  const [bioText, setBioText] = useState(profile.bioText)
   const [openLinkSocial, setOpenLinkSocial] = useState(false)
   const contexts = useContext(LanguageContext)
 
   const handleSave = async () => {
-    if (existName === false && existURL === false) {
-      let imageFile: any = null
-      if (profile.avatarFile && imageEditor) {
-        const canvas = imageEditor.getImage()
-        let url = canvas.toDataURL('image/png')
-        const res = await fetch(url)
-        const blob = await res.blob()
-        imageFile = new File([blob], 'avatar.png', blob)
-      }
-      // const url = creatoURL.substring(0, 20)
-      if (url !== 'www.creatogether.io/') alert("Wrong Url")
-      else {
-        // const creato = creatoURL.substring(20)
-        // dispatch(authAction.saveProfileInfo(displayName, creato, profile.category, imageFile, navigate))
-      }
-    }
+    // if (existName === false && existURL === false) {
+    //   let imageFile: any = null
+    //   if (profile.avatarFile && imageEditor) {
+    //     const canvas = imageEditor.getImage()
+    //     let url = canvas.toDataURL('image/png')
+    //     const res = await fetch(url)
+    //     const blob = await res.blob()
+    //     imageFile = new File([blob], 'avatar.png', blob)
+    //   }
+    //   // const url = creatoURL.substring(0, 20)
+    //   if (url !== 'www.creatogether.io/') alert("Wrong Url")
+    //   else {
+    //     // const creato = creatoURL.substring(20)
+    //     // dispatch(authAction.saveProfileInfo(displayName, creato, profile.category, imageFile, navigate))
+    //   }
+    // }
   };
 
   const setEditorRef = (editor: any) => (imageEditor = editor)
@@ -62,8 +61,19 @@ const ProfileEdit = () => {
 
   useEffect(() => {
     if (user && profile.name === null) {
+      dispatch({
+        type: SET_PROFILE,
+        payload: {
+          category: user.category,
+          avatar: user.avatar,
+          name: user.name,
+          personalisedUrl: user.personalisedUrl,
+          bioText: user.bioText
+        }
+      })
       setName(user.name)
       setUrl(user.personalisedUrl)
+      setBioText(user.bioText)
     }
   }, [profile, user])
 
@@ -123,7 +133,7 @@ const ProfileEdit = () => {
             setFocus={() => { }}
           />
         </div>
-        {existName === true ?
+        {nameExist === true ?
           <span className="display-name-error">
             {contexts.EDIT_PROFILE_LETTER.DISPLAY_NAME_ERROR}
           </span> : ""
@@ -141,16 +151,30 @@ const ProfileEdit = () => {
             setFocus={() => { }}
           />
         </div>
-        {existURL === true ?
+        {urlExist === true ?
           <span className="display-name-error">
             {contexts.EDIT_PROFILE_LETTER.URL_ERROR}
           </span> : ""
         }
+        <div className="url">
+          <Input
+            type="input"
+            placeholder="Tell the world about who you are :)"
+            label={"Bio"}
+            wordCount={50}
+            size="small"
+            title={bioText ? bioText : ''}
+            isUrl={true}
+            setTitle={setBioText}
+            setFocus={() => { }}
+          />
+        </div>
         <div
           className="social-link"
           onClick={() => {
+            const state = { ...profile, name: name, personalisedUrl: url, bioText: bioText }
+            dispatch({ type: SET_PROFILE, payload: state })
             navigate("/myaccount/edit/connect_social")
-            // setOpenLinkSocial(true);
           }}
         >
           <ContainerBtn
@@ -162,9 +186,9 @@ const ProfileEdit = () => {
         <div
           className="categories"
           onClick={() => {
-            const state = { ...profile, displayName: name, creatoUrl: url };
-            dispatch({ type: SET_PROFILE, payload: state });
-            navigate(`/myaccount/edit/categories`);
+            const state = { ...profile, name: name, personalisedUrl: url, bioText: bioText }
+            dispatch({ type: SET_PROFILE, payload: state })
+            navigate(`/myaccount/edit/categories`)
           }}
         >
           <ContainerBtn styleType="outline" text={contexts.EDIT_PROFILE_LETTER.CATEGORIES} />

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { GoogleLogin } from "react-google-login";
 // import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import AppleLogin from 'react-apple-login'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import Dialog from "../components/general/dialog";
 import { LanguageContext } from "../routes/authRoute";
@@ -19,12 +19,11 @@ declare global {
 }
 
 const Auth = (props: any) => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const loadState = useSelector((state: any) => state.load);
-  const dlgState = loadState.dlgState
-  const inapp = new InApp(navigator.userAgent || navigator.vendor || window.FB);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const loadState = useSelector((state: any) => state.load)
+  const { dlgState } = loadState
+  const inapp = new InApp(navigator.userAgent || navigator.vendor || window.FB)
   const [openWith, setOpenWith] = useState(inapp.browser === 'instagram' || inapp.browser === 'facebook' || navigator.userAgent.toLowerCase().indexOf('line') !== -1 ? true : false);
   const [isHover, setIsHover] = useState(false);
   const [isHover1, setIsHover1] = useState(false);
@@ -81,7 +80,7 @@ const Auth = (props: any) => {
 
     if (props.isSignin) dispatch(authAction.googleSigninUser(userData, navigate, prevRoute))
     else dispatch(authAction.googleSignupUser(userData, navigate, prevRoute))
-  };
+  }
 
   // const responseFacebook = (response: any) => {
   //   console.log(response)

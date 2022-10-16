@@ -44,7 +44,7 @@ const authReducer = (state: any = INITIAL_STATE, action: any) => {
         case actionTypes.SET_URL_EXIST:
             return { 
                 ...state,
-                urlExit: payload
+                urlExist: payload
             }
         case actionTypes.SET_STRIPEID:
             state.stripeID = payload.stripeID;

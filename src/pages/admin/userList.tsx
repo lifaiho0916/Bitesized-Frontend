@@ -15,7 +15,7 @@ const UserList = () => {
     const users = userState.users;
 
     const setTip = (tipValue: any, userId: any, index: any) => {
-        dispatch(authAction.setTipFunction(tipValue, userId, users, index));
+      
     }
 
     useEffect(() => {
