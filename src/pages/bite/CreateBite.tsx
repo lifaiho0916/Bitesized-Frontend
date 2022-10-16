@@ -123,7 +123,7 @@ const CreateBite = () => {
     }
     const gotoEditThumbnail = () => {
         dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
-        navigate('/bite/create/edit_thumbnail')
+        navigate('/bite/create/edit-thumbnail')
     }
     const removeVideo = (index: any) => {
         let videos = bite.videos.filter((video: any, i: any) => i !== index)

@@ -170,7 +170,7 @@ const Profile = () => {
                         icon={[
                           <AddIcon color="white" />, <AddIcon color="white" />, <AddIcon color="white" />
                         ]}
-                        handleSubmit={() => navigate('/bite/create_type')}
+                        handleSubmit={() => navigate('/bite/create-type')}
                       />
                     </div>
                   }

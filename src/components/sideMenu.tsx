@@ -20,7 +20,7 @@ const SideMenu = (props: any) => {
   const user = userState.user
 
   const handleAdminPanel = () => {
-    navigate("/admin")
+    navigate("/admin/edit-bite")
     props.setOpen(false)
   }
   const handleProfile = () => {

@@ -44,14 +44,14 @@ const Header = () => {
   const handleLogout = () => {
     setOpenSideMenu(false);
     dispatch({ type: SET_DAREMES, payload: [] });
-    dispatch({ type: SET_PREVIOUS_ROUTE, payload: "/" });
+    dispatch({ type: SET_PREVIOUS_ROUTE, payload: "/" })
     dispatch(authAction.logout(navigate));
   };
 
   const showSideMenu = () => { setOpenSideMenu(!openSideMenu) }
   const gotoHome = () => { navigate("/") }
-  const gotoAdminHome = () => { navigate('/admin') }
-  const gotoCreate = () => { navigate("/bite/create_type") }
+  const gotoAdminHome = () => { navigate('/admin/edit-bite') }
+  const gotoCreate = () => { navigate("/bite/create-type") }
 
   const setLang = () => {
     setOpenLangSelect(true);

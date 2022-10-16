@@ -13,6 +13,11 @@ import Creators from '../pages/profile/creators'
 import Bites from '../pages/profile/Bites'
 
 import ProfileEdit from '../pages/profile/edit/profileEdit'
+import Socialaccount from '../pages/profile/edit/socialAccount'
+import Categories from '../pages/profile/edit/categories'
+
+import AdminBiteList from '../pages/admin/editBite/AdminBiteList'
+// import EditBite from '../pages/admin/editBite/EditBite'
 
 import ProfileWallet from '../pages/profile/wallet/profileWallet'
 import GeneralSetting from '../pages/profile/setting/generalSetting'
@@ -21,10 +26,7 @@ import Balance from '../pages/profile/wallet/balance'
 import Invitefriends from '../pages/profile/setting/inviteFriends'
 import Payment from '../pages/profile/setting/payment'
 import Language from '../pages/profile/setting/language'
-import Socialaccount from '../pages/profile/edit/socialAccount'
-import Categories from '../pages/profile/edit/categories'
 
-import AdminHome from '../pages/admin/home'
 import UserList from '../pages/admin/userList'
 
 import Error404 from '../pages/error/error404'
@@ -42,19 +44,21 @@ const AppRoutes = () => {
       <Route path="auth/signin" element={<AuthRoute child={<Auth isSignin={true} />} />} />
       <Route path="auth/signup" element={<AuthRoute child={<Auth isSignin={false} />} />} />
 
-      <Route path="bite/create_type" element={<AuthRoute child={<CreateType />} routeType="private" />} />
+      <Route path="bite/create-type" element={<AuthRoute child={<CreateType />} routeType="private" />} />
       <Route path="bite/create/free" element={<AuthRoute child={<CreateBite />} routeType="private" />} />
       <Route path="bite/create/paid" element={<AuthRoute child={<CreateBite />} routeType="private" />} />
-      <Route path="bite/create/edit_thumbnail" element={<AuthRoute child={<EditCoverImage />} routeType="private" />} />
+      <Route path="bite/create/edit-thumbnail" element={<AuthRoute child={<EditCoverImage />} routeType="private" />} />
 
       <Route path="/:creatorLink" element={<AuthRoute child={<Profile />} />} />
       <Route path="creators" element={<AuthRoute child={<Creators />} />} />
       <Route path="bites" element={<AuthRoute child={<Bites />} />} />
 
       <Route path="myaccount/edit" element={<AuthRoute child={<ProfileEdit />} routeType="private" />} />
-      
       <Route path="myaccount/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
-      <Route path="myaccount/edit/connect_social" element={<AuthRoute child={<Socialaccount />} routeType="private" />} />
+      <Route path="myaccount/edit/connect-social" element={<AuthRoute child={<Socialaccount />} routeType="private" />} />
+
+      <Route path="admin/edit-bite" element={<AuthRoute child={<AdminBiteList />} routeType="private" />} />
+
       <Route path="myaccount/wallet" element={<AuthRoute child={<ProfileWallet />} routeType="private" />} />
       <Route path="myaccount/wallet/donuts-transactions" element={<AuthRoute child={<Balance />} routeType="private" />} />
       <Route path="myaccount/wallet/earning" element={<AuthRoute child={<Earning />} routeType="private" />} />
@@ -63,7 +67,6 @@ const AppRoutes = () => {
       <Route path="myaccount/setting/invitefriends" element={<AuthRoute child={<Invitefriends />} routeType="private" />} />
       <Route path="myaccount/setting/payment" element={<AuthRoute child={<Payment />} routeType="private" />} />
 
-      <Route path="admin" element={<AuthRoute child={<AdminHome />} routeType="private" />} />
       <Route path="admin/users" element={<AuthRoute child={<UserList />} routeType="private" />} />
       <Route path="admin/notifications" element={<AuthRoute child={<Notifications />} routeType="private" />} />
       <Route path="admin/notifications/new" element={<AuthRoute child={<NotificationNew />} routeType="private" />} />

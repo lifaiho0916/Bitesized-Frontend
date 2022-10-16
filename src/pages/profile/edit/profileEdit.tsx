@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useContext } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import AvatarEditor from 'react-avatar-editor'
 import { authAction } from "../../../redux/actions/authActions"
@@ -15,7 +15,6 @@ import "../../../assets/styles/profile/profileEditStyle.scss"
 const ProfileEdit = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const location = useLocation()
   let imageEditor: any = null
   const userState = useSelector((state: any) => state.auth)
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -168,7 +167,7 @@ const ProfileEdit = () => {
           onClick={() => {
             const state = { ...profile, name: name, personalisedUrl: url, bioText: bioText }
             dispatch({ type: SET_PROFILE, payload: state })
-            navigate("/myaccount/edit/connect_social")
+            navigate("/myaccount/edit/connect-social")
           }}
         >
           <ContainerBtn

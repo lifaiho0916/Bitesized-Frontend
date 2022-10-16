@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import AvatarEditor from 'react-avatar-editor'
+import Button from "../../components/general/button"
 import { BackIcon } from "../../assets/svg"
 import NextBtn from "../../assets/img/next-grey.png"
 import { SET_BITE } from "../../redux/types"
 import "../../assets/styles/bite/EditCoverStyle.scss"
-import Button from "../../components/general/button"
 
 const EditCoverImage = () => {
     const navigate = useNavigate()
@@ -26,7 +26,7 @@ const EditCoverImage = () => {
 
     const gotoCreateBite = async () => {
         const videos = bite.videos
-        if (thumbnails[0] !== "") {
+        if (thumbnails[0]) {
             const canvas = imageEditor1.getImage()
             let url = canvas.toDataURL('image/png')
             const res = await fetch(url)
@@ -36,7 +36,7 @@ const EditCoverImage = () => {
             videos[0].coverUrl = cover
 
         }
-        if (thumbnails[1] !== "") {
+        if (thumbnails[1]) {
             const canvas = imageEditor2.getImage()
             let url = canvas.toDataURL('image/png')
             const res = await fetch(url)
@@ -45,7 +45,7 @@ const EditCoverImage = () => {
             const cover = Object.assign(imageFile, { preview: url })
             videos[1].coverUrl = cover
         }
-        if (thumbnails[2] !== "") {
+        if (thumbnails[2]) {
             const canvas = imageEditor3.getImage()
             let url = canvas.toDataURL('image/png')
             const res = await fetch(url)
@@ -84,7 +84,7 @@ const EditCoverImage = () => {
                     </div>
                     <div className="thumb-editor">
                         <div style={{ display: 'flex', marginLeft: `${-250 * videoIndex}px` }}>
-                            {thumbnails[0] !== "" &&
+                            {thumbnails[0] &&
                                 <AvatarEditor
                                     ref={setEditorRef1}
                                     image={thumbnails[0]?.preview}
@@ -95,7 +95,7 @@ const EditCoverImage = () => {
                                     scale={1.0}
                                 />
                             }
-                            {thumbnails[1] !== "" &&
+                            {thumbnails[1] &&
                                 <AvatarEditor
                                     ref={setEditorRef2}
                                     image={thumbnails[1]?.preview}
@@ -106,7 +106,7 @@ const EditCoverImage = () => {
                                     scale={1.0}
                                 />
                             }
-                            {thumbnails[2] !== "" &&
+                            {thumbnails[2] &&
                                 <AvatarEditor
                                     ref={setEditorRef3}
                                     image={thumbnails[2]?.preview}

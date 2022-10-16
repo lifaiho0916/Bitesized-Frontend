@@ -1,15 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
-  BalanceIcon,
-  CreatoCoinIcon,
-  Dare2Icon,
-  RewardIcon,
   NoOfPeopleIcon,
-  NotificationfillIcon,
-  SettingIcon,
-  LightbulbIcon,
-  TipIcon
+  EditIcon,
+  AddIcon,
+  MoneyIcon
 } from "../assets/svg";
 import "../assets/styles/sidebarStyle.scss";
 
@@ -37,52 +32,28 @@ const Sidebar = () => {
   return (
     <div className="sidebar-wrapper">
       <div className="list">
-        <NavLink to="/admin" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
+        <NavLink to="/admin/edit-bite" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
           <div className="icon">
-            <CreatoCoinIcon className="icon-svg" color={activePath === '/admin' && activePath === location.pathname ? "#EFA058" : hoverPath === "/admin" ? "#EFA058" : "#A6A29F"} />
+            <EditIcon className="icon-svg" color={location.pathname.indexOf('/admin/edit-bite') !== -1 ? "#EFA058" : hoverPath === "/admin/edit-bite" ? "#EFA058" : "#A6A29F"} />
           </div>
           <div className="item-letter">
-            <span>Homepage</span>
+            <span>Edit Bite</span>
           </div>
         </NavLink>
-        <NavLink to="/admin/daremes" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
+        <NavLink to="/admin/create-free-bite" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
           <div className="icon">
-            <LightbulbIcon className="icon-svg" color={location.pathname.indexOf('/admin/daremes') !== -1 ? "#EFA058" : hoverPath === "/admin/daremes" ? "#EFA058" : "#A6A29F"} />
+            <AddIcon className="icon-svg" color={location.pathname.indexOf('/admin/create-free-bite') !== -1 ? "#EFA058" : hoverPath === "/admin/create-free-bite" ? "#EFA058" : "#A6A29F"} />
           </div>
           <div className="item-letter">
-            <span>DareMe</span>
+            <span>Create FREE Bite - Users</span>
           </div>
         </NavLink>
-        <NavLink to="/admin/fundmes" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
+        <NavLink to="/admin/transaction" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
           <div className="icon">
-            <Dare2Icon className="icon-svg" color={location.pathname.indexOf('/admin/fundmes') !== -1 ? "#EFA058" : hoverPath === "/admin/fundmes" ? "#EFA058" : "#A6A29F"} />
+            <MoneyIcon className="icon-svg" color={location.pathname.indexOf('/admin/transaction') !== -1 ? "#EFA058" : hoverPath === "/admin/transaction" ? "#EFA058" : "#A6A29F"} />
           </div>
           <div className="item-letter">
-            <span>FundMe</span>
-          </div>
-        </NavLink>
-        <NavLink to="/admin/fanwalls" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
-          <div className="icon">
-            <RewardIcon className="icon-svg" color={location.pathname.indexOf('/admin/fanwalls') !== -1 ? "#EFA058" : hoverPath === "/admin/fanwalls" ? "#EFA058" : "#A6A29F"} />
-          </div>
-          <div className="item-letter">
-            <span>Fanwall</span>
-          </div>
-        </NavLink>
-        <NavLink to="/admin/shop" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
-          <div className="icon">
-            <CreatoCoinIcon className="icon-svg" color={activePath === '/admin/shop' && activePath === location.pathname ? "#EFA058" : hoverPath === "/admin/shop" ? "#EFA058" : "#A6A29F"} />
-          </div>
-          <div className="item-letter">
-            <span>Donuts Shop</span>
-          </div>
-        </NavLink>
-        <NavLink to="/admin/transactions" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
-          <div className="icon">
-            <BalanceIcon className="icon-svg" color={location.pathname.indexOf('/admin/transactions') !== -1 ? "#EFA058" : hoverPath === "/admin/transactions" ? "#EFA058" : "#A6A29F"} />
-          </div>
-          <div className="item-letter">
-            <span>Transaction - Donuts</span>
+            <span>Transaction</span>
           </div>
         </NavLink>
         <NavLink to="/admin/users" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
@@ -93,41 +64,9 @@ const Sidebar = () => {
             <span>Profile - Users</span>
           </div>
         </NavLink>
-        <NavLink to="/admin/notifications" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
-          <div className="icon">
-            <NotificationfillIcon className="icon-svg" color={location.pathname.indexOf('/admin/notifications') !== -1 ? "#EFA058" : hoverPath === "/admin/notifications" ? "#EFA058" : "#A6A29F"} />
-          </div>
-          <div className="item-letter">
-            <span>Notifications</span>
-          </div>
-        </NavLink>
-        <NavLink to="/admin/referral_links" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
-          <div className="icon">
-            <SettingIcon className="icon-svg" color={location.pathname.indexOf('/admin/referral_links') !== -1 ? "#EFA058" : hoverPath === "/admin/referral_links" ? "#EFA058" : "#A6A29F"} />
-          </div>
-          <div className="item-letter">
-            <span>Referral link</span>
-          </div>
-        </NavLink>
-        <NavLink to="/admin/general-setting" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
-          <div className="icon">
-            <SettingIcon className="icon-svg" color={activePath === '/admin/general-setting' && activePath === location.pathname ? "#EFA058" : hoverPath === "/admin/general-setting" ? "#EFA058" : "#A6A29F"} />
-          </div>
-          <div className="item-letter">
-            <span>General - Admin setting</span>
-          </div>
-        </NavLink>
-        <NavLink to="/admin/tipping" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
-          <div className="icon">
-            <TipIcon className="icon-svg" color={location.pathname.indexOf('/admin/tipping') !== -1 ? "#EFA058" : hoverPath === "/admin/tipping" ? "#EFA058" : "#A6A29F"} />
-          </div>
-          <div className="item-letter">
-            <span>Tipping</span>
-          </div>
-        </NavLink>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar
