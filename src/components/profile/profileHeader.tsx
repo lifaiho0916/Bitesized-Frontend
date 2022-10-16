@@ -151,9 +151,9 @@ const ProfileHeader = (props: any) => {
           }
         </div>
       </div>
-      <div className="bio-text" >
+      <div className="bio-text" style={profileUser?.bioText === "" ? { margin: '0px' } : {}}>
         <div ref={ref} className={showMore ? "" : "container"} style={{ width: showLink ? showMore ? '100%' : 'calc(100% - 55px)' : '100%' }}>
-          {profileUser ? profileUser.bioText : ''}
+          {profileUser?.bioText}
         </div>
         {(showLink && !showMore) &&
           <div className="see-more" style={{ width: '50px' }}>
@@ -161,8 +161,7 @@ const ProfileHeader = (props: any) => {
           </div>
         }
       </div>
-      {
-        same === true &&
+      {same === true &&
         <div className="edit-profile-btn" style={{ justifyContent: width < 680 ? 'center' : 'flex-end' }}>
           <div className="edit-btn" onClick={() => {
             dispatch({
