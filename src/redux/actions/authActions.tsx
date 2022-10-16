@@ -114,26 +114,30 @@ export const authAction = {
     }
   },
 
-  saveProfileInfo: (name: any, creatoUrl: any, category: any, avatar: any, navigate: any) => async (dispatch: Dispatch<any>) => {
-    dispatch({ type: SET_LOADING_TRUE });
-    let resultAvatar = null;
-    if (avatar) {
-      const formData = new FormData();
-      formData.append("file", avatar);
-      const config = { headers: { "content-type": "multipart/form-data" } };
-      resultAvatar = await api.editAvatar(formData, config);
+  editProfile: (name: any, url: any, category: any, avatarFile: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+    try {
+      dispatch({ type: SET_LOADING_TRUE })
+      let resultAvatar = null
+      if (avatarFile) {
+        const formData = new FormData()
+        formData.append("file", avatarFile)
+        const config = { headers: { "content-type": "multipart/form-data" } }
+        resultAvatar = await api.editAvatar(formData, config)
+      }
+      let path = null
+      if (resultAvatar?.data) path = resultAvatar.data.path
+      const response = await api.editProfile({ name: name, url: url, category: category, avatar: path })
+      const { data } = response
+      dispatch({ type: SET_LOADING_FALSE })
+      if(data.success) {
+        const { payload } = data
+        dispatch({ type: SET_USER, payload: payload.user })
+        navigate(`/${url}`)
+      }
+    } catch (err) {
+      console.log(err)
+      dispatch({ type: SET_LOADING_FALSE })
     }
-    let path = null;
-    if (resultAvatar?.data) path = resultAvatar.data.path;
-    api.saveProfileInfo({ name: name, creatoUrl: creatoUrl, category: category, path: path })
-      .then((res) => {
-        const { data } = res;
-        if (data.success) {
-          dispatch({ type: SET_LOADING_FALSE });
-          dispatch({ type: SET_USER, payload: data.user });
-          navigate(`/${creatoUrl}`);
-        }
-      }).catch(err => console.log(err));
   },
 
   setLanguage: (lang: any, userData: any) => async (dispatch: Dispatch<any>) => {

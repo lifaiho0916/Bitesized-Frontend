@@ -27,23 +27,18 @@ const ProfileEdit = () => {
   const contexts = useContext(LanguageContext)
 
   const handleSave = async () => {
-    // if (existName === false && existURL === false) {
-    //   let imageFile: any = null
-    //   if (profile.avatarFile && imageEditor) {
-    //     const canvas = imageEditor.getImage()
-    //     let url = canvas.toDataURL('image/png')
-    //     const res = await fetch(url)
-    //     const blob = await res.blob()
-    //     imageFile = new File([blob], 'avatar.png', blob)
-    //   }
-    //   // const url = creatoURL.substring(0, 20)
-    //   if (url !== 'www.creatogether.io/') alert("Wrong Url")
-    //   else {
-    //     // const creato = creatoURL.substring(20)
-    //     // dispatch(authAction.saveProfileInfo(displayName, creato, profile.category, imageFile, navigate))
-    //   }
-    // }
-  };
+    if (nameExist === false && urlExist === false) {
+      let imageFile: any = null
+      if (profile.avatar && imageEditor) {
+        const canvas = imageEditor.getImage()
+        let url = canvas.toDataURL('image/png')
+        const res = await fetch(url)
+        const blob = await res.blob()
+        imageFile = new File([blob], 'avatar.png', blob)
+      }
+      dispatch(authAction.editProfile(name, url, profile.category, imageFile, navigate))
+    }
+  }
 
   const setEditorRef = (editor: any) => (imageEditor = editor)
 
@@ -51,7 +46,7 @@ const ProfileEdit = () => {
     const files = e.target.files
     if (files.length > 0) {
       const file = Object.assign(files[0], { preview: URL.createObjectURL(files[0]) })
-      const state = { ...profile, avatarFile: file }
+      const state = { ...profile, avatar: file }
       dispatch({ type: SET_PROFILE, payload: state })
     }
   }
@@ -65,7 +60,7 @@ const ProfileEdit = () => {
         type: SET_PROFILE,
         payload: {
           category: user.category,
-          avatar: user.avatar,
+          avatar: null,
           name: user.name,
           personalisedUrl: user.personalisedUrl,
           bioText: user.bioText
@@ -102,7 +97,7 @@ const ProfileEdit = () => {
             {user &&
               <AvatarEditor
                 ref={setEditorRef}
-                image={profile.avatarFile ? profile.avatarFile.preview : user.avatar.indexOf('uploads') === -1 ? user.avatar : `${process.env.REACT_APP_SERVER_URL}/${user.avatar}`}
+                image={profile.avatar ? profile.avatar.preview : user.avatar.indexOf('uploads') === -1 ? user.avatar : `${process.env.REACT_APP_SERVER_URL}/${user.avatar}`}
                 width={150}
                 height={150}
                 border={30}
@@ -164,7 +159,6 @@ const ProfileEdit = () => {
             wordCount={50}
             size="small"
             title={bioText ? bioText : ''}
-            isUrl={true}
             setTitle={setBioText}
             setFocus={() => { }}
           />

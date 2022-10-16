@@ -1,31 +1,65 @@
 .categories-wrapper {
-  width: 100%;
-  max-width: 340px;
-  margin: auto;
-  .description {
-    font-style: normal;
-    font-weight: 300;
-    font-size: 12px;
-    line-height: 14px;
-    letter-spacing: 0.02em;
-    color: #696462;
-    margin: 10px 0;
-  }
-  .categories {
-    width: 100%;
+  .page-header {
+    box-sizing: border-box;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    margin: 50px auto;
-    .category {
-      width: fit-content;
-      margin: 5px 10px;
+    max-width: 880px;
+    height: 52px;
+    margin: 25px auto;
+    padding: 0px 10px;
+
+    .page-title {
+      font-family: "Lato";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+      color: #efa058;
     }
   }
-  
-  .save-btn {
-    display: flex;
-    justify-content: center;
+
+  .categories-body {
+    width: 100%;
+    max-width: 340px;
+    margin: auto;
+
+    .description {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: 0.02em;
+      color: #696462;
+      margin: 10px 0;
+    }
+
+    .categories {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      margin: 50px auto;
+
+      .category {
+        width: fit-content;
+        margin: 5px 10px;
+      }
+    }
+
+    .save-btn {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .categories-wrapper {
+    .page-header {
+      margin: 15px auto;
+    }
   }
 }

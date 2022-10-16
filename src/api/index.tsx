@@ -20,23 +20,22 @@ export const unLockBite = (id: any, data: any) => API.put(`/api/bite/${id}/unloc
 export const getBitesByPersonalisedUrl = (url: any, userId: any) => API.get(`/api/bite/personalurl/${url}${userId ? `?userId=${userId}` : ''}`)
 export const getBitesList = () => API.get('/api/bite/bites')
 
+export const getAuthData = () => API.get('/api/auth')
+export const editProfile = (data: any) => API.post('/api/auth/profile/save', data)
+export const editAvatar = (data: any, config: any) => API.post('/api/auth/avatar/upload', data, config)
 export const checkName = (data: any) => API.post('/api/auth/checkname', data)
 export const checkUrl = (data: any) => API.post('/api/auth/checkurl', data)
-
 export const getOwnersOfBites = () => API.get('/api/auth/owners')
 export const getUserByPersonalisedUrl = (url: any) => API.get(`/api/auth/personalurl/${url}`)
 export const getCreatorsByCategory = (data: any) => API.post('/api/auth/creators', data)
 
-export const googleSignin = (data: any) => API.post('/api/auth/googleSignin', data);
-export const googleSignup = (data: any) => API.post('/api/auth/googleSignup', data);
-export const facebookSignin = (data: any) => API.post('/api/auth/facebookSignin', data);
-export const facebookSignup = (data: any) => API.post('/api/auth/facebookSignup', data);
-export const appleSignin = (data: any) => API.post('/api/auth/appleSignin', data);
-export const appleSignup = (data: any) => API.post('/api/auth/appleSignup', data);
+export const googleSignin = (data: any) => API.post('/api/auth/googleSignin', data)
+export const googleSignup = (data: any) => API.post('/api/auth/googleSignup', data)
+export const facebookSignin = (data: any) => API.post('/api/auth/facebookSignin', data)
+export const facebookSignup = (data: any) => API.post('/api/auth/facebookSignup', data)
+export const appleSignin = (data: any) => API.post('/api/auth/appleSignin', data)
+export const appleSignup = (data: any) => API.post('/api/auth/appleSignup', data)
 
-export const getAuthData = () => API.get('/api/auth/get');
-export const editAvatar = (data: any, config: any) => API.post('/api/auth/avatar/upload', data, config);
-export const saveProfileInfo = (data: any) => API.post('/api/auth/profile/save', data);
 export const getUserFromUrl = (data: any) => API.post('/api/auth/userFromUrl', data)
 export const setLanguage = (data: any) => API.post('/api/auth/setting/lang', data);
 export const inviteFriend = (data: any) => API.post('/api/auth/invite_friend', data)

@@ -6,61 +6,54 @@ import { useSelector } from 'react-redux'
 import { SET_PROFILE } from '../../../redux/types'
 import CategoryBtn from "../../../components/general/categoryBtn"
 import Button from '../../../components/general/button'
-import Title from "../../../components/general/title"
+import { BackIcon } from '../../../assets/svg'
 import "../../../assets/styles/profile/categoriesStyle.scss"
 
 const Categories = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const contexts = useContext(LanguageContext);
-  const authState = useSelector((state: any) => state.auth);
-  const { profile } = authState
-  const [categories, setCategories] = useState<Array<any>>([]);
+  const userState = useSelector((state: any) => state.auth)
+  const { profile } = userState
+  const [categories, setCategories] = useState<Array<any>>([])
 
   const selectCategory = (index: any) => {
-    var array = [...categories];
+    var array = [...categories]
     if (includeCategory(index)) {
-      let array_index = 0;
-      for (let i = 0; i < categories.length; i++) if (categories[i] === index) array_index = i;
-      array.splice(array_index, 1);
+      let array_index = 0
+      for (let i = 0; i < categories.length; i++) if (categories[i] === index) array_index = i
+      array.splice(array_index, 1)
     } else {
-      if (array.length < 3) array.push(index);
+      if (array.length < 3) array.push(index)
     }
-    setCategories(array);
+    setCategories(array)
   }
 
   const handleSave = () => {
     const state = { ...profile, category: categories }
-    // dispatch({ type: SET_PROFILE_DATA, payload: state });
-    navigate(`/myaccount/edit`);
+    dispatch({ type: SET_PROFILE, payload: state })
+    navigate(`/myaccount/edit`)
   }
 
   const includeCategory = (index: any) => {
-    for (let i = 0; i < categories.length; i++) if (categories[i] === index) return true;
-    return false;
+    for (let i = 0; i < categories.length; i++) if (categories[i] === index) return true
+    return false
   }
 
-  useEffect(() => {
-    if (authState.user) {
-      if(profile.category.length) setCategories(profile.category);
-      else setCategories(authState.user.category);
-    }
-  }, [authState]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useEffect(() => { setCategories(profile.category) }, [profile])
 
   return (
-    <>
-      <div className="title-header">
-        <Title title={contexts.HEADER_TITLE.CHOOSE_CATEGORY} back={() => navigate(`/myaccount/edit`)} />
+    <div className="categories-wrapper">
+      <div className="page-header">
+        <div onClick={() => navigate(`/myaccount/edit`)}><BackIcon color="black" /></div>
+        <div className="page-title"><span>{contexts.HEADER_TITLE.CHOOSE_CATEGORY}</span></div>
+        <div style={{ width: '24px' }}></div>
       </div>
-      <div className="categories-wrapper">
+      <div className="categories-body">
         <div className="description">{contexts.EDIT_PROFILE_LETTER.CATEGORY_LETTER}</div>
         <div className="categories">
           {contexts.CREATOR_CATEGORY_LIST.map((title: any, i: any) => (
-            <div className="category" key={i} onClick={() => { selectCategory(i); }}>
+            <div className="category" key={i} onClick={() => { selectCategory(i) }}>
               <CategoryBtn text={title} color="primary" pressed={includeCategory(i) ? true : false} />
             </div>
           ))}
@@ -76,8 +69,8 @@ const Categories = () => {
           />
         </div>
       </div>
-    </>
-  );
-};
+    </div>
+  )
+}
 
-export default Categories;
+export default Categories
