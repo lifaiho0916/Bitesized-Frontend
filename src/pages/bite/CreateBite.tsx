@@ -20,7 +20,7 @@ const useWindowSize = () => {
     useLayoutEffect(() => {
         const updateSize = () => { setSize(window.innerWidth) }
         window.addEventListener("resize", updateSize)
-        updateSize();
+        updateSize()
         return () => window.removeEventListener("resize", updateSize)
     }, [])
     return size

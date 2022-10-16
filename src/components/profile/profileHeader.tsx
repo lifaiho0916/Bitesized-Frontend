@@ -55,6 +55,10 @@ const ProfileHeader = (props: any) => {
   const [subscribed, setSubscribed] = useState(false)
   const wrapRef = useRef<any>(null)
   const res = useOutsideAlerter(wrapRef, moreInfo)
+  const ref = useRef<any>(null)
+
+  const [showMore, setShowMore] = useState(false)
+  const [showLink, setShowLink] = useState(false)
 
   useEffect(() => {
     if (profileUser && profileUser.categories.length) {
@@ -92,6 +96,18 @@ const ProfileHeader = (props: any) => {
     if (!res) setMoreInfo(res)
   }, [res])
 
+  useLayoutEffect(() => {
+    if (ref) {
+      const updateSize = () => {
+        if (ref.current.offsetWidth < ref.current.scrollWidth) setShowLink(true)
+        else setShowLink(false)
+      }
+      updateSize()
+      window.addEventListener("resize", updateSize)
+      return () => window.removeEventListener("resize", updateSize)
+    }
+  }, [profileUser])
+
   return (
     <div className="profile-header">
       <div className="avatar" style={{ justifyContent: same ? 'center' : 'space-between' }}>
@@ -99,13 +115,13 @@ const ProfileHeader = (props: any) => {
           size="mobile"
           avatar={profileUser ? profileUser.avatar.indexOf('uploads') === -1 ? profileUser.avatar : `${process.env.REACT_APP_SERVER_URL}/${profileUser.avatar}` : ''}
         />
-        {same === false &&
+        {!same &&
           <div className="social-icon-other">
             <div style={{ marginLeft: '15px' }}><YoutubeIcon color="#E17253" /></div>
             <div style={{ marginLeft: '5px' }}><InstagramIcon color="#E17253" /></div>
           </div>
         }
-      </div >
+      </div>
       <div className="ellipsis-icon" onClick={() => setMoreInfo(true)}>
         <MoreIcon color="black" />
       </div>
@@ -135,7 +151,18 @@ const ProfileHeader = (props: any) => {
           }
         </div>
       </div>
-      {same === true &&
+      <div className="bio-text" >
+        <div ref={ref} className={showMore ? "" : "container"} style={{ width: showLink ? showMore ? '100%' : 'calc(100% - 55px)' : '100%' }}>
+          {profileUser ? profileUser.bioText : ''}
+        </div>
+        {(showLink && !showMore) &&
+          <div className="see-more" style={{ width: '50px' }}>
+            <span onClick={() => { setShowMore(!showMore) }}>see more</span>
+          </div>
+        }
+      </div>
+      {
+        same === true &&
         <div className="edit-profile-btn" style={{ justifyContent: width < 680 ? 'center' : 'flex-end' }}>
           <div className="edit-btn" onClick={() => {
             dispatch({

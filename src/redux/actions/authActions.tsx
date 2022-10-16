@@ -114,7 +114,7 @@ export const authAction = {
     }
   },
 
-  editProfile: (name: any, url: any, category: any, avatarFile: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+  editProfile: (name: any, url: any, category: any, bioText: any, avatarFile: any, navigate: any) => async (dispatch: Dispatch<any>) => {
     try {
       dispatch({ type: SET_LOADING_TRUE })
       let resultAvatar = null
@@ -126,10 +126,10 @@ export const authAction = {
       }
       let path = null
       if (resultAvatar?.data) path = resultAvatar.data.path
-      const response = await api.editProfile({ name: name, url: url, category: category, avatar: path })
+      const response = await api.editProfile({ name: name, url: url, category: category, bioText: bioText, avatar: path })
       const { data } = response
       dispatch({ type: SET_LOADING_FALSE })
-      if(data.success) {
+      if (data.success) {
         const { payload } = data
         dispatch({ type: SET_USER, payload: payload.user })
         navigate(`/${url}`)

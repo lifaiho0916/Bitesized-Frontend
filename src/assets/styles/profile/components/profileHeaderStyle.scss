@@ -62,9 +62,38 @@
     }
   }
 
+  .bio-text {
+    margin: 15px 0px;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .see-more {
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14px;
+      color: #EFA058;
+      cursor: pointer;
+    }
+
+    .container {
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
   .edit-profile-btn {
     display: flex;
-    
+
     .edit-btn {
       margin-top: 10px;
       cursor: pointer;
