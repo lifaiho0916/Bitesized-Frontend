@@ -1,5 +1,6 @@
 .layout-admin {
   width: 100%;
+  height: calc(100vh - 70px);
   box-sizing: border-box;
   display: flex;
 
@@ -7,12 +8,13 @@
     position: fixed;
     z-index: 10;
     width: 270px;
+    height: 100%;
   }
 
   .main-body {
     width: calc(100% - 270px);
     margin: 0px 10px 0px 280px;
-    min-height: 635px;
+    height: 100%;
     box-shadow: 5px 0px 20px 0px rgba($color: #000000, $alpha: 0.4);
   }
 }

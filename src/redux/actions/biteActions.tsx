@@ -1,6 +1,6 @@
 import { Dispatch } from "redux"
 import * as api from "../../api"
-import { SET_LOADING_TRUE, SET_LOADING_FALSE, SET_BITES, SET_USERS, SET_DIALOG_STATE, SET_BITE } from "../types"
+import { SET_LOADING_TRUE, SET_LOADING_FALSE, SET_BITES, SET_USERS, SET_DIALOG_STATE, SET_BITE, SET_BITE_INITIAL } from "../types"
 
 export const biteAction = {
     saveBite: (bite: any, navigate: any) => async (dispatch: Dispatch<any>) => {
@@ -129,7 +129,7 @@ export const biteAction = {
     getAllBites: () => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
-            dispatch({ type: SET_BITES, payload: [] })
+            dispatch({ type: SET_BITE_INITIAL })
             const response = await api.getAllBites()
             const { data } = response
             dispatch({ type: SET_LOADING_FALSE })
@@ -140,6 +140,64 @@ export const biteAction = {
         } catch (err) {
             console.log(err)
             dispatch({ type: SET_LOADING_FALSE })
+        }
+    },
+
+    getBiteById: (biteId: any) => async (dispatch: Dispatch<any>) => {
+        try {
+            dispatch({ type: SET_LOADING_TRUE })
+            const response = await api.getBiteById(biteId)
+            const { data } = response
+            dispatch({ type: SET_LOADING_FALSE })
+            if (data.success) {
+                const { payload } = data
+                dispatch({ type: SET_BITE, payload: payload.bite })
+            }
+        } catch (err) {
+            console.log(err)
+            dispatch({ type: SET_LOADING_FALSE })
+        }
+    },
+
+    changeVisible: (id: any, visible: any) => async (dispatch: Dispatch<any>, getState: any) => {
+        try {
+            dispatch({ type: SET_LOADING_TRUE })
+            const response = await api.changeBiteVisible(id, { visible: visible })
+            const { data } = response
+            dispatch({ type: SET_LOADING_FALSE })
+            if (data.success) {
+                let bite = getState().bite.bite
+                bite.visible = visible
+                dispatch({ type: SET_BITE, payload: bite })
+            }
+        } catch (err) {
+            console.log(err)
+            dispatch({ type: SET_LOADING_FALSE })
+        }
+    },
+
+    getBitesAdmin: () => async (dispatch: Dispatch<any>) => {
+        try {
+            dispatch({ type: SET_LOADING_TRUE })
+            dispatch({ type: SET_BITE_INITIAL })
+            const response = await api.getBitesAdmin()
+            const { data } = response
+            dispatch({ type: SET_LOADING_FALSE })
+            if (data.success) {
+                const { payload } = data
+                dispatch({ type: SET_BITES, payload: payload.bites })
+            }
+        } catch (err) {
+            console.log(err)
+            dispatch({ type: SET_LOADING_FALSE })
+        }
+    },
+
+    deleteBite: (id: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+        try {
+
+        } catch (err) {
+            console.log(err)
         }
     }
 }

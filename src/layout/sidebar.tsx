@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react"
+import { Link, useLocation } from "react-router-dom"
 import {
   NoOfPeopleIcon,
   EditIcon,
   AddIcon,
   MoneyIcon
-} from "../assets/svg";
-import "../assets/styles/sidebarStyle.scss";
+} from "../assets/svg"
+import "../assets/styles/sidebarStyle.scss"
 
 const NavLink = (props: any) => {
   const isActive = props.pathname.indexOf(props.to) !== -1 ? props.to === "/admin" && props.to !== props.pathname ? false : true : false;
