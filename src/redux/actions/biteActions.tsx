@@ -195,9 +195,14 @@ export const biteAction = {
 
     deleteBite: (id: any, navigate: any) => async (dispatch: Dispatch<any>) => {
         try {
-
+            dispatch({ type: SET_LOADING_TRUE })
+            const response = await api.deleteBite(id)
+            const { data } = response
+            dispatch({ type: SET_LOADING_FALSE })
+            if(data.success) navigate('/admin/edit-bite')
         } catch (err) {
             console.log(err)
+            dispatch({ type: SET_LOADING_FALSE })
         }
     }
 }
