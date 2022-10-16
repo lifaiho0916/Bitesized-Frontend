@@ -1,0 +1,64 @@
+.admin-bite-list-wrapper {
+    margin: 30px 0px;
+    display: flex;
+    justify-content: center;
+
+
+    table,
+    tr,
+    th,
+    td {
+        border-collapse: collapse;
+        border: 0.25px solid #E1E0DF;
+    }
+
+    .bite-list {
+        .data-table {
+            width: 100%;
+
+            thead {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 18px;
+                letter-spacing: 0.005em;
+                color: #000000;
+                height: 40px;
+                background-color: #F2B176;
+
+                tr {
+                    text-align: left;
+
+                    th {
+                        padding-left: 5px;
+                        padding-right: 5px;
+                    }
+                }
+            }
+
+            tbody {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 18px;
+                letter-spacing: 0.005em;
+                color: #000000;
+
+                tr {
+                    text-align: left;
+                    height: 34px;
+                    cursor: pointer;
+
+                    td {
+                        padding-left: 5px;
+                        padding-right: 5px;
+                    }
+
+                    &:hover {
+                        background-color: rgb(240, 240, 240);
+                    }
+                }
+            }
+        }
+    }
+}
