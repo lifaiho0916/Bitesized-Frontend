@@ -1,4 +1,6 @@
 .admin-edit-bite-wrapper {
+    margin-bottom: 50px;
+
     .page-header {
         box-sizing: border-box;
         display: flex;
@@ -16,6 +18,79 @@
             line-height: 24px;
             text-align: center;
             color: #efa058;
+        }
+    }
+
+    .edit-bite {
+        .avatar-title {
+            margin: 50px 15%;
+
+            .avatar {
+                margin-bottom: 10px;
+            }
+
+            .bite-title {
+                margin-left: 15px;
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 18px;
+                color: #54504E;
+            }
+        }
+
+        .edit-title {
+            margin: 0px 15% 50px 15%;
+        }
+
+        .edit-video {
+            margin: 0px 10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .bite-videos {
+                width: 950px;
+                display: flex;
+                justify-content: space-around;
+
+                .bite-video {
+                    width: 280px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .add-icon {
+                        width: 40px;
+                        height: 40px;
+                        background: #EFA058;
+                        border-radius: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+
+                .video-action {
+                    display: flex;
+                    justify-content: space-around;
+                    margin: 15px auto;
+                    width: 100px;
+
+                    .icons {
+                        cursor: pointer;
+                        width: 40px;
+                        height: 40px;
+                        background: #D94E27;
+                        border-radius: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+            }
+
         }
     }
 }

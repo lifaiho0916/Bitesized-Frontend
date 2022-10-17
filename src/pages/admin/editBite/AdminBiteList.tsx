@@ -2,7 +2,6 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { biteAction } from "../../../redux/actions/biteActions"
-import { HiddenIcon, VisibleIcon } from "../../../assets/svg"
 import "../../../assets/styles/admin/editBite/AdminBiteListStyle.scss"
 
 const AdminBiteList = () => {
@@ -23,7 +22,6 @@ const AdminBiteList = () => {
                             <th>Post Time</th>
                             <th>Bite title</th>
                             <th>author</th>
-                            <th>Visible</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,7 +31,6 @@ const AdminBiteList = () => {
                                 <td>{new Date(bite.date).toUTCString().slice(17, 25)}</td>
                                 <td>{bite.title}</td>
                                 <td>{bite.owner.name}</td>
-                                <td style={{ textAlign: 'center' }}>{bite.visible ? <VisibleIcon color="#EFA058" /> : <HiddenIcon color="#EFA058" />}</td>
                             </tr>
                         ))}
                     </tbody>

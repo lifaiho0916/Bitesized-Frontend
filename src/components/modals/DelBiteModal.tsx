@@ -1,6 +1,7 @@
+import Button from "../general/button"
 import { CloseIcon } from "../../assets/svg"
 import "../../assets/styles/modals/DelBiteModalStyle.scss"
-import Button from "../general/button"
+
 
 const DelBiteModal = (props: any) => {
     const { show, onClose, handleSubmit } = props
