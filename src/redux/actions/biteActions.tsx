@@ -221,5 +221,22 @@ export const biteAction = {
             console.log(err)
             dispatch({ type: SET_LOADING_FALSE })
         }
+    },
+
+    changeVideoVisible: (id: any, index: any, visible: any) => async (dispatch: Dispatch<any>, getState: any) => {
+        try {
+            dispatch({ type: SET_LOADING_TRUE })
+            const response = await api.changeVideoVisible(id, index, { visible: visible })
+            const { data } = response
+            dispatch({ type: SET_LOADING_FALSE })
+            if (data.success) {
+                let bite = getState().bite.bite
+                bite.videos[index].visible = visible
+                dispatch({ type: SET_BITE, payload: bite })
+            }
+        } catch (err) {
+            console.log(err)
+            dispatch({ type: SET_LOADING_FALSE })
+        }
     }
 }

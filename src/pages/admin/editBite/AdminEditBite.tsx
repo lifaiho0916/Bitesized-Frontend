@@ -25,11 +25,7 @@ const AdminEditBite = () => {
     const [openRemoveBiteVideoModal, setOpenRemoveBiteVideoModal] = useState(false)
 
     const changeVisible = (visible: any) => { dispatch(biteAction.changeVisible(biteId, visible)) }
-    const changeVideoVisible = (index: any, visible: any) => {
-        let videos = bite.videos
-        videos[index].visible = visible
-        dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
-    }
+    const changeVideoVisible = (index: any, visible: any) => { dispatch(biteAction.changeVideoVisible(biteId, index, visible)) }
     useEffect(() => { if (bite.title === null) dispatch(biteAction.getBiteById(biteId)) }, [bite])
 
     return (
