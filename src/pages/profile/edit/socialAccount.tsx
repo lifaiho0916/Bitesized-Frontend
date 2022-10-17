@@ -1,127 +1,107 @@
-import { useEffect } from "react"
-import { useNavigate, useLocation } from "react-router-dom"
+import { useEffect, useMemo } from "react"
+import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { GoogleLogin } from "react-google-login"
 import axios from "axios"
-import {
-  // FacebookIcon,
-  InstagramIcon,
-  // TwitterIcon,
-  YoutubeIcon,
-} from "../../../assets/svg"
-import Button from "../../../components/general/button"
-import Title from "../../../components/general/title"
+import { InstagramIcon, YoutubeIcon } from "../../../assets/svg"
+import InstagramLogin from "./InstagramLogin"
+import { BackIcon } from "../../../assets/svg"
+import { accountAction } from "../../../redux/actions/socialAccountActions"
 import "../../../assets/styles/profile/socialAccountStyle.scss"
 
 const Socialaccount = () => {
   const navigate = useNavigate()
-  const location = useLocation()
   const dispatch = useDispatch()
-  const userState = useSelector((state: any) => state.auth);
-  const user = userState.user;
-  const handleSave = () => { navigate("/myaccount/edit") }
+  const userState = useSelector((state: any) => state.auth)
+  const accountState = useSelector((state: any) => state.accounts)
+  const { accounts } = accountState
+  const { user } = userState
 
-  const responseGoogleSuccess = async (response: any) => {
-    const access_token = response.accessToken
-    console.log(access_token)
-    axios.get(`https://youtube.googleapis.com/youtube/v3/channels?part=id&mine=true&access_token=${access_token}&key=${process.env.REACT_APP_GOOGLE_CLIENT_ID}`)
-      .then((response: any) => {
-        console.log("youtubeId", response.data.items[0].id)
-        window.open(`https://www.youtube.com/channel/${response.data.items[0].id}`)
-      }).catch((err) => console.log(err))
+
+  const openConnectedYoutubeChannel = () => {
+    const { id } = accounts.find((acc: any) => acc.name === 'youtube');
+    window.open(`https://www.youtube.com/channel/${id}`);
   }
 
-  useEffect(() => { window.scrollTo(0, 0) }, [location])
+  const hasYoutubeData: any = useMemo(() => {
+    if (accounts.length <= 0) return false
+    const d = accounts.find((acc: any) => acc.name === 'youtube')
+    return d && Object.keys(d).length > 0
+  }, [accounts])
+
+  const removeYoutube = () => {
+    const youtubeData = accounts.find((acc: any) => acc.name === 'youtube')
+    if (youtubeData && Object.keys(youtubeData).length > 0) {
+      dispatch(accountAction.removeAccount(youtubeData._id))
+    }
+  }
+
+  useEffect(() => { if (user) dispatch(accountAction.getAccounts(user.id)) }, [dispatch, user])
+
+  const responseGoogleSuccess = async (response: any) => {
+    try {
+      const access_token = response.accessToken
+      const youtubeApiUrl = `https://youtube.googleapis.com/youtube/v3/channels?part=id&mine=true&access_token=${access_token}&key=${process.env.REACT_APP_GOOGLE_CLIENT_ID}`
+      const response1 = await axios.get(youtubeApiUrl)
+      const data = {
+        id: response1.data.items[0].id,
+        name: 'youtube',
+        metadata: JSON.stringify(response1.data.items),
+      };
+      dispatch(accountAction.addAccount(data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
-    <>
-      <div className="title-header">
-        <Title title="Social Accounts" back={() => { navigate(`/myaccount/edit`) }} />
+    <div className="social-accounts-wrapper">
+      <div className="page-header">
+        <div onClick={() => navigate('/myaccount/edit')}><BackIcon color="black" /></div>
+        <div className="page-title"><span>Social Accounts</span></div>
+        <div style={{ width: '24px' }}></div>
       </div>
-      <div className="socialaccount-wrapper">
+      <div className="social-accounts">
         <div className="socialaccounts">
-          {/* <div className="content">
-            <div className="icon">
-              <FacebookIcon color="#EFA058" />
-            </div>
-            <div className="title">Facebook</div>
-            <div className="btn">
-              <Button
-                fillStyle="nofile"
-                text="Connect"
-                shape="pill"
-                color="primary"
-                handleSubmit={() => { }}
-              />
-            </div>
-          </div> */}
           <div className="content">
-            <div className="icon">
-              <InstagramIcon color="#EFA058" />
+            <div className="icon-title">
+              <div className="icon">
+                <InstagramIcon color="#EFA058" />
+              </div>
+              <div className="title">Instagram</div>
             </div>
-            <div className="title">Instagram</div>
             <div className="btn">
-              <Button
-                fillStyle="nofile"
-                text="Connect"
-                shape="pill"
-                color="primary"
-                handleSubmit={() => { }}
-              />
+              <InstagramLogin />
             </div>
           </div>
           <div className="content">
-            <div className="icon">
-              <YoutubeIcon color="#EFA058" />
+            <div className="icon-title">
+              <div className="icon">
+                <YoutubeIcon color="#EFA058" />
+              </div>
+              <div className="title">Youtube</div>
             </div>
-            <div className="title">Youtube</div>
+            {hasYoutubeData && <div onClick={openConnectedYoutubeChannel}>View</div>}
             <div className="btn">
-              <GoogleLogin
-                clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
-                render={(renderProps) => (
-                  <Button
-                    fillStyle="nofile"
-                    text="Connect"
-                    shape="pill"
-                    color="primary"
-                    handleSubmit={() => { renderProps.onClick() }}
-                  />
-                )}
-                onSuccess={responseGoogleSuccess}
-                cookiePolicy={"single_host_origin"}
-                scope='https://www.googleapis.com/auth/youtube.readonly'
-              />
+              {hasYoutubeData ?
+                <div className="remove-btn" onClick={removeYoutube}><span>Remove</span></div>
+                :
+                <GoogleLogin
+                  clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
+                  render={(renderProps) => (
+                    <div className="connect-btn" onClick={renderProps.onClick}><span>Connect</span></div>
+                  )}
+                  onSuccess={responseGoogleSuccess}
+                  cookiePolicy={"single_host_origin"}
+                  scope='https://www.googleapis.com/auth/youtube.readonly'
+                />
+              }
             </div>
           </div>
-          {/* <div className="content">
-            <div className="icon">
-              <TwitterIcon color="#EFA058" />
-            </div>
-            <div className="title">Twitter</div>
-            <div className="btn">
-              <Button
-                fillStyle="nofile"
-                text="Connect"
-                shape="pill"
-                color="primary"
-                handleSubmit={() => { }}
-              />
-            </div>
-          </div> */}
-        </div>
-        <div className="save-btn">
-          <Button
-            fillStyle="fill"
-            text="Save"
-            color="primary"
-            shape="rounded"
-            width="100px"
-            handleSubmit={handleSave}
-          />
         </div>
       </div>
-    </>
-  );
-};
+    </div>
+  )
+}
 
-export default Socialaccount;
+export default Socialaccount

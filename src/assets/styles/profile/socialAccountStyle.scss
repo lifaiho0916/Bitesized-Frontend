@@ -1,35 +1,118 @@
-.socialaccount-wrapper {
-  width: 100%;
-  max-width: 340px;
-  margin: auto;
-  .socialaccounts {
-    margin: 25px 0;
-    .content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 5px 0;
-      border-bottom: 0.25px solid #a8a8a8;
-      .icon {
-        width: 15%;
-      }
-      .title {
-        width: 50%;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 20px;
-        letter-spacing: 0.05em;
-      }
-      .btn {
-        width: fit-content;
-        float: right;
-      }
+.social-accounts-wrapper {
+  .page-header {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    height: 52px;
+    margin: 25px auto;
+    padding: 0px 10px;
+
+    .page-title {
+      font-family: "Lato";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+      color: #efa058;
     }
   }
-  .save-btn {
-    margin: 40px;
-    display: flex;
-    justify-content: center;
+
+  .social-accounts {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 0px 20px;
+
+    .socialaccounts {
+      margin: 25px 0;
+
+      .content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0;
+        border-bottom: 0.25px solid #a8a8a8;
+
+        .icon-title {
+          display: flex;
+          align-items: center;
+
+          .icon {
+            margin-right: 10px;
+          }
+
+          .title {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 20px;
+            letter-spacing: 0.05em;
+          }
+        }
+
+        .btn {
+          width: fit-content;
+          float: right;
+
+          .connect-btn {
+            cursor: pointer;
+            width: 80px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20px;
+            text-align: center;
+            color: #EFA058;
+
+            &:hover {
+              background-color: #EEEEEE;
+              border-radius: 30px;
+            }
+          }
+
+          .remove-btn {
+            cursor: pointer;
+            width: 80px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20px;
+            text-align: center;
+            color: #EF4444;
+
+            &:hover {
+              background-color: #EEEEEE;
+              border-radius: 30px;
+            }
+          }
+        }
+      }
+    }
+
+    .save-btn {
+      margin: 40px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .social-account-wrapper {
+    .page-header {
+      margin: 15px auto;
+    }
   }
 }

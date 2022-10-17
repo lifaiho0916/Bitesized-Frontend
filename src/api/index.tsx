@@ -35,6 +35,10 @@ export const getOwnersOfBites = () => API.get('/api/auth/owners')
 export const getUserByPersonalisedUrl = (url: any) => API.get(`/api/auth/personalurl/${url}`)
 export const getCreatorsByCategory = (data: any) => API.post('/api/auth/creators', data)
 
+export const getSocialAccount = (userId: any) => API.get(`/api/social-accounts/${userId}`)
+export const addSocialAccount = (data: any) => API.post('/api/social-accounts/add', data)
+export const removeSocialAccount = (id: any) => API.delete(`/api/social-accounts/delete/${id}`)
+
 export const googleSignin = (data: any) => API.post('/api/auth/googleSignin', data)
 export const googleSignup = (data: any) => API.post('/api/auth/googleSignup', data)
 export const facebookSignin = (data: any) => API.post('/api/auth/facebookSignin', data)
