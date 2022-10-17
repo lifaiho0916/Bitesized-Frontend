@@ -23,6 +23,7 @@ export const getBitesAdmin = () => API.get('/api/bite/adminlist')
 export const getBiteById = (id: any) => API.get(`/api/bite/${id}`)
 export const changeBiteVisible = (id: any, data: any) => API.post(`/api/bite/${id}/setvisible`, data)
 export const deleteBite = (id: any) => API.delete(`/api/bite/${id}`)
+export const removeVideoFromBite = (id: any, index: any) => API.delete(`/api/bite/${id}/${index}`)
 
 export const getAuthData = () => API.get('/api/auth')
 export const editProfile = (data: any) => API.post('/api/auth/profile/save', data)

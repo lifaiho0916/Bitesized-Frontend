@@ -31,7 +31,7 @@ const Layout = (props: any) => {
                 <div className="sidebar">
                     <Sidebar />
                 </div>
-                <div className="main-body">
+                <div className="main-body scroll-bar">
                     {props.child}
                 </div>
             </div>

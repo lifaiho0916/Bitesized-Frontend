@@ -23,7 +23,7 @@
 
     .edit-bite {
         .avatar-title {
-            margin: 50px 15%;
+            margin: 50px 15% 40px 15%;
 
             .avatar {
                 margin-bottom: 10px;
@@ -56,7 +56,9 @@
                 justify-content: space-around;
 
                 .bite-video {
+                    position: relative;
                     width: 280px;
+                    height: 495px;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -70,15 +72,11 @@
                         align-items: center;
                         justify-content: center;
                     }
-                }
 
-                .video-action {
-                    display: flex;
-                    justify-content: space-around;
-                    margin: 15px auto;
-                    width: 100px;
-
-                    .icons {
+                    .remove-icon {
+                        top: -20px;
+                        right: -20px;
+                        position: absolute;
                         cursor: pointer;
                         width: 40px;
                         height: 40px;
@@ -88,9 +86,29 @@
                         align-items: center;
                         justify-content: center;
                     }
+
+                    .view-icon {
+                        top: -20px;
+                        right: 30px;
+                        position: absolute;
+                        cursor: pointer;
+                        width: 40px;
+                        height: 40px;
+                        background: #7E7875;
+                        border-radius: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
                 }
             }
+        }
 
+        .action-buttons {
+            max-width: 800px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: space-evenly;
         }
     }
 }

@@ -2,12 +2,14 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import DelBiteModal from "../../../components/modals/DelBiteModal"
+import RemoveBiteVideoModal from "../../../components/modals/RemoveBiteVideoModal"
 import Avatar from "../../../components/general/avatar"
 import Input from "../../../components/general/input"
 import TeaserCard from "../../../components/general/TeaserCard"
 import Button from "../../../components/general/button"
 import { biteAction } from "../../../redux/actions/biteActions"
 import { BackIcon, VisibleIcon, HiddenIcon, DeleteIcon, AddIcon, RemoveIcon } from "../../../assets/svg"
+import { SET_BITE } from "../../../redux/types"
 import "../../../assets/styles/admin/editBite/AdminEditBiteStyle.scss"
 
 const AdminEditBite = () => {
@@ -17,10 +19,17 @@ const AdminEditBite = () => {
     const biteState = useSelector((state: any) => state.bite)
     const { bite, thumbnails } = biteState
     const [title, setTitle] = useState("")
+    const [removeIndex, setRemoveIndex] = useState(0)
 
     const [openDeleteModal, setOpenDeleteModal] = useState(false)
+    const [openRemoveBiteVideoModal, setOpenRemoveBiteVideoModal] = useState(false)
 
     const changeVisible = (visible: any) => { dispatch(biteAction.changeVisible(biteId, visible)) }
+    const changeVideoVisible = (index: any, visible: any) => {
+        let videos = bite.videos
+        videos[index].visible = visible
+        dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
+    }
     useEffect(() => { if (bite.title === null) dispatch(biteAction.getBiteById(biteId)) }, [bite])
 
     return (
@@ -30,12 +39,20 @@ const AdminEditBite = () => {
                 onClose={() => setOpenDeleteModal(false)}
                 handleSubmit={() => { dispatch(biteAction.deleteBite(biteId, navigate)) }}
             />
+            <RemoveBiteVideoModal
+                show={openRemoveBiteVideoModal}
+                onClose={() => setOpenRemoveBiteVideoModal(false)}
+                handleSubmit={() => {
+                    dispatch(biteAction.removeVideoFromBite(biteId, removeIndex))
+                    setOpenRemoveBiteVideoModal(false)
+                }}
+            />
             <div className="page-header">
                 <div onClick={() => navigate('/admin/edit-bite')}><BackIcon color="black" /></div>
                 <div className="page-title"><span>Bite</span></div>
                 <div style={{ display: 'flex' }}>
                     <div style={{ marginRight: '10px' }} onClick={() => changeVisible(!bite.visible)}>
-                        {bite ? bite.visible ? <HiddenIcon color="#EFA058" /> : <VisibleIcon color="#EFA058" /> : <></>}
+                        {bite ? bite.visible ? <VisibleIcon color="#EFA058" /> : <HiddenIcon color="#EFA058" /> : <></>}
                     </div>
                     <div onClick={() => setOpenDeleteModal(true)}><DeleteIcon color="#EFA058" /></div>
                 </div>
@@ -63,6 +80,7 @@ const AdminEditBite = () => {
                         width={"100%"}
                         title={title}
                         setTitle={setTitle}
+                        wordCount={100}
                     />
                 </div>
                 <div className="edit-video">
@@ -75,25 +93,46 @@ const AdminEditBite = () => {
                                         teaser={video.videoUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.videoUrl}` : ""}
                                         type={"dareme"}
                                     />
-                                </div>
-                                <div className="video-action">
-                                    <div className="icons">
-                                        <RemoveIcon color="white" />
+                                    <div className="view-icon" onClick={() => changeVideoVisible(index, !video.visible)}>
+                                        {video.visible ?
+                                            <VisibleIcon color="white" /> :
+                                            <HiddenIcon color="white" />
+                                        }
+
                                     </div>
-                                    <div className="icons">
-                                        <HiddenIcon color="white" />
+                                    <div className="remove-icon" onClick={() => {
+                                        setRemoveIndex(index)
+                                        setOpenRemoveBiteVideoModal(true)
+                                    }}>
+                                        <RemoveIcon color="white" />
                                     </div>
                                 </div>
                             </div>
                         ))}
-                        {bite.videos.length < 3 &&
-                            <div className="bite-video">
-                                <div className="add-icon">
-                                    <AddIcon color="white" width={30} height={30} />
-                                </div>
-                            </div>
-                        }
                     </div>
+                </div>
+                <div className="action-buttons">
+                    {bite.videos.length > 0 &&
+                        <Button
+                            text="Edit thumbnail"
+                            fillStyle="fill"
+                            color="primary"
+                            shape="rounded"
+                            width={"250px"}
+                            handleSubmit={() => { }}
+                        />
+                    }
+                    {bite.videos.length < 3 &&
+                        <Button
+                            text="Upload Bite Video"
+                            fillStyle="fill"
+                            color="primary"
+                            shape="rounded"
+                            width={"250px"}
+                            icon={[<AddIcon color="white" />, <AddIcon color="white" />, <AddIcon color="white" />]}
+                            handleSubmit={() => { }}
+                        />
+                    }
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
                     <Button
@@ -102,6 +141,7 @@ const AdminEditBite = () => {
                         color="primary"
                         shape="rounded"
                         width={"250px"}
+                        handleSubmit={() => { }}
                     />
                 </div>
             </div>

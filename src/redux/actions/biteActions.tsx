@@ -199,7 +199,24 @@ export const biteAction = {
             const response = await api.deleteBite(id)
             const { data } = response
             dispatch({ type: SET_LOADING_FALSE })
-            if(data.success) navigate('/admin/edit-bite')
+            if (data.success) navigate('/admin/edit-bite')
+        } catch (err) {
+            console.log(err)
+            dispatch({ type: SET_LOADING_FALSE })
+        }
+    },
+
+    removeVideoFromBite: (id: any, index: any) => async (dispatch: Dispatch<any>, getState: any) => {
+        try {
+            dispatch({ type: SET_LOADING_TRUE })
+            const response = await api.removeVideoFromBite(id, index)
+            const { data } = response
+            dispatch({ type: SET_LOADING_FALSE })
+            if (data.success) {
+                let bite = getState().bite.bite
+                const videos = bite.videos.filter((video: any, i: any) => i !== index)
+                dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
+            }
         } catch (err) {
             console.log(err)
             dispatch({ type: SET_LOADING_FALSE })
