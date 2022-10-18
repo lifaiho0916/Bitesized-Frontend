@@ -16,9 +16,13 @@ import ProfileEdit from '../pages/profile/edit/profileEdit'
 import Socialaccount from '../pages/profile/edit/socialAccount'
 import Categories from '../pages/profile/edit/categories'
 
+///----------------ADMIN-----------------==////
+//EDIT-BITE
 import AdminBiteList from '../pages/admin/editBite/AdminBiteList'
 import AdminEditBite from '../pages/admin/editBite/AdminEditBite'
+//CREATE-FREE-BITE
 import AdminCreatorList from '../pages/admin/createFreeBite/AdminCreatorList'
+import AdminCreateFreeBite from '../pages/admin/createFreeBite/AdminCreateFreeBite'
 
 import ProfileWallet from '../pages/profile/wallet/profileWallet'
 import GeneralSetting from '../pages/profile/setting/generalSetting'
@@ -61,6 +65,7 @@ const AppRoutes = () => {
       <Route path="admin/edit-bite" element={<AuthRoute child={<AdminBiteList />} routeType="private" />} />
       <Route path="admin/edit-bite/:biteId" element={<AuthRoute child={<AdminEditBite />} routeType="private" />} />
       <Route path="admin/create-free-bite" element={<AuthRoute child={<AdminCreatorList />} routeType="private" />} />
+      <Route path="admin/create-free-bite/:userId" element={<AuthRoute child={<AdminCreateFreeBite />} routeType="private" />} />
 
       <Route path="myaccount/wallet" element={<AuthRoute child={<ProfileWallet />} routeType="private" />} />
       <Route path="myaccount/wallet/donuts-transactions" element={<AuthRoute child={<Balance />} routeType="private" />} />

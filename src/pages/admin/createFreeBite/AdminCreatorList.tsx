@@ -48,7 +48,7 @@ const AdminCreatorList = (props: any) => {
                     <div className="creator" key={index}>
                         <CreatorSm
                             user={user}
-                            handleSubmit={() => navigate(`/admin/create-free-bite/${user._id}`)}
+                            handleSubmit={() => navigate(`/admin/create-free-bite/${user._id}`, { state: { user: user } })}
                         />
                     </div>
                 ))}

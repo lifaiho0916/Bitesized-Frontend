@@ -1,4 +1,4 @@
-.creator-component-wrapper {
+.creator-component-sm-wrapper {
     box-sizing: border-box;
     background: #FFFFFF;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
@@ -29,6 +29,46 @@
             .creator-category {
                 height: 45px;
                 width: 280px;
+                text-align: center;
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 18px;
+                margin: 0px auto;
+                color: #938D8A;
+            }
+        }
+    }
+}
+
+.creator-component-lg-wrapper {
+    box-sizing: border-box;
+    background: #FFFFFF;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 24px;
+    padding: 20px;
+    max-width: 800px;
+    width: 100%;
+
+    .avatar-userdata {
+        display: flex;
+        align-items: center;
+
+        .userdata {
+            margin-left: 10px;
+
+            .creator-name {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 800;
+                font-size: 22px;
+                line-height: 26px;
+                letter-spacing: 0.02em;
+                color: #EFA058;
+            }
+
+            .creator-category {
                 text-align: center;
                 font-family: 'Lato';
                 font-style: normal;
