@@ -18,19 +18,18 @@ const PurchaseModal = (props: any) => {
 
     return (
         <div className={`modal${show ? ' show' : ''}`} onClick={onClose}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                <div className="modal-header">
-                    <span>{title ? title : ''}</span>
-                    <div className="close-btn" onClick={onClose}>
-                        <CloseIcon color="black" width={30} height={30} />
+            <div id="purchase">
+                <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                    <div className="modal-header">
+                        <span>{title ? title : ''}</span>
+                        <div className="close-btn" onClick={onClose}>
+                            <CloseIcon color="black" width={30} height={30} />
+                        </div>
                     </div>
-                </div>
-                <div className="modal-body">
-                    <div id="purchaseModal">
+                    <div className="modal-body">
                         <div className="sub-title">
                             <span>Purchase a Bite</span>
                         </div>
-
                         <div className="purchase-card">
                             <Avatar
                                 avatar={bite ? bite.owner.avatar : ""}

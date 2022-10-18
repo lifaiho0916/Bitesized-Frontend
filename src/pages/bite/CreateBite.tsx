@@ -9,6 +9,7 @@ import CurrencySelect from "../../components/stripe/CurrencySelect"
 import ContainerBtn from "../../components/general/containerBtn"
 import Dialog from "../../components/general/dialog"
 import Button from "../../components/general/button"
+import PublishBiteModal from "../../components/modals/PublishBiteModal"
 import { AddIcon, BackIcon, PlayIcon, RemoveIcon } from "../../assets/svg"
 import { biteAction } from "../../redux/actions/biteActions"
 import { SET_BITE, SET_BITE_THUMBNAILS, SET_PREVIOUS_ROUTE } from "../../redux/types"
@@ -123,7 +124,7 @@ const CreateBite = () => {
     }
     const gotoEditThumbnail = () => {
         dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
-        navigate('/admin/create-free-bite//edit-thumbnail')
+        navigate('/bite/create/edit-thumbnail')
     }
     const removeVideo = (index: any) => {
         let videos = bite.videos.filter((video: any, i: any) => i !== index)
@@ -174,18 +175,10 @@ const CreateBite = () => {
                     }
                 ]}
             />
-            <Dialog
-                display={openPublish}
-                exit={() => setOpenPublish(false)}
-                wrapExit={() => setOpenPublish(false)}
-                title="Confirm:"
-                context="Post can not be edited afterwards."
-                buttons={[
-                    {
-                        text: 'Publish',
-                        handleClick: () => publishBite()
-                    }
-                ]}
+            <PublishBiteModal
+                show={openPublish}
+                onClose={() => setOpenPublish(false)}
+                handleSubmit={publishBite}
             />
             <div className="create-bite">
                 <div className="uploaded-vidoes"

@@ -23,13 +23,10 @@ const AdminCreateFreeBite = () => {
     const [title, setTitle] = useState('')
     const [publishEnable, setPublishEnable] = useState(false)
     const { state } = location
-    const { user } = state
+    let user: any = null
+    if (state) user = state.user
+
     const { bite, thumbnails } = biteState
-
-    const [videoIndex, setVideoIndex] = useState(0)
-
-    const [openVideoPopup, setOpenVideoPopUp] = useState(false)
-    const [openQuit, setOpenQuit] = useState(false)
     const [openPublish, setOpenPublish] = useState(false)
 
     const publish = () => {
@@ -41,13 +38,9 @@ const AdminCreateFreeBite = () => {
             ...bite,
             title: title,
         }
-        dispatch(biteAction.saveBite(newBite, navigate))
+        dispatch(biteAction.saveBiteByUserId(newBite, user._id, navigate))
     }
     const displayDuration = (duration: any) => { return Math.floor(duration / 60) + ":" + (Math.round(duration % 60) < 10 ? '0' : '') + Math.round(duration % 60) }
-    const popUpTeaser = (index: any) => {
-        setVideoIndex(index)
-        setOpenVideoPopUp(true)
-    }
     const uploadVideo = (e: any) => {
         const { files } = e.target
         if (files.length === 0) return
@@ -102,7 +95,7 @@ const AdminCreateFreeBite = () => {
     }
     const gotoEditThumbnail = () => {
         dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
-        navigate('/bite/create/edit-thumbnail')
+        navigate('/admin/create-free-bite/detail/edit-thumbnail', { state: { user: user } })
     }
     const removeVideo = (index: any) => {
         let videos = bite.videos.filter((video: any, i: any) => i !== index)
@@ -118,6 +111,8 @@ const AdminCreateFreeBite = () => {
         }
         setPublishEnable(true)
     }, [title, bite])
+
+    useEffect(() => { if (state === null) navigate('/admin/create-free-bite') }, [])
 
     return (
         <div className="create-free-bite-wrapper">
@@ -212,7 +207,7 @@ const AdminCreateFreeBite = () => {
                             type="input"
                             width={'100%'}
                             wordCount={100}
-                            placeholder="Tell the story..."
+                            placeholder="How to be a content creators?"
                             title={title}
                             setTitle={setTitle}
                         />

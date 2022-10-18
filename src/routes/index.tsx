@@ -66,6 +66,7 @@ const AppRoutes = () => {
       <Route path="admin/edit-bite/:biteId" element={<AuthRoute child={<AdminEditBite />} routeType="private" />} />
       <Route path="admin/create-free-bite" element={<AuthRoute child={<AdminCreatorList />} routeType="private" />} />
       <Route path="admin/create-free-bite/detail" element={<AuthRoute child={<AdminCreateFreeBite />} routeType="private" />} />
+      <Route path="admin/create-free-bite/detail/edit-thumbnail" element={<AuthRoute child={<EditCoverImage />} routeType="private" />} />
 
       <Route path="myaccount/wallet" element={<AuthRoute child={<ProfileWallet />} routeType="private" />} />
       <Route path="myaccount/wallet/donuts-transactions" element={<AuthRoute child={<Balance />} routeType="private" />} />
