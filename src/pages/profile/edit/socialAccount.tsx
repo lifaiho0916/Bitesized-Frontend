@@ -3,10 +3,10 @@ import { useEffect, useMemo } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import '../../../assets/styles/profile/socialAccountStyle.scss';
 import { BackIcon, InstagramIcon, YoutubeIcon } from '../../../assets/svg';
 import { accountAction } from '../../../redux/actions/socialAccountActions';
-import InstagramLogin from './InstagramLogin';
+import InstagramLogin from './InstagramLogin'
+import '../../../assets/styles/profile/socialAccountStyle.scss';
 
 const Socialaccount = () => {
   const navigate = useNavigate();
@@ -74,8 +74,9 @@ const Socialaccount = () => {
               </div>
               <div className='title'>Instagram</div>
             </div>
-
-            <InstagramLogin />
+            <div className="btn">
+              <InstagramLogin />
+            </div>
           </div>
           <div className='content'>
             <div className='icon-title'>
