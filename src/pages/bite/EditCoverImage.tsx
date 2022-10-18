@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import AvatarEditor from 'react-avatar-editor'
@@ -10,6 +10,7 @@ import { SET_BITE } from "../../redux/types"
 import "../../assets/styles/bite/EditCoverStyle.scss"
 
 const EditCoverImage = () => {
+    const location = useLocation()
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const loadState = useSelector((state: any) => state.load)
@@ -55,7 +56,7 @@ const EditCoverImage = () => {
             videos[2].coverUrl = cover
         }
         dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
-        navigate(prevRoute)
+        navigate(prevRoute, { state: { user: location.state ? location.state.user : null } })
     }
 
     const setEditorRef1 = (editor: any) => (imageEditor1 = editor)
@@ -65,7 +66,7 @@ const EditCoverImage = () => {
 
     return (
         <div className="edit-cover-wrapper">
-            <div className="page-header">
+            <div className="page-header" style={location.state ? { maxWidth: '100%', margin: '25px auto' } : {}}>
                 <div onClick={gotoCreateBite}><BackIcon color="black" /></div>
                 <div className="page-title"><span>Edit thumbnail</span></div>
                 <div style={{ width: '24px' }}></div>

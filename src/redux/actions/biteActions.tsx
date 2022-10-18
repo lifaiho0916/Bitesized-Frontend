@@ -36,6 +36,39 @@ export const biteAction = {
         }
     },
 
+    saveBiteByUserId: (bite: any, userId: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+        try {
+            dispatch({ type: SET_LOADING_TRUE })
+            const config = { headers: { "content-type": "multipart/form-data" } }
+            const uploadFuncs: any = []
+            bite.videos.forEach((video: any) => {
+                const formData = new FormData()
+                formData.append("file", video.videoUrl)
+                const formData1 = new FormData()
+                formData1.append("file", video.coverUrl)
+                uploadFuncs.push(api.uploadVideo(formData, config))
+                uploadFuncs.push(api.uploadCover(formData1, config))
+            })
+
+            const responses: any = await Promise.all(uploadFuncs)
+            for (let i = 0; i < bite.videos.length; i++) {
+                bite.videos[i].videoUrl = responses[i * 2].data.payload.path
+                bite.videos[i].coverUrl = responses[i * 2 + 1].data.payload.path
+            }
+
+            const response = await api.CreateBiteByUserId(userId, { bite: bite })
+
+            const { data } = response
+            if (data.success) {
+                dispatch({ type: SET_LOADING_FALSE })
+                navigate("/admin/create-free-bite")
+            }
+        } catch (err) {
+            dispatch({ type: SET_LOADING_FALSE })
+            console.log(err)
+        }
+    },
+
     getHomeSessions: () => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
