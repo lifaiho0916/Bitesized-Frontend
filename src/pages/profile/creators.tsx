@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import CategoryBtn from "../../components/general/categoryBtn"
 import Creator from "../../components/profile/creator"
 import ProfileMenu from "../../components/profileMenu"
@@ -12,7 +12,6 @@ import '../../assets/styles/profile/creatorListStyle.scss'
 const Creators = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const location = useLocation()
   const contexts = useContext(LanguageContext)
   const [categories, setCategories] = useState<Array<any>>([])
   const userState = useSelector((state: any) => state.auth)
@@ -32,7 +31,7 @@ const Creators = () => {
     return false
   }
 
-  useEffect(() => { dispatch(authAction.getCreatorsByCategory(categories)) }, [categories, dispatch, location])
+  useEffect(() => { dispatch(authAction.getCreatorsByCategory(categories)) }, [categories, dispatch])
 
   return (
     <div className="creator-wrapper">

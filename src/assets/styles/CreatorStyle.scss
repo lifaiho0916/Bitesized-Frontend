@@ -1,0 +1,43 @@
+.creator-component-wrapper {
+    box-sizing: border-box;
+    background: #FFFFFF;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 24px;
+    padding: 20px 0px;
+    width: 320px;
+
+    .avatar-userdata {
+        margin: 0px auto;
+
+        .userdata {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            .creator-name {
+                margin-top: 20px;
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 800;
+                font-size: 22px;
+                line-height: 26px;
+                letter-spacing: 0.02em;
+                color: #EFA058;
+            }
+
+            .creator-category {
+                height: 45px;
+                width: 280px;
+                text-align: center;
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 18px;
+                margin: 0px auto;
+                color: #938D8A;
+            }
+        }
+    }
+}

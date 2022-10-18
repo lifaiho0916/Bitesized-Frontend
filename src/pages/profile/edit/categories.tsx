@@ -12,7 +12,7 @@ import "../../../assets/styles/profile/categoriesStyle.scss"
 const Categories = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const contexts = useContext(LanguageContext);
+  const contexts = useContext(LanguageContext)
   const userState = useSelector((state: any) => state.auth)
   const { profile } = userState
   const [categories, setCategories] = useState<Array<any>>([])

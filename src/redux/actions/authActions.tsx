@@ -73,34 +73,6 @@ export const authAction = {
     }
   },
 
-  // facebookSignupUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
-  //   api.facebookSignup(userData)
-  //     .then((result) => {
-  //       const { data } = result;
-  //       localStorage.clear();
-  //       localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(data.token));
-  //       dispatch({ type: SET_USER, payload: data.user });
-  //       if (data.new) {
-  //         dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } });
-  //         navigate("/");
-  //       } else navigate(prevRoute);
-  //     }).catch(err => console.log(err));
-  // },
-
-  // facebookSigninUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
-  //   api.facebookSignin(userData)
-  //     .then((result) => {
-  //       const { data } = result;
-  //       localStorage.clear();
-  //       localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(data.token));
-  //       dispatch({ type: SET_USER, payload: data.user });
-  //       if (data.new) {
-  //         dispatch({ type: SET_DIALOG_STATE, payload: { type: "welcome", state: true } });
-  //         navigate("/");
-  //       } else navigate(prevRoute);
-  //     }).catch(err => console.log(err));
-  // },
-
   getAuthData: () => async (dispatch: Dispatch<any>) => {
     try {
       const response = await api.getAuthData()
@@ -227,6 +199,21 @@ export const authAction = {
       dispatch({ type: SET_LOADING_FALSE })
       const { payload } = data
       if (data.success) dispatch({ type: SET_USERS, payload: payload.creators })
+    } catch (err) {
+      console.log(err)
+      dispatch({ type: SET_LOADING_FALSE })
+    }
+  },
+
+  getUsersByCategory: (categories: any) => async (dispatch: Dispatch<any>) => {
+    try {
+      dispatch({ type: SET_LOADING_TRUE })
+      dispatch({ type: SET_USERS, payload: [] })
+      const response = await api.getUsersByCategory({ categories: categories })
+      const { data } = response
+      dispatch({ type: SET_LOADING_FALSE })
+      const { payload } = data
+      if (data.success) dispatch({ type: SET_USERS, payload: payload.users })
     } catch (err) {
       console.log(err)
       dispatch({ type: SET_LOADING_FALSE })

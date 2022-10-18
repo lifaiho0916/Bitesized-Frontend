@@ -1,0 +1,41 @@
+.admin-creator-list-wrapper {
+    .creator-list {
+        margin: 50px auto;
+        max-width: 1000px;
+        padding: 0px 50px;
+
+        .sort-item {
+            margin: 0px auto;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+            .sort-letter {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 19px;
+                text-align: center;
+                color: #EFA058;
+            }
+
+            .item {
+                margin: 5px 15px;
+            }
+        }
+    }
+
+    .creators {
+        margin: 0px auto;
+        max-width: 1050px;
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: center;
+
+        .creator {
+            margin: 10px;
+        }
+    }
+}

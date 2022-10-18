@@ -34,6 +34,7 @@ export const checkUrl = (data: any) => API.post('/api/auth/checkurl', data)
 export const getOwnersOfBites = () => API.get('/api/auth/owners')
 export const getUserByPersonalisedUrl = (url: any) => API.get(`/api/auth/personalurl/${url}`)
 export const getCreatorsByCategory = (data: any) => API.post('/api/auth/creators', data)
+export const getUsersByCategory = (data: any) => API.post('/api/auth/list', data)
 
 export const getSocialAccount = (userId: any) => API.get(`/api/social-accounts/${userId}`)
 export const addSocialAccount = (data: any) => API.post('/api/social-accounts/add', data)

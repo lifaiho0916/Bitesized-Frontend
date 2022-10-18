@@ -59,7 +59,7 @@ const BiteCardHome = (props: any) => {
             setLock(true)
             return
         }
-        if (String(bite.owner._id) === String(user.id)) {
+        if (user.role === "ADMIN" || (String(bite.owner._id) === String(user.id))) {
             setLock(false)
             return
         }
