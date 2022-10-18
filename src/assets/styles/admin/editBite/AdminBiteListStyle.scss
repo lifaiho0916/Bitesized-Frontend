@@ -13,8 +13,12 @@
     }
 
     .bite-list {
+        margin: 0px 50px;
+        width: 100%;
+
         .data-table {
             width: 100%;
+            white-space: nowrap;
 
             thead {
                 font-style: normal;

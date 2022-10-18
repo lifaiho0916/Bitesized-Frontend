@@ -124,14 +124,22 @@ export const authAction = {
   },
 
   getUsersList: (search: any) => async (dispatch: Dispatch<any>) => {
-    dispatch({ type: SET_LOADING_TRUE });
-    dispatch({ type: SET_USERS, payload: [] });
-    api.getUsersList({ search: search })
-      .then((result) => {
-        const { data } = result;
-        if (data.success) dispatch({ type: SET_USERS, payload: data.users });
-        dispatch({ type: SET_LOADING_FALSE });
-      }).catch(err => console.log(err));
+    try {
+      dispatch({ type: SET_LOADING_TRUE })
+      dispatch({ type: SET_USERS, payload: [] })
+
+      const response = await api.getUsersList({ search: search })
+      const { data } = response
+      dispatch({ type: SET_LOADING_FALSE })
+
+      if(data.success) {
+        const { payload } = data
+        dispatch({ type: SET_USERS, payload: payload.users })
+      }
+    } catch (err) {
+      console.log(err)
+      dispatch({ type: SET_LOADING_FALSE })
+    }
   },
 
   checkName: (name: any) => async (dispatch: Dispatch<any>) => {

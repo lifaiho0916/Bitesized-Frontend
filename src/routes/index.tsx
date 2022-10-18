@@ -23,6 +23,8 @@ import AdminEditBite from '../pages/admin/editBite/AdminEditBite'
 //CREATE-FREE-BITE
 import AdminCreatorList from '../pages/admin/createFreeBite/AdminCreatorList'
 import AdminCreateFreeBite from '../pages/admin/createFreeBite/AdminCreateFreeBite'
+//ProfileUser
+import AdminUserList from '../pages/admin/profileUser/AdminUserList'
 
 import ProfileWallet from '../pages/profile/wallet/profileWallet'
 import GeneralSetting from '../pages/profile/setting/generalSetting'
@@ -31,8 +33,6 @@ import Balance from '../pages/profile/wallet/balance'
 import Invitefriends from '../pages/profile/setting/inviteFriends'
 import Payment from '../pages/profile/setting/payment'
 import Language from '../pages/profile/setting/language'
-
-import UserList from '../pages/admin/userList'
 
 import Error404 from '../pages/error/error404'
 
@@ -67,6 +67,7 @@ const AppRoutes = () => {
       <Route path="admin/create-free-bite" element={<AuthRoute child={<AdminCreatorList />} routeType="private" />} />
       <Route path="admin/create-free-bite/detail" element={<AuthRoute child={<AdminCreateFreeBite />} routeType="private" />} />
       <Route path="admin/create-free-bite/detail/edit-thumbnail" element={<AuthRoute child={<EditCoverImage />} routeType="private" />} />
+      <Route path="admin/profile-user" element={<AuthRoute child={<AdminUserList />} routeType="private" />} />
 
       <Route path="myaccount/wallet" element={<AuthRoute child={<ProfileWallet />} routeType="private" />} />
       <Route path="myaccount/wallet/donuts-transactions" element={<AuthRoute child={<Balance />} routeType="private" />} />
@@ -76,7 +77,6 @@ const AppRoutes = () => {
       <Route path="myaccount/setting/invitefriends" element={<AuthRoute child={<Invitefriends />} routeType="private" />} />
       <Route path="myaccount/setting/payment" element={<AuthRoute child={<Payment />} routeType="private" />} />
 
-      <Route path="admin/users" element={<AuthRoute child={<UserList />} routeType="private" />} />
       <Route path="admin/notifications" element={<AuthRoute child={<Notifications />} routeType="private" />} />
       <Route path="admin/notifications/new" element={<AuthRoute child={<NotificationNew />} routeType="private" />} />
       <Route path="admin/notifications/setting" element={<AuthRoute child={<NotificationSetting />} routeType="private" />} />
