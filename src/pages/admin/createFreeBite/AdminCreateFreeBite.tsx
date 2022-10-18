@@ -6,13 +6,13 @@ import ContainerBtn from "../../../components/general/containerBtn"
 import ReactPlayer from "react-player"
 import TeaserCard from "../../../components/general/TeaserCard"
 import Input from "../../../components/general/input"
+import PublishBiteModal from "../../../components/modals/PublishBiteModal"
 import Button from "../../../components/general/button"
 import { BackIcon, RemoveIcon, AddIcon } from "../../../assets/svg"
 import { biteAction } from "../../../redux/actions/biteActions"
 import CONSTANT from "../../../constants/constant"
 import { SET_BITE, SET_BITE_THUMBNAILS, SET_PREVIOUS_ROUTE } from "../../../redux/types"
 import "../../../assets/styles/admin/createFreeBite/AdminCreateFreeBiteStyle.scss"
-import PublishBiteModal from "../../../components/modals/PublishBiteModal"
 
 const AdminCreateFreeBite = () => {
     const location = useLocation()
