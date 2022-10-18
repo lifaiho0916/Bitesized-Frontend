@@ -5,12 +5,12 @@ import { LanguageContext } from "../../routes/authRoute"
 import { AddIcon } from "../../assets/svg"
 import "../../assets/styles/CreatorStyle.scss"
 
-const CreatorSm = (props: any) => {
+const CreatorLg = (props: any) => {
     const { user, handleSubmit } = props
     const contexts = useContext(LanguageContext)
 
     return (
-        <div className="creator-component-sm-wrapper">
+        <div className="creator-component-lg-wrapper">
             <div className="avatar-userdata">
                 <div className="avatar">
                     <Avatar
@@ -29,18 +29,8 @@ const CreatorSm = (props: any) => {
                     </div>
                 </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Button
-                    text={"Create FREE Bite"}
-                    fillStyle="outline"
-                    color="primary"
-                    width={"155px"}
-                    icon={[<AddIcon color="#EFA058" />, <AddIcon color="white" />, <AddIcon color="white" />]}
-                    handleSubmit={handleSubmit}
-                />
-            </div>
         </div>
     )
 }
 
-export default CreatorSm
+export default CreatorLg
