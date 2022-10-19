@@ -10,7 +10,7 @@ import PurchaseModal from "../../components/modals/PurchaseModal"
 import PaymentForm from "../../components/stripe/paymentForm"
 import UnLockFreeModal from "../../components/modals/UnLockFreeModal"
 import { AddIcon, CreatoCoinIcon } from "../../assets/svg"
-import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE } from "../../redux/types"
+import { SET_DIALOG_STATE } from "../../redux/types"
 import "../../assets/styles/profile/profileStyle.scss"
 
 const Profile = () => {

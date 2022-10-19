@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import Avatar from "../../../components/general/avatar"
 import { SearchIcon, HiddenIcon, VisibleIcon } from "../../../assets/svg"
 import { authAction } from "../../../redux/actions/authActions"
+import { SET_PROFILE, SET_NAME_EXIST, SET_URL_EXIST } from "../../../redux/types"
 import "../../../assets/styles/admin/profileUser/AdminUsersStyle.scss"
 
 const AdminUserList = () => {
@@ -40,7 +41,21 @@ const AdminUserList = () => {
                             {users.map((user: any, index: any) => {
                                 if (user.date) {
                                     return (
-                                        <tr key={index} onClick={() => navigate('/admin/profile-user/edit', { state: { index: index + 1 } })}>
+                                        <tr key={index} onClick={() => {
+                                            dispatch({
+                                                type: SET_PROFILE,
+                                                payload: {
+                                                  category: [],
+                                                  avatar: null,
+                                                  name: null,
+                                                  personalisedUrl: null,
+                                                  bioText: null
+                                                }
+                                              })
+                                              dispatch({ type: SET_NAME_EXIST, payload: false })
+                                              dispatch({ type: SET_URL_EXIST, payload: false })
+                                            navigate('/admin/profile-user/edit', { state: { index: index + 1 } })
+                                        }}>
                                             <td>{new Date(user.date).toUTCString().slice(5, 11)} {new Date(user.date).toUTCString().slice(14, 16)}</td>
                                             <td>
                                                 <Avatar

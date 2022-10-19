@@ -59,6 +59,7 @@ const AppRoutes = () => {
       <Route path="admin/create-free-bite/detail/edit-thumbnail" element={<AuthRoute child={<EditCoverImage />} routeType="private" />} />
       <Route path="admin/profile-user" element={<AuthRoute child={<AdminUserList />} routeType="private" />} />
       <Route path="admin/profile-user/edit" element={<AuthRoute child={<AdminEditUser />} routeType="private" />} />
+      <Route path="admin/profile-user/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
 
       <Route path="myaccount/setting" element={<AuthRoute child={<GeneralSetting />} routeType="private" />} />
       <Route path="myaccount/setting/language" element={<AuthRoute child={<Language />} routeType="private" />} />

@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import { useDispatch } from 'react-redux'
 import { LanguageContext } from "../../../routes/authRoute"
 import { useSelector } from 'react-redux'
@@ -12,10 +12,12 @@ import "../../../assets/styles/profile/categoriesStyle.scss"
 const Categories = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const location = useLocation()
   const contexts = useContext(LanguageContext)
   const userState = useSelector((state: any) => state.auth)
   const { profile } = userState
   const [categories, setCategories] = useState<Array<any>>([])
+  const { state } = location
 
   const selectCategory = (index: any) => {
     var array = [...categories]
@@ -30,9 +32,10 @@ const Categories = () => {
   }
 
   const handleSave = () => {
-    const state = { ...profile, category: categories }
-    dispatch({ type: SET_PROFILE, payload: state })
-    navigate(`/myaccount/edit`)
+    const profileState = { ...profile, category: categories }
+    dispatch({ type: SET_PROFILE, payload: profileState })
+    if (state) navigate(`/admin/profile-user/edit`, { state: { index: state.index } })
+    else navigate(`/myaccount/edit`)
   }
 
   const includeCategory = (index: any) => {
@@ -44,8 +47,11 @@ const Categories = () => {
 
   return (
     <div className="categories-wrapper">
-      <div className="page-header">
-        <div onClick={() => navigate(`/myaccount/edit`)}><BackIcon color="black" /></div>
+      <div className="page-header" style={state ? { maxWidth: '100%', margin: '25px 20px' } : {}}>
+        <div onClick={() => {
+          if (state) navigate(`/admin/profile-user/edit`, { state: { index: state.index } })
+          else navigate(`/myaccount/edit`)
+        }}><BackIcon color="black" /></div>
         <div className="page-title"><span>{contexts.HEADER_TITLE.CHOOSE_CATEGORY}</span></div>
         <div style={{ width: '24px' }}></div>
       </div>
