@@ -10,7 +10,7 @@ import PurchaseModal from "../../components/modals/PurchaseModal"
 import PaymentForm from "../../components/stripe/paymentForm"
 import UnLockFreeModal from "../../components/modals/UnLockFreeModal"
 import { AddIcon, CreatoCoinIcon } from "../../assets/svg"
-import { SET_PREVIOUS_ROUTE, SET_DIALOG_STATE } from "../../redux/types"
+import { SET_DIALOG_STATE } from "../../redux/types"
 import "../../assets/styles/profile/profileStyle.scss"
 
 const Profile = () => {
@@ -31,12 +31,13 @@ const Profile = () => {
   const [openPurchaseModal, setOpenPurchaseModal] = useState(false)
   const [openPaymentForm, setOpenPaymentForm] = useState(false)
 
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const code = searchParams.get("mybites")
 
   useEffect(() => {
     const personalisedUrl = location.pathname.substring(1)
     dispatch(biteAction.getProfileSessions(personalisedUrl, user?.id))
+    dispatch(biteAction.getCurrencyRate())
   }, [location.pathname, dispatch, user])
 
   useEffect(() => {

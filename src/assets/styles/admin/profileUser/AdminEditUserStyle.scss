@@ -22,17 +22,131 @@
     }
 
     .admin-edit-user {
+        margin: 0px auto;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         flex-wrap: wrap;
         max-width: 880px;
         padding: 0px 50px;
+        margin: 0px auto;
 
         .old-setting {
+            box-sizing: border-box;
+            width: 390px;
+            border: 2px solid #54504E;
+            border-radius: 30px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin-top: 15px;
+            height: fit-content;
 
+            .title {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 20px;
+                text-align: center;
+                text-decoration-line: underline;
+                color: #54504E;
+            }
+
+            .avatar {
+                margin-top: 20px;
+            }
+
+            .name {
+                margin-top: 25px;
+            }
+
+            .url {
+                margin-top: 20px;
+            }
+
+            .categories {
+                margin-top: 25px;
+                display: flex;
+
+                .category {
+                    margin: 0px 2px;
+                    padding: 8px;
+                    background: #54504E;
+                    border-radius: 40px;
+                    width: fit-content;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 20px;
+                    color: #FFFFFF;
+                }
+            }
         }
 
         .new-setting {
+            box-sizing: border-box;
+            width: 390px;
+            border: 4px solid #EFA058;
+            border-radius: 30px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin-top: 15px;
+            height: fit-content;
+
+            .title {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 20px;
+                text-align: center;
+                text-decoration-line: underline;
+                color: #EFA058;
+            }
+
+            .avatar {
+                margin-top: 20px;
+            }
+
+            .description {
+                cursor: pointer;
+                margin-top: 5px;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 16px;
+                line-height: 18px;
+                letter-spacing: 0.02em;
+                color: black;
+            }
+
+            .display-name-error {
+                height: 15px;
+                display: flex;
+                justify-content: center;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 0.02em;
+                color: #AF3E1E;
+            }
+
+            .name {
+                margin-top: 0px;
+            }
+
+            .url {
+                margin-top: 5px;
+            }
 
         }
     }

@@ -167,7 +167,7 @@ const CreateBite = () => {
                 buttons={[
                     {
                         text: 'Quit',
-                        handleClick: () => navigate('/bite/create_type')
+                        handleClick: () => navigate('/bite/create-type')
                     },
                     {
                         text: 'Cancel',
@@ -301,6 +301,7 @@ const CreateBite = () => {
                                 width={'100%'}
                                 minnum={0}
                                 maxnum={100000000000000}
+                                step={0.1}
                                 placeholder="$1 USD is ideal for bite-size!"
                                 title={price}
                                 setTitle={setPrice}

@@ -35,7 +35,7 @@ const ProfileEdit = () => {
         const blob = await res.blob()
         imageFile = new File([blob], 'avatar.png', blob)
       }
-      dispatch(authAction.editProfile(name, url, profile.category, bioText, imageFile, navigate))
+      dispatch(authAction.editProfile(name, url, profile.category, bioText, imageFile, url, user.id, navigate))
     }
   }
 
@@ -50,8 +50,8 @@ const ProfileEdit = () => {
     }
   }
 
-  useEffect(() => { if (name !== "") dispatch(authAction.checkName(name)) }, [name, dispatch])
-  useEffect(() => { if (url !== "") dispatch(authAction.checkUrl(url)) }, [url, dispatch])
+  useEffect(() => { if (name !== "") dispatch(authAction.checkName(name, user.id)) }, [name, dispatch])
+  useEffect(() => { if (url !== "") dispatch(authAction.checkUrl(url, user.id)) }, [url, dispatch])
 
   useEffect(() => {
     if (user && profile.name === null) {

@@ -10,7 +10,7 @@ import LangDialog from "../components/general/langDialog"
 import { authAction } from "../redux/actions/authActions";
 import { CreatoColorIcon, AddIcon, LanguageIcon } from "../assets/svg";
 import { LanguageContext } from "../routes/authRoute";
-import { SET_DAREMES, SET_DIALOG_STATE, SET_PREVIOUS_ROUTE, SET_USERS } from "../redux/types";
+import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE, SET_USERS } from "../redux/types";
 import "../assets/styles/headerStyle.scss";
 
 const useWindowSize = () => {
@@ -42,10 +42,9 @@ const Header = () => {
   }
 
   const handleLogout = () => {
-    setOpenSideMenu(false);
-    dispatch({ type: SET_DAREMES, payload: [] });
+    setOpenSideMenu(false)
     dispatch({ type: SET_PREVIOUS_ROUTE, payload: "/" })
-    dispatch(authAction.logout(navigate));
+    dispatch(authAction.logout(navigate))
   };
 
   const showSideMenu = () => { setOpenSideMenu(!openSideMenu) }

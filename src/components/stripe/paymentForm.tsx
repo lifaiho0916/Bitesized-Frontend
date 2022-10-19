@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef, useContext } from "react"
-import axios from "axios"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { loadStripe } from "@stripe/stripe-js"
 import {
   Elements,
@@ -33,7 +32,9 @@ const CheckoutForm = (props: any) => {
   const [saveCheck, setSaveCheck] = useState(false)
   const [errorToDisplay, setErrorToDisplay] = useState('')
   const context = useContext(LanguageContext)
+  const loadState = useSelector((state: any) => state.load)
   const [currency, setCurrency] = useState(0)
+  const { currencyRate } = loadState
 
   const elementStyle = {
     lineHeight: '42px',
@@ -55,17 +56,10 @@ const CheckoutForm = (props: any) => {
 
       props.exit()
 
-      const response = await axios.get('https://api.striperates.com/rates/usd', {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': `${process.env.REACT_APP_STRIPE_CURRENCY_RATE_API_KEY}`,
-        }
-      })
 
-      const { data } = response
-      const rate1 = bite.currency === 'usd' ? 1.0 : data.data[0].rates[bite.currency]
-      const usdAmount = rate1 * bite.price
-      const rate2 = currency === 0 ? 1.0 : data.data[0].rates[CONSTANT.PAYMENT_CURRENCIES[currency]]
+      const rate1 = bite.currency === 'usd' ? 1.0 : currencyRate[`${bite.currency}`]
+      const usdAmount = bite.price / rate1
+      const rate2 = currency === 0 ? 1.0 : currencyRate[`${CONSTANT.PAYMENT_CURRENCIES[currency]}`]
       dispatch(biteAction.unLockBite(bite.id, CONSTANT.PAYMENT_CURRENCIES[currency], usdAmount, rate2, token.token))
       setErrorToDisplay('')
     } catch (err) {
@@ -87,11 +81,11 @@ const CheckoutForm = (props: any) => {
   }, [props.display]);
 
   return (
-    <div className="stripe-checkout-wrapper" style={props.display ? { visibility: 'visible', opacity: 1 } : {}} onClick={props.exit}>
+    <div className={props.display ? "stripe-checkout-wrapper show" : "stripe-checkout-wrapper"} onClick={props.exit}>
       <div className="stripe-checkout" onClick={e => e.stopPropagation()}>
         <div className="stripe-header">
           <div className="header-title">
-            {/* {context.PAYMENT.BUY_DONUTS} */}
+            Enter your card details.
           </div>
           <div onClick={props.exit}>
             <CloseIcon color="black" />

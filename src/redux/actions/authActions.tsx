@@ -86,7 +86,7 @@ export const authAction = {
     }
   },
 
-  editProfile: (name: any, url: any, category: any, bioText: any, avatarFile: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+  editProfile: (name: any, url: any, category: any, bioText: any, avatarFile: any, navUrl: any, userId: any, navigate: any) => async (dispatch: Dispatch<any>, getState: any) => {
     try {
       dispatch({ type: SET_LOADING_TRUE })
       let resultAvatar = null
@@ -98,13 +98,14 @@ export const authAction = {
       }
       let path = null
       if (resultAvatar?.data) path = resultAvatar.data.path
-      const response = await api.editProfile({ name: name, url: url, category: category, bioText: bioText, avatar: path })
+      const response = await api.editProfile({ name: name, url: url, category: category, bioText: bioText, avatar: path, id: userId })
       const { data } = response
       dispatch({ type: SET_LOADING_FALSE })
       if (data.success) {
+        const user = getState().auth.user
         const { payload } = data
-        dispatch({ type: SET_USER, payload: payload.user })
-        navigate(`/${url}`)
+        if (String(userId) === String(user.id)) dispatch({ type: SET_USER, payload: payload.user })
+        navigate(`/${navUrl}`)
       }
     } catch (err) {
       console.log(err)
@@ -142,9 +143,9 @@ export const authAction = {
     }
   },
 
-  checkName: (name: any) => async (dispatch: Dispatch<any>) => {
+  checkName: (name: any, userId: any) => async (dispatch: Dispatch<any>) => {
     try {
-      const response = await api.checkName({ name: name })
+      const response = await api.checkName({ name: name, id: userId })
       const { data } = response
       if (data.success) {
         const { payload } = data
@@ -155,9 +156,9 @@ export const authAction = {
     }
   },
 
-  checkUrl: (url: any) => async (dispatch: Dispatch<any>) => {
+  checkUrl: (url: any, userId: any) => async (dispatch: Dispatch<any>) => {
     try {
-      const response = await api.checkUrl({ url: url })
+      const response = await api.checkUrl({ url: url, id: userId })
       const { data } = response
       if (data.success) {
         const { payload } = data

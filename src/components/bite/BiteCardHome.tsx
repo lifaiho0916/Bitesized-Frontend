@@ -14,7 +14,9 @@ const BiteCardHome = (props: any) => {
     const navigate = useNavigate()
     const contexts = useContext(LanguageContext)
     const userState = useSelector((state: any) => state.auth)
+    const loadState = useSelector((state: any) => state.load)
     const { user } = userState
+    const { currencyRate } = loadState
 
     const [videoIndex, setVideoIndex] = useState(0)
     const [play, setPlay] = useState(false)
@@ -40,14 +42,10 @@ const BiteCardHome = (props: any) => {
         return res
     }
     const displayPrice = (currency: any, price: any) => {
-        let res: any = ''
-        if (currency === 'usd') res += "US $" + price
-        else if (currency === 'hkd') res += 'HK $' + price
-        else if (currency === 'twd') res += 'NT $' + price
-        else if (currency === 'inr') res += 'Rp ₹' + price
-        else if (currency === 'myr') res += 'RM ' + price
-        else res = "FREE"
-        return res
+        if(currency) {
+            if(currency === 'usd') return `$USD ${price.toFixed(2)}`
+            else return `$USD ${currencyRate ? (price / currencyRate[`${currency}`]).toFixed(2) : ''}`
+        } return "FREE"
     }
 
     const findPurchasedUser = (purchaseInfo: any) => {
