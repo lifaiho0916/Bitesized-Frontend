@@ -66,7 +66,7 @@ const EditCoverImage = () => {
 
     return (
         <div className="edit-cover-wrapper">
-            <div className="page-header" style={location.state ? { maxWidth: '100%', margin: '25px auto' } : {}}>
+            <div className="page-header" style={location.state ? { maxWidth: '100%', margin: '25px 20px' } : {}}>
                 <div onClick={gotoCreateBite}><BackIcon color="black" /></div>
                 <div className="page-title"><span>Edit thumbnail</span></div>
                 <div style={{ width: '24px' }}></div>
