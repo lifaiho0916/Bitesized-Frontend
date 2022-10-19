@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import Avatar from "../../../components/general/avatar"
 import { SearchIcon, HiddenIcon, VisibleIcon } from "../../../assets/svg"
 import { authAction } from "../../../redux/actions/authActions"
-import "../../../assets/styles/admin/profileUser/adminUsersStyle.scss"
+import "../../../assets/styles/admin/profileUser/AdminUsersStyle.scss"
 
 const AdminUserList = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const userState = useSelector((state: any) => state.auth)
     const [search, setSearch] = useState("")
     const { users } = userState
@@ -38,7 +40,7 @@ const AdminUserList = () => {
                             {users.map((user: any, index: any) => {
                                 if (user.date) {
                                     return (
-                                        <tr key={index}>
+                                        <tr key={index} onClick={() => navigate('/admin/profile-user/edit', { state: { index: index + 1 } })}>
                                             <td>{new Date(user.date).toUTCString().slice(5, 11)} {new Date(user.date).toUTCString().slice(14, 16)}</td>
                                             <td>
                                                 <Avatar

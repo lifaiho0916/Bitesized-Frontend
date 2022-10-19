@@ -11,7 +11,6 @@ import {
   YoutubeIcon,
 } from "../../assets/svg"
 import { SET_NAME_EXIST, SET_PROFILE, SET_URL_EXIST } from "../../redux/types"
-import { subscribeUser } from '../../api'
 import "../../assets/styles/profile/components/profileHeaderStyle.scss"
 
 const useOutsideAlerter = (ref: any, moreInfo: any) => {
@@ -82,14 +81,14 @@ const ProfileHeader = (props: any) => {
   }, [user, profileUser])
 
   const subscribedUser = async () => {
-    try {
-      if (user) {
-        const result = await subscribeUser(profileUser._id)
-        if (result.data.success) setSubscribed(!subscribed)
-      } else navigate('/auth/signin')
-    } catch (err) {
-      console.log({ err })
-    }
+    // try {
+    //   if (user) {
+    //     const result = await subscribeUser(profileUser._id)
+    //     if (result.data.success) setSubscribed(!subscribed)
+    //   } else navigate('/auth/signin')
+    // } catch (err) {
+    //   console.log({ err })
+    // }
   }
 
   useEffect(() => {

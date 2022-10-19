@@ -58,7 +58,7 @@ const Sidebar = () => {
         </NavLink>
         <NavLink to="/admin/profile-user" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
           <div className="icon">
-            <NoOfPeopleIcon className="icon-svg" color={activePath === '/admin/profile-user' && activePath === location.pathname ? "#EFA058" : hoverPath === "/admin/profile-user" ? "#EFA058" : "#A6A29F"} />
+            <NoOfPeopleIcon className="icon-svg" color={location.pathname.indexOf('/admin/profile-user') !== -1 ? "#EFA058" : hoverPath === "/admin/profile-user" ? "#EFA058" : "#A6A29F"} />
           </div>
           <div className="item-letter">
             <span>Profile - Users</span>

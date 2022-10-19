@@ -132,7 +132,7 @@ export const authAction = {
       const { data } = response
       dispatch({ type: SET_LOADING_FALSE })
 
-      if(data.success) {
+      if (data.success) {
         const { payload } = data
         dispatch({ type: SET_USERS, payload: payload.users })
       }
@@ -168,36 +168,6 @@ export const authAction = {
     }
   },
 
-  getUserFromUrl: (url: any) => async (dispatch: Dispatch<any>) => {
-    dispatch({ type: SET_LOADING_TRUE });
-    dispatch({ type: SET_USERS, payload: [] });
-    api.getUserFromUrl({ url: url })
-      .then((result) => {
-        const { data } = result;
-        dispatch({ type: SET_LOADING_FALSE });
-        if (data.success) dispatch({ type: SET_USERS, payload: data.user });
-      }).catch(err => console.log(err));
-  },
-
-  inviteFriend: (code: any, navigate: any) => async (dispatch: Dispatch<any>) => {
-    api.inviteFriend({ referralLink: code })
-      .then((result) => {
-        const { data } = result
-        if (data.success) {
-          const payload = data.data
-
-          const referralInfo = {
-            userId: payload.userId,
-            index: payload.index,
-            date: new Date()
-          }
-
-          localStorage.setItem("referral_info", JSON.stringify(referralInfo))
-          navigate('/auth/signup')
-        }
-      }).catch(err => console.log(err))
-  },
-
   getCreatorsByCategory: (categories: any) => async (dispatch: Dispatch<any>) => {
     try {
       dispatch({ type: SET_LOADING_TRUE })
@@ -222,6 +192,24 @@ export const authAction = {
       dispatch({ type: SET_LOADING_FALSE })
       const { payload } = data
       if (data.success) dispatch({ type: SET_USERS, payload: payload.users })
+    } catch (err) {
+      console.log(err)
+      dispatch({ type: SET_LOADING_FALSE })
+    }
+  },
+
+  changeUserVisible: (userId: any, visible: any) => async (dispatch: Dispatch<any>, getState: any) => {
+    try {
+      dispatch({ type: SET_LOADING_TRUE })
+      const response = await api.changeUserVisible(userId, { visible: visible })
+      const { data } = response
+      dispatch({ type: SET_LOADING_FALSE })
+      if (data.success) {
+        let users = getState().auth.users
+        const index = users.findIndex((user: any) => String(user._id) === String(userId))
+        users[index].visible = visible
+        dispatch({ type: SET_USERS, payload: users })
+      }
     } catch (err) {
       console.log(err)
       dispatch({ type: SET_LOADING_FALSE })
