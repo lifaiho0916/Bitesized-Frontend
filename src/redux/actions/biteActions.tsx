@@ -1,6 +1,7 @@
 import { Dispatch } from "redux"
+import axios from "axios"
 import * as api from "../../api"
-import { SET_LOADING_TRUE, SET_LOADING_FALSE, SET_BITES, SET_USERS, SET_DIALOG_STATE, SET_BITE, SET_BITE_INITIAL } from "../types"
+import { SET_LOADING_TRUE, SET_LOADING_FALSE, SET_BITES, SET_USERS, SET_DIALOG_STATE, SET_BITE, SET_BITE_INITIAL, SET_CURRENCY_RATE } from "../types"
 
 export const biteAction = {
     saveBite: (bite: any, navigate: any) => async (dispatch: Dispatch<any>) => {
@@ -270,6 +271,22 @@ export const biteAction = {
         } catch (err) {
             console.log(err)
             dispatch({ type: SET_LOADING_FALSE })
+        }
+    },
+
+    getCurrencyRate: () => async (dispatch: Dispatch<any>) => {
+        try {
+            const response = await axios.get('https://api.striperates.com/rates/usd', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': `${process.env.REACT_APP_STRIPE_CURRENCY_RATE_API_KEY}`,
+                }
+            })
+
+            const { data } = response
+            dispatch({ type: SET_CURRENCY_RATE, payload: data.data[0].rates })
+        } catch (err) {
+            console.log(err)
         }
     }
 }

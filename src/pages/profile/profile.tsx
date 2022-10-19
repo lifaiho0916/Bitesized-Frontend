@@ -31,12 +31,13 @@ const Profile = () => {
   const [openPurchaseModal, setOpenPurchaseModal] = useState(false)
   const [openPaymentForm, setOpenPaymentForm] = useState(false)
 
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const code = searchParams.get("mybites")
 
   useEffect(() => {
     const personalisedUrl = location.pathname.substring(1)
     dispatch(biteAction.getProfileSessions(personalisedUrl, user?.id))
+    dispatch(biteAction.getCurrencyRate())
   }, [location.pathname, dispatch, user])
 
   useEffect(() => {

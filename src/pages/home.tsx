@@ -43,7 +43,10 @@ const Home = () => {
     navigate(url)
   }
 
-  useEffect(() => { dispatch(biteAction.getHomeSessions()) }, [location, dispatch])
+  useEffect(() => {
+    dispatch(biteAction.getHomeSessions())
+    dispatch(biteAction.getCurrencyRate())
+  }, [location, dispatch])
   useEffect(() => {
     if (dlgState === 'unlock_free') setOpenFreeUnLock(true)
   }, [dlgState])
