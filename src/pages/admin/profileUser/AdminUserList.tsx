@@ -45,15 +45,15 @@ const AdminUserList = () => {
                                             dispatch({
                                                 type: SET_PROFILE,
                                                 payload: {
-                                                  category: [],
-                                                  avatar: null,
-                                                  name: null,
-                                                  personalisedUrl: null,
-                                                  bioText: null
+                                                    category: [],
+                                                    avatar: null,
+                                                    name: null,
+                                                    personalisedUrl: null,
+                                                    bioText: null
                                                 }
-                                              })
-                                              dispatch({ type: SET_NAME_EXIST, payload: false })
-                                              dispatch({ type: SET_URL_EXIST, payload: false })
+                                            })
+                                            dispatch({ type: SET_NAME_EXIST, payload: false })
+                                            dispatch({ type: SET_URL_EXIST, payload: false })
                                             navigate('/admin/profile-user/edit', { state: { index: index + 1 } })
                                         }}>
                                             <td>{new Date(user.date).toUTCString().slice(5, 11)} {new Date(user.date).toUTCString().slice(14, 16)}</td>
@@ -65,7 +65,7 @@ const AdminUserList = () => {
                                                     avatarStyle="horizontal"
                                                 />
                                             </td>
-                                            <td>{user.role === "ADMIN" ? '***' : '0'}</td>
+                                            <td>{user.role === "ADMIN" ? '***' : user.earnings}</td>
                                             <td>{user.email}</td>
                                             <td style={{ textAlign: 'center' }}>{user.videoCnt}</td>
                                             <td style={{ textAlign: 'center' }}>{user.biteCnt}</td>

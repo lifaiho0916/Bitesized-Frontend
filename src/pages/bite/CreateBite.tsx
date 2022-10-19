@@ -167,7 +167,7 @@ const CreateBite = () => {
                 buttons={[
                     {
                         text: 'Quit',
-                        handleClick: () => navigate('/bite/create_type')
+                        handleClick: () => navigate('/bite/create-type')
                     },
                     {
                         text: 'Cancel',

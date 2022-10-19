@@ -30,20 +30,8 @@ const useOutsideAlerter = (ref: any, moreInfo: any) => {
   return more
 }
 
-const useWindowSize = () => {
-  const [size, setSize] = useState(0)
-  useLayoutEffect(() => {
-    const updateSize = () => { setSize(window.innerWidth) }
-    window.addEventListener("resize", updateSize)
-    updateSize()
-    return () => window.removeEventListener("resize", updateSize)
-  }, [])
-  return size
-}
-
 const ProfileHeader = (props: any) => {
   const { same, profileUser } = props
-  const width = useWindowSize()
   const navigate = useNavigate()
   const userStore = useSelector((state: any) => state.auth);
   const dispatch = useDispatch()
@@ -109,17 +97,15 @@ const ProfileHeader = (props: any) => {
 
   return (
     <div className="profile-header">
-      <div className="avatar" style={{ justifyContent: same ? 'center' : 'space-between' }}>
+      <div className="avatar">
         <Avatar
           size="mobile"
           avatar={profileUser ? profileUser.avatar.indexOf('uploads') === -1 ? profileUser.avatar : `${process.env.REACT_APP_SERVER_URL}/${profileUser.avatar}` : ''}
         />
-        {!same &&
           <div className="social-icon-other">
             <div style={{ marginLeft: '15px' }}><YoutubeIcon color="#E17253" /></div>
             <div style={{ marginLeft: '5px' }}><InstagramIcon color="#E17253" /></div>
           </div>
-        }
       </div>
       <div className="ellipsis-icon" onClick={() => setMoreInfo(true)}>
         <MoreIcon color="black" />
@@ -134,12 +120,7 @@ const ProfileHeader = (props: any) => {
           </div>
         </div>
         <div className="btn-part">
-          {same ?
-            <div className="social-icon">
-              <div style={{ marginLeft: '15px' }}><YoutubeIcon color="#E17253" /></div>
-              <div style={{ marginLeft: '5px' }}><InstagramIcon color="#E17253" /></div>
-            </div>
-            :
+          {same === false &&
             <Button
               text="Subscribe"
               fillStyle="fill"
@@ -161,7 +142,7 @@ const ProfileHeader = (props: any) => {
         }
       </div>
       {same === true &&
-        <div className="edit-profile-btn" style={{ justifyContent: width < 680 ? 'center' : 'flex-end' }}>
+        <div className="edit-profile-btn">
           <div className="edit-btn" onClick={() => {
             dispatch({
               type: SET_PROFILE,
@@ -181,56 +162,11 @@ const ProfileHeader = (props: any) => {
           </div>
         </div>
       }
-      {/* <div className="icons">
-        {props.property === "view" ? (
-          <>
-            <div style={{ marginRight: '10px' }}>
-              {subscribed ?
-                <Button
-                  handleSubmit={subscribedUser}
-                  color="primary"
-                  shape="pill"
-                  fillStyle="fill"
-                  icon={[<NotificationSubscribedIcon color="white" />, <NotificationSubscribedIcon color="white" />, <NotificationSubscribedIcon color="white" />]}
-                />
-                :
-                <Button
-                  handleSubmit={subscribedUser}
-                  color="primary"
-                  shape="pill"
-                  fillStyle="fill"
-                  icon={[<NotificationOutlineIcon color="white" />, <NotificationOutlineIcon color="white" />, <NotificationOutlineIcon color="white" />]}
-                />
-              }
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="pen-icon" onClick={() => {
-              if (user) {
-                dispatch({
-                  type: SET_PROFILE_DATA, payload: {
-                    category: user.category,
-                    avatarFile: null,
-                    displayName: user.name,
-                    creatoUrl: `www.creatogether.io/${user.personalisedUrl}`
-                  }
-                })
-                navigate(`/myaccount/edit`)
-              }
-            }}>
-              <EditIcon color="white" /><span>&nbsp;Edit</span>
-            </div> */}
-      {/* <div style={{ marginLeft: '15px' }}><YoutubeIcon color="#E17253" /></div>
-            <div style={{ marginLeft: '5px' }}><InstagramIcon color="#E17253" /></div> */}
-      {/* </>
-        )}
-      </div> */}
       <div className="drop-down-list" style={moreInfo === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef}>
         <div className="list" onClick={() => {
-          navigator.clipboard.writeText(`www.creatogether.io/${profileUser.personalisedUrl}`);
+          navigator.clipboard.writeText(`bitesized.creatogether.io/${profileUser.personalisedUrl}`);
           setMoreInfo(false);
-        }}>{contexts.PROFILE_LETTER.COPY_PROFILE_LINK}</div>
+        }}>{"Copy"}</div>
         <div className="list" onClick={() => { setMoreInfo(false) }}>{contexts.PROFILE_LETTER.CANCEL}</div>
       </div>
     </div >
