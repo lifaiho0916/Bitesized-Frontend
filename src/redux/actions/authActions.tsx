@@ -1,5 +1,5 @@
 import { Dispatch } from "redux"
-import { SET_LOADING_FALSE, SET_LOADING_TRUE, SET_NAME_EXIST, SET_USER, SET_USERS, SET_URL_EXIST } from "../types";
+import { SET_LOADING_FALSE, SET_LOADING_TRUE, SET_NAME_EXIST, SET_USER, SET_USERS, SET_URL_EXIST, SET_CURRENCY_RATE } from "../types";
 import * as api from '../../api'
 
 export const authAction = {
@@ -80,6 +80,7 @@ export const authAction = {
       if (data.success) {
         const { payload } = data
         dispatch({ type: SET_USER, payload: payload.user })
+        dispatch({ type: SET_CURRENCY_RATE, payload: payload.currencyRate })
       }
     } catch (err) {
       console.log(err)

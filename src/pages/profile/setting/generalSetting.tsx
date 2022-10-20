@@ -1,18 +1,18 @@
-import { useContext, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useContext, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
 import {
   AlertIcon,
   CreatoCoinIcon,
   ForwardIcon,
   LanguageIcon,
   NoOfPeopleIcon,
+  BackIcon
 } from "../../../assets/svg";
-import Title from "../../../components/general/title";
-import { WalletIcon } from "../../../constants/awesomeIcons";
-import { useLocation, useNavigate } from "react-router-dom";
-import { LanguageContext } from "../../../routes/authRoute";
-import { SET_PREVIOUS_ROUTE } from "../../../redux/types";
-import "../../../assets/styles/profile/generalSettingStyle.scss";
+import { WalletIcon } from "../../../constants/awesomeIcons"
+import { useLocation, useNavigate } from "react-router-dom"
+import { LanguageContext } from "../../../routes/authRoute"
+import { SET_PREVIOUS_ROUTE } from "../../../redux/types"
+import "../../../assets/styles/profile/generalSettingStyle.scss"
 
 const GeneralSetting = () => {
   const navigate = useNavigate();
@@ -27,22 +27,14 @@ const GeneralSetting = () => {
   }, [location]);
 
   return (
-    <>
-      <div className="title-header">
-        <Title title={contexts.HEADER_TITLE.SETTINGS} back={() => { navigate(`/${user.personalisedUrl}`) }} />
+    <div className="setting-wrapper">
+      <div className="page-header">
+        <div onClick={() => navigate(`/${user.personalisedUrl}`)}><BackIcon color="black" /></div>
+        <div className="page-title"><span>{contexts.HEADER_TITLE.SETTINGS}</span></div>
+        <div style={{ width: '24px' }}></div>
       </div>
       <div className="setting-general">
         <div className="settings">
-          <div
-            className="setting"
-            onClick={() => navigate(`/myaccount/setting/invitefriends`)}
-          >
-            <div className="part">
-              <NoOfPeopleIcon color="black" />
-              <div className="title">{contexts.SETTINGS_LETTER.INVITE_FRIENDS}</div>
-            </div>
-            <ForwardIcon color="black" />
-          </div>
           <div
             className="setting"
             onClick={() => navigate(`/myaccount/setting/payment`)}
@@ -53,73 +45,55 @@ const GeneralSetting = () => {
             </div>
             <ForwardIcon color="black" />
           </div>
-          {/* <div
+          <div
             className="setting"
             onClick={() => {
               dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/myaccount/setting` });
-              navigate(`/myaccount/setting/language`)
+              navigate(`/myaccount/setting/language-currency`)
             }}
           >
             <div className="part">
               <LanguageIcon color="black" />
-              <div className="title">{contexts.SETTINGS_LETTER.LANGUAGE}</div>
+              <div className="title">Language and Currency</div>
             </div>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center'
-            }}>
-              <span
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  marginRight: '20px',
-                  fontStyle: 'normal',
-                  fontWeight: 400,
-                  fontSize: '16px',
-                  lineHeight: '19px',
-                  letterSpacing: '0.05em',
-                  color: '#BCB6A9'
-                }}
-              >{user?.language === 'EN' ? 'English' : '繁體中文'}</span>
-              <ForwardIcon color="black" />
-            </div> */}
-        {/* </div> */}
-        <a href="https://www.creatogether.app/" target="_blank">
-          <div className="setting">
-            <div className="part">
-              <CreatoCoinIcon color="black" />
-              <div className="title">{contexts.SETTINGS_LETTER.ABOUT_US}</div>
-            </div>
+            <ForwardIcon color="black" />
           </div>
-        </a>
-        <a href="https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713" target='_blank'>
-          <div className="setting">
-            <div className="part">
-              <NoOfPeopleIcon color="" />
-              <div className="title">{contexts.SETTINGS_LETTER.TERMS_CONDITIONS}</div>
+          <a href="https://www.creatogether.app/" target="_blank">
+            <div className="setting">
+              <div className="part">
+                <CreatoCoinIcon color="black" />
+                <div className="title">{contexts.SETTINGS_LETTER.ABOUT_US}</div>
+              </div>
             </div>
-          </div>
-        </a>
-        <a href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33" target="_blank">
-          <div className="setting">
-            <div className="part">
-              <NoOfPeopleIcon color="" />
-              <div className="title">{contexts.SETTINGS_LETTER.PRIVACY_POLICIES}</div>
+          </a>
+          <a href="https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713" target='_blank'>
+            <div className="setting">
+              <div className="part">
+                <NoOfPeopleIcon color="" />
+                <div className="title">{contexts.SETTINGS_LETTER.TERMS_CONDITIONS}</div>
+              </div>
             </div>
-          </div>
-        </a>
-        <a href="https://www.creatogether.app/contact-us" target="_blank">
-          <div className="setting">
-            <div className="part">
-              <AlertIcon color="black" />
-              <div className="title">{contexts.SETTINGS_LETTER.CONTACT_US}</div>
+          </a>
+          <a href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33" target="_blank">
+            <div className="setting">
+              <div className="part">
+                <NoOfPeopleIcon color="" />
+                <div className="title">{contexts.SETTINGS_LETTER.PRIVACY_POLICIES}</div>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+          <a href="https://www.creatogether.app/contact-us" target="_blank">
+            <div className="setting">
+              <div className="part">
+                <AlertIcon color="black" />
+                <div className="title">{contexts.SETTINGS_LETTER.CONTACT_US}</div>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
-    </>
-  );
-};
+  )
+}
 
-export default GeneralSetting;
+export default GeneralSetting

@@ -80,9 +80,7 @@ const AuthRoute = (props: routeProps) => {
         }
     }, [])
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [location])
+    useEffect(() => { window.scrollTo(0, 0) }, [location])
 
     return (
         <LanguageContext.Provider value={contexts}>

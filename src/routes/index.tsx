@@ -15,6 +15,7 @@ import Bites from '../pages/profile/Bites'
 import ProfileEdit from '../pages/profile/edit/profileEdit'
 import Socialaccount from '../pages/profile/edit/socialAccount'
 import Categories from '../pages/profile/edit/categories'
+import Wallet from '../pages/profile/Wallet'
 
 ///----------------ADMIN-----------------==////
 //EDIT-BITE
@@ -30,7 +31,7 @@ import AdminEditUser from '../pages/admin/profileUser/AdminEditUser'
 import AdminTransaction from '../pages/admin/transaction/AdminTransaction'
 
 import GeneralSetting from '../pages/profile/setting/generalSetting'
-import Language from '../pages/profile/setting/language'
+import LanguageCurrency from '../pages/profile/setting/language'
 
 import Error404 from '../pages/error/error404'
 
@@ -53,6 +54,7 @@ const AppRoutes = () => {
       <Route path="myaccount/edit" element={<AuthRoute child={<ProfileEdit />} routeType="private" />} />
       <Route path="myaccount/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
       <Route path="myaccount/edit/connect-social" element={<AuthRoute child={<Socialaccount />} routeType="private" />} />
+      <Route path="myaccount/wallet" element={<AuthRoute child={<Wallet />} routeType="private" />} />
 
       <Route path="admin/edit-bite" element={<AuthRoute child={<AdminBiteList />} routeType="private" />} />
       <Route path="admin/edit-bite/:biteId" element={<AuthRoute child={<AdminEditBite />} routeType="private" />} />
@@ -65,7 +67,7 @@ const AppRoutes = () => {
       <Route path="admin/transaction" element={<AuthRoute child={<AdminTransaction />} routeType="private" />} />
 
       <Route path="myaccount/setting" element={<AuthRoute child={<GeneralSetting />} routeType="private" />} />
-      <Route path="myaccount/setting/language" element={<AuthRoute child={<Language />} routeType="private" />} />
+      <Route path="myaccount/setting/language-currency" element={<AuthRoute child={<LanguageCurrency />} routeType="private" />} />
       
       <Route path="/not-founder-cover" element={<Error404 />} />
       <Route path="*" element={<Navigate to="/not-founder-cover" replace />} />

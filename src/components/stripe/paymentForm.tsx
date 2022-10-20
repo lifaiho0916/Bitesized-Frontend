@@ -56,11 +56,9 @@ const CheckoutForm = (props: any) => {
 
       props.exit()
 
-
       const rate1 = bite.currency === 'usd' ? 1.0 : currencyRate[`${bite.currency}`]
       const usdAmount = bite.price / rate1
-      const rate2 = currency === 0 ? 1.0 : currencyRate[`${CONSTANT.PAYMENT_CURRENCIES[currency]}`]
-      dispatch(biteAction.unLockBite(bite.id, CONSTANT.PAYMENT_CURRENCIES[currency], usdAmount, rate2, token.token))
+      dispatch(biteAction.unLockBite(bite.id, CONSTANT.PAYMENT_CURRENCIES[currency], usdAmount, token.token))
       setErrorToDisplay('')
     } catch (err) {
       console.log(err)

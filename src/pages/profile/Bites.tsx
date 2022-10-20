@@ -27,10 +27,7 @@ const Bites = () => {
     const [openPurchaseModal, setOpenPurchaseModal] = useState(false)
     const [openPaymentForm, setOpenPaymentForm] = useState(false)
 
-    useEffect(() => {
-        dispatch(biteAction.getBitesList())
-        dispatch(biteAction.getCurrencyRate())
-    }, [location, dispatch])
+    useEffect(() => { dispatch(biteAction.getBitesList()) }, [location, dispatch])
     useEffect(() => {
         if (dlgState === 'unlock_free') setOpenFreeUnLock(true)
     }, [dlgState])
@@ -38,7 +35,7 @@ const Bites = () => {
     useEffect(() => {
         if (bite) {
             if (bite.currency) setOpenPurchaseModal(true)
-            else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null))
+            else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null))
         }
     }, [bite])
 

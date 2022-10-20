@@ -37,7 +37,6 @@ const Profile = () => {
   useEffect(() => {
     const personalisedUrl = location.pathname.substring(1)
     dispatch(biteAction.getProfileSessions(personalisedUrl, user?.id))
-    dispatch(biteAction.getCurrencyRate())
   }, [location.pathname, dispatch, user])
 
   useEffect(() => {
@@ -52,7 +51,7 @@ const Profile = () => {
   useEffect(() => {
     if (bite) {
       if (bite.currency) setOpenPurchaseModal(true)
-      else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null))
+      else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null))
     }
   }, [bite])
 

@@ -43,17 +43,14 @@ const Home = () => {
     navigate(url)
   }
 
-  useEffect(() => {
-    dispatch(biteAction.getHomeSessions())
-    dispatch(biteAction.getCurrencyRate())
-  }, [location, dispatch])
+  useEffect(() => { dispatch(biteAction.getHomeSessions()) }, [location, dispatch])
   useEffect(() => {
     if (dlgState === 'unlock_free') setOpenFreeUnLock(true)
   }, [dlgState])
   useEffect(() => {
     if (bite) {
       if (bite.currency) setOpenPurchaseModal(true)
-      else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null))
+      else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null))
     }
   }, [bite])
 
