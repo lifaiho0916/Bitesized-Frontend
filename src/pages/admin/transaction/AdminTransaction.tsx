@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { useSearchParams, useNavigate } from "react-router-dom"
+import { useSearchParams, useNavigate, useLocation } from "react-router-dom"
 import Button from "../../../components/general/button"
 import { SearchIcon } from "../../../assets/svg"
 import { transactionAction } from "../../../redux/actions/transactionActions"
@@ -9,6 +9,7 @@ import "../../../assets/styles/admin/transaction/AdminTransactionStyle.scss"
 const AdminTransaction = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const location = useLocation()
     const transactionState = useSelector((state: any) => state.transaction)
     const loadState = useSelector((state: any) => state.load)
     const [searchParams] = useSearchParams()
@@ -40,7 +41,7 @@ const AdminTransaction = () => {
 
     useEffect(() => {
         dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search, null))
-    }, [code])
+    }, [code, location])
 
     return (
         <div className="transaction-wrapper">

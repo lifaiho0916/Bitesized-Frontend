@@ -44,7 +44,7 @@ const SideMenu = (props: any) => {
     props.setOpen(false)
   }
   const handleLanguage = () => {
-    navigate(`/myaccount/setting/language`)
+    navigate(`/myaccount/setting/language-currency`)
     props.setOpen(false)
   }
 
@@ -87,7 +87,7 @@ const SideMenu = (props: any) => {
           <div className="icon">
             <LanguageIcon color="black" />
           </div>
-          <p>Language / 語言</p>
+          <p>Language and Currency</p>
         </div>
         <div className="list" onClick={handleSetting}>
           <div className="icon">
