@@ -28,7 +28,7 @@ const AdminUserList = () => {
                         <tr>
                             <th>DOJ</th>
                             <th>Username</th>
-                            <th>Earnings</th>
+                            <th>Total Earnings (USD)</th>
                             <th>Email</th>
                             <th style={{ textAlign: 'center' }}>Video Uploaded</th>
                             <th style={{ textAlign: 'center' }}>Bite Post</th>
@@ -65,7 +65,7 @@ const AdminUserList = () => {
                                                     avatarStyle="horizontal"
                                                 />
                                             </td>
-                                            <td>{user.role === "ADMIN" ? '***' : user.earnings}</td>
+                                            <td>{user.role === "ADMIN" ? '***' : `$ ${user.earnings ? user.earnings.toFixed(2) : '0.00'}`}</td>
                                             <td>{user.email}</td>
                                             <td style={{ textAlign: 'center' }}>{user.videoCnt}</td>
                                             <td style={{ textAlign: 'center' }}>{user.biteCnt}</td>
