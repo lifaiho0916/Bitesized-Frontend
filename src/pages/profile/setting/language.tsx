@@ -8,13 +8,14 @@ import { LanguageContext } from "../../../routes/authRoute"
 import "../../../assets/styles/profile/languageStyle.scss"
 
 const LanguageCurrency = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const userState = useSelector((state: any) => state.auth);
-  const contexts = useContext(LanguageContext);
-  const prevRoute = useSelector((state: any) => state.load.prevRoute);
-  const user = userState.user
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const userState = useSelector((state: any) => state.auth)
+  const loadState = useSelector((state: any) => state.load)
+  const contexts = useContext(LanguageContext)
+  const { prevRoute } = loadState
+  const { user } = userState
 
   return (
     <div className="lang-currency-wrapper">

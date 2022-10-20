@@ -41,10 +41,19 @@ const BiteCardHome = (props: any) => {
         else res = 'Just ' + res
         return res
     }
-    const displayPrice = (currency: any, price: any) => {
-        if(currency) {
-            if(currency === 'usd') return `$USD ${price.toFixed(2)}`
-            else return `$USD ${currencyRate ? (price / currencyRate[`${currency}`]).toFixed(2) : ''}`
+
+    const displayPrice = (currency: any, price: any, userCurrency: any) => {
+        if (currency) {
+            const rate = currency === 'usd' ? 1.0 : currencyRate[`${currency}`]
+            const usdAmount = price / rate
+            const localPrice = usdAmount * currencyRate[`${userCurrency}`]
+            let res = ""
+            if (userCurrency === 'usd') res += 'US $'
+            else if (userCurrency === 'hkd') res += 'HK $'
+            else if (userCurrency === 'idr') res += 'Rp ₹'
+            else if (userCurrency === 'twd') res += 'NT $'
+            else res += 'RM '
+            return res + localPrice.toFixed(2)
         } return "FREE"
     }
 
@@ -163,7 +172,7 @@ const BiteCardHome = (props: any) => {
                     </div>
                 </div>
                 <div className={bite.currency ? "price-purchased" : "price-free"}>
-                    <span>{displayPrice(bite.currency, bite.price)}</span>
+                    <span>{displayPrice(bite.currency, bite.price, user ? user.currency : 'usd')}</span>
                     {bite.purchasedUsers.length > 0 && <span style={{ marginLeft: '10px' }}><NoOfPeopleIcon color="white" width={18} height={18} />&nbsp;{bite.purchasedUsers.length} {bite.currency ? "purchased" : "unlocked"}</span>}
                 </div>
                 <div className="bite-title">
