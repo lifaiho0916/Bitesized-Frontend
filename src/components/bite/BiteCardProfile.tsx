@@ -40,10 +40,21 @@ const BiteCardProfile = (props: any) => {
         else res = 'Just ' + res
         return res
     }
-    const displayPrice = (currency: any, price: any) => {
-        if(currency) {
-            if(currency === 'usd') return `$USD ${price.toFixed(2)}`
-            else return `$USD ${currencyRate ? (price / currencyRate[`${currency}`]).toFixed(2) : ''}`
+    const displayPrice = (currency: any, price: any, userCurrency: any) => {
+        if (currency) {
+            if (currencyRate) {
+                const rate = currency === 'usd' ? 1.0 : currencyRate[`${currency}`]
+                const usdAmount = price / rate
+                const rate1 = userCurrency === 'usd' ? 1.0 : currencyRate[`${userCurrency}`]
+                const localPrice = usdAmount * rate1
+                let res = ""
+                if (userCurrency === 'usd') res += 'US $'
+                else if (userCurrency === 'hkd') res += 'HK $'
+                else if (userCurrency === 'idr') res += 'Rp ₹'
+                else if (userCurrency === 'twd') res += 'NT $'
+                else res += 'RM '
+                return res + localPrice.toFixed(2)
+            }
         } return "FREE"
     }
 
@@ -83,7 +94,7 @@ const BiteCardProfile = (props: any) => {
                 {same ?
                     <span style={{ marginRight: '5px' }}>{(user && user.id === bite.owner._id) ? 'My Bite' : 'Unlocked'}</span>
                     :
-                    <span style={{ marginRight: '5px' }}>{bite.currency ? lock ? displayPrice(bite.currency, bite.price) : 'Unlocked' : 'Free'}</span>
+                    <span style={{ marginRight: '5px' }}>{bite.currency ? lock ? displayPrice(bite.currency, bite.price, user ? user.currency : 'usd') : 'Unlocked' : 'Free'}</span>
                 }
                 {bite.purchasedUsers.length > 0 &&
                     <>

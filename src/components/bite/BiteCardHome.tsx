@@ -44,16 +44,19 @@ const BiteCardHome = (props: any) => {
 
     const displayPrice = (currency: any, price: any, userCurrency: any) => {
         if (currency) {
-            const rate = currency === 'usd' ? 1.0 : currencyRate[`${currency}`]
-            const usdAmount = price / rate
-            const localPrice = usdAmount * currencyRate[`${userCurrency}`]
-            let res = ""
-            if (userCurrency === 'usd') res += 'US $'
-            else if (userCurrency === 'hkd') res += 'HK $'
-            else if (userCurrency === 'idr') res += 'Rp ₹'
-            else if (userCurrency === 'twd') res += 'NT $'
-            else res += 'RM '
-            return res + localPrice.toFixed(2)
+            if (currencyRate) {
+                const rate = currency === 'usd' ? 1.0 : currencyRate[`${currency}`]
+                const usdAmount = price / rate
+                const rate1 = userCurrency === 'usd' ? 1.0 : currencyRate[`${userCurrency}`]
+                const localPrice = usdAmount * rate1
+                let res = ""
+                if (userCurrency === 'usd') res += 'US $'
+                else if (userCurrency === 'hkd') res += 'HK $'
+                else if (userCurrency === 'idr') res += 'Rp ₹'
+                else if (userCurrency === 'twd') res += 'NT $'
+                else res += 'RM '
+                return res + localPrice.toFixed(2)
+            }
         } return "FREE"
     }
 
