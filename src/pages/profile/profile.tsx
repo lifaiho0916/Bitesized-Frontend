@@ -130,8 +130,8 @@ const Profile = () => {
                       let secondIndex = second.purchasedUsers.findIndex((purchaseInfo: any) => String(purchaseInfo.purchasedBy) === String(user.id))
                       if (firstIndex !== -1) firstDate = first.purchasedUsers[firstIndex].purchasedAt
                       if (secondIndex !== -1) secondDate = second.purchasedUsers[secondIndex].purchasedAt
-                      if (firstDate > secondDate) return 1
-                      else if (firstDate < secondDate) return -1
+                      if (firstDate < secondDate) return 1
+                      else if (firstDate > secondDate) return -1
                       else {
                         if (first.date < second.date) return 1
                         else if (first.date > second.date) return -1

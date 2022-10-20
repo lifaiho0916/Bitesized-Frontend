@@ -26,6 +26,8 @@ import AdminCreateFreeBite from '../pages/admin/createFreeBite/AdminCreateFreeBi
 //ProfileUser
 import AdminUserList from '../pages/admin/profileUser/AdminUserList'
 import AdminEditUser from '../pages/admin/profileUser/AdminEditUser'
+//Transaction
+import AdminTransaction from '../pages/admin/transaction/AdminTransaction'
 
 import GeneralSetting from '../pages/profile/setting/generalSetting'
 import Language from '../pages/profile/setting/language'
@@ -60,6 +62,7 @@ const AppRoutes = () => {
       <Route path="admin/profile-user" element={<AuthRoute child={<AdminUserList />} routeType="private" />} />
       <Route path="admin/profile-user/edit" element={<AuthRoute child={<AdminEditUser />} routeType="private" />} />
       <Route path="admin/profile-user/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
+      <Route path="admin/transaction" element={<AuthRoute child={<AdminTransaction />} routeType="private" />} />
 
       <Route path="myaccount/setting" element={<AuthRoute child={<GeneralSetting />} routeType="private" />} />
       <Route path="myaccount/setting/language" element={<AuthRoute child={<Language />} routeType="private" />} />

@@ -25,7 +25,7 @@ const GeneralSetting = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-  
+
   return (
     <>
       <div className="title-header">
@@ -53,7 +53,7 @@ const GeneralSetting = () => {
             </div>
             <ForwardIcon color="black" />
           </div>
-          <div
+          {/* <div
             className="setting"
             onClick={() => {
               dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/myaccount/setting` });
@@ -82,42 +82,42 @@ const GeneralSetting = () => {
                 }}
               >{user?.language === 'EN' ? 'English' : '繁體中文'}</span>
               <ForwardIcon color="black" />
+            </div> */}
+        {/* </div> */}
+        <a href="https://www.creatogether.app/" target="_blank">
+          <div className="setting">
+            <div className="part">
+              <CreatoCoinIcon color="black" />
+              <div className="title">{contexts.SETTINGS_LETTER.ABOUT_US}</div>
             </div>
           </div>
-          <a href="https://www.creatogether.app/" target="_blank">
-            <div className="setting">
-              <div className="part">
-                <CreatoCoinIcon color="black" />
-                <div className="title">{contexts.SETTINGS_LETTER.ABOUT_US}</div>
-              </div>
+        </a>
+        <a href="https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713" target='_blank'>
+          <div className="setting">
+            <div className="part">
+              <NoOfPeopleIcon color="" />
+              <div className="title">{contexts.SETTINGS_LETTER.TERMS_CONDITIONS}</div>
             </div>
-          </a>
-          <a href="https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713" target='_blank'>
-            <div className="setting">
-              <div className="part">
-                <NoOfPeopleIcon color="" />
-                <div className="title">{contexts.SETTINGS_LETTER.TERMS_CONDITIONS}</div>
-              </div>
+          </div>
+        </a>
+        <a href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33" target="_blank">
+          <div className="setting">
+            <div className="part">
+              <NoOfPeopleIcon color="" />
+              <div className="title">{contexts.SETTINGS_LETTER.PRIVACY_POLICIES}</div>
             </div>
-          </a>
-          <a href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33" target="_blank">
-            <div className="setting">
-              <div className="part">
-                <NoOfPeopleIcon color="" />
-                <div className="title">{contexts.SETTINGS_LETTER.PRIVACY_POLICIES}</div>
-              </div>
+          </div>
+        </a>
+        <a href="https://www.creatogether.app/contact-us" target="_blank">
+          <div className="setting">
+            <div className="part">
+              <AlertIcon color="black" />
+              <div className="title">{contexts.SETTINGS_LETTER.CONTACT_US}</div>
             </div>
-          </a>
-          <a href="https://www.creatogether.app/contact-us" target="_blank">
-            <div className="setting">
-              <div className="part">
-                <AlertIcon color="black" />
-                <div className="title">{contexts.SETTINGS_LETTER.CONTACT_US}</div>
-              </div>
-            </div>
-          </a>
-        </div>
+          </div>
+        </a>
       </div>
+    </div>
     </>
   );
 };

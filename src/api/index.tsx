@@ -39,6 +39,8 @@ export const getUsersByCategory = (data: any) => API.post('/api/auth/list', data
 export const getUsersList = (data: any) => API.post('/api/auth/users', data)
 export const changeUserVisible = (id: any, data: any) => API.put(`/api/auth/${id}/setvisible`, data)
 
+export const getTransactions = (data: any) => API.post('/api/transaction', data)
+
 export const getSocialAccount = (userId: any) => API.get(`/api/social-accounts/${userId}`)
 export const addSocialAccount = (data: any) => API.post('/api/social-accounts/add', data)
 export const removeSocialAccount = (id: any) => API.delete(`/api/social-accounts/delete/${id}`)
