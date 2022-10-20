@@ -15,6 +15,7 @@ import Bites from '../pages/profile/Bites'
 import ProfileEdit from '../pages/profile/edit/profileEdit'
 import Socialaccount from '../pages/profile/edit/socialAccount'
 import Categories from '../pages/profile/edit/categories'
+import Wallet from '../pages/profile/Wallet'
 
 ///----------------ADMIN-----------------==////
 //EDIT-BITE
@@ -53,6 +54,7 @@ const AppRoutes = () => {
       <Route path="myaccount/edit" element={<AuthRoute child={<ProfileEdit />} routeType="private" />} />
       <Route path="myaccount/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
       <Route path="myaccount/edit/connect-social" element={<AuthRoute child={<Socialaccount />} routeType="private" />} />
+      <Route path="myaccount/wallet" element={<AuthRoute child={<Wallet />} routeType="private" />} />
 
       <Route path="admin/edit-bite" element={<AuthRoute child={<AdminBiteList />} routeType="private" />} />
       <Route path="admin/edit-bite/:biteId" element={<AuthRoute child={<AdminEditBite />} routeType="private" />} />

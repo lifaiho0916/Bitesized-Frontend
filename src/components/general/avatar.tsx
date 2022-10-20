@@ -51,6 +51,7 @@ const Avatar = (props: any) => {
     margin: "0px 5px",
     fontSize: "12px",
     display: category === (undefined || "") ? "none" : "block",
+    textAlign: "center" as const,
   };
 
   const usernameStyle = {
@@ -93,7 +94,7 @@ const Avatar = (props: any) => {
         {hover !== true &&
           <p style={nameStyle as React.CSSProperties}>{username}</p>
         }
-        <p style={cartegoryStyle}>{category}</p>
+        <span style={cartegoryStyle}>{category}</span>
       </div>
     </div>
   );

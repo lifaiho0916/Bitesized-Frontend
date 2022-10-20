@@ -114,11 +114,11 @@ export const biteAction = {
         }
     },
 
-    unLockBite: (id: any, currency: any, amount: any, rate: any, token: any) => async (dispatch: Dispatch<any>, getState: any) => {
+    unLockBite: (id: any, currency: any, amount: any, token: any) => async (dispatch: Dispatch<any>, getState: any) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
             let response: any = null
-            if (currency) response = await api.unLockBite(id, { currency: currency, amount: amount, rate: rate, token: token })
+            if (currency) response = await api.unLockBite(id, { currency: currency, amount: amount, token: token })
             else response = await api.unLockBite(id, {})
 
             let bites = getState().bite.bites
@@ -273,20 +273,4 @@ export const biteAction = {
             dispatch({ type: SET_LOADING_FALSE })
         }
     },
-
-    getCurrencyRate: () => async (dispatch: Dispatch<any>) => {
-        try {
-            const response = await axios.get('https://api.striperates.com/rates/usd', {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-api-key': `${process.env.REACT_APP_STRIPE_CURRENCY_RATE_API_KEY}`,
-                }
-            })
-
-            const { data } = response
-            dispatch({ type: SET_CURRENCY_RATE, payload: data.data[0].rates })
-        } catch (err) {
-            console.log(err)
-        }
-    }
 }

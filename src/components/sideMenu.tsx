@@ -69,7 +69,7 @@ const SideMenu = (props: any) => {
           <div className="icon">
             <MoneyIcon color="black" />
           </div>
-          <p>{contexts.SIDE_MENU.DONUTS}</p>
+          <p>My Wallet</p>
         </div>
         <div className="list" onClick={handleCreators}>
           <div className="icon">

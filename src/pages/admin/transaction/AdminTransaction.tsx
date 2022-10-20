@@ -5,7 +5,6 @@ import Button from "../../../components/general/button"
 import { SearchIcon } from "../../../assets/svg"
 import { transactionAction } from "../../../redux/actions/transactionActions"
 import "../../../assets/styles/admin/transaction/AdminTransactionStyle.scss"
-import { biteAction } from "../../../redux/actions/biteActions"
 
 const AdminTransaction = () => {
     const navigate = useNavigate()
@@ -23,17 +22,14 @@ const AdminTransaction = () => {
         return price / rate
     }
 
-    const getLocalCurrency = (localCurrency: any, biteCurrency: any, price: any) => {
-        const usdAmount = getUSD(biteCurrency, price)
-        const rate = biteCurrency === 'usd' ? 1 : currencyRate[`${localCurrency}`]
-        const changedPrice = usdAmount * rate
+    const getLocalCurrency = (currency: any) => {
         let res = ''
-        if (localCurrency === 'usd') res += 'US $'
-        else if (localCurrency === 'hkd') res += 'HK $'
-        else if (localCurrency === 'inr') res += 'Rp ₹'
-        else if (localCurrency === 'twd') res += 'NT $'
+        if (currency === 'usd') res += 'US $'
+        else if (currency === 'hkd') res += 'HK $'
+        else if (currency === 'idr') res += 'Rp ₹'
+        else if (currency === 'twd') res += 'NT $'
         else res += 'RM '
-        return res + changedPrice.toFixed(2)
+        return res
     }
 
     // US $1
@@ -44,7 +40,6 @@ const AdminTransaction = () => {
 
     useEffect(() => {
         dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search, null))
-        dispatch(biteAction.getCurrencyRate())
     }, [code])
 
     return (
@@ -142,8 +137,8 @@ const AdminTransaction = () => {
                                         </td>
                                         <td>
                                             {transaction.type === 1 && <span style={{ color: '#D94E27' }}>- 0</span>}
-                                            {transaction.type === 2 && <span style={{ color: '#D94E27' }}>- {currencyRate ? getLocalCurrency(transaction.currency, transaction.bite.currency, transaction.bite.price) : ''}</span>}
-                                            {transaction.type === 3 && <span style={{ color: '#10B981' }}>+ {currencyRate ? getLocalCurrency(transaction.bite.currency, transaction.bite.currency, transaction.bite.price) : ''}</span>}
+                                            {transaction.type === 2 && <span style={{ color: '#D94E27' }}>- {currencyRate ? getLocalCurrency(transaction.currency) + `${transaction.localPrice.toFixed(2)}` : ''}</span>}
+                                            {transaction.type === 3 && <span style={{ color: '#10B981' }}>+ {currencyRate ? getLocalCurrency(transaction.bite.currency) + `${transaction.bite.price.toFixed(2)}` : ''}</span>}
                                         </td>
                                     </tr>
                                 ))}
