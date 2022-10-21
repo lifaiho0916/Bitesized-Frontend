@@ -58,7 +58,7 @@ const Wallet = () => {
         let res = ''
         if (currency === 'usd') res += 'US $'
         else if (currency === 'hkd') res += 'HK $'
-        else if (currency === 'idr') res += 'Rp ₹'
+        else if (currency === 'inr') res += 'Rp ₹'
         else if (currency === 'twd') res += 'NT $'
         else res += 'RM '
         return res

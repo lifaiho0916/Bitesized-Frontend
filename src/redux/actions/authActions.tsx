@@ -114,15 +114,23 @@ export const authAction = {
     }
   },
 
-  setLanguage: (lang: any, userData: any) => async (dispatch: Dispatch<any>) => {
-    api.setLanguage({ lang: lang })
-      .then((result) => {
-        const { data } = result;
-        if (data.success) {
-          const state = { ...userData, language: lang };
-          dispatch({ type: SET_USER, payload: state });
-        }
-      }).catch(err => console.log(err));
+  setLanguageCurrency: (lang: any, currency: any, navigate: any) => async (dispatch: Dispatch<any>, getState: any) => {
+    try {
+      dispatch({ type: SET_LOADING_TRUE })
+      const response = await api.setLanguageCurrency({ lang: lang, currency: currency })
+      const { data } = response
+      dispatch({ type: SET_LOADING_FALSE })
+      if (data.success) {
+        let user = getState().auth.user
+        const prevRoute = getState().load.prevRoute
+        const state = { ...user, language: lang, currency: currency }
+        dispatch({ type: SET_USER, payload: state })
+        navigate(prevRoute)
+      }
+    } catch (err) {
+      console.log(err)
+      dispatch({ type: SET_LOADING_FALSE })
+    }
   },
 
   getUsersList: (search: any) => async (dispatch: Dispatch<any>) => {

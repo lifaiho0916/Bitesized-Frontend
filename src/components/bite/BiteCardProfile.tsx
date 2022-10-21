@@ -50,7 +50,7 @@ const BiteCardProfile = (props: any) => {
                 let res = ""
                 if (userCurrency === 'usd') res += 'US $'
                 else if (userCurrency === 'hkd') res += 'HK $'
-                else if (userCurrency === 'idr') res += 'Rp ₹'
+                else if (userCurrency === 'inr') res += 'Rp ₹'
                 else if (userCurrency === 'twd') res += 'NT $'
                 else res += 'RM '
                 return res + localPrice.toFixed(2)

@@ -38,6 +38,7 @@ export const getCreatorsByCategory = (data: any) => API.post('/api/auth/creators
 export const getUsersByCategory = (data: any) => API.post('/api/auth/list', data)
 export const getUsersList = (data: any) => API.post('/api/auth/users', data)
 export const changeUserVisible = (id: any, data: any) => API.put(`/api/auth/${id}/setvisible`, data)
+export const setLanguageCurrency = (data: any) => API.post('/api/auth/setting/lang-currency', data)
 
 export const getTransactions = (data: any) => API.post('/api/transaction', data)
 
@@ -51,5 +52,3 @@ export const facebookSignin = (data: any) => API.post('/api/auth/facebookSignin'
 export const facebookSignup = (data: any) => API.post('/api/auth/facebookSignup', data)
 export const appleSignin = (data: any) => API.post('/api/auth/appleSignin', data)
 export const appleSignup = (data: any) => API.post('/api/auth/appleSignup', data)
-
-export const setLanguage = (data: any) => API.post('/api/auth/setting/lang', data);

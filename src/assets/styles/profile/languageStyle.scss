@@ -23,30 +23,47 @@
   .lang-currency {
     width: 100%;
     max-width: 340px;
-    margin: auto;
+    padding: 0px 10px;
+    margin: 0px auto;
 
-    .languages {
-      display: flex;
-      flex-direction: column;
-      margin: 20px 0;
+    .lang-currency-title {
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 800;
+      font-size: 18px;
+      line-height: 20px;
+      letter-spacing: 0.02em;
+      color: #EFA058;
+    }
+
+    .lang-setting {
+      margin: 10px 0px 25px 0px;
 
       .language {
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        font-family: 'Lato';
         font-style: normal;
-        font-weight: bold;
+        font-weight: 400;
         font-size: 16px;
         line-height: 20px;
         color: #000000;
-        padding: 10px;
-        transition: 0.2s;
+        padding: 10px 0px;
 
-        &:hover {
-          background-color: rgb(194, 194, 194);
-
+        label {
+          margin-left: 10px;
         }
       }
+    }
+
+    .currency-setting {
+      margin-top: 30px;
+    }
+
+    .buttons {
+      margin: 60px auto 20px auto;
+      display: flex;
+      justify-content: space-around;
     }
   }
 }
