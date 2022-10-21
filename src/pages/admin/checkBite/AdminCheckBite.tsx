@@ -51,7 +51,7 @@ const AdminCheckBite = () => {
     }
 
     useEffect(() => { if (bite.title === null) dispatch(biteAction.getBiteById(biteId)) }, [bite, biteId])
-    useEffect(() => { dispatch(transactionAction.getTransactionByBiteId(biteId, sort)) }, [biteId, sort])
+    useEffect(() => { dispatch(transactionAction.getTransactionsByBiteId(biteId, sort)) }, [biteId, sort])
 
     return (
         <div className="admin-edit-bite-wrapper">

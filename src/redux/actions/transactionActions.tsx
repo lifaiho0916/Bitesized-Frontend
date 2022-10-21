@@ -3,11 +3,11 @@ import * as api from '../../api'
 import { SET_LOADING_FALSE, SET_LOADING_TRUE, SET_TRANSACTIONS } from "../types"
 
 export const transactionAction = {
-    getTransactions: (type: any, search: any, userId: any) => async (dispatch: Dispatch<any>) => {
+    getTransactions: (type: any, search: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
             dispatch({ type: SET_TRANSACTIONS, payload: [] })
-            const response = await api.getTransactions({ type: type, search: search, userId: userId })
+            const response = await api.getTransactions(type, search)
             const { data } = response
 
             dispatch({ type: SET_LOADING_FALSE })
@@ -21,10 +21,24 @@ export const transactionAction = {
         }
     },
 
-    getTransactionByBiteId: (biteId: any, sort: any) => async (dispatch: Dispatch<any>) => {
+    getTransactionsByBiteId: (biteId: any, sort: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_TRANSACTIONS, payload: [] })
             const response = await api.getTransactionsByBiteId(biteId, sort)
+            const { data } = response
+            if (data.success) {
+                const { payload } = data
+                dispatch({ type: SET_TRANSACTIONS, payload: payload.transactions })
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    },
+
+    getTransactionsByUserId: (userId: any, type: any) => async (dispatch: Dispatch<any>) => {
+        try {
+            dispatch({ type: SET_TRANSACTIONS, payload: [] })
+            const response = await api.getTransactionsByUserId(userId, type)
             const { data } = response
             if (data.success) {
                 const { payload } = data

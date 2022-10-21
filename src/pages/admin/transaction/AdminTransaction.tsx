@@ -40,7 +40,7 @@ const AdminTransaction = () => {
     // RM 5 (Malaysian ringgit)
 
     useEffect(() => {
-        dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search, null))
+        dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search))
     }, [code, location])
 
     return (
@@ -104,7 +104,7 @@ const AdminTransaction = () => {
                         placeholder="Username"
                         className="search-input"
                         onChange={(e) => { setSearch(e.target.value) }}
-                        onKeyUp={(e) => { if (e.keyCode === 13) dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search, null)) }}
+                        onKeyUp={(e) => { if (e.keyCode === 13) dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search)) }}
                     />
                 </div>
                 <div className="users-data scroll-bar">

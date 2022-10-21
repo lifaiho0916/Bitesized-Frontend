@@ -70,7 +70,7 @@ const Wallet = () => {
     }
 
     useEffect(() => { if (!res) setMoreInfo(res) }, [res])
-    useEffect(() => { if (user) dispatch(transactionAction.getTransactions(0, "", user.id)) }, [location, dispatch, user])
+    useEffect(() => { if (user) dispatch(transactionAction.getTransactionsByUserId(user.id, 0)) }, [location, dispatch, user])
 
     return (
         <div className="profile-wallet-wrapper">
@@ -162,19 +162,19 @@ const Wallet = () => {
                             <div className="drop-down-list" style={moreInfo === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef}>
                                 <div className="list" onClick={() => {
                                     setMoreInfo(false)
-                                    dispatch(transactionAction.getTransactions(1, "", user.id))
+                                    dispatch(transactionAction.getTransactionsByUserId(user.id, 1))
                                 }}>
                                     {contexts.WALLET_LETTER.FIRST_DAYS}
                                 </div>
                                 <div className="list" onClick={() => {
                                     setMoreInfo(false)
-                                    dispatch(transactionAction.getTransactions(2, "", user.id))
+                                    dispatch(transactionAction.getTransactionsByUserId(user.id, 2))
                                 }}>
                                     {contexts.WALLET_LETTER.SECOND_DAYS}
                                 </div>
                                 <div className="list" onClick={() => {
                                     setMoreInfo(false)
-                                    dispatch(transactionAction.getTransactions(3, "", user.id))
+                                    dispatch(transactionAction.getTransactionsByUserId(user.id, 3))
                                 }}>
                                     {"Anytime"}
                                 </div>
