@@ -78,6 +78,7 @@ const AuthRoute = (props: routeProps) => {
             if (decoded.exp * 1000 < new Date().getTime()) dispatch(authAction.logout(navigate))
             else dispatch(authAction.getAuthData())
         }
+        dispatch(authAction.getCurrencyRate())
     }, [])
 
     useEffect(() => { window.scrollTo(0, 0) }, [location])

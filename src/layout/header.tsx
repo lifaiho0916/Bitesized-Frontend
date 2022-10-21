@@ -49,7 +49,7 @@ const Header = () => {
 
   const showSideMenu = () => { setOpenSideMenu(!openSideMenu) }
   const gotoHome = () => { navigate("/") }
-  const gotoAdminHome = () => { navigate('/admin/edit-bite') }
+  const gotoAdminHome = () => { navigate('/admin/check-bite') }
   const gotoCreate = () => { navigate("/bite/create-type") }
 
   const setLang = () => {

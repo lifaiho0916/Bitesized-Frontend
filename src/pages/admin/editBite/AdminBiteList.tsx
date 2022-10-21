@@ -85,7 +85,7 @@ const AdminBiteList = () => {
                         </thead>
                         <tbody>
                             {bites.map((bite: any, index: any) => (
-                                <tr key={index} onClick={() => { navigate(`/admin/edit-bite/${bite._id}`) }}>
+                                <tr key={index} onClick={() => navigate(`${location.pathname}/${bite._id}`)}>
                                     <td>{new Date(bite.date).toUTCString().slice(5, 16)}</td>
                                     <td>{new Date(bite.date).toUTCString().slice(17, 25)}</td>
                                     <td>{bite.title}</td>

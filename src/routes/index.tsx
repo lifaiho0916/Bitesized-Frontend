@@ -18,6 +18,8 @@ import Categories from '../pages/profile/edit/categories'
 import Wallet from '../pages/profile/Wallet'
 
 ///----------------ADMIN-----------------==////
+//CHECK-BITE
+import AdminCheckBite from '../pages/admin/checkBite/AdminCheckBite'
 //EDIT-BITE
 import AdminBiteList from '../pages/admin/editBite/AdminBiteList'
 import AdminEditBite from '../pages/admin/editBite/AdminEditBite'
@@ -56,6 +58,8 @@ const AppRoutes = () => {
       <Route path="myaccount/edit/connect-social" element={<AuthRoute child={<Socialaccount />} routeType="private" />} />
       <Route path="myaccount/wallet" element={<AuthRoute child={<Wallet />} routeType="private" />} />
 
+      <Route path="admin/check-bite" element={<AuthRoute child={<AdminBiteList />} routeType="private" />} />
+      <Route path="admin/check-bite/:biteId" element={<AuthRoute child={<AdminCheckBite />} routeType="private" />} />
       <Route path="admin/edit-bite" element={<AuthRoute child={<AdminBiteList />} routeType="private" />} />
       <Route path="admin/edit-bite/:biteId" element={<AuthRoute child={<AdminEditBite />} routeType="private" />} />
       <Route path="admin/create-free-bite" element={<AuthRoute child={<AdminCreatorList />} routeType="private" />} />

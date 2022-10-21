@@ -80,9 +80,21 @@ export const authAction = {
       if (data.success) {
         const { payload } = data
         dispatch({ type: SET_USER, payload: payload.user })
-        dispatch({ type: SET_CURRENCY_RATE, payload: payload.currencyRate })
       }
     } catch (err) {
+      console.log(err)
+    }
+  },
+
+  getCurrencyRate: () => async (dispatch: Dispatch<any>) => {
+    try {
+      const response = await api.getCurrencyRate()
+      const { data } = response
+      if (data.success) {
+        const { payload } = data
+        dispatch({ type: SET_CURRENCY_RATE, payload: payload.currencyRate })
+      }
+    } catch(err) {
       console.log(err)
     }
   },

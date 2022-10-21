@@ -19,5 +19,19 @@ export const transactionAction = {
             console.log(err)
             dispatch({ type: SET_LOADING_FALSE })
         }
+    },
+
+    getTransactionByBiteId: (biteId: any, sort: any) => async (dispatch: Dispatch<any>) => {
+        try {
+            dispatch({ type: SET_TRANSACTIONS, payload: [] })
+            const response = await api.getTransactionsByBiteId(biteId, sort)
+            const { data } = response
+            if (data.success) {
+                const { payload } = data
+                dispatch({ type: SET_TRANSACTIONS, payload: payload.transactions })
+            }
+        } catch (err) {
+            console.log(err)
+        }
     }
 }

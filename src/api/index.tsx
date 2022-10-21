@@ -28,6 +28,7 @@ export const removeVideoFromBite = (id: any, index: any) => API.delete(`/api/bit
 export const changeVideoVisible = (id: any, index: any, data: any) => API.put(`/api/bite/${id}/${index}/setvisible`, data)
 
 export const getAuthData = () => API.get('/api/auth')
+export const getCurrencyRate = () => API.get('/api/auth/currencyrate')
 export const editProfile = (data: any) => API.post('/api/auth/profile/save', data)
 export const editAvatar = (data: any, config: any) => API.post('/api/auth/avatar/upload', data, config)
 export const checkName = (data: any) => API.post('/api/auth/checkname', data)
@@ -41,6 +42,7 @@ export const changeUserVisible = (id: any, data: any) => API.put(`/api/auth/${id
 export const setLanguageCurrency = (data: any) => API.post('/api/auth/setting/lang-currency', data)
 
 export const getTransactions = (data: any) => API.post('/api/transaction', data)
+export const getTransactionsByBiteId = (biteId: any, sort: any) => API.get(`/api/transaction/bite/${biteId}?sort=${sort}`)
 
 export const getSocialAccount = (userId: any) => API.get(`/api/social-accounts/${userId}`)
 export const addSocialAccount = (data: any) => API.post('/api/social-accounts/add', data)
