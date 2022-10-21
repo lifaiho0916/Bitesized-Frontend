@@ -4,14 +4,14 @@ import "../../assets/styles/modals/UnLockFreeModalStyle.scss"
 
 
 const UnLockFreeModal = (props: any) => {
-    const { show, title, onClose, bite, handleSubmit } = props
+    const { show, onClose, bite, handleSubmit } = props
 
     return (
         <div className={`modal${show ? ' show' : ''}`} onClick={onClose}>
             <div id="unlockfree">
                 <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                     <div className="modal-header">
-                        <span className="title">{title ? title : ''}</span>
+                        <span className="title">Successful</span>
                         <div className="close-btn" onClick={onClose}>
                             <CloseIcon color="black" width={30} height={30} />
                         </div>
@@ -32,7 +32,7 @@ const UnLockFreeModal = (props: any) => {
                                 shape="rounded"
                                 color="primary"
                                 fillStyle="fill"
-                                width={'180px'}
+                                width={'190px'}
                                 handleSubmit={handleSubmit}
                             />
                         </div>

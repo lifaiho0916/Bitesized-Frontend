@@ -210,11 +210,11 @@ export const biteAction = {
         }
     },
 
-    getBitesAdmin: () => async (dispatch: Dispatch<any>) => {
+    getBitesAdmin: (type: any, search: any, sort: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
             dispatch({ type: SET_BITE_INITIAL })
-            const response = await api.getBitesAdmin()
+            const response = await api.getBitesAdmin(type === null ? 'all' : type, search, sort)
             const { data } = response
             dispatch({ type: SET_LOADING_FALSE })
             if (data.success) {

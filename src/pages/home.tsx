@@ -72,7 +72,6 @@ const Home = () => {
       />
       <UnLockFreeModal
         show={openFreeUnlock}
-        title="Sucessful"
         onClose={() => {
           setOpenFreeUnLock(false)
           dispatch({ type: SET_DIALOG_STATE, payload: "" })
