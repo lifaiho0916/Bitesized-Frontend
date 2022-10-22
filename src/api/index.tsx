@@ -41,11 +41,13 @@ export const getUsersList = (data: any) => API.post('/api/auth/users', data)
 export const changeUserVisible = (id: any, data: any) => API.put(`/api/auth/${id}/setvisible`, data)
 export const setLanguageCurrency = (data: any) => API.post('/api/auth/setting/lang-currency', data)
 
-export const getTransactions = (type: any, search: any) => API.get(`/api/transaction?type=${type}&search=${search}` )
+export const getTransactions = (type: any, search: any) => API.get(`/api/transaction?type=${type}&search=${search}`)
 export const getTransactionsByUserId = (userId: any, type: any) => API.get(`/api/transaction/user/${userId}?type=${type}`)
 export const getTransactionsByBiteId = (biteId: any, sort: any) => API.get(`/api/transaction/bite/${biteId}?sort=${sort}`)
 
 export const getPayment = () => API.get('/api/payment')
+export const addCard = (data: any) => API.post('/api/payment/card', data)
+export const deleteCard = () => API.delete('/api/payment/card')
 
 export const getSocialAccount = (userId: any) => API.get(`/api/social-accounts/${userId}`)
 export const addSocialAccount = (data: any) => API.post('/api/social-accounts/add', data)

@@ -3,16 +3,24 @@ import { useDispatch, useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import {
-    BalanceIcon,
     MoneyIcon,
     MoreIcon,
     SpreadIcon,
     StripeIcon,
     BackIcon,
-    AddIcon
+    AddIcon,
+    VisaCardIcon,
+    VisaCardActiveIcon,
+    MasterCardIcon,
+    MasterCardActiveIcon,
+    AECardIcon,
+    AECardActiveIcon,
+    UnionPayCardIcon,
+    UnionPayCardActiveIcon
 } from "../../assets/svg"
 import Dialog from "../../components/general/dialog"
 import Button from "../../components/general/button"
+import AddCardModal from "../../components/modals/AddCardModal"
 import { LanguageContext } from "../../routes/authRoute"
 import { SET_PREVIOUS_ROUTE } from "../../redux/types"
 import { transactionAction } from "../../redux/actions/transactionActions"
@@ -61,6 +69,8 @@ const Wallet = () => {
     const res1 = useOutsideAlerter(wrapRef1, removeCard)
     const [payout, setPayout] = useState(false)
 
+    const [openAddCard, setOpenAddCard] = useState(false)
+
     const getLocalCurrency = (currency: any) => {
         let res = ''
         if (currency === 'usd') res += 'US $'
@@ -93,6 +103,10 @@ const Wallet = () => {
                 <div style={{ width: '24px' }}></div>
             </div>
             <div className="profile-wallet">
+                <AddCardModal
+                    show={openAddCard}
+                    onClose={() => setOpenAddCard(false)}
+                />
                 <Dialog
                     display={openConnectStripe}
                     wrapExit={() => { setOpenConnectStripe(false); }}
@@ -240,15 +254,25 @@ const Wallet = () => {
                                 <div className="drop-down-list" style={removeCard === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef1}>
                                     <div className="list" onClick={() => {
                                         setRemoveCard(false)
-                                    }}>
-                                        Remove card
-                                    </div>
+                                        dispatch(paymentAction.deleteCard())
+                                    }}>Remove card</div>
                                 </div>
                             </div>
                         }
                     </div>
                     {payment ?
-                        <div></div> :
+                        <div className="user-card">
+                            <div className="card-type">
+                                <div className="card">{payment.stripe.cardType === "visa" ? <VisaCardActiveIcon /> : <VisaCardIcon />}</div>
+                                <div className="card">{payment.stripe.cardType === "mastercard" ? <MasterCardActiveIcon /> : <MasterCardIcon />}</div>
+                                <div className="card">{payment.stripe.cardType === "amex" ? <AECardActiveIcon /> : <AECardIcon />}</div>
+                                <div className="card">{payment.stripe.cardType === "unionpay" ? <UnionPayCardActiveIcon /> : <UnionPayCardIcon />}</div>
+                            </div>
+                            <div className="card-number">
+                                <span>···· ···· ···· {payment.stripe.cardNumber}</span><br />
+                                <span>Name: {payment.stripe.cardHolder}</span>
+                            </div>
+                        </div> :
                         <>
                             <div className="no-records">
                                 <span>No record so far</span>
@@ -261,7 +285,7 @@ const Wallet = () => {
                                     shape="rounded"
                                     width={'250px'}
                                     icon={[<AddIcon color="white" />, <AddIcon color="white" />, <AddIcon color="white" />]}
-                                    handleSubmit={() => { }}
+                                    handleSubmit={() => setOpenAddCard(true)}
                                 />
                             </div>
                         </>
