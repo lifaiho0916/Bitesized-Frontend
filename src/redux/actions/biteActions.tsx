@@ -1,5 +1,4 @@
 import { Dispatch } from "redux"
-import axios from "axios"
 import * as api from "../../api"
 import { SET_LOADING_TRUE, SET_LOADING_FALSE, SET_BITES, SET_USERS, SET_DIALOG_STATE, SET_BITE, SET_BITE_INITIAL, SET_CURRENCY_RATE } from "../types"
 

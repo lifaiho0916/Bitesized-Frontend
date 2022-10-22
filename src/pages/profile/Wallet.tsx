@@ -47,11 +47,14 @@ const Wallet = () => {
     const { currencyRate } = loadState
     const [openConnectStripe, setOpenConnectStripe] = useState(false)
     const [moreInfo, setMoreInfo] = useState(false)
+    const [removeCard, setRemoveCard] = useState(false)
     const wrapRef = useRef<any>(null)
+    const wrapRef1 = useRef<any>(null)
     const contexts = useContext(LanguageContext)
     const [amount, setAmount] = useState('')
     const [stripePayout, setStripePayout] = useState(false)
     const res = useOutsideAlerter(wrapRef, moreInfo)
+    const res1 = useOutsideAlerter(wrapRef1, removeCard)
     const [payout, setPayout] = useState(false)
 
     const getLocalCurrency = (currency: any) => {
@@ -70,7 +73,13 @@ const Wallet = () => {
     }
 
     useEffect(() => { if (!res) setMoreInfo(res) }, [res])
-    useEffect(() => { if (user) dispatch(transactionAction.getTransactionsByUserId(user.id, 0)) }, [location, dispatch, user])
+    useEffect(() => { if (!res1) setRemoveCard(res1) }, [res1])
+    useEffect(() => {
+        if (user) {
+            dispatch(transactionAction.getTransactionsByUserId(user.id, 0))
+            
+        }
+    }, [location, dispatch, user])
 
     return (
         <div className="profile-wallet-wrapper">
@@ -214,6 +223,23 @@ const Wallet = () => {
                                 </table>
                             </div>
                         }
+                    </div>
+                </div>
+                <div className="card-info">
+                    <div className="card-info-header">
+                        <div className="title">
+                            <span>Payment details</span>
+                        </div>
+                        <div className="more-icon">
+                            <div onClick={() => { setRemoveCard(true) }}><MoreIcon color="black" /></div>
+                            <div className="drop-down-list" style={removeCard === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef1}>
+                                <div className="list" onClick={() => {
+                                    setRemoveCard(false)
+                                }}>
+                                    Remove card
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

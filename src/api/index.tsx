@@ -45,6 +45,8 @@ export const getTransactions = (type: any, search: any) => API.get(`/api/transac
 export const getTransactionsByUserId = (userId: any, type: any) => API.get(`/api/transaction/user/${userId}?type=${type}`)
 export const getTransactionsByBiteId = (biteId: any, sort: any) => API.get(`/api/transaction/bite/${biteId}?sort=${sort}`)
 
+export const getPayment = () => API.get('/api/payment')
+
 export const getSocialAccount = (userId: any) => API.get(`/api/social-accounts/${userId}`)
 export const addSocialAccount = (data: any) => API.post('/api/social-accounts/add', data)
 export const removeSocialAccount = (id: any) => API.delete(`/api/social-accounts/delete/${id}`)
