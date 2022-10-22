@@ -326,38 +326,16 @@
         }
       }
 
-      .content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        .part {
-          display: flex;
-          align-items: center;
-
-          .icon {
-            margin-right: 8px;
-          }
-
-          .number {
-            color: #54504e;
-            font-style: normal;
-            font-weight: 600;
-            font-size: 20px;
-            line-height: 24px;
-          }
-        }
-      }
-
-      .local-currency {
-        margin: 10px 0px 0px 20px;
+      .no-records {
+        margin: 10px 0px;
         font-family: 'Lato';
         font-style: normal;
-        font-weight: 600;
-        font-size: 18px;
+        font-weight: 400;
+        font-size: 16px;
         line-height: 20px;
-        letter-spacing: -0.003em;
-        color: #54504E;
+        color: #000000;
+        display: flex;
+        justify-content: center;
       }
     }
   }

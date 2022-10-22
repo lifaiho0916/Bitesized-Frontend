@@ -8,15 +8,17 @@ import {
     MoreIcon,
     SpreadIcon,
     StripeIcon,
-    BackIcon
+    BackIcon,
+    AddIcon
 } from "../../assets/svg"
 import Dialog from "../../components/general/dialog"
 import Button from "../../components/general/button"
-import ContainerBtn from "../../components/general/containerBtn"
 import { LanguageContext } from "../../routes/authRoute"
-import { SET_PREVIOUS_ROUTE, SET_TRANSACTIONS } from "../../redux/types"
+import { SET_PREVIOUS_ROUTE } from "../../redux/types"
 import { transactionAction } from "../../redux/actions/transactionActions"
+import { paymentAction } from "../../redux/actions/paymentActions"
 import "../../assets/styles/profile/profileWalletStyle.scss"
+
 
 const useOutsideAlerter = (ref: any, moreInfo: any) => {
     const [more, setMore] = useState(moreInfo);
@@ -42,9 +44,11 @@ const Wallet = () => {
     const userState = useSelector((state: any) => state.auth)
     const transactionState = useSelector((state: any) => state.transaction)
     const loadState = useSelector((state: any) => state.load)
+    const paymentState = useSelector((state: any) => state.payment)
     const { user } = userState
     const { transactions } = transactionState
     const { currencyRate } = loadState
+    const { payment } = paymentState
     const [openConnectStripe, setOpenConnectStripe] = useState(false)
     const [moreInfo, setMoreInfo] = useState(false)
     const [removeCard, setRemoveCard] = useState(false)
@@ -77,7 +81,7 @@ const Wallet = () => {
     useEffect(() => {
         if (user) {
             dispatch(transactionAction.getTransactionsByUserId(user.id, 0))
-            
+            dispatch(paymentAction.getPayment())
         }
     }, [location, dispatch, user])
 
@@ -230,17 +234,38 @@ const Wallet = () => {
                         <div className="title">
                             <span>Payment details</span>
                         </div>
-                        <div className="more-icon">
-                            <div onClick={() => { setRemoveCard(true) }}><MoreIcon color="black" /></div>
-                            <div className="drop-down-list" style={removeCard === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef1}>
-                                <div className="list" onClick={() => {
-                                    setRemoveCard(false)
-                                }}>
-                                    Remove card
+                        {payment &&
+                            <div className="more-icon">
+                                <div onClick={() => { setRemoveCard(true) }}><MoreIcon color="black" /></div>
+                                <div className="drop-down-list" style={removeCard === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef1}>
+                                    <div className="list" onClick={() => {
+                                        setRemoveCard(false)
+                                    }}>
+                                        Remove card
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                     </div>
+                    {payment ?
+                        <div></div> :
+                        <>
+                            <div className="no-records">
+                                <span>No record so far</span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                <Button
+                                    text="Add new card"
+                                    fillStyle="fill"
+                                    color="primary"
+                                    shape="rounded"
+                                    width={'250px'}
+                                    icon={[<AddIcon color="white" />, <AddIcon color="white" />, <AddIcon color="white" />]}
+                                    handleSubmit={() => { }}
+                                />
+                            </div>
+                        </>
+                    }
                 </div>
             </div>
         </div>
