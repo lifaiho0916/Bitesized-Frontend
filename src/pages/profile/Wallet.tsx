@@ -16,13 +16,14 @@ import {
     AECardIcon,
     AECardActiveIcon,
     UnionPayCardIcon,
-    UnionPayCardActiveIcon
+    UnionPayCardActiveIcon,
+    DescendIcon,
+    AscendIcon
 } from "../../assets/svg"
 import Dialog from "../../components/general/dialog"
 import Button from "../../components/general/button"
 import AddCardModal from "../../components/modals/AddCardModal"
 import { LanguageContext } from "../../routes/authRoute"
-import { SET_PREVIOUS_ROUTE } from "../../redux/types"
 import { transactionAction } from "../../redux/actions/transactionActions"
 import { paymentAction } from "../../redux/actions/paymentActions"
 import "../../assets/styles/profile/profileWalletStyle.scss"
@@ -63,11 +64,11 @@ const Wallet = () => {
     const wrapRef = useRef<any>(null)
     const wrapRef1 = useRef<any>(null)
     const contexts = useContext(LanguageContext)
-    const [amount, setAmount] = useState('')
     const [stripePayout, setStripePayout] = useState(false)
     const res = useOutsideAlerter(wrapRef, moreInfo)
     const res1 = useOutsideAlerter(wrapRef1, removeCard)
     const [payout, setPayout] = useState(false)
+    const [sort, setSort] = useState(-1)
 
     const [openAddCard, setOpenAddCard] = useState(false)
 
@@ -90,10 +91,11 @@ const Wallet = () => {
     useEffect(() => { if (!res1) setRemoveCard(res1) }, [res1])
     useEffect(() => {
         if (user) {
-            dispatch(transactionAction.getTransactionsByUserId(user.id, 0))
+            dispatch(transactionAction.getTransactionsByUserId(user.id, 0, sort))
             dispatch(paymentAction.getPayment())
         }
     }, [location, dispatch, user])
+    useEffect(() => { if (user) dispatch(transactionAction.getTransactionsByUserId(user.id, 0, sort)) }, [sort])
 
     return (
         <div className="profile-wallet-wrapper">
@@ -189,19 +191,19 @@ const Wallet = () => {
                             <div className="drop-down-list" style={moreInfo === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef}>
                                 <div className="list" onClick={() => {
                                     setMoreInfo(false)
-                                    dispatch(transactionAction.getTransactionsByUserId(user.id, 1))
+                                    dispatch(transactionAction.getTransactionsByUserId(user.id, 1, sort))
                                 }}>
                                     {contexts.WALLET_LETTER.FIRST_DAYS}
                                 </div>
                                 <div className="list" onClick={() => {
                                     setMoreInfo(false)
-                                    dispatch(transactionAction.getTransactionsByUserId(user.id, 2))
+                                    dispatch(transactionAction.getTransactionsByUserId(user.id, 2, sort))
                                 }}>
                                     {contexts.WALLET_LETTER.SECOND_DAYS}
                                 </div>
                                 <div className="list" onClick={() => {
                                     setMoreInfo(false)
-                                    dispatch(transactionAction.getTransactionsByUserId(user.id, 3))
+                                    dispatch(transactionAction.getTransactionsByUserId(user.id, 3, sort))
                                 }}>
                                     {"Anytime"}
                                 </div>
@@ -218,7 +220,16 @@ const Wallet = () => {
                                         <tr>
                                             <th>Fee</th>
                                             <th>Detail</th>
-                                            <th>Date</th>
+                                            <th>
+                                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                                    <span>Date</span>
+                                                    <div style={{ cursor: 'pointer' }}
+                                                        onClick={() => setSort(-sort)}
+                                                    >
+                                                        {sort === -1 ? <DescendIcon /> : <AscendIcon />}
+                                                    </div>
+                                                </div>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
