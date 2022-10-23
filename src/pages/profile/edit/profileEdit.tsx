@@ -50,8 +50,8 @@ const ProfileEdit = () => {
     }
   }
 
-  useEffect(() => { if (name !== "") dispatch(authAction.checkName(name, user.id)) }, [name, dispatch])
-  useEffect(() => { if (url !== "") dispatch(authAction.checkUrl(url, user.id)) }, [url, dispatch])
+  useEffect(() => { if (name !== "" && user) dispatch(authAction.checkName(name, user.id)) }, [name, dispatch, user])
+  useEffect(() => { if (url !== "" && user) dispatch(authAction.checkUrl(url, user.id)) }, [url, dispatch, user])
 
   useEffect(() => {
     if (user && profile.name === null) {
@@ -69,7 +69,7 @@ const ProfileEdit = () => {
       setUrl(user.personalisedUrl)
       setBioText(user.bioText)
     }
-  }, [profile, user])
+  }, [profile, user, dispatch])
 
   return (
     <div className="profile-edit-wrapper">

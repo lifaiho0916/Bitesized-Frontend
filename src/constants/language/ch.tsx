@@ -1,17 +1,6 @@
 export const CH = {
-  DAREME_CATEGORY_LIST: ['週末交給你決定', '寵粉絲系列', '創作做什麼', '節日挑戰', '參與其中吧 ', '找數真漢子 ', '挑戰我吧', '才華招募', '求包養系列'],
-  FUNDME_CATEGORY_LIST: ['人生第一次', '寵粉絲系列', '參與其中吧', '找數真漢子', '挑戰我吧', '求包養系列'],
-  DAREME_DEADLINE_LIST: ["1 日", "2 日", "3 日", "4 日", "5 日", "6 日", "7 日", "8 日", "9 日", "10 日"],
-  CREATOR_CATEGORY_LIST: ["藝人", "作家", "博主", "健身教練", "電競選手", "Instagram 創作者", "直播主", "音樂人", "攝影師", "播客", "Tiktok 創作者", "影片製作者", "YouTuber"],
-  FUNDME_DEADLINE_LIST: ["3 日", "4 日", "5 日", "6 日", "7 日", "8 日", "9 日", "10 日", "11 日", "12 日", "13 日", "14 日"],
+  CREATOR_CATEGORY_LIST: ["Videographer", "Photographer", "Designer", "Blogger", "Fitness Trainer", "Business Owner", "Gadgets Lover", "Illustrator", "Tutor", "Musician", "Interview Coach", "Life Coach", "Teacher", "Chef", "Finance Advisor", "Learner", "Gamer", "Podcaster", "Live Streamer", "Writer", "Fashionista"],
   PAYMENT_CURRENCIES: ['美元', '印度盧比', '新台幣', '港幣', '馬幣'],
-  FUNDME_LETTER: {
-    DETAIL_SUPERFAN_LETTER: '以 SuperFan 身份支持創作者將獲得獎勵!',
-    DETAIL_FREE_LETTER: '免費支持創作者!',
-    DONUTED_BY_CREATOR: '1個甜甜圈由Creato代為送出!',
-    SEE_SUPERFAN_REWARD: '查看 SuperFan 的專屬獨家內容／禮物',
-    DONUTS_FOR: '個甜甜圈用作'
-  },
   HOME_LETTER: {
     DAREME_LIST: 'DareMe - 參與內容創作',
     LETS_STARTED: "開始使用Creato吧!",

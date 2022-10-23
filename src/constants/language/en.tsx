@@ -1,17 +1,6 @@
 export const EN = {
-  DAREME_CATEGORY_LIST: ['Decide My Weekend', 'Fandom', 'Give Me An Idea', 'Festive Challenge', 'Join Me', 'Keeping A Promise', 'One-off challenge', 'Talent Please', 'Sugar Daddy/Mommy'],
-  FUNDME_CATEGORY_LIST: ['First Time Ever', 'Fandom', 'Join Me', 'Keeping A Promise', 'One-off challenge', 'Sugar Daddy/Mommy'],
-  DAREME_DEADLINE_LIST: ["1 day", "2 days", "3 days", "4 days", "5 days", "6 days", "7 days", "8 days", "9 days", "10 days"],
-  CREATOR_CATEGORY_LIST: ["Artist", "Author", "Blogger", "Fitness Instructor", "Gamer", "Instagram Creator", "Live Streamer", "Musician", "Photographer", "Podcaster", "Tiktok Creator", "Videographer", "YouTuber"],
-  FUNDME_DEADLINE_LIST: ["3 days", "4 days", "5 days", "6 days", "7 days", "8 days", "9 days", "10 days", "11 days", "12 days", "13 days", "14 days"],
+  CREATOR_CATEGORY_LIST: ["Videographer", "Photographer", "Designer", "Blogger", "Fitness Trainer", "Business Owner", "Gadgets Lover", "Illustrator", "Tutor", "Musician", "Interview Coach", "Life Coach", "Teacher", "Chef", "Finance Advisor", "Learner", "Gamer", "Podcaster", "Live Streamer", "Writer", "Fashionista"],
   PAYMENT_CURRENCIES: ['USD', 'INR', 'TWD', 'HKD', 'MYR'],
-  FUNDME_LETTER: {
-    DETAIL_SUPERFAN_LETTER: 'Supporting the creator as SuperFan will get you entitled for the reward!',
-    DETAIL_FREE_LETTER: 'Supporting the creator for Free!',
-    DONUTED_BY_CREATOR: 'This 1 Donut will be donated by Creato!',
-    SEE_SUPERFAN_REWARD: 'See superFan Reward',
-    DONUTS_FOR: 'Donuts for'
-  },
   HOME_LETTER: {
     DAREME_LIST: 'DareMe - Create Content Together',
     LETS_STARTED: "Let's Get Started",

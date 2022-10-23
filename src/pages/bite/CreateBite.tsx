@@ -309,14 +309,6 @@ const CreateBite = () => {
                         </div>
 
                         <div className="third-divider"></div>
-                        <div className="session-title">
-                            <span>Currency</span>
-                        </div>
-                        <div className="currency-description">
-                            <span>(Price will be displayed in USD)</span>
-                        </div>
-
-                        <div className="firth-divider"></div>
                         <div className="currency-selection">
                             <CurrencySelect
                                 width={'100%'}
@@ -325,6 +317,12 @@ const CreateBite = () => {
                                 options={currencies}
                             />
                         </div>
+
+                        <div className="firth-divider"></div>
+                        <div className="currency-description">
+                            <span>(We will convert your price in USD as default)</span>
+                        </div>
+
                     </div>
                 }
 

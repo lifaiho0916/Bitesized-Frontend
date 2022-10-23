@@ -30,20 +30,20 @@ import "../../assets/styles/profile/profileWalletStyle.scss"
 
 
 const useOutsideAlerter = (ref: any, moreInfo: any) => {
-    const [more, setMore] = useState(moreInfo);
+    const [more, setMore] = useState(moreInfo)
     useEffect(() => {
         const handleClickOutside = (event: any) => {
-            setMore(moreInfo);
+            setMore(moreInfo)
             if (ref.current && !ref.current.contains(event.target)) {
-                if (moreInfo) setMore(false);
+                if (moreInfo) setMore(false)
             }
         }
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside)
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [ref, moreInfo]);
-    return more;
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [ref, moreInfo])
+    return more
 }
 
 const Wallet = () => {
@@ -171,7 +171,8 @@ const Wallet = () => {
                                 text={contexts.WALLET_LETTER.CASH_OUT}
                                 handleSubmit={() => {
                                     // setPayout(true) 
-                                    setOpenConnectStripe(true)
+                                    // setOpenConnectStripe(true)
+                                    window.open("https://www.creatogether.app/altpayout", '_blank')
                                 }}
                             />
                         </div>
