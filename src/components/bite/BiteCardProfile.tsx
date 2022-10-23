@@ -1,16 +1,18 @@
 import { useState, useContext, useEffect } from "react"
-import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
-import ReactPlayer from "react-player"
+import { useSelector, useDispatch } from "react-redux"
+import { useLocation, useNavigate } from "react-router-dom"
 import Button from "../general/button"
 import { LanguageContext } from "../../routes/authRoute"
 import { ClockIcon, NoOfPeopleIcon, PlayIcon, UnlockIcon } from "../../assets/svg"
 import NextBtn from "../../assets/img/next-bright.png"
+import { SET_PREVIOUS_ROUTE } from "../../redux/types"
 import "../../assets/styles/bite/BiteCardProfileStyle.scss"
 
 const BiteCardProfile = (props: any) => {
-    const { bite, setBite, same } = props
+    const { bite, same } = props
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const location = useLocation()
     const contexts = useContext(LanguageContext)
     const userState = useSelector((state: any) => state.auth)
     const loadState = useSelector((state: any) => state.load)
@@ -75,15 +77,18 @@ const BiteCardProfile = (props: any) => {
         setLock(bite.purchasedUsers.every(findPurchasedUser))
     }
 
-    const Unlock = () => {
-        if (user) setBite(bite)
-        else navigate('/auth/signin')
+    const clickCard = () => {
+        if (user) {
+            dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
+            navigate(`/bite/detail/${bite._id}`, { state: { owner: user.id === bite.owner._id ? true : false } })
+        }
+        else navigate('/auth/signup')
     }
 
     useEffect(() => { checkUnLock() }, [bite, user])
 
     return (
-        <div className="bite-card-profile-wrapper">
+        <div className="bite-card-profile-wrapper" onClick={clickCard}>
             <div className="unlock-purchase-info"
                 style={{
                     background:
@@ -120,46 +125,26 @@ const BiteCardProfile = (props: any) => {
                                 <img src={NextBtn} alt="next video" />
                             </div>
                         }
-                        {play === true ?
-                            <ReactPlayer
-                                className="react-player"
-                                config={{
-                                    file: {
-                                        attributes: {
-                                            controlsList: 'nodownload noremoteplayback noplaybackrate',
-                                            disablePictureInPicture: true,
-                                        }
-                                    }
-                                }}
-                                url={`${process.env.REACT_APP_SERVER_URL}/${bite.videos[videoIndex].videoUrl}`}
-                                playing={play}
-                                playsinline={true}
-                                controls
-                            />
-                            :
-                            <>
-                                <img
-                                    src={`${process.env.REACT_APP_SERVER_URL}/${bite.videos[videoIndex].coverUrl}`}
-                                    alt="cover Image"
-                                    width={'100%'}
+                        <img
+                            src={`${process.env.REACT_APP_SERVER_URL}/${bite.videos[videoIndex].coverUrl}`}
+                            alt="cover Image"
+                            width={'100%'}
+                        />
+                        {lock ?
+                            <div className="lock-btn">
+                                <Button
+                                    text="Unlock"
+                                    shape="rounded"
+                                    fillStyle="outline"
+                                    color="primary"
+                                    icon={[<UnlockIcon color="#EFA058" />, <UnlockIcon color="white" />, <UnlockIcon color="white" />]}
+                                    handleSubmit={() => { }}
                                 />
-                                {lock ?
-                                    <div className="lock-btn">
-                                        <Button
-                                            text="Unlock"
-                                            shape="rounded"
-                                            fillStyle="outline"
-                                            color="primary"
-                                            icon={[<UnlockIcon color="#EFA058" />, <UnlockIcon color="white" />, <UnlockIcon color="white" />]}
-                                            handleSubmit={Unlock}
-                                        />
-                                    </div>
-                                    :
-                                    <div className="play-icon" onClick={() => setPlay(true)}>
-                                        <PlayIcon color="white" />
-                                    </div>
-                                }
-                            </>
+                            </div>
+                            :
+                            <div className="play-icon" onClick={() => setPlay(true)}>
+                                <PlayIcon color="white" />
+                            </div>
                         }
                         <div
                             className="video-count"

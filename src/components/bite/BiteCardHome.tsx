@@ -21,6 +21,7 @@ const BiteCardHome = (props: any) => {
     const { currencyRate } = loadState
 
     const [videoIndex, setVideoIndex] = useState(0)
+    const [lock, setLock] = useState(true)
 
     const clickCard = () => {
         if (user) {
@@ -70,6 +71,27 @@ const BiteCardHome = (props: any) => {
         } return "FREE"
     }
 
+    const findPurchasedUser = (purchaseInfo: any) => {
+        return String(purchaseInfo.purchasedBy) !== String(user.id)
+    }
+
+    const checkUnLock = () => {
+        if (user === null) {
+            setLock(true)
+            return
+        }
+        if (bite.owner) {
+            if (user.role === "ADMIN" || (String(bite.owner._id) === String(user.id))) {
+                setLock(false)
+                return
+            }
+
+            setLock(bite.purchasedUsers.every(findPurchasedUser))
+        }
+    }
+
+    useEffect(() => checkUnLock(), [bite, user])
+
     return (
         <div className="bite-card-home-wrapper" onClick={clickCard}>
             <div className="top-info">
@@ -77,7 +99,10 @@ const BiteCardHome = (props: any) => {
                     <Avatar
                         size="mobile"
                         avatar={bite.owner.avatar.indexOf('uploads') === -1 ? bite.owner.avatar : `${process.env.REACT_APP_SERVER_URL}/${bite.owner.avatar}`}
-                        handleClick={() => { navigate(`/${bite.owner.personalisedUrl}`) }}
+                        handleClick={(e: any) => {
+                            e.stopPropagation()
+                            navigate(`/${bite.owner.personalisedUrl}`)
+                        }}
                     />
                 </div>
                 <div className="ownername-lefttime-wrapper">
@@ -111,10 +136,9 @@ const BiteCardHome = (props: any) => {
                             alt="coverImage"
                             width={'100%'}
                         />
-                        {user ?
+                        {!lock ?
                             <div className="play-icon"><PlayIcon color="white" /></div>
                             :
-
                             <div className="lock-btn">
                                 <Button
                                     text="Unlock"

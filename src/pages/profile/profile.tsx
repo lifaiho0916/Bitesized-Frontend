@@ -6,11 +6,7 @@ import ProfileHeader from "../../components/profile/profileHeader"
 import ProfileMenu from "../../components/profileMenu"
 import Button from "../../components/general/button"
 import BiteCardProfile from "../../components/bite/BiteCardProfile"
-import PurchaseModal from "../../components/modals/PurchaseModal"
-import PaymentForm from "../../components/stripe/paymentForm"
-import UnLockFreeModal from "../../components/modals/UnLockFreeModal"
 import { AddIcon, CreatoCoinIcon } from "../../assets/svg"
-import { SET_DIALOG_STATE } from "../../redux/types"
 import "../../assets/styles/profile/profileStyle.scss"
 
 const Profile = () => {
@@ -19,17 +15,10 @@ const Profile = () => {
   const location = useLocation()
   const biteState = useSelector((state: any) => state.bite)
   const userState = useSelector((state: any) => state.auth)
-  const loadState = useSelector((state: any) => state.load)
   const { bites } = biteState
   const { user, users } = userState
-  const { dlgState } = loadState
   const authuser = users.length ? users[0] : null
   const [isSame, setIsSame] = useState(false)
-
-  const [bite, setBite] = useState<any>(null)
-  const [openFreeUnlock, setOpenFreeUnLock] = useState(false)
-  const [openPurchaseModal, setOpenPurchaseModal] = useState(false)
-  const [openPaymentForm, setOpenPaymentForm] = useState(false)
 
   const [searchParams] = useSearchParams()
   const code = searchParams.get("mybites")
@@ -45,17 +34,6 @@ const Profile = () => {
   }, [authuser, user])
 
   useEffect(() => {
-    if (dlgState === 'unlock_free') setOpenFreeUnLock(true)
-  }, [dlgState])
-
-  useEffect(() => {
-    if (bite) {
-      if (bite.currency) setOpenPurchaseModal(true)
-      else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null))
-    }
-  }, [bite])
-
-  useEffect(() => {
     if (code !== null && authuser) {
       if (user) {
         if (String(user.id) !== String(authuser._id)) navigate(`/${authuser.personalisedUrl}`)
@@ -65,44 +43,6 @@ const Profile = () => {
 
   return (
     <div className="profile-wrapper">
-      <PurchaseModal
-        show={openPurchaseModal}
-        onClose={() => {
-          setOpenPurchaseModal(false)
-          setBite(null)
-        }}
-        bite={bite}
-        handleSubmit={() => {
-          if (user) {
-            setOpenPurchaseModal(false)
-            setOpenPaymentForm(true)
-          }
-        }}
-      />
-      <UnLockFreeModal
-        show={openFreeUnlock}
-        onClose={() => {
-          setOpenFreeUnLock(false)
-          dispatch({ type: SET_DIALOG_STATE, payload: "" })
-        }}
-        bite={bite}
-        handleSubmit={() => {
-          dispatch({ type: SET_DIALOG_STATE, payload: "" })
-          navigate(`/${user.personalisedUrl}`)
-        }}
-      />
-      <PaymentForm
-        display={openPaymentForm}
-        exit={() => {
-          setBite(null)
-          setOpenPaymentForm(false)
-        }}
-        wrapExit={() => {
-          setBite(null)
-          setOpenPaymentForm(false)
-        }}
-        bite={bite ? { id: bite._id, currency: bite.currency, price: bite.price } : null}
-      />
       <div className="profile">
         <ProfileHeader same={isSame} profileUser={authuser ? authuser : null} />
         {isSame ?
@@ -146,7 +86,7 @@ const Profile = () => {
                     }
                   }).map((bite: any, index: any) => (
                     <div className="profile-bite" key={index}>
-                      <BiteCardProfile bite={bite} setBite={setBite} same={isSame} />
+                      <BiteCardProfile bite={bite} same={isSame} />
                     </div>
                   ))}
                 </div> :
@@ -212,7 +152,7 @@ const Profile = () => {
                 })
                   .map((bite: any, index: any) => (
                     <div className="profile-bite" key={index}>
-                      <BiteCardProfile bite={bite} setBite={setBite} />
+                      <BiteCardProfile bite={bite} />
                     </div>
                   ))}
               </div>

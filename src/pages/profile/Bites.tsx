@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom"
 import ProfileMenu from "../../components/profileMenu"
 import BiteCardProfile from "../../components/bite/BiteCardProfile"
 import PurchaseModal from "../../components/modals/PurchaseModal"
-import PaymentForm from "../../components/stripe/paymentForm"
 import UnLockFreeModal from "../../components/modals/UnLockFreeModal"
 import { biteAction } from "../../redux/actions/biteActions"
 import { BackIcon } from "../../assets/svg"
@@ -71,18 +70,6 @@ const Bites = () => {
                     dispatch({ type: SET_DIALOG_STATE, payload: "" })
                     navigate(`/${user.personalisedUrl}`)
                 }}
-            />
-            <PaymentForm
-                display={openPaymentForm}
-                exit={() => {
-                    setBite(null)
-                    setOpenPaymentForm(false)
-                }}
-                wrapExit={() => {
-                    setBite(null)
-                    setOpenPaymentForm(false)
-                }}
-                bite={bite ? { id: bite._id, currency: bite.currency, price: bite.price } : null}
             />
             <div className="list-menu">
                 <ProfileMenu
