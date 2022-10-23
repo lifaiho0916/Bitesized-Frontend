@@ -89,13 +89,8 @@ const Wallet = () => {
 
     useEffect(() => { if (!res) setMoreInfo(res) }, [res])
     useEffect(() => { if (!res1) setRemoveCard(res1) }, [res1])
-    useEffect(() => {
-        if (user) {
-            dispatch(transactionAction.getTransactionsByUserId(user.id, 0, sort))
-            dispatch(paymentAction.getPayment())
-        }
-    }, [location, dispatch, user])
-    useEffect(() => { if (user) dispatch(transactionAction.getTransactionsByUserId(user.id, 0, sort)) }, [sort])
+    useEffect(() => { if (user) dispatch(transactionAction.getTransactionsByUserId(user.id, 0, sort)) }, [location, dispatch, user, sort])
+    useEffect(() => { dispatch(paymentAction.getPayment()) }, [dispatch, location])
 
     return (
         <div className="profile-wallet-wrapper">

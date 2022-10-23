@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { loadStripe } from "@stripe/stripe-js"
 import {
     Elements,
@@ -12,19 +12,24 @@ import {
 import Button from "../general/button"
 import { SET_LOADING_TRUE, SET_LOADING_FALSE } from "../../redux/types"
 import { CloseIcon, VisaCardIcon, VisaCardActiveIcon, MasterCardIcon, MasterCardActiveIcon, AECardIcon, AECardActiveIcon, UnionPayCardIcon, UnionPayCardActiveIcon } from "../../assets/svg"
-import { paymentAction } from "../../redux/actions/paymentActions"
+import { biteAction } from "../../redux/actions/biteActions"
+import CONSTANT from "../../constants/constant"
 import "../../assets/styles/modals/AddCardModalStyle.scss"
+
+
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY}`)
 
 const PaymentForm = (props: any) => {
-    const { onClose } = props
+    const { bite, currency, onClose } = props
     const dispatch = useDispatch()
+    const loadState = useSelector((state: any) => state.load)
     const [numberInfo, setNumberInfo] = useState<any>(null)
     const [cardType, setCardType] = useState("")
     const [holder, setHolder] = useState("")
     const elements = useElements()
     const stripe = useStripe()
+    const { currencyRate } = loadState
 
     const handleSubmit = async (e: any) => {
         try {
@@ -40,7 +45,9 @@ const PaymentForm = (props: any) => {
             }
 
             onClose()
-            dispatch(paymentAction.addCard(token.token, holder, cardType))
+            const rate = bite.currency === 'usd' ? 1.0 : currencyRate[`${bite.currency}`]
+            const usdAmount = bite.price / rate
+            dispatch(biteAction.unLockBite(bite._id, currency, usdAmount, token.token))
         } catch (err) {
             console.log(err)
             dispatch({ type: SET_LOADING_FALSE })
@@ -139,7 +146,7 @@ const PaymentForm = (props: any) => {
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
                 <Button
-                    text={"Add"}
+                    text={"Pay"}
                     fillStyle="fill"
                     color="primary"
                     shape="rounded"
@@ -151,7 +158,7 @@ const PaymentForm = (props: any) => {
     )
 }
 
-const AddCardModal = (props: any) => {
+const PaymentModal = (props: any) => {
     const { show, onClose } = props
 
     return (
@@ -178,4 +185,4 @@ const AddCardModal = (props: any) => {
     )
 }
 
-export default AddCardModal
+export default PaymentModal

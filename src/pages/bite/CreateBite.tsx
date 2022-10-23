@@ -143,7 +143,7 @@ const CreateBite = () => {
             return
         }
         setPublishEnable(true)
-    }, [title, price, bite])
+    }, [title, price, bite, free])
 
     useEffect(() => { setFree(location.pathname.substring(location.pathname.length - 4) === 'free') }, [location])
 
@@ -204,7 +204,7 @@ const CreateBite = () => {
                                             {video.coverUrl &&
                                                 <img
                                                     src={video.coverUrl.preview}
-                                                    alt="cover Image"
+                                                    alt="coverImage"
                                                     width={'100%'}
                                                 />
                                             }
@@ -322,7 +322,6 @@ const CreateBite = () => {
                         <div className="currency-description">
                             <span>(We will convert your price in USD as default)</span>
                         </div>
-
                     </div>
                 }
 

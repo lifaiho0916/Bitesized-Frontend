@@ -95,6 +95,25 @@
                     }
                 }
 
+                .divider {
+                    margin: 20px auto;
+                    border: 1px solid #E1E0DF;
+                }
+
+                .charge-amount {
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 20px;
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 18px;
+                    text-align: center;
+                    letter-spacing: 0.005em;
+                    color: #000000;
+                }
+
                 .next-btn {
                     margin-top: 20px;
                 }

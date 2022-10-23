@@ -72,7 +72,6 @@ export const biteAction = {
     getHomeSessions: () => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
-            dispatch({ type: SET_BITE, payload: null })
             dispatch({ type: SET_DIALOG_STATE, payload: "" })
             dispatch({ type: SET_BITES, payload: [] })
             dispatch({ type: SET_USERS, payload: [] })
@@ -113,28 +112,21 @@ export const biteAction = {
         }
     },
 
-    unLockBite: (id: any, currency: any, amount: any, token: any) => async (dispatch: Dispatch<any>, getState: any) => {
+    unLockBite: (id: any, currency: any, amount: any, token: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
             let response: any = null
             if (currency) response = await api.unLockBite(id, { currency: currency, amount: amount, token: token })
             else response = await api.unLockBite(id, {})
 
-            let bites = getState().bite.bites
-
             dispatch({ type: SET_LOADING_FALSE })
             const { data } = response
             const { payload } = data
 
             if (data.success) {
-                const foundIndex = bites.findIndex((bite: any) => String(bite._id) === String(payload.bite._id))
-                bites[foundIndex] = payload.bite
-                dispatch({ type: SET_BITES, payload: bites })
+                dispatch({ type: SET_BITE, payload: payload.bite })
                 if (currency === null) dispatch({ type: SET_DIALOG_STATE, payload: 'unlock_free' })
-            } else {
-                console.log(payload)
             }
-
         } catch (err) {
             console.log(err)
             dispatch({ type: SET_LOADING_FALSE })
@@ -179,6 +171,7 @@ export const biteAction = {
     getBiteById: (biteId: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
+            dispatch({ type: SET_BITE_INITIAL })
             const response = await api.getBiteById(biteId)
             const { data } = response
             dispatch({ type: SET_LOADING_FALSE })

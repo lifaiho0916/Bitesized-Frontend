@@ -1,17 +1,19 @@
 import { useState, useContext, useEffect } from "react"
-import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
-import ReactPlayer from "react-player"
+import { useSelector, useDispatch } from "react-redux"
+import { useNavigate, useLocation } from "react-router-dom"
 import Avatar from "../general/avatar"
 import Button from "../general/button"
 import { LanguageContext } from "../../routes/authRoute"
 import { ClockIcon, NoOfPeopleIcon, PlayIcon, UnlockIcon } from "../../assets/svg"
+import { SET_PREVIOUS_ROUTE } from "../../redux/types"
 import NextBtn from "../../assets/img/next-bright.png"
 import "../../assets/styles/bite/BiteCardHomeStyle.scss"
 
 const BiteCardHome = (props: any) => {
-    const { bite, setBite } = props
+    const { bite } = props
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const location = useLocation()
     const contexts = useContext(LanguageContext)
     const userState = useSelector((state: any) => state.auth)
     const loadState = useSelector((state: any) => state.load)
@@ -19,13 +21,21 @@ const BiteCardHome = (props: any) => {
     const { currencyRate } = loadState
 
     const [videoIndex, setVideoIndex] = useState(0)
-    const [play, setPlay] = useState(false)
-    const [lock, setLock] = useState(true)
 
-    const PrevVideo = () => {
+    const clickCard = () => {
+        if (user) {
+            dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
+            navigate(`/bite/detail/${bite._id}`, { state: { owner: user.id === bite.owner._id ? true : false } })
+        }
+        else navigate('/auth/signup')
+    }
+
+    const PrevVideo = (e: any) => {
+        e.stopPropagation()
         if (videoIndex > 0) setVideoIndex((index) => index - 1)
     }
-    const NextVideo = () => {
+    const NextVideo = (e: any) => {
+        e.stopPropagation()
         if (videoIndex < bite.videos.length - 1) setVideoIndex((index) => index + 1)
     }
 
@@ -60,32 +70,8 @@ const BiteCardHome = (props: any) => {
         } return "FREE"
     }
 
-    const findPurchasedUser = (purchaseInfo: any) => {
-        return String(purchaseInfo.purchasedBy) !== String(user.id)
-    }
-
-    const checkUnLock = () => {
-        if (user === null) {
-            setLock(true)
-            return
-        }
-        if (user.role === "ADMIN" || (String(bite.owner._id) === String(user.id))) {
-            setLock(false)
-            return
-        }
-
-        setLock(bite.purchasedUsers.every(findPurchasedUser))
-    }
-
-    const Unlock = () => {
-        if (user) setBite(bite)
-        else navigate('/auth/signin')
-    }
-
-    useEffect(() => { checkUnLock() }, [bite, user])
-
     return (
-        <div className="bite-card-home-wrapper">
+        <div className="bite-card-home-wrapper" onClick={clickCard}>
             <div className="top-info">
                 <div className="owner-avatar">
                     <Avatar
@@ -107,11 +93,7 @@ const BiteCardHome = (props: any) => {
             </div>
 
             <div className="bite-body">
-                <div className="video-part"
-                    onClick={() => {
-                        if (play) { setPlay(false) }
-                    }}
-                >
+                <div className="video-part">
                     <div className="cover-image">
                         {videoIndex > 0 &&
                             <div className="prev-video" onClick={PrevVideo}>
@@ -123,46 +105,26 @@ const BiteCardHome = (props: any) => {
                                 <img src={NextBtn} alt="next video" />
                             </div>
                         }
-                        {play === true ?
-                            <ReactPlayer
-                                className="react-player"
-                                config={{
-                                    file: {
-                                        attributes: {
-                                            controlsList: 'nodownload noremoteplayback noplaybackrate',
-                                            disablePictureInPicture: true,
-                                        }
-                                    }
-                                }}
-                                url={`${process.env.REACT_APP_SERVER_URL}/${bite.videos[videoIndex].videoUrl}`}
-                                playing={play}
-                                playsinline={true}
-                                controls
-                            />
+
+                        <img
+                            src={`${process.env.REACT_APP_SERVER_URL}/${bite.videos[videoIndex].coverUrl}`}
+                            alt="coverImage"
+                            width={'100%'}
+                        />
+                        {user ?
+                            <div className="play-icon"><PlayIcon color="white" /></div>
                             :
-                            <>
-                                <img
-                                    src={`${process.env.REACT_APP_SERVER_URL}/${bite.videos[videoIndex].coverUrl}`}
-                                    alt="cover Image"
-                                    width={'100%'}
+
+                            <div className="lock-btn">
+                                <Button
+                                    text="Unlock"
+                                    shape="rounded"
+                                    fillStyle="outline"
+                                    color="primary"
+                                    icon={[<UnlockIcon color="#EFA058" />, <UnlockIcon color="white" />, <UnlockIcon color="white" />]}
+                                    handleSubmit={() => { }}
                                 />
-                                {lock ?
-                                    <div className="lock-btn">
-                                        <Button
-                                            text="Unlock"
-                                            shape="rounded"
-                                            fillStyle="outline"
-                                            color="primary"
-                                            icon={[<UnlockIcon color="#EFA058" />, <UnlockIcon color="white" />, <UnlockIcon color="white" />]}
-                                            handleSubmit={Unlock}
-                                        />
-                                    </div>
-                                    :
-                                    <div className="play-icon" onClick={() => setPlay(true)}>
-                                        <PlayIcon color="white" />
-                                    </div>
-                                }
-                            </>
+                            </div>
                         }
                         <div
                             className="video-count"

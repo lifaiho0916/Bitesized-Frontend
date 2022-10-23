@@ -7,6 +7,7 @@ import Home from "../pages/home"
 import CreateType from '../pages/bite/CreateType'
 import CreateBite from '../pages/bite/CreateBite'
 import EditCoverImage from '../pages/bite/EditCoverImage'
+import BiteDetail from '../pages/bite/BiteDetail'
 
 import Profile from '../pages/profile/profile'
 import Creators from '../pages/profile/creators'
@@ -48,6 +49,7 @@ const AppRoutes = () => {
       <Route path="bite/create/free" element={<AuthRoute child={<CreateBite />} routeType="private" />} />
       <Route path="bite/create/paid" element={<AuthRoute child={<CreateBite />} routeType="private" />} />
       <Route path="bite/create/edit-thumbnail" element={<AuthRoute child={<EditCoverImage />} routeType="private" />} />
+      <Route path="bite/detail/:biteId" element={<AuthRoute child={<BiteDetail />} routeType="private" />} />
 
       <Route path="/:creatorLink" element={<AuthRoute child={<Profile />} />} />
       <Route path="creators" element={<AuthRoute child={<Creators />} />} />

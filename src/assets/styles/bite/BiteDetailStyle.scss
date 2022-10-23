@@ -1,0 +1,160 @@
+.bite-detail-wrapper {
+    .page-header {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 880px;
+        height: 52px;
+        margin: 25px auto;
+        padding: 0px 10px;
+
+        .page-title {
+            font-family: "Lato";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 24px;
+            text-align: center;
+            color: #efa058;
+        }
+    }
+
+    .scroll-bar {
+        &::-webkit-scrollbar {
+            height: 12px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: rgba(245, 195, 149, 0.1);
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: rgba(245, 195, 149, 0.5);
+            border-radius: 10px;
+            transition: 0.2s;
+            height: 20px;
+
+            &:hover {
+                background: #efa058;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+    }
+
+    .bite-detail {
+        .main-detail {
+            max-width: 880px;
+            margin: 0px auto;
+
+            .avatar-title {
+                padding: 0px 20px;
+
+                .left-time {
+                    margin-bottom: 10px;
+                    margin-left: 10px;
+                    font-family: "Lato";
+                    font-style: normal;
+                    font-weight: 800;
+                    font-size: 16px;
+                    line-height: 18px;
+                    letter-spacing: 0.02em;
+                    display: flex;
+                    align-items: center;
+                    color: #de5a67;
+                }
+
+                .avatar {
+                    margin-bottom: 10px;
+                }
+
+                .bite-title {
+                    margin-left: 15px;
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 18px;
+                    color: #54504E;
+                }
+            }
+        }
+
+        .video-part {
+            margin: 0px auto;
+            max-width: 880px;
+
+            .bite-videos {
+                display: flex;
+                margin: 30px 10px;
+                overflow-x: scroll;
+
+                .bite-video {
+                    position: relative;
+                    margin: 10px;
+                    width: 325px;
+                    height: 578px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .react-player {
+                        width: 100% !important;
+                        height: 100% !important;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        overflow: hidden;
+
+                        video {
+                            height: auto !important;
+                            width: 100% !important;
+                        }
+                    }
+
+                    .lock-video {
+                        position: absolute;
+                        top: 0px;
+                        left: 0px;
+                        width: 100%;
+                        height: 100%;
+                        background-color: rgba(0, 0, 0, 0.5);
+                    }
+
+                    .play-icon {
+                        cursor: pointer;
+                        position: absolute;
+                        transform: translate(-50%, -50%);
+                        top: 50%;
+                        left: 50%;
+                        width: 40px;
+                        height: 40px;
+                        background: #efa058;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        &:hover {
+                            background: #f2b176;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .bite-detail-wrapper {
+        .page-header {
+            margin: 15px auto;
+        }
+    }
+}
