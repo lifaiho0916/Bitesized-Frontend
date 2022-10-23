@@ -156,5 +156,22 @@
         .page-header {
             margin: 15px auto;
         }
+
+        .bite-detail {
+            .video-part {
+                margin: 0px auto;
+                max-width: 880px;
+
+                .bite-videos {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    .bite-video {
+                        margin: 10px auto;
+                    }
+                }
+            }
+        }
     }
 }
