@@ -26,7 +26,7 @@ const AdminEditUser = () => {
     const [name, setName] = useState<string>(profile.name)
     const [url, setUrl] = useState<string>(profile.personalisedUrl)
     const [bioText, setBioText] = useState(profile.bioText)
-    const [subscripe, setSubscribe] = useState(profile.subscribe)
+    const [subscribe, setSubscribe] = useState(profile.subscribe)
     const { state } = location
     let imageEditor: any = null
 
@@ -55,7 +55,7 @@ const AdminEditUser = () => {
                 const blob = await res.blob()
                 imageFile = new File([blob], 'avatar.png', blob)
             }
-            dispatch(authAction.editProfile(name, url, profile.category, bioText, imageFile, "admin/profile-user", user._id, navigate))
+            dispatch(authAction.editProfile(name, url, profile.category, bioText, subscribe, imageFile, "admin/profile-user", user._id, navigate))
         }
     }
 
@@ -161,12 +161,14 @@ const AdminEditUser = () => {
                                     readOnly={true}
                                 />
                             </div>
-                            <div className="subscription">
-                                <span>Subscription function</span>
-                                <ToggleBtn
-                                    toggle={user.subscribe.switch}
-                                />
-                            </div>
+                            {user.subscribe.available &&
+                                <div className="subscription">
+                                    <span>Subscription function</span>
+                                    <ToggleBtn
+                                        toggle={user.subscribe.switch}
+                                    />
+                                </div>
+                            }
                             <div className="categories">
                                 {user.categories.map((category: any, index: any) => (
                                     <div key={index} className="category"><span>{contexts.CREATOR_CATEGORY_LIST[category]}</span></div>
@@ -237,13 +239,15 @@ const AdminEditUser = () => {
                                     setFocus={() => { }}
                                 />
                             </div>
-                            <div className="subscription">
-                                <span>Subscription function</span>
-                                <ToggleBtn
-                                    toggle={subscripe}
-                                    setToggle={setSubscribe}
-                                />
-                            </div>
+                            {user.subscribe.available &&
+                                <div className="subscription">
+                                    <span>Subscription function</span>
+                                    <ToggleBtn
+                                        toggle={subscribe}
+                                        setToggle={setSubscribe}
+                                    />
+                                </div>
+                            }
                             <div style={{ marginTop: '20px' }}>
                                 <Button
                                     text="Edit Link Social Accounts"
@@ -272,7 +276,7 @@ const AdminEditUser = () => {
                                         <EditIcon color="white" />,
                                     ]}
                                     handleSubmit={() => {
-                                        const state = { ...profile, name: name, personalisedUrl: url, bioText: bioText }
+                                        const state = { ...profile, name: name, personalisedUrl: url, bioText: bioText, subscribe: subscribe }
                                         dispatch({ type: SET_PROFILE, payload: state })
                                         navigate('/admin/profile-user/edit/categories', { state: { index: index } })
                                     }}

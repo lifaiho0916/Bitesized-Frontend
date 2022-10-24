@@ -72,12 +72,19 @@
       justify-content: center;
     }
 
-    .tipping-mode {
-      width: 280px;
-      margin: 10px auto;
+    .subscription {
+      margin: 20px auto 20px auto;
+      padding: 0px 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: 0.05em;
+      color: #000000;
     }
 
     .social-link {
