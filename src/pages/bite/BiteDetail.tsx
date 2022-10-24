@@ -7,7 +7,7 @@ import ReactPlayer from "react-player"
 import UnLockFreeModal from "../../components/modals/UnLockFreeModal"
 import PurchaseModal from "../../components/modals/PurchaseModal"
 import PaymentModal from "../../components/modals/PaymentModal"
-import { BackIcon, ClockIcon, PlayIcon, UnlockIcon,AscendIcon, DescendIcon } from "../../assets/svg"
+import { BackIcon, ClockIcon, PlayIcon, UnlockIcon, AscendIcon, DescendIcon } from "../../assets/svg"
 import { LanguageContext } from "../../routes/authRoute"
 import { biteAction } from "../../redux/actions/biteActions"
 import { transactionAction } from "../../redux/actions/transactionActions"
@@ -154,6 +154,13 @@ const BiteDetail = () => {
                                         avatarStyle={"horizontal"}
                                     />
                                 }
+                                <Button
+                                    text="Subscribe"
+                                    fillStyle="fill"
+                                    color="primary"
+                                    shape="rounded"
+                                    handleSubmit={() => { }}
+                                />
                             </div>
                             <div className="bite-title">
                                 <span>{bite?.title}</span>
