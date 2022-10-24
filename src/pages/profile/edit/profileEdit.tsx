@@ -6,6 +6,7 @@ import { authAction } from "../../../redux/actions/authActions"
 import ContainerBtn from "../../../components/general/containerBtn"
 import Button from "../../../components/general/button"
 import Input from "../../../components/general/input"
+import ToggleBtn from "../../../components/toggleBtn"
 import { SET_PROFILE } from "../../../redux/types"
 import { AddIcon, SpreadIcon, BackIcon } from "../../../assets/svg"
 import Dialog from "../../../components/general/dialog"
@@ -22,6 +23,7 @@ const ProfileEdit = () => {
   const [name, setName] = useState<string>(profile.name)
   const [url, setUrl] = useState<string>(profile.personalisedUrl)
   const [bioText, setBioText] = useState(profile.bioText)
+  const [subscribe, setSubscribe] = useState(profile.subscribe)
   const [openLinkSocial, setOpenLinkSocial] = useState(false)
   const contexts = useContext(LanguageContext)
 
@@ -35,7 +37,7 @@ const ProfileEdit = () => {
         const blob = await res.blob()
         imageFile = new File([blob], 'avatar.png', blob)
       }
-      dispatch(authAction.editProfile(name, url, profile.category, bioText, imageFile, url, user.id, navigate))
+      dispatch(authAction.editProfile(name, url, profile.category, bioText, subscribe, imageFile, url, user.id, navigate))
     }
   }
 
@@ -62,12 +64,14 @@ const ProfileEdit = () => {
           avatar: null,
           name: user.name,
           personalisedUrl: user.personalisedUrl,
-          bioText: user.bioText
+          bioText: user.bioText,
+          subscribe: user.subscribe.switch
         }
       })
       setName(user.name)
       setUrl(user.personalisedUrl)
       setBioText(user.bioText)
+      setSubscribe(user.subscribe.switch)
     }
   }, [profile, user, dispatch])
 
@@ -162,6 +166,15 @@ const ProfileEdit = () => {
             setFocus={() => { }}
           />
         </div>
+        {(user && user.subscribe && user.subscribe.available) &&
+          <div className="subscription">
+            <span>Subscription function</span>
+            <ToggleBtn
+              toggle={subscribe}
+              setToggle={setSubscribe}
+            />
+          </div>
+        }
         <div
           className="social-link"
           onClick={() => {
@@ -179,7 +192,7 @@ const ProfileEdit = () => {
         <div
           className="categories"
           onClick={() => {
-            const state = { ...profile, name: name, personalisedUrl: url, bioText: bioText }
+            const state = { ...profile, name: name, personalisedUrl: url, bioText: bioText, subscribe: subscribe }
             dispatch({ type: SET_PROFILE, payload: state })
             navigate(`/myaccount/edit/categories`)
           }}

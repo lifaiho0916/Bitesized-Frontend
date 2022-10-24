@@ -99,7 +99,7 @@ export const authAction = {
     }
   },
 
-  editProfile: (name: any, url: any, category: any, bioText: any, avatarFile: any, navUrl: any, userId: any, navigate: any) => async (dispatch: Dispatch<any>, getState: any) => {
+  editProfile: (name: any, url: any, category: any, bioText: any, subscribe: any, avatarFile: any, navUrl: any, userId: any, navigate: any) => async (dispatch: Dispatch<any>, getState: any) => {
     try {
       dispatch({ type: SET_LOADING_TRUE })
       let resultAvatar = null
@@ -111,7 +111,7 @@ export const authAction = {
       }
       let path = null
       if (resultAvatar?.data) path = resultAvatar.data.path
-      const response = await api.editProfile({ name: name, url: url, category: category, bioText: bioText, avatar: path, id: userId })
+      const response = await api.editProfile({ name: name, url: url, category: category, bioText: bioText, subscribe: subscribe, avatar: path, id: userId })
       const { data } = response
       dispatch({ type: SET_LOADING_FALSE })
       if (data.success) {
