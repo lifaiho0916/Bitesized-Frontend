@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import Avatar from "../../../components/general/avatar"
-import { SearchIcon, HiddenIcon, VisibleIcon, CheckOnIcon, CheckOffIcon } from "../../../assets/svg"
+import { SearchIcon, HiddenIcon, VisibleIcon, CheckBoxOffIcon, CheckBoxOnIcon } from "../../../assets/svg"
 import { authAction } from "../../../redux/actions/authActions"
 import { SET_PROFILE, SET_NAME_EXIST, SET_URL_EXIST } from "../../../redux/types"
 import "../../../assets/styles/admin/profileUser/AdminUsersStyle.scss"
@@ -16,7 +16,7 @@ const AdminUserList = () => {
 
     const subscribe = (e: any, userId: any, available: any) => {
         e.stopPropagation()
-        
+        dispatch(authAction.setSubscribeByAdmin(userId, available))
     }
 
     useEffect(() => { dispatch(authAction.getUsersList("")) }, [])
@@ -79,7 +79,7 @@ const AdminUserList = () => {
                                             <td style={{ textAlign: 'center' }}>{user.visible ? <VisibleIcon color="#EFA058" /> : <HiddenIcon color="#EFA058" />}</td>
                                             <td style={{ textAlign: 'center' }}>
                                                 <div onClick={(e) => subscribe(e, user._id, !user.subscribe.available)}>
-                                                    {user.subscribe.available ? <CheckOnIcon color="#EFA058" /> : <CheckOffIcon color="#EFA058" />}
+                                                    {user.subscribe.available ? <CheckBoxOnIcon color="#EFA058" /> : <CheckBoxOffIcon color="#EFA058" />}
                                                 </div>
                                             </td>
                                         </tr>

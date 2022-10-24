@@ -40,6 +40,7 @@ export const getUsersByCategory = (data: any) => API.post('/api/auth/list', data
 export const getUsersList = (data: any) => API.post('/api/auth/users', data)
 export const changeUserVisible = (id: any, data: any) => API.put(`/api/auth/${id}/setvisible`, data)
 export const setLanguageCurrency = (data: any) => API.post('/api/auth/setting/lang-currency', data)
+export const setSubscribebyAdmin = (data: any) => API.put('/api/auth/subscribe/available', data)
 
 export const getTransactions = (type: any, search: any) => API.get(`/api/transaction?type=${type}&search=${search}`)
 export const getTransactionsByUserId = (userId: any, type: any, sort: any) => API.get(`/api/transaction/user/${userId}?type=${type}&sort=${sort}`)

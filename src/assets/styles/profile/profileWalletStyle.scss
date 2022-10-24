@@ -67,6 +67,7 @@
         line-height: 20px;
         color: #000000;
         margin-bottom: 10px;
+        text-align: center;
       }
 
       .content {
@@ -120,8 +121,7 @@
         justify-content: space-between;
 
         .coin-icon {
-          display: flex;
-          align-items: center;
+          width: 20px;
         }
 
         .title {
@@ -277,7 +277,7 @@
       .card-info-header {
         margin: 10px 20px;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
 
         .title {
           font-family: 'Lato';
@@ -356,6 +356,35 @@
           font-weight: 400;
           font-size: 16px;
           line-height: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .profile-wallet-wrapper {
+    .page-header {
+      margin: 15px auto;
+    }
+
+    .profile-wallet {
+      .cashable {
+        .title {
+          text-align: left;
+        }
+      }
+
+      .transaction-history {
+        .coin-icon {
+          display: none;
+        }
+      }
+
+      .card-info {
+        .card-info-header {
+          display: flex;
+          justify-content: flex-start;
         }
       }
     }

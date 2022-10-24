@@ -94,7 +94,7 @@ export const authAction = {
         const { payload } = data
         dispatch({ type: SET_CURRENCY_RATE, payload: payload.currencyRate })
       }
-    } catch(err) {
+    } catch (err) {
       console.log(err)
     }
   },
@@ -230,6 +230,24 @@ export const authAction = {
         let users = getState().auth.users
         const index = users.findIndex((user: any) => String(user._id) === String(userId))
         users[index].visible = visible
+        dispatch({ type: SET_USERS, payload: users })
+      }
+    } catch (err) {
+      console.log(err)
+      dispatch({ type: SET_LOADING_FALSE })
+    }
+  },
+
+  setSubscribeByAdmin: (userId: any, available: any) => async (dispatch: Dispatch<any>, getState: any) => {
+    try {
+      dispatch({ type: SET_LOADING_TRUE })
+      const response = await api.setSubscribebyAdmin({ user: userId, available: available })
+      const { data } = response
+      dispatch({ type: SET_LOADING_FALSE })
+      if (data.success) {
+        const users = getState().auth.users
+        const foundIndex = users.findIndex((user: any) => String(user._id) === String(userId))
+        users[foundIndex].subscribe.available = available
         dispatch({ type: SET_USERS, payload: users })
       }
     } catch (err) {

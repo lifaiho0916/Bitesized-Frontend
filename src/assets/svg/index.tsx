@@ -1396,3 +1396,24 @@ export const CheckOffIcon = (props: any) => (
     <path d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM10 18C5.58 18 2 14.42 2 10C2 5.58 5.58 2 10 2C14.42 2 18 5.58 18 10C18 14.42 14.42 18 10 18Z" fill={props.color} />
   </svg>
 )
+
+export const CheckBoxOnIcon = (props: any) => (
+  <svg width={props.width ? props.width : "24"} height={props.height ? props.height : "24"} viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="30" height="30" rx="5" fill="#EFA058" />
+    <g clipPath="url(#clip0_3_236674)">
+      <path d="M11.9984 19.2016L7.79844 15.0016L6.39844 16.4016L11.9984 22.0016L23.9984 10.0016L22.5984 8.60156L11.9984 19.2016Z" fill="white" />
+    </g>
+    <defs>
+      <clipPath id="clip0_3_236674">
+        <rect width="24" height="24" fill="white" transform="translate(3 3)" />
+      </clipPath>
+    </defs>
+  </svg>
+)
+
+export const CheckBoxOffIcon = (props: any) => (
+  <svg width={props.width ? props.width : "24"} height={props.height ? props.height : "24"} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0.5" y="0.5" width="23" height="23" rx="4.5" fill="white" stroke="#EFA058" />
+  </svg>
+
+)

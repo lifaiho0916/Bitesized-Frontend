@@ -178,9 +178,7 @@ const Wallet = () => {
                 </div>
                 <div className="transaction-history">
                     <div className="header">
-                        <div className="coin-icon">
-                            <MoneyIcon color="black" />
-                        </div>
+                        <div className="coin-icon"></div>
                         <div className="title">Transaction history</div>
                         <div className="more-icon">
                             <div onClick={() => { setMoreInfo(true) }}><MoreIcon color="black" /></div>
