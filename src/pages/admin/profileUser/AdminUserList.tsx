@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import Avatar from "../../../components/general/avatar"
-import { SearchIcon, HiddenIcon, VisibleIcon } from "../../../assets/svg"
+import { SearchIcon, HiddenIcon, VisibleIcon, CheckOnIcon, CheckOffIcon } from "../../../assets/svg"
 import { authAction } from "../../../redux/actions/authActions"
 import { SET_PROFILE, SET_NAME_EXIST, SET_URL_EXIST } from "../../../redux/types"
 import "../../../assets/styles/admin/profileUser/AdminUsersStyle.scss"
@@ -13,6 +13,11 @@ const AdminUserList = () => {
     const userState = useSelector((state: any) => state.auth)
     const [search, setSearch] = useState("")
     const { users } = userState
+
+    const subscribe = (e: any, userId: any, available: any) => {
+        e.stopPropagation()
+        
+    }
 
     useEffect(() => { dispatch(authAction.getUsersList("")) }, [])
 
@@ -34,6 +39,7 @@ const AdminUserList = () => {
                             <th style={{ textAlign: 'center' }}>Bite Post</th>
                             <th style={{ textAlign: 'center' }}>Payment Status</th>
                             <th style={{ textAlign: 'center' }}>Account Status</th>
+                            <th style={{ textAlign: 'center' }}>Subscription mode</th>
                         </tr>
                     </thead>
                     {users.length > 0 &&
@@ -71,6 +77,11 @@ const AdminUserList = () => {
                                             <td style={{ textAlign: 'center' }}>{user.biteCnt}</td>
                                             <td></td>
                                             <td style={{ textAlign: 'center' }}>{user.visible ? <VisibleIcon color="#EFA058" /> : <HiddenIcon color="#EFA058" />}</td>
+                                            <td style={{ textAlign: 'center' }}>
+                                                <div onClick={(e) => subscribe(e, user._id, !user.subscribe.available)}>
+                                                    {user.subscribe.available ? <CheckOnIcon color="#EFA058" /> : <CheckOffIcon color="#EFA058" />}
+                                                </div>
+                                            </td>
                                         </tr>
                                     )
                                 }

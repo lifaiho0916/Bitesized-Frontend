@@ -139,7 +139,7 @@ const PaymentForm = (props: any) => {
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
                 <Button
-                    text={"Add"}
+                    text={"Save"}
                     fillStyle="fill"
                     color="primary"
                     shape="rounded"
@@ -166,7 +166,7 @@ const AddCardModal = (props: any) => {
                     </div>
                     <div className="modal-body">
                         <div className="header-title">
-                            <span>Enter your card details.</span>
+                            <span>Add a new Card</span>
                         </div>
                         <Elements stripe={stripePromise}>
                             <PaymentForm {...props} />

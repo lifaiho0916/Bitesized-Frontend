@@ -41,6 +41,9 @@
 
       .language {
         display: flex;
+        width: fit-content;
+        height: 24px;
+        cursor: pointer;
         align-items: center;
         font-family: 'Lato';
         font-style: normal;
@@ -52,6 +55,7 @@
 
         label {
           margin-left: 10px;
+          cursor: pointer;
         }
       }
     }

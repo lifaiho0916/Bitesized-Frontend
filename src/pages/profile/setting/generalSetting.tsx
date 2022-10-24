@@ -7,7 +7,7 @@ import {
   LanguageIcon,
   NoOfPeopleIcon,
   BackIcon
-} from "../../../assets/svg";
+} from "../../../assets/svg"
 import { WalletIcon } from "../../../constants/awesomeIcons"
 import { useLocation, useNavigate } from "react-router-dom"
 import { LanguageContext } from "../../../routes/authRoute"

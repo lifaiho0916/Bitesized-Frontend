@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { useLocation, useNavigate } from "react-router-dom"
-import { CheckIcon, BackIcon } from "../../../assets/svg"
+import { useNavigate } from "react-router-dom"
+import { CheckOnIcon, CheckOffIcon, BackIcon } from "../../../assets/svg"
 import { useSelector } from "react-redux"
 import Button from "../../../components/general/button"
 import CurrencySelect from "../../../components/stripe/CurrencySelect"
@@ -22,8 +22,7 @@ const LanguageCurrency = () => {
   const { user } = userState
   const [lang, setLang] = useState(user ? user.language : 'EN')
   const [option, setOption] = useState(0)
-
-  const setLanguage = (event: any) => { setLang(event.target.value) }
+  
   const saveSetting = () => {
     dispatch(authAction.setLanguageCurrency(lang, currenciesLowercase[option], navigate))
   }
@@ -47,12 +46,18 @@ const LanguageCurrency = () => {
           <div className="lang-currency-title">
             <span>Language Settings</span>
           </div>
-          <div className="lang-setting" onChange={(e) => setLanguage(e)}>
-            <div className="language">
-              <input type="radio" name="lang" id="eng" value="EN" defaultChecked={user.language === 'EN' ? true : false} /><label htmlFor="eng">English</label>
+          <div className="lang-setting">
+            <div className="language" onClick={() => setLang('EN')}>
+              <div style={{ width: '24px', display: 'flex', justifyContent: 'center' }}>
+                {lang === 'EN' ? <CheckOnIcon color="#EFA058" /> : <CheckOffIcon color="#EFA058" />}
+              </div>
+              <label>English</label>
             </div>
-            <div className="language">
-              <input type="radio" name="lang" id="chi" value="CH" defaultChecked={user.language === 'EN' ? false : true} /><label htmlFor="chi">繁體中文</label>
+            <div className="language" onClick={() => setLang('CH')}>
+              <div style={{ width: '24px', display: 'flex', justifyContent: 'center' }}>
+                {lang === 'EN' ? <CheckOffIcon color="#EFA058" /> : <CheckOnIcon color="#EFA058" />}
+              </div>
+              <label>繁體中文</label>
             </div>
           </div>
           <div className="lang-currency-title">
