@@ -9,64 +9,34 @@ export const authAction = {
     navigate("/")
   },
 
-  googleSignupUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
+  googleAuth: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
     try {
-      const response = await api.googleSignup(userData)
+      const response = await api.googleAuth(userData)
       const { data } = response
       if (data.success) {
         const { payload } = data
         localStorage.clear()
         localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(payload.token))
         dispatch({ type: SET_USER, payload: payload.user })
-        navigate(prevRoute === '' ? '/' : prevRoute)
+        if (payload.new) navigate('/myaccount/edit')
+        else navigate(prevRoute)
       }
     } catch (err) {
       console.log(err)
     }
   },
 
-  googleSigninUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
+  appleAuth: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
     try {
-      const response = await api.googleSignin(userData)
+      const response = await api.appleAuth(userData)
       const { data } = response
       if (data.success) {
         const { payload } = data
         localStorage.clear()
         localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(payload.token))
         dispatch({ type: SET_USER, payload: payload.user })
-        navigate(prevRoute === '' ? '/' : prevRoute)
-      }
-    } catch (err) {
-      console.log(err)
-    }
-  },
-
-  appleSignupUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
-    try {
-      const response = await api.appleSignup(userData)
-      const { data } = response
-      if (data.success) {
-        const { payload } = data
-        localStorage.clear()
-        localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(payload.token))
-        dispatch({ type: SET_USER, payload: payload.user })
-        navigate(prevRoute === '' ? '/' : prevRoute)
-      }
-    } catch (err) {
-      console.log(err)
-    }
-  },
-
-  appleSigninUser: (userData: any, navigate: any, prevRoute: any) => async (dispatch: Dispatch<any>) => {
-    try {
-      const response = await api.appleSignin(userData)
-      const { data } = response
-      if (data.success) {
-        const { payload } = data
-        localStorage.clear()
-        localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(payload.token))
-        dispatch({ type: SET_USER, payload: payload.user })
-        navigate(prevRoute === '' ? '/' : prevRoute)
+        if (payload.new) navigate('/myaccount/edit')
+        else navigate(prevRoute)
       }
     } catch (err) {
       console.log(err)

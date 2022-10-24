@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useEffect, useMemo } from 'react';
-import { GoogleLogin } from 'react-google-login';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { BackIcon, InstagramIcon, YoutubeIcon } from '../../../assets/svg';
@@ -94,17 +93,17 @@ const Socialaccount = () => {
                   <span>Remove</span>
                 </div>
               ) : (
-                <GoogleLogin
-                  clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
-                  render={(renderProps) => (
-                    <div className='connect-btn' onClick={renderProps.onClick}>
+                // <GoogleLogin
+                //   clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
+                //   render={(renderProps) => (
+                    <div className='connect-btn'>
                       <span>Connect</span>
                     </div>
-                  )}
-                  onSuccess={responseGoogleSuccess}
-                  cookiePolicy={'single_host_origin'}
-                  scope='https://www.googleapis.com/auth/youtube.readonly'
-                />
+                //   )}
+                //   onSuccess={responseGoogleSuccess}
+                //   cookiePolicy={'single_host_origin'}
+                //   scope='https://www.googleapis.com/auth/youtube.readonly'
+                // />
               )}
             </div>
           </div>

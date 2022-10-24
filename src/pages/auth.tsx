@@ -1,16 +1,17 @@
-import React, { useEffect, useState, useContext } from "react";
-import { GoogleLogin } from "react-google-login";
+import { useEffect, useState, useContext } from "react"
 // import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google'
 import AppleLogin from 'react-apple-login'
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
-import Dialog from "../components/general/dialog";
-import { LanguageContext } from "../routes/authRoute";
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux"
+import axios from "axios"
+import Dialog from "../components/general/dialog"
+import { LanguageContext } from "../routes/authRoute"
 import { AppleIcon, FacebookIcon, GoogleIcon } from "../constants/awesomeIcons"
-import { SET_DIALOG_STATE } from "../redux/types";
-import { authAction } from "../redux/actions/authActions";
-import "../assets/styles/signupStyle.scss";
-const InApp = require("detect-inapp");
+import { SET_DIALOG_STATE } from "../redux/types"
+import { authAction } from "../redux/actions/authActions"
+import "../assets/styles/signupStyle.scss"
+const InApp = require("detect-inapp")
 
 declare global {
   interface Window {
@@ -18,20 +19,56 @@ declare global {
   }
 }
 
+const CustomGoogleLogin = (props: any) => {
+  const { dispatch, lang, preveRoute, navigate } = props
+  const googleLogin = useGoogleLogin({
+    onSuccess: async tokenResponse => {
+      try {
+        const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo',
+          { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } })
+        const { data } = userInfo
+
+        let browser = ""
+        if (navigator.userAgent.indexOf("Chrome") !== -1) browser = 'Chrome'
+        else if (navigator.userAgent.indexOf("Safari") !== -1) browser = "Safari"
+        else if (navigator.userAgent.indexOf("Firefox") !== -1) browser = 'Firefox'
+
+        const userData = {
+          name: data.name,
+          email: data.email,
+          authId: data.sub,
+          avatar: data.picture,
+          lang: lang,
+          browser: browser
+        }
+
+        dispatch(authAction.googleAuth(userData, navigate, preveRoute))
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    onError: errorResponse => console.log(errorResponse),
+  })
+
+  return (
+    <div className="icon" onClick={() => googleLogin()}>
+      <GoogleIcon color="#EFA058" />
+    </div>
+  )
+}
+
 const Auth = (props: any) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const loadState = useSelector((state: any) => state.load)
-  const { dlgState } = loadState
+  const { dlgState, prevRoute } = loadState
   const inapp = new InApp(navigator.userAgent || navigator.vendor || window.FB)
   const [openWith, setOpenWith] = useState(inapp.browser === 'instagram' || inapp.browser === 'facebook' || navigator.userAgent.toLowerCase().indexOf('line') !== -1 ? true : false);
-  const [isHover, setIsHover] = useState(false);
-  const [isHover1, setIsHover1] = useState(false);
+  const [isHover, setIsHover] = useState(false)
+  const [isHover1, setIsHover1] = useState(false)
   const [openSignupMethodErrorDlg, SetOpenSignupMethodErrorDlg] = useState(false)
   const lang = useSelector((state: any) => state.auth.lang)
-  const prevRoute = loadState.prevRoute;
-  const referralInfo = JSON.parse(localStorage.getItem("referral_info") || '{}')
-  const contexts = useContext(LanguageContext);
+  const contexts = useContext(LanguageContext)
 
   const signupStyle = {
     fontWeight: "bold",
@@ -41,7 +78,7 @@ const Auth = (props: any) => {
     alignItems: "center",
     color: isHover === true ? "black" : "#BCB6A9",
     textDecoration: isHover === true ? "underline" : "none",
-  };
+  }
 
   const aStyle = {
     fontWeight: "bold",
@@ -50,7 +87,7 @@ const Auth = (props: any) => {
     alignItems: "center",
     color: isHover === true ? "black" : "#BCB6A9",
     textDecoration: isHover === true ? "underline" : "none",
-  };
+  }
 
   const aStyle1 = {
     fontWeight: "bold",
@@ -59,27 +96,6 @@ const Auth = (props: any) => {
     alignItems: "center",
     color: isHover1 === true ? "black" : "#BCB6A9",
     textDecoration: isHover1 === true ? "underline" : "none",
-  };
-
-  const responseGoogleSuccess = async (response: any) => {
-    const result: any = response?.profileObj;
-    let browser = "";
-    if (navigator.userAgent.indexOf("Chrome") !== -1) browser = 'Chrome';
-    else if (navigator.userAgent.indexOf("Safari") !== -1) browser = "Safari";
-    else if (navigator.userAgent.indexOf("Firefox") !== -1) browser = 'Firefox';
-
-    const userData = ({
-      name: result.name,
-      avatar: result.imageUrl,
-      email: result.email,
-      googleId: result.googleId,
-      browser: browser,
-      lang: lang,
-      referral: referralInfo
-    })
-
-    if (props.isSignin) dispatch(authAction.googleSigninUser(userData, navigate, prevRoute))
-    else dispatch(authAction.googleSignupUser(userData, navigate, prevRoute))
   }
 
   // const responseFacebook = (response: any) => {
@@ -102,21 +118,19 @@ const Auth = (props: any) => {
 
   const responseApple = (response: any) => {
     if (!response.error) {
-      let browser = "";
-      if (navigator.userAgent.indexOf("Chrome") !== -1) browser = 'Chrome';
-      else if (navigator.userAgent.indexOf("Safari") !== -1) browser = "Safari";
-      else if (navigator.userAgent.indexOf("Firefox") !== -1) browser = 'Firefox';
+      let browser = ""
+      if (navigator.userAgent.indexOf("Chrome") !== -1) browser = 'Chrome'
+      else if (navigator.userAgent.indexOf("Safari") !== -1) browser = "Safari"
+      else if (navigator.userAgent.indexOf("Firefox") !== -1) browser = 'Firefox'
 
-      const userData = ({
+      const userData = {
         token: response.authorization.id_token,
-        user: response.user ? response.user : null,
+        userInfo: response.user ? response.user : null,
         browser: browser,
         lang: lang,
-        referral: referralInfo
-      })
+      }
 
-      if (props.isSignin) dispatch(authAction.appleSigninUser(userData, navigate, prevRoute))
-      else dispatch(authAction.appleSignupUser(userData, navigate, prevRoute))
+      dispatch(authAction.appleAuth(userData, navigate, prevRoute))
     }
   }
 
@@ -127,7 +141,7 @@ const Auth = (props: any) => {
   }, [dlgState])
 
   return (
-    <React.Fragment>
+    <>
       <Dialog
         display={openSignupMethodErrorDlg}
         title="Oops!"
@@ -203,17 +217,14 @@ const Auth = (props: any) => {
           </h2>
         )}
         <div className="icons">
-          <GoogleLogin
-            clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
-            render={(renderProps) => (
-              <div className="icon" onClick={renderProps.onClick}>
-                <GoogleIcon color="#EFA058" />
-              </div>
-            )}
-            onSuccess={responseGoogleSuccess}
-            onFailure={(err) => console.log(err)}
-            cookiePolicy={"single_host_origin"}
-          />
+          <GoogleOAuthProvider clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}>
+            <CustomGoogleLogin
+              lang={lang}
+              dispatch={dispatch}
+              preveRoute={prevRoute}
+              navigate={navigate}
+            />
+          </GoogleOAuthProvider>
           {/* <FacebookLogin
             appId={CONSTANT.FACEBOOK_APP_ID}
             autoLoad={false}
@@ -229,8 +240,6 @@ const Auth = (props: any) => {
           <AppleLogin
             clientId={`${process.env.REACT_APP_APPLE_CLIENT_ID}`}
             redirectURI={`${process.env.REACT_APP_APPLE_REDIRECT_URL}`}
-            // clientId="dev.creatogether.io.apple.login.service"
-            // redirectURI="https://dev8.creatogether.io/auth"
             callback={responseApple} // Catch the response
             scope="email name"
             responseMode="query"
@@ -242,36 +251,38 @@ const Auth = (props: any) => {
             )}
           />
         </div>
-        {props.isSignin === false ? (
-          <p>{contexts.AUTH_LETTER.BY_SIGN_UP}
-            <a
-              onMouseOver={() => setIsHover(true)}
-              onMouseLeave={() => setIsHover(false)}
-              style={aStyle}
-              href="https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713" target="_blank"> {contexts.AUTH_LETTER.TERMS}</a>{contexts.AUTH_LETTER.AND}<a onMouseOver={() => setIsHover1(true)}
-                onMouseLeave={() => setIsHover1(false)}
-                style={aStyle1} href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33" target="_blank">{contexts.AUTH_LETTER.PRIVACY_POLICY}</a></p>
-        ) : (
-          <div
-            style={{
-              display: "flex",
-            }}
-          >
-            <p>{contexts.AUTH_LETTER.NEW_CREATO}</p>
-            <p
-              onMouseOver={() => setIsHover(true)}
-              onMouseLeave={() => setIsHover(false)}
-              onClick={() => navigate('/auth/signup')}
-              style={signupStyle}
+        {
+          props.isSignin === false ? (
+            <p>{contexts.AUTH_LETTER.BY_SIGN_UP}
+              <a
+                onMouseOver={() => setIsHover(true)}
+                onMouseLeave={() => setIsHover(false)}
+                style={aStyle}
+                href="https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713" target="_blank"> {contexts.AUTH_LETTER.TERMS}</a>{contexts.AUTH_LETTER.AND}<a onMouseOver={() => setIsHover1(true)}
+                  onMouseLeave={() => setIsHover1(false)}
+                  style={aStyle1} href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33" target="_blank">{contexts.AUTH_LETTER.PRIVACY_POLICY}</a></p>
+          ) : (
+            <div
+              style={{
+                display: "flex",
+              }}
             >
-              {contexts.AUTH_LETTER.SIGN_UP}
-            </p>
-            <p>{contexts.AUTH_LETTER.NOW}</p>
-          </div>
-        )}
-      </div>
-    </React.Fragment>
-  );
-};
+              <p>{contexts.AUTH_LETTER.NEW_CREATO}</p>
+              <p
+                onMouseOver={() => setIsHover(true)}
+                onMouseLeave={() => setIsHover(false)}
+                onClick={() => navigate('/auth/signup')}
+                style={signupStyle}
+              >
+                {contexts.AUTH_LETTER.SIGN_UP}
+              </p>
+              <p>{contexts.AUTH_LETTER.NOW}</p>
+            </div>
+          )
+        }
+      </div >
+    </>
+  )
+}
 
-export default Auth;
+export default Auth
