@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import AvatarEditor from "react-avatar-editor"
 import Input from "../../../components/general/input"
 import Button from "../../../components/general/button"
+import ToggleBtn from "../../../components/toggleBtn"
 import HideUserModal from "../../../components/modals/HideUserModal"
 import { BackIcon, VisibleIcon, HiddenIcon, EditIcon } from "../../../assets/svg"
 import { authAction } from "../../../redux/actions/authActions"
@@ -25,6 +26,7 @@ const AdminEditUser = () => {
     const [name, setName] = useState<string>(profile.name)
     const [url, setUrl] = useState<string>(profile.personalisedUrl)
     const [bioText, setBioText] = useState(profile.bioText)
+    const [subscripe, setSubscribe] = useState(profile.subscribe)
     const { state } = location
     let imageEditor: any = null
 
@@ -76,12 +78,14 @@ const AdminEditUser = () => {
                     avatar: null,
                     name: user.name,
                     personalisedUrl: user.personalisedUrl,
-                    bioText: user.bioText
+                    bioText: user.bioText,
+                    subscribe: user.subscribe.switch
                 }
             })
             setName(user.name)
             setUrl(user.personalisedUrl)
             setBioText(user.bioText)
+            setSubscribe(user.subscribe.switch)
         }
     }, [profile, user])
     useEffect(() => { if (name !== "" && user) dispatch(authAction.checkName(name, user._id)) }, [name, dispatch])
@@ -157,6 +161,12 @@ const AdminEditUser = () => {
                                     readOnly={true}
                                 />
                             </div>
+                            <div className="subscription">
+                                <span>Subscription function</span>
+                                <ToggleBtn
+                                    toggle={user.subscribe.switch}
+                                />
+                            </div>
                             <div className="categories">
                                 {user.categories.map((category: any, index: any) => (
                                     <div key={index} className="category"><span>{contexts.CREATOR_CATEGORY_LIST[category]}</span></div>
@@ -225,6 +235,13 @@ const AdminEditUser = () => {
                                     title={bioText ? bioText : ""}
                                     setTitle={setBioText}
                                     setFocus={() => { }}
+                                />
+                            </div>
+                            <div className="subscription">
+                                <span>Subscription function</span>
+                                <ToggleBtn
+                                    toggle={subscripe}
+                                    setToggle={setSubscribe}
                                 />
                             </div>
                             <div style={{ marginTop: '20px' }}>

@@ -66,6 +66,21 @@
                 margin-top: 20px;
             }
 
+            .subscription {
+                margin-top: 20px;
+                width: 90%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 20px;
+                letter-spacing: 0.05em;
+                color: #000000;
+            }
+
             .categories {
                 margin-top: 25px;
                 display: flex;
@@ -146,6 +161,21 @@
 
             .url {
                 margin-top: 5px;
+            }
+
+            .subscription {
+                margin-top: 20px;
+                width: 90%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 20px;
+                letter-spacing: 0.05em;
+                color: #000000;
             }
 
         }

@@ -12,6 +12,7 @@ const INITIAL_STATE: any = {
         name: null,
         personalisedUrl: null,
         bioText: null,
+        subscribe: null
     }
 }
 
@@ -63,6 +64,7 @@ const authReducer = (state: any = INITIAL_STATE, action: any) => {
                     name: null,
                     personalisedUrl: null,
                     bioText: null,
+                    subscribe: null
                 }
             }
         }

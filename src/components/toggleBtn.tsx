@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
-const ToggleBtn = () => {
-  const [toggle, setToggle] = useState<boolean>(true)
+const ToggleBtn = (props: any) => {
+  const { toggle, setToggle } = props
   const handleToggle = () => {
-    setToggle(!toggle)
+    if (setToggle) setToggle(!toggle)
   }
+
   const style = {
     wrapper: {
       width: "70px",
@@ -24,7 +25,7 @@ const ToggleBtn = () => {
       backgroundColor: 'white',
       borderRadius: '14px',
       transition: '0.2s',
-      transform: toggle? '':'translateX(35px)'
+      transform: toggle ? 'translateX(35px)' : ''
     },
   };
   return (

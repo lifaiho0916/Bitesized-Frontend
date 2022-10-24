@@ -147,7 +147,8 @@
       line-height: 18px;
       letter-spacing: 0.005em;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
+      margin-left: 5px;
     }
 
     .publish-btn {
@@ -164,15 +165,15 @@
     }
 
     .third-divider {
-      margin-top: 40px;
+      margin-top: 20px;
     }
 
     .firth-divider {
-      margin-top: 40px;
+      margin-top: 10px;
     }
 
     .fifth-divider {
-      margin-top: 20px;
+      margin-top: 40px;
     }
   }
 }
@@ -223,11 +224,16 @@
       }
 
       .firth-divider {
-        margin-top: 15px;
+        margin-top: 10px;
       }
 
       .fifth-divider {
-        margin-top: 10px;
+        margin-top: 20px;
+      }
+
+      .currency-description {
+        display: flex;
+        justify-content: center;
       }
     }
   }

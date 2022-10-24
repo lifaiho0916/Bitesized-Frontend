@@ -55,7 +55,8 @@ const AdminUserList = () => {
                                                     avatar: null,
                                                     name: null,
                                                     personalisedUrl: null,
-                                                    bioText: null
+                                                    bioText: null,
+                                                    subscribe: null
                                                 }
                                             })
                                             dispatch({ type: SET_NAME_EXIST, payload: false })
