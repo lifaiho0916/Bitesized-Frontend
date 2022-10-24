@@ -26,7 +26,7 @@ const PurchaseModal = (props: any) => {
             const usdPrice = biteCurrency === 'usd' ? price : price / currencyRate[`${biteCurrency}`]
             const currency = currencies[option].toLowerCase()
             const rate = currency === 'usd' ? 1.0 : currencyRate[`${currency}`]
-            return (usdPrice * rate).toFixed(1)
+            return (usdPrice * rate).toFixed(2)
         }
     }
 
