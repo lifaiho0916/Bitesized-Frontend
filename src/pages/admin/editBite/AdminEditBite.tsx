@@ -26,7 +26,7 @@ const AdminEditBite = () => {
 
     const changeVisible = (visible: any) => { dispatch(biteAction.changeVisible(biteId, visible)) }
     const changeVideoVisible = (index: any, visible: any) => { dispatch(biteAction.changeVideoVisible(biteId, index, visible)) }
-    useEffect(() => { if (bite.title === null) dispatch(biteAction.getBiteById(biteId)) }, [bite])
+    useEffect(() => { dispatch(biteAction.getBiteById(biteId)) }, [biteId])
 
     return (
         <div className="admin-edit-bite-wrapper">

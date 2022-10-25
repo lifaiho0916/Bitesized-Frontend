@@ -51,7 +51,7 @@
       }
 
       .bite-card {
-        padding: 10px 0px;
+        padding: 20px 0px;
         display: flex;
         overflow-x: scroll;
 
@@ -88,7 +88,23 @@
           cursor: pointer;
 
           &:hover {
-            transform: scale(0.995);
+            transform: scale(1.04);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .profile-wrapper {
+    .profile {
+      .creators-bite {
+        .bite-card {
+          .profile-bite {
+            &:hover {
+              transform: none;
+            }
           }
         }
       }
