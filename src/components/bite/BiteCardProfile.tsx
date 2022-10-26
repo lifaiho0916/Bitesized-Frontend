@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useLocation, useNavigate } from "react-router-dom"
 import Button from "../general/button"
 import { LanguageContext } from "../../routes/authRoute"
-import { ClockIcon, NoOfPeopleIcon, PlayIcon, UnlockIcon } from "../../assets/svg"
+import { ClockIcon, NoOfPeopleIcon, UnlockIcon } from "../../assets/svg"
 import NextBtn from "../../assets/img/next-bright.png"
 import { SET_PREVIOUS_ROUTE } from "../../redux/types"
 import "../../assets/styles/bite/BiteCardProfileStyle.scss"
@@ -20,7 +20,6 @@ const BiteCardProfile = (props: any) => {
     const { user } = userState
 
     const [videoIndex, setVideoIndex] = useState(0)
-    const [play, setPlay] = useState(false)
     const [lock, setLock] = useState(true)
 
     const PrevVideo = () => {
@@ -109,11 +108,7 @@ const BiteCardProfile = (props: any) => {
                 }
             </div>
             <div className="bite-body">
-                <div className="video-part"
-                    onClick={() => {
-                        if (play) { setPlay(false) }
-                    }}
-                >
+                <div className="video-part">
                     <div className="cover-image">
                         {videoIndex > 0 &&
                             <div className="prev-video" onClick={PrevVideo}>
@@ -130,7 +125,7 @@ const BiteCardProfile = (props: any) => {
                             alt="cover Image"
                             width={'100%'}
                         />
-                        {lock ?
+                        {user === null &&
                             <div className="lock-btn">
                                 <Button
                                     text="Unlock"
@@ -140,10 +135,6 @@ const BiteCardProfile = (props: any) => {
                                     icon={[<UnlockIcon color="#EFA058" />, <UnlockIcon color="white" />, <UnlockIcon color="white" />]}
                                     handleSubmit={() => { }}
                                 />
-                            </div>
-                            :
-                            <div className="play-icon" onClick={() => setPlay(true)}>
-                                <PlayIcon color="white" />
                             </div>
                         }
                         <div
