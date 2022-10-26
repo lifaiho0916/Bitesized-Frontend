@@ -57,9 +57,10 @@ const Profile = () => {
 
   useEffect(() => {
     // 0 
-    // 0 258(258)
-    // 0 279(279) 558(279)
-    // 0 279(279) 579(300) 858(279)
+    // 0 295(295)
+    // 0 297(297) 595(298)
+    // 0 297(297) 597(300) 895(298)
+    // 0 297(297) 597(300) 897(300) 1195(298)
     let array: any = []
     let left = 0
     bites.filter((bite: any, index: any) => {
@@ -70,19 +71,19 @@ const Profile = () => {
     }).forEach((bite: any, index: any, biteArray: any) => {
       if (index == 0) array.push(left)
       else if (index === 1) {
-        if (biteArray.length === 2) left = left + 258
-        else left = left + 300
+        if (biteArray.length === 2) left = left + 295
+        else left = left + 297
         array.push(left)
       }
       else if (index === biteArray.length - 1) {
-        left = left + 279
+        left = left + 298
         array.push(left)
       } else {
         left = left + 300
         array.push(left)
       }
     })
-    setScrollWidth(array)
+    setScrollWidth([...array])
   }, [bites, isSame, code, authuser])
 
   return (
@@ -101,8 +102,9 @@ const Profile = () => {
             <div className="creators-bite">
               {(bites.length > 0 && authuser) ?
                 <div className="bite-card" onScroll={(e: any) => {
+                  console.log(e.target.scrollLeft)
                   scrollWidth.forEach((width: any, index: any) => {
-                    if (e.target.scrollLeft === width) setScrollIndex(index)
+                    if (Math.abs(e.target.scrollLeft - width) <= 1) setScrollIndex(index)
                   })
                 }}>
                   {bites.filter((bite: any) => {
@@ -174,7 +176,7 @@ const Profile = () => {
             {(bites.length > 0 && authuser) ?
               <div className="bite-card" onScroll={(e: any) => {
                 scrollWidth.forEach((width: any, index: any) => {
-                  if (e.target.scrollLeft === width) setScrollIndex(index)
+                  if (Math.abs(e.target.scrollLeft - width) <= 1) setScrollIndex(index)
                 })
               }}>
                 {bites.sort((first: any, second: any) => {

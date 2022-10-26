@@ -165,7 +165,7 @@ const ProfileHeader = (props: any) => {
       }
       <div className="drop-down-list" style={moreInfo === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef}>
         <div className="list" onClick={() => {
-          navigator.clipboard.writeText(`bitesized.creatogether.io/${profileUser.personalisedUrl}`);
+          navigator.clipboard.writeText(`bitesized.creatogether.io/${profileUser.personalisedUrl}`)
           setMoreInfo(false)
         }}>{"Copy link"}</div>
         <div className="list" onClick={() => { setMoreInfo(false) }}>{contexts.PROFILE_LETTER.CANCEL}</div>

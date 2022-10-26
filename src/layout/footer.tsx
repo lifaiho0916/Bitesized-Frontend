@@ -65,14 +65,6 @@ const Footer = () => {
             {
               text: contexts.FOOTER_LETTER.HOW_IT_WORKS,
               link: 'https://www.creatogether.app/how-it-works'
-            },
-            {
-              text: contexts.FOOTER_LETTER.BLOG,
-              link: 'https://www.creatogether.app/blogs'
-            },
-            {
-              text: contexts.FOOTER_LETTER.NEWS,
-              link: 'https://www.creatogether.app/news'
             }
           ]}
         />
@@ -90,10 +82,6 @@ const Footer = () => {
             {
               text: contexts.FOOTER_LETTER.PRIVACY_POLICY,
               link: 'https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33'
-            },
-            {
-              text: contexts.FOOTER_LETTER.CONTACT_US,
-              link: 'https://www.creatogether.app/contact-us',
             }
           ]}
         />
@@ -101,16 +89,12 @@ const Footer = () => {
           title="Discover"
           subtitles={[
             {
-              text: contexts.FOOTER_LETTER.COMMUNITY,
-              link: 'https://www.creatogether.app/communities'
+              text: contexts.FOOTER_LETTER.CONTACT_US,
+              link: 'https://www.creatogether.app/contact-us',
             },
             {
-              text: contexts.FOOTER_LETTER.JOIN_US,
-              link: 'https://www.notion.so/room591/Creato-Is-Hiring-100d3ca4ef8e42f889aa1c577596d308'
-            },
-            {
-              text: contexts.FOOTER_LETTER.RESOURCES,
-              link: 'https://www.creatogether.app/resources'
+              text: contexts.FOOTER_LETTER.BLOG,
+              link: 'https://www.creatogether.app/blogs'
             }
           ]}
         />

@@ -124,7 +124,7 @@ const PaymentForm = (props: any) => {
                 </div>
                 <div className="cvv">
                     <div className="letter">
-                        <span>CVV</span>
+                        <span>CVC</span>
                     </div>
                     <div className="cvv-ele">
                         <CardCvcElement
@@ -165,7 +165,7 @@ const AddCardModal = (props: any) => {
                         </div>
                     </div>
                     <div className="modal-body">
-                        <div className="header-title">
+                        <div className="header-card-title">
                             <span>Add a new Card</span>
                         </div>
                         <Elements stripe={stripePromise}>

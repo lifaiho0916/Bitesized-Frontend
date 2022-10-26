@@ -137,45 +137,47 @@ const Wallet = () => {
                         }
                     ]}
                 />
-                <div className="cashable">
-                    <div className="title">Cashable amount</div>
-                    <div className="content">
-                        <div className="part">
-                            <div className="icon">
+                {(user && user.earnings > 0) &&
+                    <div className="cashable">
+                        <div className="title">Cashable amount</div>
+                        <div className="content">
+                            <div className="part">
+                                <div className="icon">
+                                    <Button
+                                        color="primary"
+                                        icon={[
+                                            <MoneyIcon color="white" />,
+                                            <MoneyIcon color="white" />,
+                                            <MoneyIcon color="white" />,
+                                        ]}
+                                        shape="pill"
+                                        fillStyle="fill"
+                                        handleSubmit={() => { }}
+                                    />
+                                </div>
+                                <div className="number">
+                                    <span>{user ? (user.earnings * 0.9).toFixed(2).toLocaleString() : 0.00} (USD)</span>
+                                </div>
+                            </div>
+                            <div className="btn">
                                 <Button
                                     color="primary"
-                                    icon={[
-                                        <MoneyIcon color="white" />,
-                                        <MoneyIcon color="white" />,
-                                        <MoneyIcon color="white" />,
-                                    ]}
-                                    shape="pill"
-                                    fillStyle="fill"
-                                    handleSubmit={() => { }}
+                                    fillStyle="outline"
+                                    shape="rounded"
+                                    text={contexts.WALLET_LETTER.CASH_OUT}
+                                    handleSubmit={() => {
+                                        // setPayout(true) 
+                                        // setOpenConnectStripe(true)
+                                        window.open("https://www.creatogether.app/altpayout", '_blank')
+                                    }}
                                 />
                             </div>
-                            <div className="number">
-                                <span>{user ? (user.earnings * 0.9).toFixed(2).toLocaleString() : 0.00} (USD)</span>
-                            </div>
                         </div>
-                        <div className="btn">
-                            <Button
-                                color="primary"
-                                fillStyle="outline"
-                                shape="rounded"
-                                text={contexts.WALLET_LETTER.CASH_OUT}
-                                handleSubmit={() => {
-                                    // setPayout(true) 
-                                    // setOpenConnectStripe(true)
-                                    window.open("https://www.creatogether.app/altpayout", '_blank')
-                                }}
-                            />
+                        <div className="local-currency">
+                            <span>≈ {(user && currencyRate) ? (getLocalCurrencyPrice(user.earnings * 0.9, user.currency)) : 0.00} {user ? user.currency.toUpperCase() : ''}</span>
                         </div>
                     </div>
-                    <div className="local-currency">
-                        <span>≈ {(user && currencyRate) ? (getLocalCurrencyPrice(user.earnings * 0.9, user.currency)) : 0.00} {user ? user.currency.toUpperCase() : ''}</span>
-                    </div>
-                </div>
+                }
                 <div className="transaction-history">
                     <div className="header">
                         <div className="coin-icon"></div>
@@ -230,8 +232,8 @@ const Wallet = () => {
                                         {transactions.map((transaction: any, index: any) => (
                                             <tr key={index}>
                                                 <td>
-                                                    {transaction.type === 2 && <span style={{ color: '#D94E27' }}>{currencyRate ? getLocalCurrency(transaction.currency) + `${transaction.localPrice.toFixed(1)}` : ''}</span>}
-                                                    {transaction.type === 3 && <span style={{ color: '#10B981' }}>{currencyRate ? getLocalCurrency(transaction.bite.currency) + `${transaction.bite.price.toFixed(1)}` : ''}</span>}
+                                                    {transaction.type === 2 && <span style={{ color: '#D94E27' }}>- {currencyRate ? getLocalCurrency(transaction.currency) + `${transaction.localPrice.toFixed(1)}` : ''}</span>}
+                                                    {transaction.type === 3 && <span style={{ color: '#10B981' }}>+ {currencyRate ? getLocalCurrency(transaction.bite.currency) + `${transaction.bite.price.toFixed(1)}` : ''}</span>}
                                                 </td>
                                                 <td>
                                                     <span className="detail">
@@ -250,6 +252,7 @@ const Wallet = () => {
                 </div>
                 <div className="card-info">
                     <div className="card-info-header">
+                        <div className="coin-icon"></div>
                         <div className="title">
                             <span>Payment details</span>
                         </div>

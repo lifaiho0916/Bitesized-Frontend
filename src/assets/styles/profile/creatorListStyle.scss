@@ -49,7 +49,8 @@
       }
 
       .item {
-        margin: 5px 15px;
+        flex-grow: 0;
+        margin: 5px 12px;
       }
     }
   }
@@ -104,6 +105,14 @@
   .creator-wrapper {
     .page-header {
       margin: 15px auto;
+    }
+
+    .creator-list {
+      .sort-item {
+        .item {
+          margin: 5px 3px;
+        }
+      }
     }
   }
 }
