@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom"
 import Avatar from "../general/avatar"
 import Button from "../general/button"
 import { LanguageContext } from "../../routes/authRoute"
-import { ClockIcon, NoOfPeopleIcon, PlayIcon, UnlockIcon } from "../../assets/svg"
+import { ClockIcon, NoOfPeopleIcon, UnlockIcon } from "../../assets/svg"
 import { SET_PREVIOUS_ROUTE } from "../../redux/types"
 import NextBtn from "../../assets/img/next-bright.png"
 import "../../assets/styles/bite/BiteCardHomeStyle.scss"
@@ -136,9 +136,7 @@ const BiteCardHome = (props: any) => {
                             alt="coverImage"
                             width={'100%'}
                         />
-                        {!lock ?
-                            <div className="play-icon"><PlayIcon color="white" /></div>
-                            :
+                        {user === null &&
                             <div className="lock-btn">
                                 <Button
                                     text="Unlock"
@@ -160,8 +158,8 @@ const BiteCardHome = (props: any) => {
                         </div>
                     </div>
                 </div>
-                <div className={bite.currency ? "price-purchased" : "price-free"}>
-                    <span>{displayPrice(bite.currency, bite.price, user ? user.currency : 'usd')}</span>
+                <div className={bite.currency ? !lock ? "price-unlocked" : "price-purchased" : "price-free"}>
+                    <span>{!lock ? 'Unlocked' : displayPrice(bite.currency, bite.price, user ? user.currency : 'usd')}</span>
                     {bite.purchasedUsers.length > 0 && <span style={{ marginLeft: '10px' }}><NoOfPeopleIcon color="white" width={18} height={18} />&nbsp;{bite.purchasedUsers.length} {bite.currency ? "purchased" : "unlocked"}</span>}
                 </div>
                 <div className="bite-title">

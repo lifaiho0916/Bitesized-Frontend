@@ -7,17 +7,18 @@ import { EN, CH } from "../constants/language"
 import { SET_LANGUAGE, SET_USER } from '../redux/types'
 import Layout from '../layout/layout'
 import Layout1 from "../layout/layout1"
-import socketIOClient from "socket.io-client"
+// import socketIOClient from "socket.io-client"
 
 interface routeProps {
     child: any;
     routeType?: string;
 }
 
-var socket = socketIOClient(`${process.env.REACT_APP_SERVER_URL}`);
+// var socket = socketIOClient(`${process.env.REACT_APP_SERVER_URL}`);
 export const LanguageContext = createContext<any>(null);
 
 const AuthRoute = (props: routeProps) => {
+    const { child, routeType } = props
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [contexts, setContexts] = useState(CH);
@@ -27,24 +28,24 @@ const AuthRoute = (props: routeProps) => {
     const location = useLocation();
     const token: any = JSON.parse(localStorage.getItem(`${process.env.REACT_APP_CREATO_TOKEN}`) || '{}');
 
-    const walletChange = (wallet: any) => {
-        const state = { ...user, wallet: wallet };
-        dispatch({ type: SET_USER, payload: state });
-    }
+    // const walletChange = (wallet: any) => {
+    //     const state = { ...user, wallet: wallet };
+    //     dispatch({ type: SET_USER, payload: state });
+    // }
 
     useEffect(() => {
         if (user) {
             const lang: any = user.language === 'EN' ? EN : CH;
             setContexts(lang);
-            socket.emit('connected', user.email, user.role);
-            socket.on("wallet_change", (donuts: any) => walletChange(donuts));
+            // socket.emit('connected', user.email, user.role);
+            // socket.on("wallet_change", (donuts: any) => walletChange(donuts));
             // socket.on("create_notification", () => dispatch(notificationAction.setNotification()));
         }
     }, [user]);
 
     useEffect(() => {
         if (user === null) {
-            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+            // const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
             let lang: any = EN
             let langLetter: any = 'EN'
             // if (timezone === 'Asia/Shanghai' || timezone === 'Asia/Urumqi' || timezone === 'Asia/Hong_Kong' || timezone === 'Asia/Chongqing') {
@@ -54,23 +55,23 @@ const AuthRoute = (props: routeProps) => {
             dispatch({ type: SET_LANGUAGE, payload: langLetter })
             setContexts(lang)
         }
-    }, []);
+    }, [user, dispatch]);
 
     useEffect(() => {
         if (user === null) {
             const lang: any = language === 'EN' ? EN : CH;
             setContexts(lang)
         }
-    }, [language])
+    }, [language, user])
 
     useEffect(() => {
-        if (props.routeType === 'private') {
+        if (routeType === 'private') {
             if (localStorage.getItem(`${process.env.REACT_APP_CREATO_TOKEN}`)) {
                 const decoded: any = decode(token);
                 if (decoded.exp * 1000 < new Date().getTime()) dispatch(authAction.logout(navigate))
             } else navigate("/")
         }
-    }, [navigate, props.routeType])
+    }, [navigate, routeType, dispatch, token])
 
     useEffect(() => {
         if (localStorage.getItem(`${process.env.REACT_APP_CREATO_TOKEN}`)) {
@@ -79,13 +80,13 @@ const AuthRoute = (props: routeProps) => {
             else dispatch(authAction.getAuthData())
         }
         dispatch(authAction.getCurrencyRate())
-    }, [])
+    }, [dispatch, token, navigate])
 
     useEffect(() => { window.scrollTo(0, 0) }, [location])
 
     return (
         <LanguageContext.Provider value={contexts}>
-            {location.pathname.indexOf('admin') !== -1 ? <Layout1 child={props.child} /> : <Layout child={props.child} />}
+            {location.pathname.indexOf('admin') !== -1 ? <Layout1 child={child} /> : <Layout child={child} />}
         </LanguageContext.Provider>
     );
 }

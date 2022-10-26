@@ -159,7 +159,7 @@ const BiteDetail = () => {
                                     fillStyle="fill"
                                     color="primary"
                                     shape="rounded"
-                                    handleSubmit={() => { }}
+                                    handleSubmit={() => { window.open('https://www.creatogether.app/subscribenow', '_blank') }}
                                 />
                             </div>
                             <div className="bite-title">

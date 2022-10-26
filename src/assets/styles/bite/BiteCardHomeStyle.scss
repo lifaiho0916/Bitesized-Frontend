@@ -197,6 +197,29 @@
             }
         }
 
+        .price-unlocked {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 6px 0px;
+
+            span {
+                display: flex;
+                align-items: center;
+                width: fit-content;
+                height: 18px;
+                padding: 0px 12px;
+                background: #65E265;
+                border-radius: 90px;
+                font-family: "Lato";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 18px;
+                color: #ffffff;
+            }
+        }
+
         .price-free {
             display: flex;
             align-items: center;

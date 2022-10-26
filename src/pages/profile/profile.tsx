@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useLayoutEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom"
 import { biteAction } from "../../redux/actions/biteActions"
@@ -9,7 +9,19 @@ import BiteCardProfile from "../../components/bite/BiteCardProfile"
 import { AddIcon, CreatoCoinIcon } from "../../assets/svg"
 import "../../assets/styles/profile/profileStyle.scss"
 
+const useWindowSize = () => {
+  const [size, setSize] = useState(0)
+  useLayoutEffect(() => {
+    const updateSize = () => { setSize(window.innerWidth) }
+    window.addEventListener("resize", updateSize)
+    updateSize()
+    return () => window.removeEventListener("resize", updateSize)
+  }, [])
+  return size
+}
+
 const Profile = () => {
+  const width = useWindowSize()
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
@@ -19,6 +31,8 @@ const Profile = () => {
   const { user, users } = userState
   const authuser = users.length ? users[0] : null
   const [isSame, setIsSame] = useState(false)
+  const [scrollIndex, setScrollIndex] = useState(0)
+  const [scrollWidth, setScrollWidth] = useState<any>([])
 
   const [searchParams] = useSearchParams()
   const code = searchParams.get("mybites")
@@ -41,6 +55,36 @@ const Profile = () => {
     }
   }, [code, user, authuser])
 
+  useEffect(() => {
+    // 0 
+    // 0 258(258)
+    // 0 279(279) 558(279)
+    // 0 279(279) 579(300) 858(279)
+    let array: any = []
+    let left = 0
+    bites.filter((bite: any, index: any) => {
+      if (isSame) {
+        if (code === null) return String(bite.owner._id) !== String(authuser._id)
+        else return String(bite.owner._id) === String(authuser._id)
+      } else return true
+    }).forEach((bite: any, index: any, biteArray: any) => {
+      if (index == 0) array.push(left)
+      else if (index === 1) {
+        if (biteArray.length === 2) left = left + 258
+        else left = left + 300
+        array.push(left)
+      }
+      else if (index === biteArray.length - 1) {
+        left = left + 279
+        array.push(left)
+      } else {
+        left = left + 300
+        array.push(left)
+      }
+    })
+    setScrollWidth(array)
+  }, [bites, isSame, code, authuser])
+
   return (
     <div className="profile-wrapper">
       <div className="profile">
@@ -56,7 +100,11 @@ const Profile = () => {
             </div>
             <div className="creators-bite">
               {(bites.length > 0 && authuser) ?
-                <div className="bite-card">
+                <div className="bite-card" onScroll={(e: any) => {
+                  scrollWidth.forEach((width: any, index: any) => {
+                    if (e.target.scrollLeft === width) setScrollIndex(index)
+                  })
+                }}>
                   {bites.filter((bite: any) => {
                     if (code === null) return String(bite.owner._id) !== String(authuser._id)
                     else return String(bite.owner._id) === String(authuser._id)
@@ -85,7 +133,7 @@ const Profile = () => {
                       }
                     }
                   }).map((bite: any, index: any) => (
-                    <div className="profile-bite" key={index}>
+                    <div className="profile-bite" key={index} style={(width < 680 && index === scrollIndex) ? { transform: 'scale(1.03)' } : {}}>
                       <BiteCardProfile bite={bite} same={isSame} />
                     </div>
                   ))}
@@ -124,7 +172,11 @@ const Profile = () => {
               <p>{authuser ? authuser.name : ''}'s Bite</p>
             </div>
             {(bites.length > 0 && authuser) ?
-              <div className="bite-card">
+              <div className="bite-card" onScroll={(e: any) => {
+                scrollWidth.forEach((width: any, index: any) => {
+                  if (e.target.scrollLeft === width) setScrollIndex(index)
+                })
+              }}>
                 {bites.sort((first: any, second: any) => {
                   if (user) {
                     let firstDate: any = "2222"
@@ -151,7 +203,7 @@ const Profile = () => {
                   }
                 })
                   .map((bite: any, index: any) => (
-                    <div className="profile-bite" key={index}>
+                    <div className="profile-bite" key={index} style={(width < 680 && index === scrollIndex) ? { transform: 'scale(1.03)' } : {}}>
                       <BiteCardProfile bite={bite} />
                     </div>
                   ))}

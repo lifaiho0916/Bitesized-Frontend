@@ -102,10 +102,10 @@ const ProfileHeader = (props: any) => {
           size="mobile"
           avatar={profileUser ? profileUser.avatar.indexOf('uploads') === -1 ? profileUser.avatar : `${process.env.REACT_APP_SERVER_URL}/${profileUser.avatar}` : ''}
         />
-          <div className="social-icon-other">
-            <div style={{ marginLeft: '15px' }}><YoutubeIcon color="#E17253" /></div>
-            <div style={{ marginLeft: '5px' }}><InstagramIcon color="#E17253" /></div>
-          </div>
+        <div className="social-icon-other">
+          <div style={{ marginLeft: '15px' }}><YoutubeIcon color="#E17253" /></div>
+          <div style={{ marginLeft: '5px' }}><InstagramIcon color="#E17253" /></div>
+        </div>
       </div>
       <div className="ellipsis-icon" onClick={() => setMoreInfo(true)}>
         <MoreIcon color="black" />
@@ -126,7 +126,7 @@ const ProfileHeader = (props: any) => {
               fillStyle="fill"
               color="primary"
               shape="rounded"
-              handleSubmit={() => { }}
+              handleSubmit={() => { window.open('https://www.creatogether.app/subscribenow', '_blank') }}
             />
           }
         </div>

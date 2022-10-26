@@ -29,7 +29,7 @@
     }
 
     .creators-bite {
-      margin: 20px 10px;
+      margin: 20px 30px;
       display: flex;
       flex-direction: column;
 
@@ -51,7 +51,7 @@
       }
 
       .bite-card {
-        padding: 10px 0px;
+        padding: 20px 5px;
         display: flex;
         overflow-x: scroll;
 
@@ -82,13 +82,35 @@
         }
 
         .profile-bite {
-          margin: 0 5px;
+          display: flex;
+          justify-content: center;
+          margin: 0 10px;
           background-color: transparent;
           transition: 0.2s;
           cursor: pointer;
 
           &:hover {
-            transform: scale(0.995);
+            transform: scale(1.03);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .profile-wrapper {
+    .profile {
+      .creators-bite {
+        .bite-card {
+          scroll-snap-type: x mandatory;
+
+          .profile-bite {
+            scroll-snap-align: center;
+
+            &:hover {
+              transform: none;
+            }
           }
         }
       }
