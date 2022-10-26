@@ -172,7 +172,7 @@ const PaymentModal = (props: any) => {
                         </div>
                     </div>
                     <div className="modal-body">
-                        <div className="header-title">
+                        <div className="header-card-title">
                             <span>Enter your card details.</span>
                         </div>
                         <Elements stripe={stripePromise}>

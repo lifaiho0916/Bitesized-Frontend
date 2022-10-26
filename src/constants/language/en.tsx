@@ -1,5 +1,5 @@
 export const EN = {
-  CREATOR_CATEGORY_LIST: ["Videographer", "Photographer", "Designer", "Blogger", "Fitness Trainer", "Business Owner", "Gadgets Lover", "Illustrator", "Tutor", "Musician", "Interview Coach", "Life Coach", "Teacher", "Chef", "Finance Advisor", "Learner", "Gamer", "Podcaster", "Live Streamer", "Writer", "Fashionista"],
+  CREATOR_CATEGORY_LIST: ["Blogger", "Chef", "Designer", "Fashionista", "Finance Advisor", "Fitness Trainer", "Gadgets Lover", "Gamer", "Illustrator", "Interview Coach", "Live Coach", "Live Streamer", "Musician", "Photographer", "Podcaster", "Teacher", "Tutor", "Writer", "Videographer"],
   PAYMENT_CURRENCIES: ['USD', 'INR', 'TWD', 'HKD', 'MYR'],
   HOME_LETTER: {
     DAREME_LIST: 'DareMe - Create Content Together',

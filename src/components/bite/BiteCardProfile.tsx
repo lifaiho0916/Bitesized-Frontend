@@ -109,7 +109,7 @@ const BiteCardProfile = (props: any) => {
             </div>
             <div className="bite-body">
                 <div className="video-part">
-                    <div className="cover-image">
+                    <div className="cover-image" style={{ backgroundColor: bite.currency ? lock ? '#97D8D4' : '#D8F7D8' : '#FBBEB1' }}>
                         {videoIndex > 0 &&
                             <div className="prev-video" onClick={PrevVideo}>
                                 <img src={NextBtn} alt="next video" />

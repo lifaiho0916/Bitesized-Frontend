@@ -165,7 +165,7 @@ const AddCardModal = (props: any) => {
                         </div>
                     </div>
                     <div className="modal-body">
-                        <div className="header-title">
+                        <div className="header-card-title">
                             <span>Add a new Card</span>
                         </div>
                         <Elements stripe={stripePromise}>
