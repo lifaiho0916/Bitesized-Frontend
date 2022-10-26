@@ -88,7 +88,7 @@ const Home = () => {
           <div className="daremes scroll-bar"
             onScroll={(e: any) => {
               scrollWidth.forEach((width: any, index: any) => {
-                if (e.target.scrollLeft === width) setScrollIndex(index)
+                if (Math.abs(e.target.scrollLeft - width) <= 1) setScrollIndex(index)
               })
             }}
           >
