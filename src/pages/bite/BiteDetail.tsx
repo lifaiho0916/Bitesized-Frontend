@@ -91,7 +91,7 @@ const BiteDetail = () => {
     useEffect(() => { if (bite) checkUnLock() }, [bite, user])
     useEffect(() => { dispatch(biteAction.getBiteById(biteId)) }, [biteId])
     useEffect(() => {
-        if (dlgState === 'unlock_free') setOpenFreeUnLock(true)
+        if (dlgState === 'unlock_bite') setOpenFreeUnLock(true)
     }, [dlgState])
     useEffect(() => {
         if (state && state.owner === true) {
@@ -248,14 +248,13 @@ const BiteDetail = () => {
                                                 setVideoIndex(-1)
                                             }
                                         }
-                                    }}>
+                                    }} style={{ backgroundColor: bite.currency ? lock ? '#97D8D4' : '#D8F7D8' : '#FBBEB1' }}>
                                         {lock ?
                                             <>
                                                 <img
                                                     src={video.coverUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.coverUrl}` : ""}
                                                     alt="cover"
-                                                    width={325}
-                                                    height={578}
+                                                    width={'100%'}
                                                 />
                                                 <div className="play-icon"><PlayIcon color="white" /></div>
                                                 <div className="lock-video"></div>
@@ -284,8 +283,7 @@ const BiteDetail = () => {
                                                         <img
                                                             src={video.coverUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.coverUrl}` : ""}
                                                             alt="cover"
-                                                            width={325}
-                                                            height={578}
+                                                            width={'100%'}
                                                         />
                                                         <div className="play-icon"
                                                             onClick={() => {

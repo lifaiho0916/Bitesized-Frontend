@@ -2,7 +2,6 @@ import Button from "../general/button"
 import { CloseIcon, RewardIcon } from "../../assets/svg"
 import "../../assets/styles/modals/UnLockFreeModalStyle.scss"
 
-
 const UnLockFreeModal = (props: any) => {
     const { show, onClose, bite, handleSubmit } = props
 
@@ -21,7 +20,7 @@ const UnLockFreeModal = (props: any) => {
                             <RewardIcon color="#efa058" width={60} height={60} />
                         </div>
                         <div className="sub-title">
-                            <span>You have unlock this FREE Bite </span>
+                            <span>You have unlocked this {bite.currency ? '' : 'FREE'} Bite </span>
                         </div>
                         <div className="bite-title">
                             <span>{bite ? bite.title : ''}</span>
@@ -31,9 +30,19 @@ const UnLockFreeModal = (props: any) => {
                                 text="Check on profile"
                                 shape="rounded"
                                 color="primary"
-                                fillStyle="fill"
+                                fillStyle="outline"
                                 width={'190px'}
                                 handleSubmit={handleSubmit}
+                            />
+                        </div>
+                        <div className="check-profile-btn">
+                            <Button
+                                text="Watch the content"
+                                shape="rounded"
+                                color="primary"
+                                fillStyle="fill"
+                                width={'190px'}
+                                handleSubmit={onClose}
                             />
                         </div>
                     </div>

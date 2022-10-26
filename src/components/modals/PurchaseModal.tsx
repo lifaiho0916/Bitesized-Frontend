@@ -7,11 +7,14 @@ import "../../assets/styles/modals/PurchaseModalStyle.scss"
 import CurrencySelect from "../stripe/CurrencySelect"
 
 const currencies = ['USD', 'INR', 'TWD', 'HKD', 'MYR']
+const displayCurrencies = ['USD - US Dollar', 'INR - Indian Rupee', 'TWD - New Taiwan Dollar', 'HKD - Hong Kong Dollar', 'MYR - Malaysian Ringgit']
 
 const PurchaseModal = (props: any) => {
     const { show, onClose, bite, handleSubmit, setCurrency } = props
     const loadState = useSelector((state: any) => state.load)
+    const userState = useSelector((state: any) => state.auth)
     const { currencyRate } = loadState
+    const { user } = userState
     const [option, setOption] = useState(0)
 
     const displayPrice = (currency: any, price: any) => {
@@ -31,6 +34,10 @@ const PurchaseModal = (props: any) => {
     }
 
     useEffect(() => { setCurrency(currencies[option].toLowerCase()) }, [option])
+    useEffect(() => {
+        const foundIndex = currencies.findIndex((currency: any) => currency.toLowerCase() === user.currency)
+        setOption(foundIndex)
+    }, [user])
 
     return (
         <div className={`modal${show ? ' show' : ''}`} onClick={onClose}>
@@ -74,7 +81,7 @@ const PurchaseModal = (props: any) => {
                             label="You will pay in:"
                             option={option}
                             setOption={setOption}
-                            options={currencies}
+                            options={displayCurrencies}
                             width={'100%'}
                         />
 

@@ -131,7 +131,7 @@ const PaymentForm = (props: any) => {
                 </div>
                 <div className="cvv">
                     <div className="letter">
-                        <span>CVV</span>
+                        <span>CVC</span>
                     </div>
                     <div className="cvv-ele">
                         <CardCvcElement

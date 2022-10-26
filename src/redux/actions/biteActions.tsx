@@ -125,7 +125,7 @@ export const biteAction = {
 
             if (data.success) {
                 dispatch({ type: SET_BITE, payload: payload.bite })
-                if (currency === null) dispatch({ type: SET_DIALOG_STATE, payload: 'unlock_free' })
+                dispatch({ type: SET_DIALOG_STATE, payload: 'unlock_bite' })
             }
         } catch (err) {
             console.log(err)
