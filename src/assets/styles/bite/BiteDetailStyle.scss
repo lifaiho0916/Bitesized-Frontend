@@ -76,6 +76,37 @@
                     justify-content: space-between;
                 }
 
+                .status-chip {
+                    margin-bottom: 10px;
+
+                    .chip {
+                        font-family: 'Lato';
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 14.5283px;
+                        line-height: 19px;
+                        color: #FFFFFF;
+                        height: 19px;
+                        width: fit-content;
+                        padding: 0px 12px;
+                        display: flex;
+                        align-items: center;
+                        margin-right: 10px;
+
+                        &.paid {
+                            background: #30D8CE;
+                        }
+
+                        &.free {
+                            background: #F8907A;
+                        }
+
+                        &.unlock {
+                            background: #65E265;
+                        }
+                    }
+                }
+
                 .bite-title {
                     margin-left: 15px;
                     font-family: 'Lato';

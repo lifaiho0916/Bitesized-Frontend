@@ -78,11 +78,6 @@ const BiteDetail = () => {
         else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null))
     }
 
-    const getUSD = (biteCurrency: any, price: any) => {
-        const rate = biteCurrency === 'usd' ? 1 : currencyRate[`${biteCurrency}`]
-        return price / rate
-    }
-
     const getLocalCurrency = (currency: any) => {
         let res = ''
         if (currency === 'usd') res += 'US $'
@@ -162,6 +157,12 @@ const BiteDetail = () => {
                                     handleSubmit={() => { window.open('https://www.creatogether.app/subscribenow', '_blank') }}
                                 />
                             </div>
+                            <div className="status-chip">
+                                {/* <div className={`chip ${}`}> */}
+
+                                {/* </div> */}
+                                
+                            </div>
                             <div className="bite-title">
                                 <span>{bite?.title}</span>
                             </div>
@@ -202,7 +203,6 @@ const BiteDetail = () => {
                                                 </th>
                                                 <th>Time</th>
                                                 <th>Username</th>
-                                                <th>In USD</th>
                                                 <th>In Local Currencies</th>
                                             </tr>
                                         </thead>
@@ -221,11 +221,6 @@ const BiteDetail = () => {
                                                                 />
                                                                 :
                                                                 'Deleted User'}
-                                                        </td>
-                                                        <td>
-                                                            {transaction.type === 1 && <span style={{ color: '#D94E27' }}>- 0</span>}
-                                                            {transaction.type === 2 && <span style={{ color: '#D94E27' }}>- {currencyRate ? (getUSD(transaction.bite.currency, transaction.bite.price)).toFixed(2) : ''}</span>}
-                                                            {transaction.type === 3 && <span style={{ color: '#10B981' }}>+ {currencyRate ? (getUSD(transaction.bite.currency, transaction.bite.price)).toFixed(2) : ''}</span>}
                                                         </td>
                                                         <td>
                                                             {transaction.type === 1 && <span style={{ color: '#D94E27' }}>- 0</span>}

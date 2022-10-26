@@ -17,6 +17,7 @@ const EditCoverImage = () => {
     const biteState = useSelector((state: any) => state.bite)
     const { prevRoute } = loadState
     const { bite, thumbnails } = biteState
+    const [aligns, setAligns] = useState<any>([true, true, true])
     const [videoIndex, setVideoIndex] = useState(0)
     let imageEditor1: any = null
     let imageEditor2: any = null
@@ -63,6 +64,12 @@ const EditCoverImage = () => {
     const setEditorRef2 = (editor: any) => (imageEditor2 = editor)
     const setEditorRef3 = (editor: any) => (imageEditor3 = editor)
 
+    const setFit = (index: any) => {
+        let alignTemps: any = aligns
+        alignTemps[index] = !alignTemps[index]
+        setAligns([...alignTemps])
+    }
+
 
     return (
         <div className="edit-cover-wrapper">
@@ -90,8 +97,8 @@ const EditCoverImage = () => {
                                     ref={setEditorRef1}
                                     image={thumbnails[0]?.preview}
                                     width={220}
-                                    height={389}
-                                    border={15}
+                                    height={aligns[0] ? 389 : 165}
+                                    border={aligns[0] ? 15 : [15, 125]}
                                     color={[0, 0, 0, 0.6]} // RGBA
                                     scale={1.0}
                                 />
@@ -101,8 +108,8 @@ const EditCoverImage = () => {
                                     ref={setEditorRef2}
                                     image={thumbnails[1]?.preview}
                                     width={220}
-                                    height={389}
-                                    border={15}
+                                    height={aligns[1] ? 389 : 165}
+                                    border={aligns[1] ? 15 : [15, 125]}
                                     color={[0, 0, 0, 0.6]} // RGBA
                                     scale={1.0}
                                 />
@@ -112,8 +119,8 @@ const EditCoverImage = () => {
                                     ref={setEditorRef3}
                                     image={thumbnails[2]?.preview}
                                     width={220}
-                                    height={389}
-                                    border={15}
+                                    height={aligns[2] ? 389 : 165}
+                                    border={aligns[2] ? 15 : [15, 125]}
                                     color={[0, 0, 0, 0.6]} // RGBA
                                     scale={1.0}
                                 />
@@ -127,6 +134,16 @@ const EditCoverImage = () => {
                             <div style={{ width: '23px' }}></div>
                         }
                     </div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                    <Button
+                        text={aligns[videoIndex] ? 'Fit with width' : 'Fit with height'}
+                        fillStyle="fill"
+                        color="primary"
+                        shape="rounded"
+                        width={"220px"}
+                        handleSubmit={() => setFit(videoIndex)}
+                    />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
                     <Button
