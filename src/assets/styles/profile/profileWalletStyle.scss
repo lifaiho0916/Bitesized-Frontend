@@ -277,7 +277,11 @@
       .card-info-header {
         margin: 10px 20px;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
+
+        .coin-icon {
+          width: 20px;
+        }
 
         .title {
           font-family: 'Lato';
@@ -383,8 +387,9 @@
 
       .card-info {
         .card-info-header {
-          display: flex;
-          justify-content: flex-start;
+          .coin-icon {
+            display: none;
+          }
         }
       }
     }
