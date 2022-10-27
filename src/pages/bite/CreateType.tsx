@@ -12,7 +12,7 @@ const CreateType = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    useEffect(() => { dispatch({ type: SET_BITE_INITIAL }) }, [])
+    useEffect(() => { dispatch({ type: SET_BITE_INITIAL }) }, [dispatch])
 
     return (
         <div className="create-type-wrapper">
@@ -22,7 +22,7 @@ const CreateType = () => {
                 <div style={{ width: '24px' }}></div>
             </div>
             <div className="create-type">
-                <img src={CreateImage} alt="create image" />
+                <img src={CreateImage} alt="createImage" />
                 <div className="type-description">
                     <span>I want to gift a Bite to fans!</span>
                 </div>

@@ -58,7 +58,7 @@ const Home = () => {
     let array: any = []
     let left = 0
     bites.forEach((bite: any, index: any, biteArray: any) => {
-      if (index == 0) array.push(left)
+      if (index === 0) array.push(left)
       else if (index === 1) {
         if (biteArray.length === 2) left = left + 341
         else left = left + 343
@@ -111,7 +111,7 @@ const Home = () => {
             <div className="see-more-btn">{width < 680 ? '··· ' : ''}see more</div>
           </div>
           <div className="underline"></div>
-          <div className="users scroll-bar">
+          <div className="users scroll-bar">\
             {users.map((user: any, index: any) => (
               <div key={index} className="user" onClick={() => gotoCreatoProfile(`/${user.personalisedUrl}`)}>
                 <Avatar

@@ -53,7 +53,7 @@ const Profile = () => {
         if (String(user.id) !== String(authuser._id)) navigate(`/${authuser.personalisedUrl}`)
       } else navigate(`/${authuser.personalisedUrl}`)
     }
-  }, [code, user, authuser])
+  }, [code, user, authuser, navigate])
 
   useEffect(() => {
     // 0 
@@ -69,7 +69,7 @@ const Profile = () => {
         else return String(bite.owner._id) === String(authuser._id)
       } else return true
     }).forEach((bite: any, index: any, biteArray: any) => {
-      if (index == 0) array.push(left)
+      if (index === 0) array.push(left)
       else if (index === 1) {
         if (biteArray.length === 2) left = left + 295
         else left = left + 297

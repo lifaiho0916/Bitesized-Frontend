@@ -58,7 +58,7 @@ const GeneralSetting = () => {
             </div>
             <ForwardIcon color="black" />
           </div>
-          <a href="https://www.creatogether.app/" target="_blank">
+          <a href="https://www.creatogether.app/" target="_blank" rel="noreferrer">
             <div className="setting">
               <div className="part">
                 <CreatoCoinIcon color="black" />
@@ -66,7 +66,7 @@ const GeneralSetting = () => {
               </div>
             </div>
           </a>
-          <a href="https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713" target='_blank'>
+          <a href="https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713" target='_blank' rel="noreferrer">
             <div className="setting">
               <div className="part">
                 <NoOfPeopleIcon color="" />
@@ -74,7 +74,7 @@ const GeneralSetting = () => {
               </div>
             </div>
           </a>
-          <a href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33" target="_blank">
+          <a href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33" target="_blank" rel="noreferrer">
             <div className="setting">
               <div className="part">
                 <NoOfPeopleIcon color="" />
@@ -82,7 +82,7 @@ const GeneralSetting = () => {
               </div>
             </div>
           </a>
-          <a href="https://www.creatogether.app/contact-us" target="_blank">
+          <a href="https://www.creatogether.app/contact-us" target="_blank" rel="noreferrer">
             <div className="setting">
               <div className="part">
                 <AlertIcon color="black" />

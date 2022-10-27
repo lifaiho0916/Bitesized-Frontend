@@ -7,7 +7,11 @@ import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
 import Dialog from "../components/general/dialog"
 import { LanguageContext } from "../routes/authRoute"
-import { AppleIcon, FacebookIcon, GoogleIcon } from "../constants/awesomeIcons"
+import { 
+  AppleIcon,
+  // FacebookIcon,
+  GoogleIcon
+} from "../constants/awesomeIcons"
 import { SET_DIALOG_STATE } from "../redux/types"
 import { authAction } from "../redux/actions/authActions"
 import "../assets/styles/signupStyle.scss"

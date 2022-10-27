@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import decode from "jwt-decode"
 import { authAction } from "../redux/actions/authActions"
 import { EN, CH } from "../constants/language"
-import { SET_LANGUAGE, SET_USER } from '../redux/types'
+import { SET_LANGUAGE } from '../redux/types'
 import Layout from '../layout/layout'
 import Layout1 from "../layout/layout1"
 // import socketIOClient from "socket.io-client"

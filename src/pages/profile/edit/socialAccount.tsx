@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -37,21 +37,21 @@ const Socialaccount = () => {
     if (user) dispatch(accountAction.getAccounts(user.id));
   }, [dispatch, user]);
 
-  const responseGoogleSuccess = async (response: any) => {
-    try {
-      const access_token = response.accessToken;
-      const youtubeApiUrl = `https://youtube.googleapis.com/youtube/v3/channels?part=id&mine=true&access_token=${access_token}&key=${process.env.REACT_APP_GOOGLE_CLIENT_ID}`;
-      const response1 = await axios.get(youtubeApiUrl);
-      const data = {
-        id: response1.data.items[0].id,
-        name: 'youtube',
-        metadata: JSON.stringify(response1.data.items),
-      };
-      dispatch(accountAction.addAccount(data));
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const responseGoogleSuccess = async (response: any) => {
+  //   try {
+  //     const access_token = response.accessToken;
+  //     const youtubeApiUrl = `https://youtube.googleapis.com/youtube/v3/channels?part=id&mine=true&access_token=${access_token}&key=${process.env.REACT_APP_GOOGLE_CLIENT_ID}`;
+  //     const response1 = await axios.get(youtubeApiUrl);
+  //     const data = {
+  //       id: response1.data.items[0].id,
+  //       name: 'youtube',
+  //       metadata: JSON.stringify(response1.data.items),
+  //     };
+  //     dispatch(accountAction.addAccount(data));
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     <div className='social-accounts-wrapper'>

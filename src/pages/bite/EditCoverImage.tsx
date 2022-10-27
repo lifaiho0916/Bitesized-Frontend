@@ -117,7 +117,7 @@ const EditCoverImage = () => {
             }
             if (seekCnt === 10) dispatch({ type: SET_LOADING_FALSE })
         }
-    }, [seekCnt])
+    }, [seekCnt, bite, videoIndex, thumbs, dispatch])
 
     return (
         <div className="edit-cover-wrapper">

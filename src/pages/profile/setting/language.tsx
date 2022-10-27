@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { CheckOnIcon, CheckOffIcon, BackIcon } from "../../../assets/svg"
@@ -6,7 +6,6 @@ import { useSelector } from "react-redux"
 import Button from "../../../components/general/button"
 import CurrencySelect from "../../../components/stripe/CurrencySelect"
 import { authAction } from "../../../redux/actions/authActions"
-import { LanguageContext } from "../../../routes/authRoute"
 import "../../../assets/styles/profile/languageStyle.scss"
 
 const currencies = ['USD - US Dollar', 'INR - Indian Rupee', 'TWD - New Taiwan Dollar', 'HKD - Hong Kong Dollar', 'MYR - Malaysian Ringgit']
@@ -17,7 +16,6 @@ const LanguageCurrency = () => {
   const dispatch = useDispatch()
   const userState = useSelector((state: any) => state.auth)
   const loadState = useSelector((state: any) => state.load)
-  const contexts = useContext(LanguageContext)
   const { prevRoute } = loadState
   const { user } = userState
   const [lang, setLang] = useState(user ? user.language : 'EN')

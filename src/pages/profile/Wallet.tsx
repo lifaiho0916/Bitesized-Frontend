@@ -6,7 +6,7 @@ import {
     MoneyIcon,
     MoreIcon,
     SpreadIcon,
-    StripeIcon,
+    // StripeIcon,
     BackIcon,
     AddIcon,
     VisaCardIcon,
@@ -64,7 +64,7 @@ const Wallet = () => {
     const wrapRef = useRef<any>(null)
     const wrapRef1 = useRef<any>(null)
     const contexts = useContext(LanguageContext)
-    const [stripePayout, setStripePayout] = useState(false)
+    // const [stripePayout, setStripePayout] = useState(false)
     const res = useOutsideAlerter(wrapRef, moreInfo)
     const res1 = useOutsideAlerter(wrapRef1, removeCard)
     const [payout, setPayout] = useState(false)
@@ -125,7 +125,7 @@ const Wallet = () => {
                             text: 'Stripe',
                             handleClick: () => {
                                 setPayout(false)
-                                setStripePayout(true)
+                                // setStripePayout(true)
                             }
                         },
                         {
