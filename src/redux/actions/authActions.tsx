@@ -104,10 +104,9 @@ export const authAction = {
       dispatch({ type: SET_LOADING_FALSE })
       if (data.success) {
         let user = getState().auth.user
-        const prevRoute = getState().load.prevRoute
         const state = { ...user, language: lang, currency: currency }
         dispatch({ type: SET_USER, payload: state })
-        navigate(prevRoute)
+        navigate("/")
       }
     } catch (err) {
       console.log(err)
