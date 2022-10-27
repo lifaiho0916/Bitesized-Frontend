@@ -9,6 +9,12 @@
     .avatar-userdata {
         margin: 0px auto;
 
+        .avatar {
+            display: flex;
+            justify-content: center;
+            filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.15))
+        }
+
         .userdata {
             display: flex;
             align-items: center;
@@ -54,6 +60,12 @@
     .avatar-userdata {
         display: flex;
         align-items: center;
+
+        .avatar {
+            display: flex;
+            justify-content: center;
+            filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.15))
+        }
 
         .userdata {
             margin-left: 10px;

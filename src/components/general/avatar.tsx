@@ -44,6 +44,7 @@ const Avatar = (props: any) => {
     fontWeight: "bold",
     color: hover && status === "hover" ? '#EFA058' : 'black',
     display: avatarStyle === "noname" ? "none" : "block",
+    
   };
 
   const cartegoryStyle = {

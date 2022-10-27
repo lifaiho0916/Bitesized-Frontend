@@ -14,10 +14,12 @@ const Creator = (props: any) => {
   return (
     <div className="creator-comp-wrapper">
       <div className="avatar-userinfo">
-        <Avatar
-          avatar={(user && user.avatar) ? user.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${user.avatar}` : user.avatar : ''}
-          size={'mobile'}
-        />
+        <div className="avatar">
+          <Avatar
+            avatar={(user && user.avatar) ? user.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${user.avatar}` : user.avatar : ''}
+            size={'mobile'}
+          />
+        </div>
         <div className="name-category">
           <div className="creator-name">
             <span>{user?.name}</span>

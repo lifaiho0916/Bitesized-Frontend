@@ -6,6 +6,12 @@
   border-radius: 24px;
 
   .avatar-userinfo {
+    .avatar {
+      display: flex;
+      justify-content: center;
+      filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.15))
+    }
+
     .name-category {
       .creator-name {
         margin-top: 20px;
