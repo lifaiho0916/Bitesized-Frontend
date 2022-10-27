@@ -83,8 +83,9 @@ const Home = () => {
           <div className="see-more" onClick={gotoBites}>
             <div className="description">Learn new knowledge within 15 minutes</div>
             <div className="divider"></div>
-            <div className="see-more-btn">see more</div>
+            <div className="see-more-btn">{width < 680 ? '··· ' : ''}see more</div>
           </div>
+          <div className="underline"></div>
           <div className="daremes scroll-bar"
             onScroll={(e: any) => {
               scrollWidth.forEach((width: any, index: any) => {
@@ -107,8 +108,9 @@ const Home = () => {
           <div className="see-more" onClick={gotoCreators}>
             <div className="description">Start discover new area of your learning</div>
             <div className="divider"></div>
-            <div className="see-more-btn">see more</div>
+            <div className="see-more-btn">{width < 680 ? '··· ' : ''}see more</div>
           </div>
+          <div className="underline"></div>
           <div className="users scroll-bar">
             {users.map((user: any, index: any) => (
               <div key={index} className="user" onClick={() => gotoCreatoProfile(`/${user.personalisedUrl}`)}>
