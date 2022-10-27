@@ -3,7 +3,7 @@ import * as api from "../../api"
 import { SET_LOADING_TRUE, SET_LOADING_FALSE, SET_BITES, SET_USERS, SET_DIALOG_STATE, SET_BITE, SET_BITE_INITIAL } from "../types"
 
 export const biteAction = {
-    saveBite: (bite: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+    saveBite: (bite: any, navigate: any) => async (dispatch: Dispatch<any>, getState: any) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
             const config = { headers: { "content-type": "multipart/form-data" } }
@@ -28,7 +28,8 @@ export const biteAction = {
             const { data } = response
             if (data.success) {
                 dispatch({ type: SET_LOADING_FALSE })
-                navigate("/")
+                const user = getState().auth.user
+                navigate(`/${user.personalisedUrl}?mybites`)
             }
         } catch (err) {
             dispatch({ type: SET_LOADING_FALSE })

@@ -1,9 +1,8 @@
 import { useState, useContext, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useLocation, useNavigate } from "react-router-dom"
-import Button from "../general/button"
 import { LanguageContext } from "../../routes/authRoute"
-import { ClockIcon, NoOfPeopleIcon, UnlockIcon } from "../../assets/svg"
+import { ClockIcon, NoOfPeopleIcon, UnlockIcon, LockedIcon } from "../../assets/svg"
 import NextBtn from "../../assets/img/next-bright.png"
 import { SET_PREVIOUS_ROUTE } from "../../redux/types"
 import "../../assets/styles/bite/BiteCardProfileStyle.scss"
@@ -21,6 +20,7 @@ const BiteCardProfile = (props: any) => {
 
     const [videoIndex, setVideoIndex] = useState(0)
     const [lock, setLock] = useState(true)
+    const [hover, setHover] = useState(false)
 
     const PrevVideo = () => {
         if (videoIndex > 0) setVideoIndex((index) => index - 1)
@@ -87,7 +87,12 @@ const BiteCardProfile = (props: any) => {
     useEffect(() => { checkUnLock() }, [bite, user])
 
     return (
-        <div className="bite-card-profile-wrapper" onClick={clickCard}>
+        <div
+            className="bite-card-profile-wrapper"
+            onClick={clickCard}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+        >
             <div className="unlock-purchase-info"
                 style={{
                     background:
@@ -127,14 +132,10 @@ const BiteCardProfile = (props: any) => {
                         />
                         {user === null &&
                             <div className="lock-btn">
-                                <Button
-                                    text="Unlock"
-                                    shape="rounded"
-                                    fillStyle="outline"
-                                    color="primary"
-                                    icon={[<UnlockIcon color="#EFA058" />, <UnlockIcon color="white" />, <UnlockIcon color="white" />]}
-                                    handleSubmit={() => { }}
-                                />
+                                <div className={`button ${hover ? 'hover' : ''}`}>
+                                    {hover ? <UnlockIcon color="white" width={21} height={20} /> : <LockedIcon color="#EFA058" width={20} height={20} />}
+                                    <span>Unlock</span>
+                                </div>
                             </div>
                         }
                         <div

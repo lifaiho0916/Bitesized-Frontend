@@ -2,9 +2,8 @@ import { useState, useContext, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate, useLocation } from "react-router-dom"
 import Avatar from "../general/avatar"
-import Button from "../general/button"
 import { LanguageContext } from "../../routes/authRoute"
-import { ClockIcon, NoOfPeopleIcon, UnlockIcon } from "../../assets/svg"
+import { ClockIcon, LockedIcon, NoOfPeopleIcon, UnlockIcon } from "../../assets/svg"
 import { SET_PREVIOUS_ROUTE } from "../../redux/types"
 import NextBtn from "../../assets/img/next-bright.png"
 import "../../assets/styles/bite/BiteCardHomeStyle.scss"
@@ -22,6 +21,7 @@ const BiteCardHome = (props: any) => {
 
     const [videoIndex, setVideoIndex] = useState(0)
     const [lock, setLock] = useState(true)
+    const [hover, setHover] = useState(false)
 
     const clickCard = () => {
         if (user) {
@@ -93,7 +93,12 @@ const BiteCardHome = (props: any) => {
     useEffect(() => checkUnLock(), [bite, user])
 
     return (
-        <div className="bite-card-home-wrapper" onClick={clickCard}>
+        <div
+            className="bite-card-home-wrapper"
+            onClick={clickCard}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+        >
             <div className="top-info">
                 <div className="owner-avatar">
                     <Avatar
@@ -138,14 +143,10 @@ const BiteCardHome = (props: any) => {
                         />
                         {user === null &&
                             <div className="lock-btn">
-                                <Button
-                                    text="Unlock"
-                                    shape="rounded"
-                                    fillStyle="outline"
-                                    color="primary"
-                                    icon={[<UnlockIcon color="#EFA058" />, <UnlockIcon color="white" />, <UnlockIcon color="white" />]}
-                                    handleSubmit={() => { }}
-                                />
+                                <div className={`button ${hover ? 'hover' : ''}`}>
+                                    {hover ? <UnlockIcon color="white" width={21} height={20} /> : <LockedIcon color="#EFA058" width={20} height={20} />}
+                                    <span>Unlock</span>
+                                </div>
                             </div>
                         }
                         <div

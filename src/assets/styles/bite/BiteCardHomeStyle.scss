@@ -146,6 +146,35 @@
                 align-items: center;
                 border-radius: 0px 0px 15px 15px;
                 background-color: rgba(0, 0, 0, 0.5);
+
+                .button {
+                    width: 100px;
+                    height: 45px;
+                    background: #FFFFFF;
+                    border: 0.808378px solid #EFA058;
+                    border-radius: 7px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    span {
+                        margin-left: 5px;
+                        font-family: 'Lato';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 16px;
+                        line-height: 20px;
+                        text-align: center;
+                        color: #EFA058;
+                    }
+
+                    &.hover {
+                        background-color: #EFA058;
+                        span {
+                            color: white;
+                        }
+                    }
+                }
             }
 
             .video-count {
