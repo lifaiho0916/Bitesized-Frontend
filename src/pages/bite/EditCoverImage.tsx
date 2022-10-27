@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import AvatarEditor from 'react-avatar-editor'
 import Button from "../../components/general/button"
-import { AddIcon, ArrowLeftIcon, ArrowRightIcon, BackIcon, FitHeightIcon, FitWidthIcon } from "../../assets/svg"
+import { AddIcon, BackIcon, FitHeightIcon, FitWidthIcon } from "../../assets/svg"
 import { SET_BITE } from "../../redux/types"
 import "../../assets/styles/bite/EditCoverStyle.scss"
 
@@ -137,13 +137,13 @@ const EditCoverImage = () => {
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
                     <Button
                         text={aligns[videoIndex] ? 'Fit with width' : 'Fit with height'}
-                        fillStyle="outline"
+                        fillStyle="fill"
                         color="primary"
                         shape="rounded"
                         width={"290px"}
                         icon={aligns[videoIndex] ?
-                            [<FitWidthIcon color="#EFA058" />, <FitWidthIcon color="white" />, <FitWidthIcon color="white" />] :
-                            [<FitHeightIcon color="#EFA058" />, <FitHeightIcon color="white" />, <FitHeightIcon color="white" />]
+                            [<FitWidthIcon color="white" />, <FitWidthIcon color="white" />, <FitWidthIcon color="white" />] :
+                            [<FitHeightIcon color="white" />, <FitHeightIcon color="white" />, <FitHeightIcon color="white" />]
                         }
                         handleSubmit={() => setFit(videoIndex)}
                     />

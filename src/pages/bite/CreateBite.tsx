@@ -43,13 +43,15 @@ const CreateBite = () => {
 
     const fileInputRef = useRef<HTMLInputElement>(null)
     const biteState = useSelector((state: any) => state.bite)
-    const [title, setTitle] = useState('')
-    const [price, setPrice] = useState('')
+    const { bite, thumbnails } = biteState
+    
+    const [title, setTitle] = useState(bite.title ? bite.title : '')
+    const [price, setPrice] = useState(bite.price ? bite.price : '')
     const [currency, setCurrency] = useState(0)
     const [publishEnable, setPublishEnable] = useState(false)
     const [videoIndex, setVideoIndex] = useState(-1)
     const [free, setFree] = useState(false)
-    const { bite, thumbnails } = biteState
+    
     const width = useWindowSize()
     const [play, setPlay] = useState(false)
 
@@ -132,6 +134,16 @@ const CreateBite = () => {
         dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
     }
     const gotoEditThumbnail = () => {
+        const newBite = free ? {
+            ...bite,
+            title: title,
+        } : {
+            ...bite,
+            title: title,
+            price: price,
+            currency: (currencies[currency]).toLowerCase()
+        }
+        dispatch({ type: SET_BITE, payload: newBite })
         dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
         navigate('/bite/create/edit-thumbnail')
     }

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
 import Avatar from "../general/avatar"
+import CurrencySelect from "../stripe/CurrencySelect"
 import Button from "../general/button"
 import { CloseIcon } from "../../assets/svg"
 import "../../assets/styles/modals/PurchaseModalStyle.scss"
-import CurrencySelect from "../stripe/CurrencySelect"
 
 const currencies = ['USD', 'INR', 'TWD', 'HKD', 'MYR']
 const displayCurrencies = ['USD - US Dollar', 'INR - Indian Rupee', 'TWD - New Taiwan Dollar', 'HKD - Hong Kong Dollar', 'MYR - Malaysian Ringgit']
@@ -19,9 +19,14 @@ const PurchaseModal = (props: any) => {
 
     const displayPrice = (currency: any, price: any) => {
         if (currency) {
-            if (currency === 'usd') return `$USD ${price.toFixed(2)}`
-            else return `$USD ${currencyRate ? (price / currencyRate[`${currency}`]).toFixed(2) : ''}`
-        } return "FREE"
+            let res = ""
+            if (currency === 'usd') res += 'US $'
+            else if (currency === 'hkd') res += 'HK $'
+            else if (currency === 'inr') res += 'Rp ₹'
+            else if (currency === 'twd') res += 'NT $'
+            else res += 'RM '
+            return res + price.toFixed(2)
+        }
     }
 
     const displaySelectedPrice = (biteCurrency: any, price: any) => {
