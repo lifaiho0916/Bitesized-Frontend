@@ -103,7 +103,7 @@ const PurchaseModal = (props: any) => {
                         <div className="terms-and-privacy">
                             <span>By Clicking Next, you agree to <a href="https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713">Creato’s Terms & Conditions</a>, and <a href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33">Privacy Policy</a>, and for payment processor - Stripe to charge your payment method.</span>
                         </div>
-                        <div className="next-btn">
+                        <div className="next-btn" style={{ marginBottom: '15px' }}>
                             <Button
                                 text="Next"
                                 fillStyle="fill"

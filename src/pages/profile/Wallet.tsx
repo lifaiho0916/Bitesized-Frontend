@@ -256,7 +256,7 @@ const Wallet = () => {
                         <div className="title">
                             <span>Payment details</span>
                         </div>
-                        {payment &&
+                        {payment ?
                             <div className="more-icon">
                                 <div onClick={() => { setRemoveCard(true) }}><MoreIcon color="black" /></div>
                                 <div className="drop-down-list" style={removeCard === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef1}>
@@ -265,7 +265,8 @@ const Wallet = () => {
                                         dispatch(paymentAction.deleteCard())
                                     }}>Remove card</div>
                                 </div>
-                            </div>
+                            </div> :
+                            <div style={{ width: '22px' }}></div>
                         }
                     </div>
                     {payment ?

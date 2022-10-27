@@ -114,12 +114,8 @@
                     color: #000000;
                 }
 
-                .next-btn {
-                    margin-top: 20px;
-                }
-
                 .terms-and-privacy {
-                    margin: 10px 0px;
+                    margin: 15px 0px 0px 0px;
                     width: 250px;
                     font-family: 'Lato';
                     font-style: normal;
@@ -138,6 +134,10 @@
                         font-weight: bold;
                         font-size: 11px;
                     }
+                }
+
+                .next-btn {
+                    margin-top: 10px;
                 }
             }
         }
