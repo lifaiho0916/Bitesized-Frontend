@@ -1423,3 +1423,15 @@ export const DragHandleIcon = (props: any) => (
     <path d="M16 0H0V2H16V0ZM0 6H16V4H0V6Z" fill={props.color} />
   </svg>
 )
+
+export const FitWidthIcon = (props: any) => (
+  <svg width={props.width ? props.width : "24"} height={props.height ? props.height : "24"} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fillRule="evenodd" clipRule="evenodd" d="M2.71525 4L2.71525 11.997L7.0654 6.3724L8.28751 7.94481L5.95049 10.8965L5.95049 10.8965H18.0034V10.8965L15.6664 7.94481L16.8885 6.3724L21.241 12L16.8885 17.6276L15.6664 16.0551L18.0034 13.1034H5.95051L8.28751 16.0551L7.0654 17.6276L2.71525 12.0029L2.71525 20H1L1 4H2.71525ZM22.9985 20V4H21.2832L21.2832 20H22.9985Z" fill={props.color} />
+  </svg>
+)
+
+export const FitHeightIcon = (props: any) => (
+  <svg width={props.width ? props.width : "24"} height={props.height ? props.height : "24"} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fillRule="evenodd" clipRule="evenodd" d="M4 21.2852L11.997 21.2852L6.3724 16.935L7.94481 15.7129L10.8965 18.0499L10.8965 18.0499V5.99698H10.8965L7.94481 8.33401L6.3724 7.11189L12 2.75945L17.6276 7.11189L16.0551 8.33401L13.1034 5.997L13.1034 18.0499L16.0551 15.7129L17.6276 16.935L12.0029 21.2852L20 21.2852V23.0004H4V21.2852ZM20 1.00198H4L4 2.71722L20 2.71722V1.00198Z" fill={props.color} />
+  </svg>
+)

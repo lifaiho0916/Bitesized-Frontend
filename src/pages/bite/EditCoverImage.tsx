@@ -4,8 +4,7 @@ import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import AvatarEditor from 'react-avatar-editor'
 import Button from "../../components/general/button"
-import { BackIcon } from "../../assets/svg"
-import NextBtn from "../../assets/img/next-grey.png"
+import { AddIcon, ArrowLeftIcon, ArrowRightIcon, BackIcon, FitHeightIcon, FitWidthIcon } from "../../assets/svg"
 import { SET_BITE } from "../../redux/types"
 import "../../assets/styles/bite/EditCoverStyle.scss"
 
@@ -70,7 +69,6 @@ const EditCoverImage = () => {
         setAligns([...alignTemps])
     }
 
-
     return (
         <div className="edit-cover-wrapper">
             <div className="page-header" style={location.state ? { maxWidth: '100%', margin: '25px 20px' } : {}}>
@@ -80,16 +78,6 @@ const EditCoverImage = () => {
             </div>
             <div className="edit-cover">
                 <div className="cover-editor">
-                    <div className="next-prev-btn"
-                        style={{ transform: 'rotate(180deg)' }}
-                        onClick={PrevCover}
-                    >
-                        {videoIndex > 0 ?
-                            <img src={NextBtn} alt="Prev" />
-                            :
-                            <div style={{ width: '23px' }}></div>
-                        }
-                    </div>
                     <div className="thumb-editor">
                         <div style={{ display: 'flex', marginLeft: `${-250 * videoIndex}px` }}>
                             {thumbnails[0] &&
@@ -127,31 +115,57 @@ const EditCoverImage = () => {
                             }
                         </div>
                     </div>
-                    <div className="next-prev-btn" onClick={NextCover}>
-                        {videoIndex < bite.videos.length - 1 ?
-                            <img src={NextBtn} alt="Next" />
-                            :
-                            <div style={{ width: '23px' }}></div>
-                        }
-                    </div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', margin: '20px auto 0px auto', width: '320px' }}>
+                    <Button
+                        text="< Prev"
+                        shape="rounded"
+                        fillStyle={videoIndex > 0 ? 'fill' : undefined}
+                        color="primary"
+                        width={videoIndex > 0 ? videoIndex === bite.videos.length - 1 ? '155px' : '100px' : '100px'}
+                        handleSubmit={PrevCover}
+                    />
+                    <Button
+                        text="Next >"
+                        shape="rounded"
+                        color="primary"
+                        fillStyle={videoIndex < bite.videos.length - 1 ? 'fill' : undefined}
+                        width={videoIndex < bite.videos.length - 1 ? videoIndex === 0 ? '155px' : '100px' : '100px'}
+                        handleSubmit={NextCover}
+                    />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
                     <Button
                         text={aligns[videoIndex] ? 'Fit with width' : 'Fit with height'}
-                        fillStyle="fill"
+                        fillStyle="outline"
                         color="primary"
                         shape="rounded"
-                        width={"220px"}
+                        width={"290px"}
+                        icon={aligns[videoIndex] ?
+                            [<FitWidthIcon color="#EFA058" />, <FitWidthIcon color="white" />, <FitWidthIcon color="white" />] :
+                            [<FitHeightIcon color="#EFA058" />, <FitHeightIcon color="white" />, <FitHeightIcon color="white" />]
+                        }
                         handleSubmit={() => setFit(videoIndex)}
                     />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
                     <Button
-                        text="Save"
+                        text="Upload a new thumbnail"
                         fillStyle="fill"
                         color="primary"
                         shape="rounded"
-                        width={"220px"}
+                        width={"290px"}
+                        icon={[<AddIcon color="white" />, <AddIcon color="white" />, <AddIcon color="white" />]}
+                        handleSubmit={() => { }}
+                    />
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                    <Button
+                        text="Save all changes"
+                        fillStyle="fill"
+                        color="primary"
+                        shape="rounded"
+                        width={"290px"}
                         handleSubmit={gotoCreateBite}
                     />
                 </div>
