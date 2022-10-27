@@ -1417,3 +1417,9 @@ export const CheckBoxOffIcon = (props: any) => (
   </svg>
 
 )
+
+export const DragHandleIcon = (props: any) => (
+  <svg width={props.width ? props.width : "16"} height={props.height ? props.height : "6"} viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 0H0V2H16V0ZM0 6H16V4H0V6Z" fill={props.color} />
+  </svg>
+)

@@ -2,15 +2,15 @@ import { useEffect, useState, useLayoutEffect, useRef } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import ReactPlayer from "react-player"
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import Input from "../../components/general/input"
-import TeaserCard from "../../components/general/TeaserCard"
 import TeaserCardPopUp from "../../components/general/TeaserCardPopUp"
 import CurrencySelect from "../../components/stripe/CurrencySelect"
 import ContainerBtn from "../../components/general/containerBtn"
 import Dialog from "../../components/general/dialog"
 import Button from "../../components/general/button"
 import PublishBiteModal from "../../components/modals/PublishBiteModal"
-import { AddIcon, BackIcon, PlayIcon, RemoveIcon } from "../../assets/svg"
+import { AddIcon, BackIcon, PlayIcon, RemoveIcon, DragHandleIcon } from "../../assets/svg"
 import { biteAction } from "../../redux/actions/biteActions"
 import { SET_BITE, SET_BITE_THUMBNAILS, SET_PREVIOUS_ROUTE } from "../../redux/types"
 import CONSTANT from "../../constants/constant"
@@ -27,6 +27,13 @@ const useWindowSize = () => {
     return size
 }
 
+const reOrder = (list: any, startIndex: any, endIndex: any) => {
+    const result = Array.from(list)
+    const [removed] = result.splice(startIndex, 1)
+    result.splice(endIndex, 0, removed)
+    return result
+}
+
 const currencies = ['USD', 'INR', 'TWD', 'HKD', 'MYR']
 
 const CreateBite = () => {
@@ -40,10 +47,11 @@ const CreateBite = () => {
     const [price, setPrice] = useState('')
     const [currency, setCurrency] = useState(0)
     const [publishEnable, setPublishEnable] = useState(false)
-    const [videoIndex, setVideoIndex] = useState(0)
+    const [videoIndex, setVideoIndex] = useState(-1)
     const [free, setFree] = useState(false)
     const { bite, thumbnails } = biteState
     const width = useWindowSize()
+    const [play, setPlay] = useState(false)
 
     const [openVideoPopup, setOpenVideoPopUp] = useState(false)
     const [openQuit, setOpenQuit] = useState(false)
@@ -92,6 +100,7 @@ const CreateBite = () => {
                 let thumbs = thumbnails
                 thumbs.push('')
                 videos.push({
+                    id: `item-${videos.length}`,
                     coverUrl: null,
                     videoUrl: loadFile,
                     duration: video.duration
@@ -133,6 +142,27 @@ const CreateBite = () => {
         dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
     }
 
+    const onDragEnd = (result: any) => {
+        // dropped outside the list
+        if (!result.destination) {
+            return
+        }
+
+        const items = reOrder(
+            bite.videos,
+            result.source.index,
+            result.destination.index
+        )
+
+        dispatch({
+            type: SET_BITE,
+            payload: {
+                ...bite,
+                videos: items
+            }
+        })
+    }
+
     useEffect(() => {
         if (title === "" || bite.videos.length === 0) {
             setPublishEnable(false)
@@ -147,6 +177,12 @@ const CreateBite = () => {
 
     useEffect(() => { setFree(location.pathname.substring(location.pathname.length - 4) === 'free') }, [location])
 
+    const getItemStyle = (isDragging: any, draggableStyle: any) => ({
+        userSelect: 'none',
+        background: isDragging ? '#FFC88F' : '#FFFFFF',
+        ...draggableStyle,
+    })
+
     return (
         <div className="create-bite-wrapper">
             <div className="page-header">
@@ -156,8 +192,11 @@ const CreateBite = () => {
             </div>
             <TeaserCardPopUp
                 display={openVideoPopup}
-                exit={() => { setOpenVideoPopUp(false) }}
-                teaser={bite.videos.length === 0 ? "" : bite.videos[videoIndex].videoUrl.preview}
+                exit={() => {
+                    setOpenVideoPopUp(false)
+                    setVideoIndex(-1)
+                }}
+                teaser={(bite.videos.length === 0 || videoIndex === -1) ? "" : bite.videos[videoIndex].videoUrl.preview}
             />
             <Dialog
                 display={openQuit}
@@ -181,49 +220,97 @@ const CreateBite = () => {
                 handleSubmit={publishBite}
             />
             <div className="create-bite">
-                <div className="uploaded-vidoes"
-                    style={{ height: bite.videos.length === 0 ? '0px' : width > 940 ? '495px' : '160px' }}
-                >
-                    {bite.videos.map((video: any, index: any) => (
-                        <div className="uploaded-video" key={index}>
-                            {width > 940 ?
-                                <>
-                                    <TeaserCard
-                                        cover={video.coverUrl ? video.coverUrl.preview : null}
-                                        teaser={video.videoUrl.preview}
-                                        type={"dareme"}
-                                    />
-                                    <div className="bin-btn" onClick={() => removeVideo(index)}>
-                                        <RemoveIcon color="white" width={30} height={30} />
-                                    </div>
-                                </>
-                                :
-                                <>
-                                    <div className="mobile-part">
-                                        <div className="cover-image">
-                                            {video.coverUrl &&
-                                                <img
-                                                    src={video.coverUrl.preview}
-                                                    alt="coverImage"
-                                                    width={'100%'}
-                                                />
-                                            }
-                                        </div>
-                                        <div className="play-icon" onClick={() => popUpTeaser(index)}>
-                                            <PlayIcon color="white" />
-                                        </div>
-                                    </div>
-                                    <div className="bin-btn" onClick={() => removeVideo(index)}>
-                                        <RemoveIcon color="white" width={20} height={20} />
-                                    </div>
-                                </>
-                            }
-                            <div className="time-duration">
-                                <span>{displayDuration(video.duration)}</span>
+                <DragDropContext onDragEnd={onDragEnd}>
+                    <Droppable droppableId="droppable" direction="horizontal">
+                        {(provided, snapshot) => (
+                            <div className="uploaded-vidoes"
+                                ref={provided.innerRef}
+                                style={{ height: bite.videos.length === 0 ? '0px' : width > 880 ? '460px' : '200px' }}
+                                {...provided.droppableProps}
+                            >
+                                {bite.videos.map((video: any, index: any) => (
+                                    <Draggable key={video.id} draggableId={video.id} index={index}>
+                                        {(provided, snapshot) => (
+                                            <div className="uploaded-video"
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                                style={getItemStyle(
+                                                    snapshot.isDragging,
+                                                    provided.draggableProps.style
+                                                )}
+                                            >
+                                                <div className="bite-main-part">
+                                                    <div className="bite-part" onClick={() => {
+                                                        if (play) {
+                                                            if (videoIndex === index) {
+                                                                setPlay(false)
+                                                                setVideoIndex(-1)
+                                                            } else setVideoIndex(index)
+                                                        }
+                                                    }}>
+                                                        {(index !== videoIndex) &&
+                                                            <>
+                                                                <div className="cover-image">
+                                                                    {video.coverUrl &&
+                                                                        <img
+                                                                            src={video.coverUrl.preview}
+                                                                            alt="coverImage"
+                                                                            width={'100%'}
+                                                                        />
+                                                                    }
+                                                                </div>
+                                                                <div className="play-icon" onClick={() => {
+                                                                    if (width > 880) {
+                                                                        setVideoIndex(index)
+                                                                        setPlay(true)
+                                                                    } else popUpTeaser(index)
+                                                                }}>
+                                                                    <PlayIcon color="white" width={width < 880 ? '18' : '28'} height={width < 880 ? '18' : '28'} />
+                                                                </div>
+                                                            </>
+                                                        }
+                                                        {(play && videoIndex === index) &&
+                                                            <>
+                                                                <ReactPlayer
+                                                                    className="react-player"
+                                                                    url={video?.videoUrl.preview}
+                                                                    playing={play}
+                                                                    playsinline={true}
+                                                                    config={{
+                                                                        file: {
+                                                                            attributes: {
+                                                                                controlsList: 'nodownload noremoteplayback noplaybackrate',
+                                                                                disablePictureInPicture: true,
+                                                                            }
+                                                                        }
+                                                                    }}
+                                                                    controls
+                                                                />
+                                                            </>
+                                                        }
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'center', marginTop: width < 880 ? '8px' : '16px' }}>
+                                                        <DragHandleIcon width={width < 880 ? '' : 30} height={width < 880 ? '' : 10} color={snapshot.isDragging ? "#EA8426" : "#BAB6B5"} />
+                                                    </div>
+                                                </div>
+                                                <div className="bin-btn" onClick={() => removeVideo(index)}>
+                                                    <RemoveIcon color="white" width={30} height={30} />
+                                                </div>
+                                                {(width < 880 || index !== videoIndex) &&
+                                                    <div className="time-duration">
+                                                        <span>{displayDuration(video.duration)}</span>
+                                                    </div>
+                                                }
+                                            </div>
+                                        )}
+                                    </Draggable>
+                                ))}
+                                {provided.placeholder}
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        )}
+                    </Droppable>
+                </DragDropContext>
 
                 <div className="upload-edit-btns">
                     {bite.videos.length > 0 &&
@@ -336,7 +423,7 @@ const CreateBite = () => {
                 </div>
 
             </div>
-        </div>
+        </div >
     )
 }
 
