@@ -97,7 +97,12 @@ const PurchaseModal = (props: any) => {
                             <span style={{ color: '#EF4444' }}>{bite.owner ? displaySelectedPrice(bite.currency, bite.price) : ''}</span>
                             <span>&nbsp;in {currencies[option]}</span>
                         </div>
-
+                        <div className="charge-amount" style={{ marginTop: '0px' }}>
+                            <span>(Including processing fee)</span>
+                        </div>
+                        <div className="terms-and-privacy">
+                            <span>By Clicking Next, you agree to <a href="https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713">Creato’s Terms & Conditions</a>, and <a href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33">Privacy Policy</a>, and for payment processor - Stripe to charge your payment method.</span>
+                        </div>
                         <div className="next-btn">
                             <Button
                                 text="Next"

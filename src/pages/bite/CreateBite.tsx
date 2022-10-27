@@ -44,7 +44,7 @@ const CreateBite = () => {
     const fileInputRef = useRef<HTMLInputElement>(null)
     const biteState = useSelector((state: any) => state.bite)
     const { bite, thumbnails } = biteState
-    
+
     const [title, setTitle] = useState(bite.title ? bite.title : '')
     const [price, setPrice] = useState(bite.price ? bite.price : '')
     const [currency, setCurrency] = useState(0)
@@ -367,7 +367,7 @@ const CreateBite = () => {
                             key={index}
                             url={video.videoUrl.preview}
                             playing={false}
-                            onReady={() => { if (video.coverUrl === null) setTimeout(() => getFirstFrame(index), 1000) }}
+                            onReady={() => { if (video.coverUrl === null) setTimeout(() => getFirstFrame(index), 500) }}
                         />
                     ))}
                 </div>
