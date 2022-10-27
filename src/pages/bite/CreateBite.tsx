@@ -329,7 +329,7 @@ const CreateBite = () => {
                         <div className="upload-btn">
                             <Button
                                 text="Edit thumbnail"
-                                width={250}
+                                width={280}
                                 shape="rounded"
                                 fillStyle="fill"
                                 color="primary"
@@ -341,7 +341,7 @@ const CreateBite = () => {
                         <div className="upload-btn">
                             <Button
                                 text="Upload Bite Videos"
-                                width={250}
+                                width={280}
                                 shape="rounded"
                                 fillStyle="fill"
                                 color="primary"
