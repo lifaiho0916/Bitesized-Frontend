@@ -3,33 +3,36 @@ import * as api from "../../api"
 import { SET_LOADING_TRUE, SET_LOADING_FALSE, SET_BITES, SET_USERS, SET_DIALOG_STATE, SET_BITE, SET_BITE_INITIAL } from "../types"
 
 export const biteAction = {
-    saveBite: (bite: any, navigate: any) => async (dispatch: Dispatch<any>, getState: any) => {
+    saveBite: (bite: any, personalisedUrl: any, navigate: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
-            const config = { headers: { "content-type": "multipart/form-data" } }
-            const uploadFuncs: any = []
-            bite.videos.forEach((video: any) => {
-                const formData = new FormData()
-                formData.append("file", video.videoUrl)
-                const formData1 = new FormData()
-                formData1.append("file", video.coverUrl)
-                uploadFuncs.push(api.uploadVideo(formData, config))
-                uploadFuncs.push(api.uploadCover(formData1, config))
-            })
-
-            const responses: any = await Promise.all(uploadFuncs)
-            for (let i = 0; i < bite.videos.length; i++) {
-                bite.videos[i].videoUrl = responses[i * 2].data.payload.path
-                bite.videos[i].coverUrl = responses[i * 2 + 1].data.payload.path
+            const config = {
+                headers: { "content-type": "multipart/form-data" },
+                onUploadProgress: (progress: any) => console.log(progress.loaded / progress.total * 100)
             }
 
-            const response = await api.CreateBite({ bite: bite })
+            const formData = new FormData()
+            bite.videos.forEach((video: any) => {
+                formData.append("files", video.coverUrl)
+                formData.append("files", video.videoUrl)
+            })
 
+            dispatch({ type: SET_LOADING_FALSE })
+            const response = await api.uploadFiles(formData, config)
             const { data } = response
             if (data.success) {
-                dispatch({ type: SET_LOADING_FALSE })
-                const user = getState().auth.user
-                navigate(`/${user.personalisedUrl}?mybites`)
+                const { payload } = data
+                for (let i = 0; i < bite.videos.length; i++) {
+                    bite.videos[i].coverUrl = 'uploads/bite/' + payload.files[i * 2].filename
+                    bite.videos[i].videoUrl = 'uploads/bite/' + payload.files[i * 2 + 1].filename
+                }
+
+                const response1 = await api.CreateBite({ bite: bite })
+
+                if (response1.data.success) {
+                    dispatch({ type: SET_LOADING_FALSE })
+                    navigate(`/${personalisedUrl}?mybites`)
+                }
             }
         } catch (err) {
             dispatch({ type: SET_LOADING_FALSE })
@@ -39,31 +42,35 @@ export const biteAction = {
 
     saveBiteByUserId: (bite: any, userId: any, navigate: any) => async (dispatch: Dispatch<any>) => {
         try {
-            dispatch({ type: SET_LOADING_TRUE })
-            const config = { headers: { "content-type": "multipart/form-data" } }
-            const uploadFuncs: any = []
-            bite.videos.forEach((video: any) => {
-                const formData = new FormData()
-                formData.append("file", video.videoUrl)
-                const formData1 = new FormData()
-                formData1.append("file", video.coverUrl)
-                uploadFuncs.push(api.uploadVideo(formData, config))
-                uploadFuncs.push(api.uploadCover(formData1, config))
-            })
+            // dispatch({ type: SET_LOADING_TRUE })
+            // const config = { headers: { "content-type": "multipart/form-data" } }
+            // const uploadFuncs: any = []
+            // const uploadThumbs: any = []
+            // const uploadVideos: any = []
+            // bite.videos.forEach((video: any) => {
+            //     uploadThumbs.push(video.coverUrl)
+            //     uploadVideos.push(video.videoUrl)
+            // const formData = new FormData()
+            // formData.append("file", video.videoUrl)
+            // const formData1 = new FormData()
+            // formData1.append("file", video.coverUrl)
+            // uploadFuncs.push(api.uploadVideo(formData, config))
+            // uploadFuncs.push(api.uploadCover(formData1, config))
+            // })
 
-            const responses: any = await Promise.all(uploadFuncs)
-            for (let i = 0; i < bite.videos.length; i++) {
-                bite.videos[i].videoUrl = responses[i * 2].data.payload.path
-                bite.videos[i].coverUrl = responses[i * 2 + 1].data.payload.path
-            }
+            // const responses: any = await Promise.all(uploadFuncs)
+            // for (let i = 0; i < bite.videos.length; i++) {
+            //     bite.videos[i].videoUrl = responses[i * 2].data.payload.path
+            //     bite.videos[i].coverUrl = responses[i * 2 + 1].data.payload.path
+            // }
 
-            const response = await api.CreateBiteByUserId(userId, { bite: bite })
+            // const response = await api.CreateBiteByUserId(userId, { bite: bite })
 
-            const { data } = response
-            if (data.success) {
-                dispatch({ type: SET_LOADING_FALSE })
-                navigate("/admin/create-free-bite")
-            }
+            // const { data } = response
+            // if (data.success) {
+            //     dispatch({ type: SET_LOADING_FALSE })
+            //     navigate("/admin/create-free-bite")
+            // }
         } catch (err) {
             dispatch({ type: SET_LOADING_FALSE })
             console.log(err)

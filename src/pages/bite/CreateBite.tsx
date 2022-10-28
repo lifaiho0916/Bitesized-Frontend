@@ -43,7 +43,9 @@ const CreateBite = () => {
 
     const fileInputRef = useRef<HTMLInputElement>(null)
     const biteState = useSelector((state: any) => state.bite)
+    const userState = useSelector((state: any) => state.auth)
     const { bite, thumbnails } = biteState
+    const { user } = userState
 
     const [title, setTitle] = useState(bite.title ? bite.title : '')
     const [price, setPrice] = useState(bite.price ? bite.price : '')
@@ -73,7 +75,7 @@ const CreateBite = () => {
             price: price,
             currency: (currencies[currency]).toLowerCase()
         }
-        dispatch(biteAction.saveBite(newBite, navigate))
+        dispatch(biteAction.saveBite(newBite, user.personalisedUrl ,navigate))
     }
     const displayDuration = (duration: any) => { return Math.floor(duration / 60) + ":" + (Math.round(duration % 60) < 10 ? '0' : '') + Math.round(duration % 60) }
     const popUpTeaser = (index: any) => {
