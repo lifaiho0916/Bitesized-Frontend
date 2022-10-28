@@ -131,11 +131,11 @@
             justify-content: center;
             font-family: 'Lato';
             font-style: normal;
-            font-weight: 600;
-            font-size: 26px;
-            line-height: 30px;
-            text-decoration-line: underline;
-            color: #000000;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+            color: #EFA058;
+            margin-bottom: 20px;
         }
 
         .scroll-bar {
@@ -174,7 +174,7 @@
             padding: 0px 10px;
 
             .data-table {
-                height: 290px;
+                height: 300px;
                 overflow: auto;
 
                 table {
@@ -233,6 +233,20 @@
                     }
                 }
             }
+        }
+
+        .share-letter {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 18px;
+            text-align: center;
+            color: #54504E;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
 
         .video-part {

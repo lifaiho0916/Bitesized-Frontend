@@ -12,6 +12,7 @@ import { LanguageContext } from "../../routes/authRoute"
 import { biteAction } from "../../redux/actions/biteActions"
 import { transactionAction } from "../../redux/actions/transactionActions"
 import { SET_DIALOG_STATE } from "../../redux/types"
+import NoTransactionImg from "../../assets/img/no-bite-transaction.png"
 import "../../assets/styles/bite/BiteDetailStyle.scss"
 
 const BiteDetail = () => {
@@ -34,6 +35,7 @@ const BiteDetail = () => {
     const [sort, setSort] = useState(-1)
     const [videoIndex, setVideoIndex] = useState(-1)
     const [play, setPlay] = useState(false)
+    const [copied, setCopied] = useState(false)
     const [currency, setCurrency] = useState('usd')
 
     const [openFreeUnlock, setOpenFreeUnLock] = useState(false)
@@ -53,14 +55,10 @@ const BiteDetail = () => {
         return res
     }
 
-    const findPurchasedUser = (purchaseInfo: any) => {
-        return String(purchaseInfo.purchasedBy) !== String(user.id)
-    }
-
     const lock = useMemo(() => {
         if (user === null) return true
         if (user.role === "ADMIN" || (bite.owner && String(bite.owner._id) === String(user.id))) return false
-        if (bite.owner) return bite.purchasedUsers.every(findPurchasedUser)
+        if (bite.owner) return bite.purchasedUsers.every((purchaseInfo: any) => String(purchaseInfo.purchasedBy) !== String(user.id))
         return true
     }, [user, bite])
 
@@ -89,15 +87,23 @@ const BiteDetail = () => {
         return res
     }
 
-    useEffect(() => { dispatch(biteAction.getBiteById(biteId)) }, [biteId])
+    useEffect(() => { dispatch(biteAction.getBiteById(biteId)) }, [biteId, dispatch])
     useEffect(() => {
         if (dlgState === 'unlock_bite') setOpenFreeUnLock(true)
     }, [dlgState])
     useEffect(() => {
-        if (state && state.owner === true) {
+        if ((state && state.owner === true) || (user && bite.owner && (String(user.id) === String(bite.owner._id)))) {
             dispatch(transactionAction.getTransactionsByBiteId(biteId, sort))
         }
-    }, [location, biteId, sort])
+    }, [biteId, sort, dispatch, state, user, bite])
+
+    const displayEmptyRow = (count: any) => {
+        var indents: any = []
+        for (var i = 0; i < count; i++) {
+            indents.push(<tr key={i}><td></td><td></td><td></td><td></td></tr>)
+        }
+        return indents
+    }
 
     return (
         <div className="bite-detail-wrapper">
@@ -187,30 +193,30 @@ const BiteDetail = () => {
                             </div>
                         }
                     </div>
-                    {(state && state.owner === true) &&
+                    {((state && state.owner === true) || (user && bite.owner && (String(user.id) === String(bite.owner._id)))) &&
                         <>
                             <div className="header-title" style={{ marginTop: '40px' }}>Bite transaction history</div>
-                            <div className="transaction-history">
-                                <div className="data-table scroll-bar" style={transactions.length <= 5 ? { height: 'fit-content' } : {}}>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>
-                                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                                        <span>Date</span>
-                                                        <div style={{ cursor: 'pointer' }}
-                                                            onClick={() => setSort(-sort)}
-                                                        >
-                                                            {sort === -1 ? <DescendIcon /> : <AscendIcon />}
+                            {transactions.length > 0 ?
+                                <div className="transaction-history">
+                                    <div className="data-table scroll-bar">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                                            <span>Date</span>
+                                                            <div style={{ cursor: 'pointer' }}
+                                                                onClick={() => setSort(-sort)}
+                                                            >
+                                                                {sort === -1 ? <DescendIcon /> : <AscendIcon />}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </th>
-                                                <th>Time</th>
-                                                <th>Username</th>
-                                                <th>In Local Currencies</th>
-                                            </tr>
-                                        </thead>
-                                        {transactions.length > 0 &&
+                                                    </th>
+                                                    <th>Time</th>
+                                                    <th>Username</th>
+                                                    <th>In Local Currencies</th>
+                                                </tr>
+                                            </thead>
                                             <tbody>
                                                 {transactions.map((transaction: any, index: any) => (
                                                     <tr key={index}>
@@ -233,11 +239,37 @@ const BiteDetail = () => {
                                                         </td>
                                                     </tr>
                                                 ))}
+                                                {transactions.length < 5 && displayEmptyRow(5 - transactions.length)}
                                             </tbody>
-                                        }
-                                    </table>
+                                        </table>
+                                    </div>
+                                </div>
+                                :
+                                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+                                    <img
+                                        src={NoTransactionImg}
+                                        alt="Notransaction"
+                                    />
+                                </div>
+                            }
+                            <div className="share-letter">
+                                <span>{transactions.length > 0 ? 'Share your Bite to others to earn more!' : 'No record yet, share your Bite to others!'}</span>
+                                <div style={{ marginTop: '15px' }}>
+                                    <Button
+                                        text={copied ? "Link copied!" : "Copy link"}
+                                        fillStyle="fill"
+                                        color="primary"
+                                        shape="rounded"
+                                        width={'280px'}
+                                        handleSubmit={() => {
+                                            navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}${location.pathname}`)
+                                            setCopied(true)
+                                            setTimeout(() => { setCopied(false) }, 2000)
+                                        }}
+                                    />
                                 </div>
                             </div>
+
                         </>
                     }
                     <div className="video-part">
