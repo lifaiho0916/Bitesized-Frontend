@@ -163,7 +163,7 @@ const BiteDetail = () => {
                                 </div>
                                 {!lock &&
                                     <div className={`chip ${(state && state.owner === true) ? 'mine' : 'unlock'}`}>
-                                        {(state && state.owner === true) ? 'My Bite' : 'Unlocked' }
+                                        {(state && state.owner === true) ? 'My Bite' : 'Unlocked'}
                                     </div>
                                 }
                             </div>
@@ -260,9 +260,17 @@ const BiteDetail = () => {
                                                     alt="cover"
                                                     width={'100%'}
                                                 />
-                                                <div className="play-icon"><PlayIcon color="white" /></div>
                                                 <div className="lock-video"></div>
-
+                                                <div className="play-icon">
+                                                    <Button
+                                                        text="Unlock"
+                                                        fillStyle="outline"
+                                                        color="primary"
+                                                        shape="rounded"
+                                                        icon={[<UnlockIcon color="#EFA058" />, <UnlockIcon color="white" />, <UnlockIcon color="white" />]}
+                                                        handleSubmit={unLockBite}
+                                                    />
+                                                </div>
                                             </>
                                             :
                                             <>

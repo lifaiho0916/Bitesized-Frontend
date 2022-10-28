@@ -1435,3 +1435,18 @@ export const FitHeightIcon = (props: any) => (
     <path fillRule="evenodd" clipRule="evenodd" d="M4 21.2852L11.997 21.2852L6.3724 16.935L7.94481 15.7129L10.8965 18.0499L10.8965 18.0499V5.99698H10.8965L7.94481 8.33401L6.3724 7.11189L12 2.75945L17.6276 7.11189L16.0551 8.33401L13.1034 5.997L13.1034 18.0499L16.0551 15.7129L17.6276 16.935L12.0029 21.2852L20 21.2852V23.0004H4V21.2852ZM20 1.00198H4L4 2.71722L20 2.71722V1.00198Z" fill={props.color} />
   </svg>
 )
+
+export const BiteIcon = (props: any) => (
+  <svg  width={props.width ? props.width : "24"} height={props.height ? props.height : "24"} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clipPath="url(#clip0_1184_208254)">
+      <path d="M23 11.01L18 11C17.45 11 17 11.45 17 12V21C17 21.55 17.45 22 18 22H23C23.55 22 24 21.55 24 21V12C24 11.45 23.55 11.01 23 11.01ZM23 20H18V13H23V20ZM20 2H2C0.89 2 0 2.89 0 4V16C0 17.1 0.89 18 2 18H9V20H7V22H15V20H13V18H15V16H2V4H20V9H22V4C22 2.89 21.1 2 20 2Z" fill={props.color} />
+      <path d="M8.14773 10.8866V12.6593L11.25 14.3523L14.3523 12.6593V10.8866L11.25 12.5795L8.14773 10.8866ZM11.25 6.375L6.375 9.03409L11.25 11.6932L15.2386 9.51716V12.5795H16.125V9.03409L11.25 6.375Z" fill={props.color} />
+    </g>
+    <defs>
+      <clipPath id="clip0_1184_208254">
+        <rect width="24" height="24" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+
+)

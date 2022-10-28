@@ -1,5 +1,5 @@
 import Button from "../general/button"
-import { CloseIcon, RewardIcon } from "../../assets/svg"
+import { CloseIcon, RewardIcon, BiteIcon } from "../../assets/svg"
 import "../../assets/styles/modals/UnLockFreeModalStyle.scss"
 
 const UnLockFreeModal = (props: any) => {
@@ -17,7 +17,11 @@ const UnLockFreeModal = (props: any) => {
                     </div>
                     <div className="modal-body">
                         <div className="reward-icon">
-                            <RewardIcon color="#efa058" width={60} height={60} />
+                            {(bite && bite.currency) ?
+                                <BiteIcon color="#efa058" width={60} height={60} />
+                                :
+                                <RewardIcon color="#efa058" width={60} height={60} />
+                            }
                         </div>
                         <div className="sub-title">
                             <span>You have unlocked this {bite.currency ? '' : 'FREE'} Bite </span>
