@@ -5,14 +5,17 @@ import { useNavigate } from "react-router-dom"
 import Button from "../../components/general/button"
 import { BackIcon, AddIcon } from "../../assets/svg"
 import CreateImage from "../../assets/img/create.png"
-import { SET_BITE_INITIAL } from "../../redux/types"
+import { SET_BITE_INITIAL, SET_UPLOADED_PROCESS } from "../../redux/types"
 import "../../assets/styles/bite/CreateTypeStyle.scss"
 
 const CreateType = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    useEffect(() => { dispatch({ type: SET_BITE_INITIAL }) }, [dispatch])
+    useEffect(() => {
+        dispatch({ type: SET_BITE_INITIAL })
+        dispatch({ type: SET_UPLOADED_PROCESS, payload: [0, 0, 0, 0, 0, 0] })
+    }, [dispatch])
 
     return (
         <div className="create-type-wrapper">

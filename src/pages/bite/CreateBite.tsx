@@ -12,8 +12,9 @@ import Button from "../../components/general/button"
 import PublishBiteModal from "../../components/modals/PublishBiteModal"
 import { AddIcon, BackIcon, PlayIcon, RemoveIcon, DragHandleIcon } from "../../assets/svg"
 import { biteAction } from "../../redux/actions/biteActions"
-import { SET_BITE, SET_BITE_THUMBNAILS, SET_PREVIOUS_ROUTE } from "../../redux/types"
+import { SET_BITE, SET_BITE_THUMBNAILS, SET_PREVIOUS_ROUTE, SET_UPLOADED_PROCESS } from "../../redux/types"
 import CONSTANT from "../../constants/constant"
+import * as api from "../../api/index"
 import "../../assets/styles/bite/CreateBiteStyle.scss"
 
 const useWindowSize = () => {
@@ -53,7 +54,7 @@ const CreateBite = () => {
     const [publishEnable, setPublishEnable] = useState(false)
     const [videoIndex, setVideoIndex] = useState(-1)
     const [free, setFree] = useState(false)
-    
+
     const width = useWindowSize()
     const [play, setPlay] = useState(false)
 
@@ -66,6 +67,7 @@ const CreateBite = () => {
         setOpenPublish(true)
     }
     const publishBite = () => {
+        setOpenPublish(false)
         const newBite = free ? {
             ...bite,
             title: title,
@@ -75,7 +77,7 @@ const CreateBite = () => {
             price: price,
             currency: (currencies[currency]).toLowerCase()
         }
-        dispatch(biteAction.saveBite(newBite, user.personalisedUrl ,navigate))
+        dispatch(biteAction.saveBite(newBite, user.personalisedUrl, navigate))
     }
     const displayDuration = (duration: any) => { return Math.floor(duration / 60) + ":" + (Math.round(duration % 60) < 10 ? '0' : '') + Math.round(duration % 60) }
     const popUpTeaser = (index: any) => {
@@ -210,7 +212,7 @@ const CreateBite = () => {
                     setOpenVideoPopUp(false)
                     setVideoIndex(-1)
                 }}
-                teaser={(bite.videos.length === 0 || videoIndex === -1) ? "" : bite.videos[videoIndex].videoUrl.preview}
+                teaser={(bite.videos.length === 0 || videoIndex === -1) ? "" : bite.videos[videoIndex].videoUrl.preview ? bite.videos[videoIndex].videoUrl.preview : bite.videos[videoIndex].videoUrl}
             />
             <Dialog
                 display={openQuit}
@@ -268,7 +270,7 @@ const CreateBite = () => {
                                                                 <div className="cover-image">
                                                                     {video.coverUrl &&
                                                                         <img
-                                                                            src={video.coverUrl.preview}
+                                                                            src={video.coverUrl.preview ? video.coverUrl.preview : `${process.env.REACT_APP_SERVER_URL}/${video.coverUrl}`}
                                                                             alt="coverImage"
                                                                             width={'100%'}
                                                                         />
@@ -288,7 +290,7 @@ const CreateBite = () => {
                                                             <>
                                                                 <ReactPlayer
                                                                     className="react-player"
-                                                                    url={video?.videoUrl.preview}
+                                                                    url={video.videoUrl.preview ? video.videoUrl.preview : `${process.env.REACT_APP_SERVER_URL}/${video.videoUrl}`}
                                                                     playing={play}
                                                                     playsinline={true}
                                                                     config={{

@@ -11,7 +11,8 @@ API.interceptors.request.use((req: any) => {
     return req
 })
 
-export const uploadFiles = (data: any, config: any) => API.post('/api/bite/upload/files', data, config)
+export const uploadVideo = (data: any, config: any) => API.post('/api/bite/upload/video', data, config)
+export const uploadCover = (data: any, config: any) => API.post('/api/bite/upload/cover', data, config)
 export const CreateBite = (data: any) => API.post('/api/bite/create', data)
 export const CreateBiteByUserId = (id: any, data: any) => API.post(`/api/bite/create/${id}`, data)
 
