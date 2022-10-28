@@ -77,7 +77,9 @@
                 }
 
                 .status-chip {
-                    margin-bottom: 10px;
+                    margin-bottom: 20px;
+                    margin-left: 15px;
+                    display: flex;
 
                     .chip {
                         font-family: 'Lato';
@@ -92,6 +94,7 @@
                         display: flex;
                         align-items: center;
                         margin-right: 10px;
+                        border-radius: 100px;
 
                         &.paid {
                             background: #30D8CE;
@@ -103,6 +106,10 @@
 
                         &.unlock {
                             background: #65E265;
+                        }
+
+                        &.mine {
+                            background: #EFA058;
                         }
                     }
                 }

@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react"
+import { useState, useContext, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useLocation, useNavigate } from "react-router-dom"
 import { LanguageContext } from "../../routes/authRoute"
@@ -19,7 +19,6 @@ const BiteCardProfile = (props: any) => {
     const { user } = userState
 
     const [videoIndex, setVideoIndex] = useState(0)
-    const [lock, setLock] = useState(true)
     const [hover, setHover] = useState(false)
 
     const PrevVideo = () => {
@@ -63,28 +62,18 @@ const BiteCardProfile = (props: any) => {
         return String(purchasedInfo.purchasedBy) !== String(user.id)
     }
 
-    const checkUnLock = () => {
-        if (user === null) {
-            setLock(true)
-            return
-        }
-        if (user.role === "ADMIN" || (String(bite.owner._id) === String(user.id))) {
-            setLock(false)
-            return
-        }
-
-        setLock(bite.purchasedUsers.every(findPurchasedUser))
-    }
+    const lock = useMemo(() => {
+        if (user === null) return true
+        if (user.role === "ADMIN" || (bite.owner && String(bite.owner._id) === String(user.id))) return false
+        return bite.purchasedUsers.every(findPurchasedUser)
+     }, [user, bite])
 
     const clickCard = () => {
         if (user) {
             dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
             navigate(`/bite/detail/${bite._id}`, { state: { owner: user.id === bite.owner._id ? true : false } })
-        }
-        else navigate('/auth/signup')
+        } else navigate('/auth/signup')
     }
-
-    useEffect(() => { checkUnLock() }, [bite, user])
 
     return (
         <div

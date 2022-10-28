@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState, useContext, useMemo } from "react"
 import { useParams, useNavigate, useLocation } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import Avatar from "../../components/general/avatar"
@@ -31,7 +31,6 @@ const BiteDetail = () => {
     const { user } = userState
     const { transactions } = transactionState
 
-    const [lock, setLock] = useState(true)
     const [sort, setSort] = useState(-1)
     const [videoIndex, setVideoIndex] = useState(-1)
     const [play, setPlay] = useState(false)
@@ -58,20 +57,22 @@ const BiteDetail = () => {
         return String(purchaseInfo.purchasedBy) !== String(user.id)
     }
 
-    const checkUnLock = () => {
-        if (user === null) {
-            setLock(true)
-            return
-        }
-        if (bite.owner) {
-            if (user.role === "ADMIN" || (String(bite.owner._id) === String(user.id))) {
-                setLock(false)
-                return
-            }
+    const lock = useMemo(() => {
+        if (user === null) return true
+        if (user.role === "ADMIN" || (bite.owner && String(bite.owner._id) === String(user.id))) return false
+        if (bite.owner) return bite.purchasedUsers.every(findPurchasedUser)
+        return true
+    }, [user, bite])
 
-            setLock(bite.purchasedUsers.every(findPurchasedUser))
+    const localPrice = useMemo(() => {
+        if (currencyRate && user && bite.owner) {
+            const rate = bite.currency === 'usd' ? 1.0 : currencyRate[`${bite.currency}`]
+            const usdAmount = bite.price / rate
+            const rate1 = user.currency === 'usd' ? 1.0 : currencyRate[`${user.currency}`]
+            const price = usdAmount * rate1
+            return price.toFixed(2)
         }
-    }
+    }, [bite, user, currencyRate])
 
     const unLockBite = () => {
         if (bite.currency) setOpenPurchaseModal(true)
@@ -88,7 +89,6 @@ const BiteDetail = () => {
         return res
     }
 
-    useEffect(() => { if (bite) checkUnLock() }, [bite, user])
     useEffect(() => { dispatch(biteAction.getBiteById(biteId)) }, [biteId])
     useEffect(() => {
         if (dlgState === 'unlock_bite') setOpenFreeUnLock(true)
@@ -158,10 +158,14 @@ const BiteDetail = () => {
                                 />
                             </div>
                             <div className="status-chip">
-                                {/* <div className={`chip ${}`}> */}
-
-                                {/* </div> */}
-                                
+                                <div className={`chip ${bite.currency ? 'paid' : 'free'}`}>
+                                    {bite.currency ? user ? getLocalCurrency(user.currency) + localPrice : '' : 'Free'}
+                                </div>
+                                {!lock &&
+                                    <div className={`chip ${(state && state.owner === true) ? 'mine' : 'unlock'}`}>
+                                        {(state && state.owner === true) ? 'My Bite' : 'Unlocked' }
+                                    </div>
+                                }
                             </div>
                             <div className="bite-title">
                                 <span>{bite?.title}</span>

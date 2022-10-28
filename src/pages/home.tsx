@@ -111,7 +111,7 @@ const Home = () => {
             <div className="see-more-btn">{width < 680 ? '··· ' : ''}see more</div>
           </div>
           <div className="underline"></div>
-          <div className="users scroll-bar">\
+          <div className="users scroll-bar">
             {users.map((user: any, index: any) => (
               <div key={index} className="user" onClick={() => gotoCreatoProfile(`/${user.personalisedUrl}`)}>
                 <Avatar

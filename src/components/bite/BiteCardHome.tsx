@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react"
+import { useState, useContext, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate, useLocation } from "react-router-dom"
 import Avatar from "../general/avatar"
@@ -20,7 +20,6 @@ const BiteCardHome = (props: any) => {
     const { currencyRate } = loadState
 
     const [videoIndex, setVideoIndex] = useState(0)
-    const [lock, setLock] = useState(true)
     const [hover, setHover] = useState(false)
 
     const clickCard = () => {
@@ -75,22 +74,11 @@ const BiteCardHome = (props: any) => {
         return String(purchaseInfo.purchasedBy) !== String(user.id)
     }
 
-    const checkUnLock = () => {
-        if (user === null) {
-            setLock(true)
-            return
-        }
-        if (bite.owner) {
-            if (user.role === "ADMIN" || (String(bite.owner._id) === String(user.id))) {
-                setLock(false)
-                return
-            }
-
-            setLock(bite.purchasedUsers.every(findPurchasedUser))
-        }
-    }
-
-    useEffect(() => checkUnLock(), [bite, user])
+    const lock = useMemo(() => {
+        if (user === null) return true
+        if (user.role === "ADMIN" || (bite.owner && String(bite.owner._id) === String(user.id))) return false
+        return bite.purchasedUsers.every(findPurchasedUser)
+     }, [user, bite])
 
     return (
         <div
