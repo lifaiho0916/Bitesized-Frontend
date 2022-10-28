@@ -8,7 +8,9 @@ const INITIAL_STATE: any = {
         videos: []
     },
     bites: [],
-    thumbnails: []
+    thumbnails: [[], [], []],
+    selectedIndexs: [0, 0, 0],
+    aligns: [true, true, true]
 }
 
 const biteReducer = (state: any = INITIAL_STATE, action: any) => {
@@ -25,10 +27,20 @@ const biteReducer = (state: any = INITIAL_STATE, action: any) => {
                 ...state,
                 bites: payload
             }
-        case actionTypes.SET_BITE_THUMBNAILS:
+        case actionTypes.SET_THUMBNAILS:
             return {
                 ...state,
                 thumbnails: payload
+            }
+        case actionTypes.SET_SELECTED_INDEXES:
+            return {
+                ...state,
+                selectedIndexs: payload
+            }
+        case actionTypes.SET_VIDEO_ALIGNS:
+            return {
+                ...state,
+                aligns: payload
             }
         case actionTypes.SET_BITE_INITIAL:
             return {
@@ -39,7 +51,9 @@ const biteReducer = (state: any = INITIAL_STATE, action: any) => {
                     videos: []
                 },
                 bites: [],
-                thumbnails: []
+                thumbnails: [[], [], []],
+                selectedIndexs: [0, 0, 0],
+                aligns: [true, true, true]
             }
         default:
             return state

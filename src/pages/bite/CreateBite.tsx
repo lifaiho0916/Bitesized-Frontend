@@ -12,9 +12,8 @@ import Button from "../../components/general/button"
 import PublishBiteModal from "../../components/modals/PublishBiteModal"
 import { AddIcon, BackIcon, PlayIcon, RemoveIcon, DragHandleIcon } from "../../assets/svg"
 import { biteAction } from "../../redux/actions/biteActions"
-import { SET_BITE, SET_BITE_THUMBNAILS, SET_PREVIOUS_ROUTE, SET_UPLOADED_PROCESS } from "../../redux/types"
+import { SET_BITE, SET_PREVIOUS_ROUTE, SET_SELECTED_INDEXES, SET_THUMBNAILS, SET_VIDEO_ALIGNS } from "../../redux/types"
 import CONSTANT from "../../constants/constant"
-import * as api from "../../api/index"
 import "../../assets/styles/bite/CreateBiteStyle.scss"
 
 const useWindowSize = () => {
@@ -45,7 +44,7 @@ const CreateBite = () => {
     const fileInputRef = useRef<HTMLInputElement>(null)
     const biteState = useSelector((state: any) => state.bite)
     const userState = useSelector((state: any) => state.auth)
-    const { bite, thumbnails } = biteState
+    const { bite, thumbnails, selectedIndexs, aligns } = biteState
     const { user } = userState
 
     const [title, setTitle] = useState(bite.title ? bite.title : '')
@@ -103,8 +102,6 @@ const CreateBite = () => {
             video.preload = "metadata"
             video.onloadedmetadata = evt => {
                 let videos = bite.videos
-                let thumbs = thumbnails
-                thumbs.push('')
                 videos.push({
                     id: `item-${videos.length}`,
                     coverUrl: null,
@@ -112,7 +109,6 @@ const CreateBite = () => {
                     duration: video.duration
                 })
                 dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
-                dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
             }
             video.src = URL.createObjectURL(loadFile)
         }
@@ -131,11 +127,8 @@ const CreateBite = () => {
         const file = new File([blob], 'cover.png', blob)
         const cover = Object.assign(file, { preview: url })
         const videos = bite.videos
-        const thumbs = thumbnails
         videos[index].coverUrl = cover
-        thumbs[index] = cover
         dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
-        dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
     }
     const gotoEditThumbnail = () => {
         const newBite = free ? {
@@ -154,8 +147,15 @@ const CreateBite = () => {
     const removeVideo = (index: any) => {
         let videos = bite.videos.filter((video: any, i: any) => i !== index)
         let thumbs = thumbnails.filter((thumb: any, i: any) => i !== index)
+        thumbs.push([])
+        let tempAligns = aligns.filter((align: any, i: any) => i !== index)
+        tempAligns.push(true)
+        let indexes = selectedIndexs.filter((ind: any, i: any) => i !== index)
+        indexes.push(0)
+        dispatch({ type: SET_THUMBNAILS, payload: thumbnails })
+        dispatch({ type: SET_VIDEO_ALIGNS, payload: tempAligns })
+        dispatch({ type: SET_SELECTED_INDEXES, payload: indexes })
         dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
-        dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
     }
 
     const onDragEnd = (result: any) => {

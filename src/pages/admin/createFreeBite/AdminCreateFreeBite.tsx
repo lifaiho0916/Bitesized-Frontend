@@ -11,7 +11,7 @@ import Button from "../../../components/general/button"
 import { BackIcon, RemoveIcon, AddIcon } from "../../../assets/svg"
 import { biteAction } from "../../../redux/actions/biteActions"
 import CONSTANT from "../../../constants/constant"
-import { SET_BITE, SET_BITE_THUMBNAILS, SET_PREVIOUS_ROUTE } from "../../../redux/types"
+import { SET_BITE, SET_PREVIOUS_ROUTE } from "../../../redux/types"
 import "../../../assets/styles/admin/createFreeBite/AdminCreateFreeBiteStyle.scss"
 
 const AdminCreateFreeBite = () => {
@@ -68,7 +68,7 @@ const AdminCreateFreeBite = () => {
                     duration: video.duration
                 })
                 dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
-                dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
+                // dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
             }
             video.src = URL.createObjectURL(loadFile)
         }
@@ -91,7 +91,7 @@ const AdminCreateFreeBite = () => {
         videos[index].coverUrl = cover
         thumbs[index] = cover
         dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
-        dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
+        // dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
     }
     const gotoEditThumbnail = () => {
         dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
@@ -101,7 +101,7 @@ const AdminCreateFreeBite = () => {
         let videos = bite.videos.filter((video: any, i: any) => i !== index)
         let thumbs = thumbnails.filter((thumb: any, i: any) => i !== index)
         dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
-        dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
+        // dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
     }
 
     useEffect(() => {

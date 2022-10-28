@@ -6,7 +6,14 @@ import ReactPlayer from "react-player"
 import AvatarEditor from 'react-avatar-editor'
 import Button from "../../components/general/button"
 import { AddIcon, BackIcon, FitHeightIcon, FitWidthIcon } from "../../assets/svg"
-import { SET_BITE, SET_LOADING_TRUE, SET_LOADING_FALSE } from "../../redux/types"
+import {
+    SET_BITE,
+    SET_LOADING_TRUE,
+    SET_LOADING_FALSE,
+    SET_SELECTED_INDEXES,
+    SET_VIDEO_ALIGNS,
+    SET_THUMBNAILS
+} from "../../redux/types"
 import "../../assets/styles/bite/EditCoverStyle.scss"
 
 const EditCoverImage = () => {
@@ -16,17 +23,13 @@ const EditCoverImage = () => {
     const loadState = useSelector((state: any) => state.load)
     const biteState = useSelector((state: any) => state.bite)
     const { prevRoute } = loadState
-    const { bite, thumbnails } = biteState
+    const { bite, thumbnails, selectedIndexs, aligns } = biteState
     const fileInputRef = useRef<HTMLInputElement>(null)
     let imageEditor1: any = null
     let imageEditor2: any = null
     let imageEditor3: any = null
     const playerRef = useRef<ReactPlayer>(null)
-    const [thumbs, setThumbs] = useState<any>([[], [], []])
-    const [selectedIndexs, setSelecteIndexes] = useState<any>([0, 0, 0])
-    const [uploadedThumbs, setUploadedThumbs] = useState<any>([null, null, null])
     const [seekCnt, setSeekCnt] = useState<any>(null)
-    const [aligns, setAligns] = useState<any>([true, true, true])
     const [videoIndex, setVideoIndex] = useState(0)
 
     const NextCover = async () => {
@@ -44,7 +47,7 @@ const EditCoverImage = () => {
 
     const gotoCreateBite = async () => {
         const videos = bite.videos
-        if (thumbnails[0]) {
+        if (videos[0] && thumbnails[0].length > 0) {
             const canvas = imageEditor1.getImage()
             let url = canvas.toDataURL('image/png')
             const res = await fetch(url)
@@ -53,7 +56,7 @@ const EditCoverImage = () => {
             const cover = Object.assign(imageFile, { preview: url })
             videos[0].coverUrl = cover
         }
-        if (thumbnails[1]) {
+        if (videos[1] && thumbnails[1].length > 0) {
             const canvas = imageEditor2.getImage()
             let url = canvas.toDataURL('image/png')
             const res = await fetch(url)
@@ -62,7 +65,7 @@ const EditCoverImage = () => {
             const cover = Object.assign(imageFile, { preview: url })
             videos[1].coverUrl = cover
         }
-        if (thumbnails[2]) {
+        if (videos[2] && thumbnails[2].length > 0) {
             const canvas = imageEditor3.getImage()
             let url = canvas.toDataURL('image/png')
             const res = await fetch(url)
@@ -82,7 +85,7 @@ const EditCoverImage = () => {
     const setFit = (index: any) => {
         let alignTemps: any = aligns
         alignTemps[index] = !alignTemps[index]
-        setAligns([...alignTemps])
+        dispatch({ type: SET_VIDEO_ALIGNS, payload: alignTemps })
     }
 
     const getCoverURL = () => {
@@ -100,24 +103,28 @@ const EditCoverImage = () => {
         const { files } = e.target
         if (files.length === 0) return
         const loadFile = Object.assign(files[0], { preview: URL.createObjectURL(files[0]) })
-        let uploadeds = uploadedThumbs
-        uploadeds[videoIndex] = loadFile
-        setUploadedThumbs([...uploadeds])
+        let thumbs = thumbnails
+        if (thumbs[videoIndex][10]) thumbs[videoIndex][10] = loadFile
+        else thumbs[videoIndex].push(loadFile)
+        let indexes = selectedIndexs
+        indexes[videoIndex] = 10
+        dispatch({ type: SET_SELECTED_INDEXES, payload: indexes })
+        dispatch({ type: SET_THUMBNAILS, payload: thumbs })
     }
 
     useEffect(() => {
         if (seekCnt !== null) {
             if (seekCnt >= 0 && seekCnt < 10) {
                 let period = bite.videos[videoIndex].duration / 10
-                let tempThumbs = thumbs
+                let tempThumbs = thumbnails
                 let url = getCoverURL()
                 tempThumbs[videoIndex].push(url)
-                setThumbs(tempThumbs)
+                dispatch({ type: SET_THUMBNAILS, payload: tempThumbs })
                 playerRef.current?.seekTo(period * seekCnt)
             }
             if (seekCnt === 10) dispatch({ type: SET_LOADING_FALSE })
         }
-    }, [seekCnt, bite, videoIndex, thumbs, dispatch])
+    }, [seekCnt, bite, videoIndex, thumbnails, dispatch])
 
     return (
         <div className="edit-cover-wrapper">
@@ -130,10 +137,10 @@ const EditCoverImage = () => {
                 <div className="cover-editor">
                     <div className="thumb-editor">
                         <div style={{ display: 'flex', marginLeft: `${-250 * videoIndex}px` }}>
-                            {thumbnails[0] &&
+                            {bite.videos[0] &&
                                 <AvatarEditor
                                     ref={setEditorRef1}
-                                    image={uploadedThumbs[0] ? uploadedThumbs[0].preview : thumbs[0].length > 0 ? thumbs[0][selectedIndexs[0]] : ''}
+                                    image={selectedIndexs[0] < 10 ? thumbnails[0][selectedIndexs[0]] : thumbnails[0][selectedIndexs[0]].preview}
                                     width={220}
                                     height={aligns[0] ? 389 : 140}
                                     border={aligns[0] ? 15 : [15, 135]}
@@ -141,10 +148,10 @@ const EditCoverImage = () => {
                                     scale={1.0}
                                 />
                             }
-                            {thumbnails[1] &&
+                            {bite.videos[1] &&
                                 <AvatarEditor
                                     ref={setEditorRef2}
-                                    image={uploadedThumbs[1] ? uploadedThumbs[1].preview : thumbs[1].length > 0 ? thumbs[1][selectedIndexs[1]] : ''}
+                                    image={selectedIndexs[1] < 10 ? thumbnails[1][selectedIndexs[1]] : thumbnails[1][selectedIndexs[1]].preview}
                                     width={220}
                                     height={aligns[1] ? 389 : 140}
                                     border={aligns[1] ? 15 : [15, 135]}
@@ -152,10 +159,10 @@ const EditCoverImage = () => {
                                     scale={1.0}
                                 />
                             }
-                            {thumbnails[2] &&
+                            {bite.videos[2] &&
                                 <AvatarEditor
                                     ref={setEditorRef3}
-                                    image={uploadedThumbs[2] ? uploadedThumbs[2].preview : thumbs[2].length > 0 ? thumbs[2][selectedIndexs[2]] : ''}
+                                    image={selectedIndexs[2] < 10 ? thumbnails[2][selectedIndexs[2]] : thumbnails[2][selectedIndexs[2]].preview}
                                     width={220}
                                     height={aligns[2] ? 389 : 140}
                                     border={aligns[2] ? 15 : [15, 135]}
@@ -172,7 +179,7 @@ const EditCoverImage = () => {
                     ref={playerRef}
                     url={bite?.videos[videoIndex]?.videoUrl?.preview}
                     onReady={() => {
-                        if (thumbs[videoIndex].length === 0) {
+                        if (thumbnails[videoIndex].length === 0) {
                             dispatch({ type: SET_LOADING_TRUE })
                             setSeekCnt(0)
                         }
@@ -198,22 +205,26 @@ const EditCoverImage = () => {
                     />
                 </div>
                 <div className="cover-images scroll-bar">
-                    {thumbs[videoIndex].map((thumb: any, index: any) => (
-                        <div className="cover" key={index}>
-                            <div
-                                className={`cover-item ${selectedIndexs[videoIndex] === index ? 'hover-style' : ''}`}
-                                onClick={() => {
-                                    let indexes = selectedIndexs
-                                    indexes[videoIndex] = index
-                                    setSelecteIndexes([...indexes])
-                                }}
-                            >
-                                <img
-                                    src={thumb}
-                                    alt="coverImage"
-                                    width={'100%'}
-                                />
-                            </div>
+                    {thumbnails[videoIndex].map((thumb: any, index: any) => (
+                        <div key={index}>
+                            {index < 10 &&
+                                <div className="cover">
+                                    <div
+                                        className={`cover-item ${selectedIndexs[videoIndex] === index ? 'hover-style' : ''}`}
+                                        onClick={() => {
+                                            let indexes = selectedIndexs
+                                            indexes[videoIndex] = index
+                                            dispatch({ type: SET_SELECTED_INDEXES, payload: indexes })
+                                        }}
+                                    >
+                                        <img
+                                            src={thumb}
+                                            alt="coverImage"
+                                            width={'100%'}
+                                        />
+                                    </div>
+                                </div>
+                            }
                         </div>
                     ))}
                 </div>
