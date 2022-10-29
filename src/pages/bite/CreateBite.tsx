@@ -152,7 +152,7 @@ const CreateBite = () => {
         tempAligns.push(true)
         let indexes = selectedIndexs.filter((ind: any, i: any) => i !== index)
         indexes.push(0)
-        dispatch({ type: SET_THUMBNAILS, payload: thumbnails })
+        dispatch({ type: SET_THUMBNAILS, payload: thumbs })
         dispatch({ type: SET_VIDEO_ALIGNS, payload: tempAligns })
         dispatch({ type: SET_SELECTED_INDEXES, payload: indexes })
         dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
@@ -170,11 +170,31 @@ const CreateBite = () => {
             result.destination.index
         )
 
+        const thumbs = reOrder(
+            thumbnails,
+            result.source.index,
+            result.destination.index
+        )
+
+        const tempAligns = reOrder(
+            aligns,
+            result.source.index,
+            result.destination.index
+        )
+
+        const indexes = reOrder(
+            selectedIndexs,
+            result.source.index,
+            result.destination.index
+        )
+
+        dispatch({ type: SET_THUMBNAILS, payload: thumbs })
+        dispatch({ type: SET_VIDEO_ALIGNS, payload: tempAligns })
+        dispatch({ type: SET_SELECTED_INDEXES, payload: indexes })
         dispatch({
             type: SET_BITE,
             payload: {
-                ...bite,
-                videos: items
+                ...bite, videos: items
             }
         })
     }

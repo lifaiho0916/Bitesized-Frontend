@@ -6,8 +6,8 @@ export const biteAction = {
     saveBite: (bite: any, personalisedUrl: any, navigate: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_UPLOADING, payload: true })
-
             let uploadFiles: any = []
+            let cnt = 0
 
             bite.videos.forEach((video: any) => {
                 uploadFiles.push(video.coverUrl)
@@ -29,8 +29,8 @@ export const biteAction = {
                     const { data } = response
                     const { payload } = data
                     bite.videos[index / 2].coverUrl = payload.path
-                    if (index === (bite.videos.length * 2 - 1)) {
-                        console.log("Cover", bite)
+                    cnt++
+                    if (cnt === (bite.videos.length * 2)) {
                         const response1 = await api.CreateBite({ bite: bite })
                         if (response1.data.success) {
                             dispatch({ type: SET_UPLOADING, payload: false })
@@ -49,8 +49,8 @@ export const biteAction = {
                     const { data } = response
                     const { payload } = data
                     bite.videos[Math.floor(index / 2)].videoUrl = payload.path
-                    if (index === (bite.videos.length * 2 - 1)) {
-                        console.log("Video", bite)
+                    cnt++
+                    if (cnt === (bite.videos.length * 2)) {
                         const response1 = await api.CreateBite({ bite: bite })
                         if (response1.data.success) {
                             dispatch({ type: SET_UPLOADING, payload: false })
