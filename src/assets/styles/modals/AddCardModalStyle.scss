@@ -178,6 +178,29 @@
                         }
                     }
                 }
+
+                .check-box {
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 20px;
+                    padding: 0px 10px;
+
+                    .checkbox {
+                        display: flex;
+                        justify-content: center;
+
+                        .letter {
+                            display: flex;
+                            align-items: center;
+                            font-family: 'Lato';
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 12px;
+                            line-height: 14px;
+                            color: #000000;
+                        }
+                    }
+                }
             }
         }
     }

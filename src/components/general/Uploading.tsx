@@ -11,7 +11,7 @@ const Uploading = () => {
   const [index, setIndex] = useState(Math.floor(Math.random() * (CONSTANT.UPLOADING_LETTERS.length - 1)))
 
   const percent = useMemo(() => {
-    const len = bite.videos.length === 0 ? 1 : bite.videos.length * 2
+    const len = bite.videos.length === 0 ? 1 : bite.videos.length
     let sum = 0
     uploadProcess.forEach((process: any) => {
       sum += process
@@ -22,7 +22,7 @@ const Uploading = () => {
   useEffect(() => {
     const timerId = setInterval(() => {
       setIndex(Math.floor(Math.random() * (CONSTANT.UPLOADING_LETTERS.length - 1)))
-    }, 5000)
+    }, 10000)
 
     return () => {
       clearInterval(timerId)

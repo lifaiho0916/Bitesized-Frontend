@@ -6,7 +6,7 @@ const INITIAL_STATE: any = {
     prevRoute: "/",
     dlgState: "",
     currencyRate: null,
-    uploadProcess: [0, 0, 0, 0, 0, 0]
+    uploadProcess: [0, 0, 0]
 }
 
 const loadRedcuer = (state: any = INITIAL_STATE, action: any) => {

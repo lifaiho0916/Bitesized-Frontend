@@ -10,6 +10,7 @@ import PaymentModal from "../../components/modals/PaymentModal"
 import { BackIcon, ClockIcon, PlayIcon, UnlockIcon, AscendIcon, DescendIcon } from "../../assets/svg"
 import { LanguageContext } from "../../routes/authRoute"
 import { biteAction } from "../../redux/actions/biteActions"
+import { paymentAction } from "../../redux/actions/paymentActions"
 import { transactionAction } from "../../redux/actions/transactionActions"
 import { SET_DIALOG_STATE } from "../../redux/types"
 import NoTransactionImg from "../../assets/img/no-bite-transaction.png"
@@ -25,8 +26,10 @@ const BiteDetail = () => {
     const userState = useSelector((state: any) => state.auth)
     const biteState = useSelector((state: any) => state.bite)
     const transactionState = useSelector((state: any) => state.transaction)
+    const paymentState = useSelector((state: any) => state.payment)
 
     const { state } = location
+    const { payment } = paymentState
     const { prevRoute, dlgState, currencyRate } = loadState
     const { bite } = biteState
     const { user } = userState
@@ -74,7 +77,7 @@ const BiteDetail = () => {
 
     const unLockBite = () => {
         if (bite.currency) setOpenPurchaseModal(true)
-        else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null))
+        else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null, null, null))
     }
 
     const getLocalCurrency = (currency: any) => {
@@ -87,7 +90,10 @@ const BiteDetail = () => {
         return res
     }
 
-    useEffect(() => { dispatch(biteAction.getBiteById(biteId)) }, [biteId, dispatch])
+    useEffect(() => {
+        dispatch(paymentAction.getPayment())
+        dispatch(biteAction.getBiteById(biteId))
+    }, [biteId, dispatch])
     useEffect(() => {
         if (dlgState === 'unlock_bite') setOpenFreeUnLock(true)
     }, [dlgState])
@@ -141,6 +147,7 @@ const BiteDetail = () => {
                         onClose={() => setOpenPaymentModal(false)}
                         bite={bite}
                         currency={currency}
+                        payment={payment}
                     />
                     <div className="main-detail">
                         <div className="avatar-title">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { loadStripe } from "@stripe/stripe-js"
 import {
@@ -13,15 +13,12 @@ import Button from "../general/button"
 import { SET_LOADING_TRUE, SET_LOADING_FALSE } from "../../redux/types"
 import { CloseIcon, VisaCardIcon, VisaCardActiveIcon, MasterCardIcon, MasterCardActiveIcon, AECardIcon, AECardActiveIcon, UnionPayCardIcon, UnionPayCardActiveIcon } from "../../assets/svg"
 import { biteAction } from "../../redux/actions/biteActions"
-import CONSTANT from "../../constants/constant"
 import "../../assets/styles/modals/AddCardModalStyle.scss"
-
-
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY}`)
 
 const PaymentForm = (props: any) => {
-    const { bite, currency, onClose } = props
+    const { bite, currency, onClose, payment } = props
     const dispatch = useDispatch()
     const loadState = useSelector((state: any) => state.load)
     const [numberInfo, setNumberInfo] = useState<any>(null)
@@ -29,6 +26,8 @@ const PaymentForm = (props: any) => {
     const [holder, setHolder] = useState("")
     const elements = useElements()
     const stripe = useStripe()
+    const checkBoxRef = useRef(null)
+    const [saveCheck, setSaveCheck] = useState(false)
     const { currencyRate } = loadState
 
     const handleSubmit = async (e: any) => {
@@ -47,7 +46,7 @@ const PaymentForm = (props: any) => {
             onClose()
             const rate = bite.currency === 'usd' ? 1.0 : currencyRate[`${bite.currency}`]
             const usdAmount = bite.price / rate
-            dispatch(biteAction.unLockBite(bite._id, currency, usdAmount, token.token))
+            dispatch(biteAction.unLockBite(bite._id, currency, usdAmount, token.token, saveCheck, holder, numberInfo.brand))
         } catch (err) {
             console.log(err)
             dispatch({ type: SET_LOADING_FALSE })
@@ -144,6 +143,14 @@ const PaymentForm = (props: any) => {
                     </div>
                 </div>
             </div>
+            {payment === null &&
+                <div className="check-box">
+                    <label className="checkbox">
+                        <input type="checkbox" id="save_card" ref={checkBoxRef} checked={saveCheck} onChange={(e) => { setSaveCheck(e.target.checked) }} />
+                        <span className="letter">&nbsp;Save this card for future purchases</span>
+                    </label>
+                </div>
+            }
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
                 <Button
                     text={"Pay"}

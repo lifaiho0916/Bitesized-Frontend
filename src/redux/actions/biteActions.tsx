@@ -19,12 +19,7 @@ export const biteAction = {
                 formData.append("file", file)
                 if (index % 2 === 0) {
                     const response = await api.uploadCover(formData, {
-                        headers: { "content-type": "multipart/form-data" },
-                        onUploadProgress: (progress: any) => {
-                            const { loaded, total } = progress
-                            const percentageProgress = Math.floor((loaded / total) * 100)
-                            dispatch({ type: SET_UPLOADED_PROCESS, payload: { index: index, percent: percentageProgress } })
-                        }
+                        headers: { "content-type": "multipart/form-data" }
                     })
                     const { data } = response
                     const { payload } = data
@@ -43,7 +38,7 @@ export const biteAction = {
                         onUploadProgress: (progress: any) => {
                             const { loaded, total } = progress
                             const percentageProgress = Math.floor((loaded / total) * 100)
-                            dispatch({ type: SET_UPLOADED_PROCESS, payload: { index: index, percent: percentageProgress } })
+                            dispatch({ type: SET_UPLOADED_PROCESS, payload: { index: Math.floor(index / 2), percent: percentageProgress } })
                         }
                     })
                     const { data } = response
@@ -136,11 +131,11 @@ export const biteAction = {
         }
     },
 
-    unLockBite: (id: any, currency: any, amount: any, token: any) => async (dispatch: Dispatch<any>) => {
+    unLockBite: (id: any, currency: any, amount: any, token: any, saveCheck: any, holder: any, cardType: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
             let response: any = null
-            if (currency) response = await api.unLockBite(id, { currency: currency, amount: amount, token: token })
+            if (currency) response = await api.unLockBite(id, { currency: currency, amount: amount, token: token, saveCheck: saveCheck, holder: holder, cardType: cardType })
             else response = await api.unLockBite(id, {})
 
             dispatch({ type: SET_LOADING_FALSE })
