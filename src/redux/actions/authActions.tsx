@@ -1,6 +1,9 @@
 import { Dispatch } from "redux"
 import { SET_LOADING_FALSE, SET_LOADING_TRUE, SET_NAME_EXIST, SET_USER, SET_USERS, SET_URL_EXIST, SET_CURRENCY_RATE } from "../types";
 import * as api from '../../api'
+import ReactGA from "react-ga"
+const SIGN_TRACKING_ID = 'UA-224117138-1'
+ReactGA.initialize(SIGN_TRACKING_ID)
 
 export const authAction = {
   logout: (navigate: any) => async (dispatch: Dispatch<any>) => {
@@ -18,8 +21,21 @@ export const authAction = {
         localStorage.clear()
         localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(payload.token))
         dispatch({ type: SET_USER, payload: payload.user })
-        if (payload.new) navigate('/myaccount/edit')
-        else navigate(prevRoute)
+        if (payload.new) {
+          ReactGA.event({
+            category: "Sign Method",
+            action: "Sign Up",
+            label: 'Google'
+          })
+          navigate('/myaccount/edit')
+        } else {
+          ReactGA.event({
+            category: "Sign Method",
+            action: "Sign In",
+            label: 'Google'
+          })
+          navigate(prevRoute)
+        }
       }
     } catch (err) {
       console.log(err)

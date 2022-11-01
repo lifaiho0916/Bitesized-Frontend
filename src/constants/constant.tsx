@@ -86,7 +86,7 @@ const CONSTANT = {
             owner: "- Stephen Hawking"
         }
     ],
-    PAYMENT_CURRENCIES: ['usd', 'idr', 'twd', 'hkd', 'myr']
+    PAYMENT_CURRENCIES: ['usd', 'idr', 'twd', 'hkd', 'myr'],
 }
 
 export default CONSTANT;
