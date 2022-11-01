@@ -57,7 +57,7 @@ const AdminCreateFreeBite = () => {
             : files.length > (3 - bite.videos.length) ? 3 - bite.videos.length : files.length
         for (let i = 0; i < len; i++) {
             if (files[i].size > CONSTANT.MAX_BITE_FILE_SIZE) {
-                alert("file size is over 150M")
+                alert("Please keep file size below 100MB")
                 return
             }
         }

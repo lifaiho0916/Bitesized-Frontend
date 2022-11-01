@@ -51,8 +51,21 @@ export const authAction = {
         localStorage.clear()
         localStorage.setItem(`${process.env.REACT_APP_CREATO_TOKEN}`, JSON.stringify(payload.token))
         dispatch({ type: SET_USER, payload: payload.user })
-        if (payload.new) navigate('/myaccount/edit')
-        else navigate(prevRoute)
+        if (payload.new) {
+          ReactGA.event({
+            category: "Sign Method",
+            action: "Sign Up",
+            label: 'Apple'
+          })
+          navigate('/myaccount/edit')
+        } else {
+          ReactGA.event({
+            category: "Sign Method",
+            action: "Sign In",
+            label: 'Apple'
+          })
+          navigate(prevRoute)
+        }
       }
     } catch (err) {
       console.log(err)

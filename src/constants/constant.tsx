@@ -1,5 +1,5 @@
 const CONSTANT = {
-    MAX_BITE_FILE_SIZE: 100 * 1023 * 1024,
+    MAX_BITE_FILE_SIZE: 100 * 1024 * 1024,
     UPLOADING_LETTERS: [
         {
             letter: "“ I am always ready to learn although I do not always like being taught. ”",
