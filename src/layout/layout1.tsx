@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import decode from "jwt-decode"
 import Header from "./header"
 import Sidebar from "./sidebar"
+import Uploading from "../components/general/Uploading"
 import Loading from "../components/general/loading"
 import { authAction } from "../redux/actions/authActions"
 import "../assets/styles/layout/layoutAdminStyle.scss"
@@ -25,6 +26,7 @@ const Layout = (props: any) => {
     return (
         <>
             <Loading loading={loadState.loading} />
+            {loadState.uploading && <Uploading />}
             <Header />
             <div className="layout-admin">
                 <div className="sidebar">

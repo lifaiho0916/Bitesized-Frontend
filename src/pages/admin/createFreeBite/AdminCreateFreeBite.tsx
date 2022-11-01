@@ -3,16 +3,23 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useLocation } from "react-router-dom"
 import CreatorLg from "../../../components/general/CreatorLg"
 import ContainerBtn from "../../../components/general/containerBtn"
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import ReactPlayer from "react-player"
-import TeaserCard from "../../../components/general/TeaserCard"
 import Input from "../../../components/general/input"
 import PublishBiteModal from "../../../components/modals/PublishBiteModal"
 import Button from "../../../components/general/button"
-import { BackIcon, RemoveIcon, AddIcon } from "../../../assets/svg"
+import { BackIcon, RemoveIcon, AddIcon, PlayIcon, DragHandleIcon } from "../../../assets/svg"
 import { biteAction } from "../../../redux/actions/biteActions"
 import CONSTANT from "../../../constants/constant"
-import { SET_BITE, SET_PREVIOUS_ROUTE } from "../../../redux/types"
+import { SET_BITE, SET_PREVIOUS_ROUTE, SET_THUMBNAILS, SET_VIDEO_ALIGNS, SET_SELECTED_INDEXES } from "../../../redux/types"
 import "../../../assets/styles/admin/createFreeBite/AdminCreateFreeBiteStyle.scss"
+
+const reOrder = (list: any, startIndex: any, endIndex: any) => {
+    const result = Array.from(list)
+    const [removed] = result.splice(startIndex, 1)
+    result.splice(endIndex, 0, removed)
+    return result
+}
 
 const AdminCreateFreeBite = () => {
     const location = useLocation()
@@ -26,7 +33,9 @@ const AdminCreateFreeBite = () => {
     let user: any = null
     if (state) user = state.user
 
-    const { bite, thumbnails } = biteState
+    const { bite, thumbnails, selectedIndexs, aligns } = biteState
+    const [play, setPlay] = useState(false)
+    const [videoIndex, setVideoIndex] = useState(-1)
     const [openPublish, setOpenPublish] = useState(false)
 
     const publish = () => {
@@ -60,15 +69,13 @@ const AdminCreateFreeBite = () => {
             video.preload = "metadata"
             video.onloadedmetadata = evt => {
                 let videos = bite.videos
-                let thumbs = thumbnails
-                thumbs.push('')
                 videos.push({
+                    id: `item-${videos.length}`,
                     coverUrl: null,
                     videoUrl: loadFile,
                     duration: video.duration
                 })
                 dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
-                // dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
             }
             video.src = URL.createObjectURL(loadFile)
         }
@@ -87,22 +94,78 @@ const AdminCreateFreeBite = () => {
         const file = new File([blob], 'cover.png', blob)
         const cover = Object.assign(file, { preview: url })
         const videos = bite.videos
-        const thumbs = thumbnails
         videos[index].coverUrl = cover
-        thumbs[index] = cover
         dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
-        // dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
     }
     const gotoEditThumbnail = () => {
+        const newBite = {
+            ...bite,
+            title: title,
+        }
+        dispatch({ type: SET_BITE, payload: newBite })
         dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
         navigate('/admin/create-free-bite/detail/edit-thumbnail', { state: { user: user } })
     }
     const removeVideo = (index: any) => {
         let videos = bite.videos.filter((video: any, i: any) => i !== index)
         let thumbs = thumbnails.filter((thumb: any, i: any) => i !== index)
+        thumbs.push([])
+        let tempAligns = aligns.filter((align: any, i: any) => i !== index)
+        tempAligns.push(true)
+        let indexes = selectedIndexs.filter((ind: any, i: any) => i !== index)
+        indexes.push(0)
+        dispatch({ type: SET_THUMBNAILS, payload: thumbs })
+        dispatch({ type: SET_VIDEO_ALIGNS, payload: tempAligns })
+        dispatch({ type: SET_SELECTED_INDEXES, payload: indexes })
         dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
-        // dispatch({ type: SET_BITE_THUMBNAILS, payload: thumbs })
     }
+
+    const onDragEnd = (result: any) => {
+        // dropped outside the list
+        if (!result.destination) {
+            return
+        }
+
+        const items = reOrder(
+            bite.videos,
+            result.source.index,
+            result.destination.index
+        )
+
+        const thumbs = reOrder(
+            thumbnails,
+            result.source.index,
+            result.destination.index
+        )
+
+        const tempAligns = reOrder(
+            aligns,
+            result.source.index,
+            result.destination.index
+        )
+
+        const indexes = reOrder(
+            selectedIndexs,
+            result.source.index,
+            result.destination.index
+        )
+
+        dispatch({ type: SET_THUMBNAILS, payload: thumbs })
+        dispatch({ type: SET_VIDEO_ALIGNS, payload: tempAligns })
+        dispatch({ type: SET_SELECTED_INDEXES, payload: indexes })
+        dispatch({
+            type: SET_BITE,
+            payload: {
+                ...bite, videos: items
+            }
+        })
+    }
+
+    const getItemStyle = (isDragging: any, draggableStyle: any) => ({
+        userSelect: 'none',
+        background: isDragging ? '#FFC88F' : '#FFFFFF',
+        ...draggableStyle,
+    })
 
     useEffect(() => {
         if (title === "" || bite.videos.length === 0) {
@@ -112,7 +175,7 @@ const AdminCreateFreeBite = () => {
         setPublishEnable(true)
     }, [title, bite])
 
-    useEffect(() => { if (state === null) navigate('/admin/create-free-bite') }, [])
+    useEffect(() => { if (state === null) navigate('/admin/create-free-bite') }, [state, navigate])
 
     return (
         <div className="create-free-bite-wrapper">
@@ -132,23 +195,94 @@ const AdminCreateFreeBite = () => {
                 </div>
 
                 <div className="create-bite">
-                    <div className="uploaded-vidoes" style={{ height: bite.videos.length === 0 ? '0px' : '495px' }}>
-                        {bite.videos.map((video: any, index: any) => (
-                            <div className="uploaded-video" key={index}>
-                                <TeaserCard
-                                    cover={video.coverUrl ? video.coverUrl.preview : null}
-                                    teaser={video.videoUrl.preview}
-                                    type={"dareme"}
-                                />
-                                <div className="bin-btn" onClick={() => removeVideo(index)}>
-                                    <RemoveIcon color="white" width={30} height={30} />
+                    <DragDropContext onDragEnd={onDragEnd}>
+                        <Droppable droppableId="droppable" direction="horizontal">
+                            {(provided, snapshot) => (
+                                <div className="uploaded-vidoes"
+                                    ref={provided.innerRef}
+                                    style={{ height: bite.videos.length === 0 ? '0px' : '460px' }}
+                                    {...provided.droppableProps}
+                                >
+                                    {bite.videos.map((video: any, index: any) => (
+                                        <Draggable key={video.id} draggableId={video.id} index={index}>
+                                            {(provided, snapshot) => (
+                                                <div className="uploaded-video"
+                                                    ref={provided.innerRef}
+                                                    {...provided.draggableProps}
+                                                    {...provided.dragHandleProps}
+                                                    style={getItemStyle(
+                                                        snapshot.isDragging,
+                                                        provided.draggableProps.style
+                                                    )}
+                                                >
+                                                    <div className="bite-main-part">
+                                                        <div className="bite-part" onClick={() => {
+                                                            if (play) {
+                                                                if (videoIndex === index) {
+                                                                    setPlay(false)
+                                                                    setVideoIndex(-1)
+                                                                } else setVideoIndex(index)
+                                                            }
+                                                        }}>
+                                                            {(index !== videoIndex) &&
+                                                                <>
+                                                                    <div className="cover-image">
+                                                                        {video.coverUrl &&
+                                                                            <img
+                                                                                src={video.coverUrl.preview ? video.coverUrl.preview : `${process.env.REACT_APP_SERVER_URL}/${video.coverUrl}`}
+                                                                                alt="coverImage"
+                                                                                width={'100%'}
+                                                                            />
+                                                                        }
+                                                                    </div>
+                                                                    <div className="play-icon" onClick={() => {
+                                                                        setVideoIndex(index)
+                                                                        setPlay(true)
+                                                                    }}>
+                                                                        <PlayIcon color="white" width={'28'} height={'28'} />
+                                                                    </div>
+                                                                </>
+                                                            }
+                                                            {(play && videoIndex === index) &&
+                                                                <>
+                                                                    <ReactPlayer
+                                                                        className="react-player"
+                                                                        url={video.videoUrl.preview ? video.videoUrl.preview : `${process.env.REACT_APP_SERVER_URL}/${video.videoUrl}`}
+                                                                        playing={play}
+                                                                        playsinline={true}
+                                                                        config={{
+                                                                            file: {
+                                                                                attributes: {
+                                                                                    controlsList: 'nodownload noremoteplayback noplaybackrate',
+                                                                                    disablePictureInPicture: true,
+                                                                                }
+                                                                            }
+                                                                        }}
+                                                                        controls
+                                                                    />
+                                                                </>
+                                                            }
+                                                        </div>
+                                                        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
+                                                            <DragHandleIcon width={30} height={10} color={snapshot.isDragging ? "#EA8426" : "#BAB6B5"} />
+                                                        </div>
+                                                    </div>
+                                                    <div className="bin-btn" onClick={() => removeVideo(index)}>
+                                                        <RemoveIcon color="white" width={30} height={30} />
+                                                    </div>
+                                                    <div className="time-duration">
+                                                        <span>{displayDuration(video.duration)}</span>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                        </Draggable>
+                                    ))}
+                                    {provided.placeholder}
                                 </div>
-                                <div className="time-duration">
-                                    <span>{displayDuration(video.duration)}</span>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                            )}
+                        </Droppable>
+                    </DragDropContext>
 
                     <div className="upload-edit-btns">
                         {bite.videos.length > 0 &&
@@ -193,7 +327,7 @@ const AdminCreateFreeBite = () => {
                                 key={index}
                                 url={video.videoUrl.preview}
                                 playing={false}
-                                onReady={() => { if (video.coverUrl === null) setTimeout(() => getFirstFrame(index), 1000) }}
+                                onReady={() => { if (video.coverUrl === null) setTimeout(() => getFirstFrame(index), 500) }}
                             />
                         ))}
                     </div>

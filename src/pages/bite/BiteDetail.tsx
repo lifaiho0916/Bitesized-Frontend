@@ -44,8 +44,6 @@ const BiteDetail = () => {
     const [openFreeUnlock, setOpenFreeUnLock] = useState(false)
     const [openPurchaseModal, setOpenPurchaseModal] = useState(false)
     const [openPaymentModal, setOpenPaymentModal] = useState(false)
-    const [cardHover, SetCardHover] = useState(false)
-    const [hover, setHover] = useState(false)
 
     const displayTime = (left: any) => {
         const passTime = Math.abs(left)

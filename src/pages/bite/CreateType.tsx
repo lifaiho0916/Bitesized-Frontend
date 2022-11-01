@@ -14,7 +14,7 @@ const CreateType = () => {
 
     useEffect(() => {
         dispatch({ type: SET_BITE_INITIAL })
-        dispatch({ type: SET_UPLOADED_PROCESS, payload: [0, 0, 0, 0, 0, 0] })
+        dispatch({ type: SET_UPLOADED_PROCESS, payload: [0, 0, 0] })
     }, [dispatch])
 
     return (

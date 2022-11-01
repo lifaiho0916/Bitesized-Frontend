@@ -262,7 +262,7 @@
                     position: relative;
                     margin: 10px;
                     width: 325px;
-                    height: 578px;
+                    height: 575px;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -290,7 +290,24 @@
                         background-color: rgba(0, 0, 0, 0.5);
                     }
 
-
+                    .play-icon {
+                        cursor: pointer;
+                        position: absolute;
+                        transform: translate(-50%, -50%);
+                        top: 50%;
+                        left: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 40px;
+                        height: 40px;
+                        background: #efa058;
+                        border-radius: 50%;
+                
+                        &:hover {
+                            background: #f2b176;
+                        }
+                    }
 
                     .lock-btn {
                         cursor: pointer;

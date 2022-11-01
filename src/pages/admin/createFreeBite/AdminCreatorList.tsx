@@ -5,7 +5,7 @@ import { LanguageContext } from "../../../routes/authRoute"
 import CategoryBtn from "../../../components/general/categoryBtn"
 import { authAction } from "../../../redux/actions/authActions"
 import CreatorSm from "../../../components/general/CreatorSm"
-import { SET_BITE_INITIAL } from "../../../redux/types"
+import { SET_BITE_INITIAL, SET_UPLOADED_PROCESS } from "../../../redux/types"
 import "../../../assets/styles/admin/createFreeBite/AdminCreatorListStyle.scss"
 
 const AdminCreatorList = (props: any) => {
@@ -50,6 +50,7 @@ const AdminCreatorList = (props: any) => {
                         <CreatorSm
                             user={user}
                             handleSubmit={() => {
+                                dispatch({ type: SET_UPLOADED_PROCESS, payload: [0, 0, 0] })
                                 dispatch({ type: SET_BITE_INITIAL })
                                 navigate(`/admin/create-free-bite/detail`, { state: { user: user } })
                             }}

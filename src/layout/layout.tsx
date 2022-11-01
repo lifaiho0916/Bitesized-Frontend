@@ -12,7 +12,7 @@ import "../assets/styles/layout/layoutStyle.scss";
 const Layout = (props: any) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const loadState = useSelector((state: any) => state.load);
+  const loadState = useSelector((state: any) => state.load)
   const token: any = JSON.parse(localStorage.getItem(`${process.env.REACT_APP_CREATO_TOKEN}`) || '{}');
 
   useEffect(() => {
