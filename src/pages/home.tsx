@@ -97,8 +97,7 @@ const Home = () => {
               <div className="dareme" key={i} style={(width < 680 && i === scrollIndex) ? { transform: 'scale(1.03)' } : {}}>
                 <BiteCardHome bite={bite} />
               </div>
-            ))
-            }
+            ))}
           </div>
         </div>
       }

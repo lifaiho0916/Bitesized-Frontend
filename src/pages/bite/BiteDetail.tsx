@@ -7,7 +7,7 @@ import ReactPlayer from "react-player"
 import UnLockFreeModal from "../../components/modals/UnLockFreeModal"
 import PurchaseModal from "../../components/modals/PurchaseModal"
 import PaymentModal from "../../components/modals/PaymentModal"
-import { BackIcon, ClockIcon, PlayIcon, UnlockIcon, AscendIcon, DescendIcon } from "../../assets/svg"
+import { BackIcon, ClockIcon, PlayIcon, UnlockIcon, AscendIcon, DescendIcon, LockedIcon } from "../../assets/svg"
 import { LanguageContext } from "../../routes/authRoute"
 import { biteAction } from "../../redux/actions/biteActions"
 import { paymentAction } from "../../redux/actions/paymentActions"
@@ -44,6 +44,8 @@ const BiteDetail = () => {
     const [openFreeUnlock, setOpenFreeUnLock] = useState(false)
     const [openPurchaseModal, setOpenPurchaseModal] = useState(false)
     const [openPaymentModal, setOpenPaymentModal] = useState(false)
+    const [cardHover, SetCardHover] = useState(false)
+    const [hover, setHover] = useState(false)
 
     const displayTime = (left: any) => {
         const passTime = Math.abs(left)
@@ -193,7 +195,7 @@ const BiteDetail = () => {
                                     shape="rounded"
                                     width={"250px"}
                                     icon={[
-                                        <UnlockIcon color="#EFA058" />, <UnlockIcon color="white" />, <UnlockIcon color="white" />
+                                        <LockedIcon color="#EFA058" />, <UnlockIcon color="white" />, <UnlockIcon color="white" />
                                     ]}
                                     handleSubmit={unLockBite}
                                 />
@@ -300,13 +302,13 @@ const BiteDetail = () => {
                                                     width={'100%'}
                                                 />
                                                 <div className="lock-video"></div>
-                                                <div className="play-icon">
+                                                <div className="lock-btn">
                                                     <Button
                                                         text="Unlock"
                                                         fillStyle="outline"
                                                         color="primary"
                                                         shape="rounded"
-                                                        icon={[<UnlockIcon color="#EFA058" />, <UnlockIcon color="white" />, <UnlockIcon color="white" />]}
+                                                        icon={[<LockedIcon color="#EFA058" />, <UnlockIcon color="white" />, <UnlockIcon color="white" />]}
                                                         handleSubmit={unLockBite}
                                                     />
                                                 </div>
