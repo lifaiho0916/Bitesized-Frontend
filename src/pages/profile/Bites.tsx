@@ -20,7 +20,7 @@ const Bites = () => {
         <div className="creator-wrapper">
             <div className="page-header">
                 <div onClick={() => { navigate('/') }}><BackIcon color="black" /></div>
-                <div className="page-title"><span>List of Bites</span></div>
+                <div className="page-title"><span>List of Bite-sized Knowledge</span></div>
                 <div style={{ width: '24px' }}></div>
             </div>
             <div className="list-menu">
