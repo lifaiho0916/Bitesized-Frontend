@@ -81,7 +81,7 @@ const Home = () => {
         <div className="section" style={{ marginTop: '20px' }}>
           <div className="title">💡Bite-sized Knowledge</div>
           <div className="see-more" onClick={gotoBites}>
-            <div className="description">Learn new knowledge within 15 minutes</div>
+            <div className="description">Learn Something New In Minutes</div>
             <div className="divider"></div>
             <div className="see-more-btn">{width < 680 ? '··· ' : ''}see more</div>
           </div>
@@ -103,9 +103,9 @@ const Home = () => {
       }
       {users.length > 0 &&
         <div className="section">
-          <div className="title">🧑‍💻 Creators You Might Like</div>
+          <div className="title">Creators You Might Like 🎨</div>
           <div className="see-more" onClick={gotoCreators}>
-            <div className="description">Start discover new area of your learning</div>
+            <div className="description">Explore Skills & Knowledge from Creators</div>
             <div className="divider"></div>
             <div className="see-more-btn">{width < 680 ? '··· ' : ''}see more</div>
           </div>
