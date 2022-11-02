@@ -4,6 +4,7 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
 import Button from "../../../components/general/button"
 import { biteAction } from "../../../redux/actions/biteActions"
 import { SearchIcon, AscendIcon, DescendIcon } from "../../../assets/svg"
+import { SET_BITE, SET_UPLOADED_PROCESS } from "../../../redux/types"
 import "../../../assets/styles/admin/editBite/AdminBiteListStyle.scss"
 
 const AdminBiteList = () => {
@@ -85,7 +86,11 @@ const AdminBiteList = () => {
                         </thead>
                         <tbody>
                             {bites.map((bite: any, index: any) => (
-                                <tr key={index} onClick={() => navigate(`${location.pathname}/${bite._id}`)}>
+                                <tr key={index} onClick={() => {
+                                    dispatch({ type: SET_BITE, payload: bite })
+                                    dispatch({ type: SET_UPLOADED_PROCESS, payload: [0, 0, 0] })
+                                    navigate(`${location.pathname}/${bite._id}`)
+                                }}>
                                     <td>{new Date(bite.date).toUTCString().slice(5, 16)}</td>
                                     <td>{new Date(bite.date).toUTCString().slice(17, 25)}</td>
                                     <td>{bite.title}</td>

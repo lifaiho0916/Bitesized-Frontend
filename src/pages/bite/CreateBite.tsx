@@ -12,7 +12,7 @@ import Button from "../../components/general/button"
 import PublishBiteModal from "../../components/modals/PublishBiteModal"
 import { AddIcon, BackIcon, PlayIcon, RemoveIcon, DragHandleIcon } from "../../assets/svg"
 import { biteAction } from "../../redux/actions/biteActions"
-import { SET_BITE, SET_PREVIOUS_ROUTE, SET_SELECTED_INDEXES, SET_THUMBNAILS, SET_VIDEO_ALIGNS } from "../../redux/types"
+import { SET_BITE, SET_PREVIOUS_ROUTE, SET_SELECTED_INDEXES, SET_VIDEO_ALIGNS } from "../../redux/types"
 import CONSTANT from "../../constants/constant"
 import "../../assets/styles/bite/CreateBiteStyle.scss"
 
@@ -44,7 +44,7 @@ const CreateBite = () => {
     const fileInputRef = useRef<HTMLInputElement>(null)
     const biteState = useSelector((state: any) => state.bite)
     const userState = useSelector((state: any) => state.auth)
-    const { bite, thumbnails, selectedIndexs, aligns } = biteState
+    const { bite, selectedIndexs, aligns } = biteState
     const { user } = userState
 
     const [title, setTitle] = useState(bite.title ? bite.title : '')
@@ -103,7 +103,7 @@ const CreateBite = () => {
             video.onloadedmetadata = evt => {
                 let videos = bite.videos
                 videos.push({
-                    id: `item-${videos.length}`,
+                    id: loadFile.name,
                     coverUrl: null,
                     videoUrl: loadFile,
                     duration: video.duration
@@ -146,13 +146,10 @@ const CreateBite = () => {
     }
     const removeVideo = (index: any) => {
         let videos = bite.videos.filter((video: any, i: any) => i !== index)
-        let thumbs = thumbnails.filter((thumb: any, i: any) => i !== index)
-        thumbs.push([])
         let tempAligns = aligns.filter((align: any, i: any) => i !== index)
         tempAligns.push(true)
         let indexes = selectedIndexs.filter((ind: any, i: any) => i !== index)
         indexes.push(0)
-        dispatch({ type: SET_THUMBNAILS, payload: thumbs })
         dispatch({ type: SET_VIDEO_ALIGNS, payload: tempAligns })
         dispatch({ type: SET_SELECTED_INDEXES, payload: indexes })
         dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
@@ -170,12 +167,6 @@ const CreateBite = () => {
             result.destination.index
         )
 
-        const thumbs = reOrder(
-            thumbnails,
-            result.source.index,
-            result.destination.index
-        )
-
         const tempAligns = reOrder(
             aligns,
             result.source.index,
@@ -188,7 +179,6 @@ const CreateBite = () => {
             result.destination.index
         )
 
-        dispatch({ type: SET_THUMBNAILS, payload: thumbs })
         dispatch({ type: SET_VIDEO_ALIGNS, payload: tempAligns })
         dispatch({ type: SET_SELECTED_INDEXES, payload: indexes })
         dispatch({

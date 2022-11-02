@@ -11,7 +11,7 @@ import Button from "../../../components/general/button"
 import { BackIcon, RemoveIcon, AddIcon, PlayIcon, DragHandleIcon } from "../../../assets/svg"
 import { biteAction } from "../../../redux/actions/biteActions"
 import CONSTANT from "../../../constants/constant"
-import { SET_BITE, SET_PREVIOUS_ROUTE, SET_THUMBNAILS, SET_VIDEO_ALIGNS, SET_SELECTED_INDEXES } from "../../../redux/types"
+import { SET_BITE, SET_PREVIOUS_ROUTE, SET_VIDEO_ALIGNS, SET_SELECTED_INDEXES } from "../../../redux/types"
 import "../../../assets/styles/admin/createFreeBite/AdminCreateFreeBiteStyle.scss"
 
 const reOrder = (list: any, startIndex: any, endIndex: any) => {
@@ -70,7 +70,7 @@ const AdminCreateFreeBite = () => {
             video.onloadedmetadata = evt => {
                 let videos = bite.videos
                 videos.push({
-                    id: `item-${videos.length}`,
+                    id: loadFile.name,
                     coverUrl: null,
                     videoUrl: loadFile,
                     duration: video.duration
@@ -108,13 +108,10 @@ const AdminCreateFreeBite = () => {
     }
     const removeVideo = (index: any) => {
         let videos = bite.videos.filter((video: any, i: any) => i !== index)
-        let thumbs = thumbnails.filter((thumb: any, i: any) => i !== index)
-        thumbs.push([])
         let tempAligns = aligns.filter((align: any, i: any) => i !== index)
         tempAligns.push(true)
         let indexes = selectedIndexs.filter((ind: any, i: any) => i !== index)
         indexes.push(0)
-        dispatch({ type: SET_THUMBNAILS, payload: thumbs })
         dispatch({ type: SET_VIDEO_ALIGNS, payload: tempAligns })
         dispatch({ type: SET_SELECTED_INDEXES, payload: indexes })
         dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
@@ -132,12 +129,6 @@ const AdminCreateFreeBite = () => {
             result.destination.index
         )
 
-        const thumbs = reOrder(
-            thumbnails,
-            result.source.index,
-            result.destination.index
-        )
-
         const tempAligns = reOrder(
             aligns,
             result.source.index,
@@ -150,7 +141,6 @@ const AdminCreateFreeBite = () => {
             result.destination.index
         )
 
-        dispatch({ type: SET_THUMBNAILS, payload: thumbs })
         dispatch({ type: SET_VIDEO_ALIGNS, payload: tempAligns })
         dispatch({ type: SET_SELECTED_INDEXES, payload: indexes })
         dispatch({

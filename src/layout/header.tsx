@@ -8,7 +8,7 @@ import SideMenu from "../components/sideMenu";
 import Avatar from "../components/general/avatar";
 import LangDialog from "../components/general/langDialog"
 import { authAction } from "../redux/actions/authActions";
-import { CreatoColorIcon, AddIcon, LanguageIcon } from "../assets/svg";
+import { LogoIcon, AddIcon, LanguageIcon } from "../assets/svg";
 import { LanguageContext } from "../routes/authRoute";
 import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE, SET_USERS } from "../redux/types";
 import "../assets/styles/headerStyle.scss";
@@ -77,7 +77,7 @@ const Header = () => {
         <div className="header">
           <div className="user-header">
             <div className="dare-creator" onClick={gotoHome}>
-              <div className="header-logo"><CreatoColorIcon /></div>
+              <div className="header-logo" style={{ marginRight: '10px' }}><LogoIcon width={40} height={40} /></div>
               <h2>Creato</h2>
             </div>
             {user ? (

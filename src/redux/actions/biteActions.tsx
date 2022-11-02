@@ -60,6 +60,84 @@ export const biteAction = {
         }
     },
 
+    editBite: (bite: any, navigate: any) => async (dispatch: Dispatch<any>) => {
+        try {
+            let uploadFiles: any = []
+            let cnt = 0
+            let len = 0
+
+            bite.videos.forEach((video: any, index: any) => {
+                if (video.id) {
+                    uploadFiles.push({
+                        index: index,
+                        file: video.coverUrl
+                    })
+                    uploadFiles.push({
+                        index: index,
+                        file: video.videoUrl
+                    })
+                    len++
+                }
+            })
+
+            if (uploadFiles.length) {
+                dispatch({ type: SET_UPLOADING, payload: true })
+                uploadFiles.forEach(async (upload: any, index: any) => {
+                    const formData = new FormData()
+                    formData.append("file", upload.file)
+                    if (index % 2 === 0) {
+                        const response = await api.uploadCover(formData, {
+                            headers: { "content-type": "multipart/form-data" }
+                        })
+                        const { data } = response
+                        const { payload } = data
+                        bite.videos[upload.index].coverUrl = payload.path
+                        cnt++
+                        if (cnt === (len * 2)) {
+                            const response1 = await api.UpdateBite(bite._id, { bite: bite })
+                            if (response1.data.success) {
+                                dispatch({ type: SET_UPLOADING, payload: false })
+                                navigate('/admin/edit-bite')
+                            }
+                        }
+                    } else {
+                        const response = await api.uploadVideo(formData, {
+                            headers: { "content-type": "multipart/form-data" },
+                            onUploadProgress: (progress: any) => {
+                                const { loaded, total } = progress
+                                const percentageProgress = Math.floor((loaded / total) * 100)
+                                dispatch({ type: SET_UPLOADED_PROCESS, payload: { index: Math.floor(index / 2), percent: percentageProgress } })
+                            }
+                        })
+                        const { data } = response
+                        const { payload } = data
+                        bite.videos[upload.index].videoUrl = payload.path
+                        cnt++
+                        if (cnt === (len * 2)) {
+                            const response1 = await api.UpdateBite(bite._id, { bite: bite })
+                            if (response1.data.success) {
+                                dispatch({ type: SET_UPLOADING, payload: false })
+                                navigate('/admin/edit-bite')
+                            }
+                        }
+                    }
+                })
+            } else {
+                dispatch({ type: SET_LOADING_TRUE })
+                const response1 = await api.UpdateBite(bite._id, { bite: bite })
+                if (response1.data.success) {
+                    dispatch({ type: SET_LOADING_FALSE })
+                    navigate('/admin/edit-bite')
+                }
+            }
+
+        } catch (err) {
+            console.log(err)
+            dispatch({ type: SET_LOADING_FALSE })
+            dispatch({ type: SET_UPLOADING, payload: false })
+        }
+    },
+
     saveBiteByUserId: (bite: any, userId: any, navigate: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_UPLOADING, payload: true })

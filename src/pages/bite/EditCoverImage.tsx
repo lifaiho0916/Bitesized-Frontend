@@ -12,7 +12,6 @@ import {
     SET_LOADING_FALSE,
     SET_SELECTED_INDEXES,
     SET_VIDEO_ALIGNS,
-    SET_THUMBNAILS
 } from "../../redux/types"
 import "../../assets/styles/bite/EditCoverStyle.scss"
 
@@ -23,7 +22,8 @@ const EditCoverImage = () => {
     const loadState = useSelector((state: any) => state.load)
     const biteState = useSelector((state: any) => state.bite)
     const { prevRoute } = loadState
-    const { bite, thumbnails, selectedIndexs, aligns } = biteState
+    const { bite, selectedIndexs, aligns } = biteState
+    const [thumbnails, setThumbnails] = useState<any>([[], [], []])
     const fileInputRef = useRef<HTMLInputElement>(null)
     let imageEditor1: any = null
     let imageEditor2: any = null
@@ -31,6 +31,7 @@ const EditCoverImage = () => {
     const playerRef = useRef<ReactPlayer>(null)
     const [seekCnt, setSeekCnt] = useState<any>(null)
     const [videoIndex, setVideoIndex] = useState(0)
+    const [blobFiles, setBlobFiles] = useState<any>([null, null, null])
 
     const NextCover = async () => {
         if (videoIndex < bite.videos.length - 1) {
@@ -106,30 +107,30 @@ const EditCoverImage = () => {
         let thumbs = thumbnails
         if (thumbs[videoIndex][10]) thumbs[videoIndex][10] = loadFile
         else thumbs[videoIndex].push(loadFile)
+        setThumbnails([...thumbs])
         let indexes = selectedIndexs
         indexes[videoIndex] = 10
         dispatch({ type: SET_SELECTED_INDEXES, payload: indexes })
-        dispatch({ type: SET_THUMBNAILS, payload: thumbs })
     }
 
     useEffect(() => {
         if (seekCnt !== null) {
             if (seekCnt >= 0 && seekCnt < 10) {
-                let period = bite.videos[videoIndex].duration / 10
+                let period = (bite.videos[videoIndex].duration ? bite.videos[videoIndex].duration : blobFiles[videoIndex].duration) / 10
                 let tempThumbs = thumbnails
                 let url = getCoverURL()
                 tempThumbs[videoIndex].push(url)
-                dispatch({ type: SET_THUMBNAILS, payload: tempThumbs })
+                setThumbnails([...tempThumbs])
                 playerRef.current?.seekTo(period * seekCnt)
             }
             if (seekCnt === 10) dispatch({ type: SET_LOADING_FALSE })
         }
-    }, [seekCnt, bite, videoIndex, thumbnails, dispatch])
+    }, [seekCnt, bite, videoIndex, dispatch])
 
     return (
         <div className="edit-cover-wrapper">
             <div className="page-header" style={location.state ? { maxWidth: '100%', margin: '25px 20px' } : {}}>
-                <div onClick={gotoCreateBite}><BackIcon color="black" /></div>
+                <div onClick={() => navigate(prevRoute, { state: { user: location.state ? location.state.user : null } })}><BackIcon color="black" /></div>
                 <div className="page-title"><span>Edit thumbnail</span></div>
                 <div style={{ width: '24px' }}></div>
             </div>
@@ -177,11 +178,30 @@ const EditCoverImage = () => {
                     hidden
                     id="element"
                     ref={playerRef}
-                    url={bite?.videos[videoIndex]?.videoUrl?.preview}
-                    onReady={() => {
+                    url={bite?.videos[videoIndex]?.videoUrl.preview ? bite?.videos[videoIndex]?.videoUrl.preview : blobFiles[videoIndex] ? blobFiles[videoIndex].preview : `${process.env.REACT_APP_SERVER_URL}/${bite?.videos[videoIndex]?.videoUrl}`}
+                    onReady={async () => {
                         if (thumbnails[videoIndex].length === 0) {
                             dispatch({ type: SET_LOADING_TRUE })
-                            setSeekCnt(0)
+                            if (bite?.videos[videoIndex]?.videoUrl.preview === undefined && blobFiles[videoIndex] === null) {
+                                const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/${bite?.videos[videoIndex]?.videoUrl}`)
+                                const blob = await response.blob()
+                                const extension = bite?.videos[videoIndex]?.videoUrl.slice(-3);
+                                const file = new File([blob], `VIDEO.${extension}`, blob)
+                                const video = document.createElement('video')
+                                video.preload = "metadata"
+                                video.onloadedmetadata = evt => {
+                                    const videoFile = Object.assign(file, {
+                                        preview: URL.createObjectURL(file),
+                                        duration: video.duration
+                                    })
+                                    let files = blobFiles
+                                    files[videoIndex] = videoFile
+                                    setBlobFiles([...files])
+                                    setTimeout(() => setSeekCnt(0), 500)
+                                }
+                                video.src = URL.createObjectURL(file)
+                            }
+                            else setSeekCnt(0)
                         }
                     }}
                     onSeek={() => { if (seekCnt <= 10) setSeekCnt((prev: any) => prev + 1) }}

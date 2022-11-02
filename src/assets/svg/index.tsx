@@ -1185,6 +1185,12 @@ export const AppleMusicIcon = (props: any) => (
 
 export const CreatoColorIcon = (props: any) => <img src={CREATO_COLOR_PNG} alt="creatocoin" />;
 
+export const LogoIcon = (props: any) => (
+  <svg width={props.width ? props.width : "932"} height={props.height ? props.height : "932"} viewBox="0 0 932 932" fill="none" xmlns="http://www.w3.org/2000/svg" >
+    <path d="M419.456 333.811V0.545898C186.729 23.8186 0.546875 223.499 0.546875 466C0.546875 708.502 186.729 908.182 419.456 931.455V598.19C372.911 579.106 326.365 527.44 326.365 466C326.365 404.56 372.911 352.895 419.456 333.811ZM599.121 419.455H931.456C909.114 198.364 745.274 22.4223 512.547 0.545898V333.811C559.092 347.775 583.296 379.426 599.121 419.455ZM512.547 598.19V931.455C745.274 909.579 909.114 733.637 931.456 512.546H599.121C583.296 552.575 559.092 584.226 512.547 598.19Z" fill="#EFA058" />
+  </svg >
+)
+
 export const CreatoGreyIcon = (props: any) => <img src={CREATO_GREY_PNG} alt="creatgreycoin" />;
 
 export const ListViewIcon = (props: any) => (
@@ -1437,7 +1443,7 @@ export const FitHeightIcon = (props: any) => (
 )
 
 export const BiteIcon = (props: any) => (
-  <svg  width={props.width ? props.width : "24"} height={props.height ? props.height : "24"} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width={props.width ? props.width : "24"} height={props.height ? props.height : "24"} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clipPath="url(#clip0_1184_208254)">
       <path d="M23 11.01L18 11C17.45 11 17 11.45 17 12V21C17 21.55 17.45 22 18 22H23C23.55 22 24 21.55 24 21V12C24 11.45 23.55 11.01 23 11.01ZM23 20H18V13H23V20ZM20 2H2C0.89 2 0 2.89 0 4V16C0 17.1 0.89 18 2 18H9V20H7V22H15V20H13V18H15V16H2V4H20V9H22V4C22 2.89 21.1 2 20 2Z" fill={props.color} />
       <path d="M8.14773 10.8866V12.6593L11.25 14.3523L14.3523 12.6593V10.8866L11.25 12.5795L8.14773 10.8866ZM11.25 6.375L6.375 9.03409L11.25 11.6932L15.2386 9.51716V12.5795H16.125V9.03409L11.25 6.375Z" fill={props.color} />

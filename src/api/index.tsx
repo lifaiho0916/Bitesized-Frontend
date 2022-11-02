@@ -15,6 +15,7 @@ export const uploadVideo = (data: any, config: any) => API.post('/api/bite/uploa
 export const uploadCover = (data: any, config: any) => API.post('/api/bite/upload/cover', data, config)
 export const CreateBite = (data: any) => API.post('/api/bite/create', data)
 export const CreateBiteByUserId = (id: any, data: any) => API.post(`/api/bite/create/${id}`, data)
+export const UpdateBite = (id: any, data: any) => API.put(`/api/bite/${id}`, data)
 
 export const getAllBites = () => API.get('/api/bite')
 export const unLockBite = (id: any, data: any) => API.put(`/api/bite/${id}/unlock`, data)

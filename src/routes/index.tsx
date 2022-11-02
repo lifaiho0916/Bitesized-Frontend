@@ -64,6 +64,7 @@ const AppRoutes = () => {
       <Route path="admin/check-bite/:biteId" element={<AuthRoute child={<AdminCheckBite />} routeType="private" />} />
       <Route path="admin/edit-bite" element={<AuthRoute child={<AdminBiteList />} routeType="private" />} />
       <Route path="admin/edit-bite/:biteId" element={<AuthRoute child={<AdminEditBite />} routeType="private" />} />
+      <Route path="admin/edit-bite/:biteId/edit-thumbnail" element={<AuthRoute child={<EditCoverImage />} routeType="private" />} />
       <Route path="admin/create-free-bite" element={<AuthRoute child={<AdminCreatorList />} routeType="private" />} />
       <Route path="admin/create-free-bite/detail" element={<AuthRoute child={<AdminCreateFreeBite />} routeType="private" />} />
       <Route path="admin/create-free-bite/detail/edit-thumbnail" element={<AuthRoute child={<EditCoverImage />} routeType="private" />} />
@@ -74,7 +75,7 @@ const AppRoutes = () => {
 
       <Route path="myaccount/setting" element={<AuthRoute child={<GeneralSetting />} routeType="private" />} />
       <Route path="myaccount/setting/language-currency" element={<AuthRoute child={<LanguageCurrency />} routeType="private" />} />
-      
+
       <Route path="/not-founder-cover" element={<Error404 />} />
       <Route path="*" element={<Navigate to="/not-founder-cover" replace />} />
     </Routes>
