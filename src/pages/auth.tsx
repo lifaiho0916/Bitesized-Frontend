@@ -1,25 +1,20 @@
-import { useEffect, useState, useContext } from "react"
+import { useState, useContext } from "react"
 // import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google'
 import AppleLogin from 'react-apple-login'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
-import Dialog from "../components/general/dialog"
+import ThirdPartBrowserModal from "../components/modals/ThirdPartyBrowserModal"
 import { LanguageContext } from "../routes/authRoute"
-import {
-  AppleIcon,
-  // FacebookIcon,
-  GoogleIcon
-} from "../constants/awesomeIcons"
-import { SET_DIALOG_STATE } from "../redux/types"
+import { AppleIcon, GoogleIcon } from "../constants/awesomeIcons"
 import { authAction } from "../redux/actions/authActions"
 import "../assets/styles/signupStyle.scss"
 const InApp = require("detect-inapp")
 
 declare global {
   interface Window {
-    FB: any;
+    FB: any
   }
 }
 
@@ -65,14 +60,15 @@ const Auth = (props: any) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const loadState = useSelector((state: any) => state.load)
-  const { dlgState, prevRoute } = loadState
+  const { prevRoute } = loadState
   const inapp = new InApp(navigator.userAgent || navigator.vendor || window.FB)
-  const [openWith, setOpenWith] = useState((inapp.browser === 'instagram' || inapp.browser === 'facebook' || navigator.userAgent.toLowerCase().indexOf('line') !== -1) ? true : false);
+  const [openWith, setOpenWith] = useState((inapp.browser === 'instagram' || inapp.browser === 'facebook' || navigator.userAgent.toLowerCase().indexOf('line') !== -1) ? true : false)
   const [isHover, setIsHover] = useState(false)
   const [isHover1, setIsHover1] = useState(false)
-  const [openSignupMethodErrorDlg, SetOpenSignupMethodErrorDlg] = useState(false)
-  const lang = useSelector((state: any) => state.auth.lang)
+  // const [openSignupMethodErrorDlg, SetOpenSignupMethodErrorDlg] = useState(false)
+  const userState = useSelector((state: any) => state.auth)
   const contexts = useContext(LanguageContext)
+  const { lang } = userState
 
   const signupStyle = {
     fontWeight: "bold",
@@ -138,15 +134,15 @@ const Auth = (props: any) => {
     }
   }
 
-  useEffect(() => {
-    if (dlgState.state) {
-      if (dlgState.type === 'error_signup_method') SetOpenSignupMethodErrorDlg(true)
-    }
-  }, [dlgState])
+  // useEffect(() => {
+  //   if (dlgState.state) {
+  //     if (dlgState.type === 'error_signup_method') SetOpenSignupMethodErrorDlg(true)
+  //   }
+  // }, [dlgState])
 
   return (
     <>
-      <Dialog
+      {/* <Dialog
         display={openSignupMethodErrorDlg}
         title="Oops!"
         exit={() => {
@@ -167,37 +163,29 @@ const Auth = (props: any) => {
             }
           }
         ]}
-      />
-      <Dialog
-        display={openWith}
-        title="Open In Browser 🌐"
-        context={"Open in browser\nfor a better experience.\n\n開啓瀏覽器\n獲得更好的用戶體驗"}
-        exit={() => { setOpenWith(false) }}
-        wrapExit={() => { setOpenWith(false) }}
-        buttons={[
-          {
-            text: 'Open / 開啓',
-            handleClick: () => {
-              const serverUrl = `${process.env.REACT_APP_SERVER_URL}`
-              if (navigator.userAgent.indexOf('like Mac') !== -1) {
-                if (navigator.userAgent.toLowerCase().indexOf('line') !== -1) {
-                  window.open(`googlechrome://${serverUrl.substring(8)}/auth/signin`)
-                } else {
-                  window.open(`googlechrome://${serverUrl.substring(8)}/auth/signin`)
-                }
-              } else if (navigator.userAgent.indexOf('Android') !== -1) {
-                if (navigator.userAgent.toLowerCase().indexOf('line') !== -1) {
-                  let link = document.createElement('a')
-                  link.setAttribute("href", `intent:${serverUrl}/auth/signin#Intent;end`)
-                  link.setAttribute("target", "_blank")
-                  link.click()
-                } else {
-                  window.open(`googlechrome://${serverUrl.substring(8)}/auth/signin`)
-                }
-              }
+      /> */}
+      <ThirdPartBrowserModal
+        show={openWith}
+        onClose={() => setOpenWith(false)}
+        handleSubmit={() => {
+          const url = `${process.env.REACT_APP_CLIENT_URL}`
+          if (navigator.userAgent.indexOf('like Mac') !== -1) {
+            if (navigator.userAgent.toLowerCase().indexOf('line') !== -1) {
+              window.open(`googlechrome://${url.substring(8)}/auth/signin`)
+            } else {
+              window.open(`googlechrome://${url.substring(8)}/auth/signin`)
+            }
+          } else if (navigator.userAgent.indexOf('Android') !== -1) {
+            if (navigator.userAgent.toLowerCase().indexOf('line') !== -1) {
+              let link = document.createElement('a')
+              link.setAttribute("href", `intent:${url}/auth/signin#Intent;end`)
+              link.setAttribute("target", "_blank")
+              link.click()
+            } else {
+              window.open(`googlechrome://${url.substring(8)}/auth/signin`)
             }
           }
-        ]}
+        }}
       />
       <div className="signup-wrapper">
         {props.isSignin === false ? (
@@ -266,11 +254,7 @@ const Auth = (props: any) => {
                   onMouseLeave={() => setIsHover1(false)}
                   style={aStyle1} href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33" target="_blank">{contexts.AUTH_LETTER.PRIVACY_POLICY}</a></p>
           ) : (
-            <div
-              style={{
-                display: "flex",
-              }}
-            >
+            <div style={{ display: "flex" }}>
               <p>{contexts.AUTH_LETTER.NEW_CREATO}</p>
               <p
                 onMouseOver={() => setIsHover(true)}
