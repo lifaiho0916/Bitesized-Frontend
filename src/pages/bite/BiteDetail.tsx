@@ -94,9 +94,7 @@ const BiteDetail = () => {
         dispatch(paymentAction.getPayment())
         dispatch(biteAction.getBiteById(biteId))
     }, [biteId, dispatch])
-    useEffect(() => {
-        if (dlgState === 'unlock_bite') setOpenFreeUnLock(true)
-    }, [dlgState])
+    useEffect(() => { if (dlgState === 'unlock_bite') setOpenFreeUnLock(true) }, [dlgState])
     useEffect(() => {
         if ((state && state.owner === true) || (user && bite.owner && (String(user.id) === String(bite.owner._id)))) {
             dispatch(transactionAction.getTransactionsByBiteId(biteId, sort))
@@ -318,7 +316,7 @@ const BiteDetail = () => {
                                                         className="react-player"
                                                         url={video.videoUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.videoUrl}` : ''}
                                                         playing={play}
-                                                        playsinline={true}
+                                                        // playsinline={true}
                                                         config={{
                                                             file: {
                                                                 attributes: {

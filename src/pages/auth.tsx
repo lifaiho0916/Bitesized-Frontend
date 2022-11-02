@@ -255,7 +255,7 @@ const Auth = (props: any) => {
                   style={aStyle1} href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33" target="_blank">{contexts.AUTH_LETTER.PRIVACY_POLICY}</a></p>
           ) : (
             <div style={{ display: "flex" }}>
-              <p>{contexts.AUTH_LETTER.NEW_CREATO}</p>
+              <p>{contexts.AUTH_LETTER.NEW_CREATO}&nbsp;</p>
               <p
                 onMouseOver={() => setIsHover(true)}
                 onMouseLeave={() => setIsHover(false)}
@@ -264,7 +264,7 @@ const Auth = (props: any) => {
               >
                 {contexts.AUTH_LETTER.SIGN_UP}
               </p>
-              <p>{contexts.AUTH_LETTER.NOW}</p>
+              <p>&nbsp;{contexts.AUTH_LETTER.NOW}</p>
             </div>
           )
         }
