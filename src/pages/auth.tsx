@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
 import Dialog from "../components/general/dialog"
 import { LanguageContext } from "../routes/authRoute"
-import { 
+import {
   AppleIcon,
   // FacebookIcon,
   GoogleIcon
@@ -67,7 +67,7 @@ const Auth = (props: any) => {
   const loadState = useSelector((state: any) => state.load)
   const { dlgState, prevRoute } = loadState
   const inapp = new InApp(navigator.userAgent || navigator.vendor || window.FB)
-  const [openWith, setOpenWith] = useState(inapp.browser === 'instagram' || inapp.browser === 'facebook' || navigator.userAgent.toLowerCase().indexOf('line') !== -1 ? true : false);
+  const [openWith, setOpenWith] = useState((inapp.browser === 'instagram' || inapp.browser === 'facebook' || navigator.userAgent.toLowerCase().indexOf('line') !== -1) ? true : false);
   const [isHover, setIsHover] = useState(false)
   const [isHover1, setIsHover1] = useState(false)
   const [openSignupMethodErrorDlg, SetOpenSignupMethodErrorDlg] = useState(false)
@@ -172,8 +172,8 @@ const Auth = (props: any) => {
         display={openWith}
         title="Open In Browser 🌐"
         context={"Open in browser\nfor a better experience.\n\n開啓瀏覽器\n獲得更好的用戶體驗"}
-        exit={() => { setOpenWith(false); }}
-        wrapExit={() => { setOpenWith(false); }}
+        exit={() => { setOpenWith(false) }}
+        wrapExit={() => { setOpenWith(false) }}
         buttons={[
           {
             text: 'Open / 開啓',
@@ -181,18 +181,18 @@ const Auth = (props: any) => {
               const serverUrl = `${process.env.REACT_APP_SERVER_URL}`
               if (navigator.userAgent.indexOf('like Mac') !== -1) {
                 if (navigator.userAgent.toLowerCase().indexOf('line') !== -1) {
-                  window.open(`googlechrome://${serverUrl.substring(8)}/auth/signin`);
+                  window.open(`googlechrome://${serverUrl.substring(8)}/auth/signin`)
                 } else {
-                  window.open(`googlechrome://${serverUrl.substring(8)}/auth/signin`);
+                  window.open(`googlechrome://${serverUrl.substring(8)}/auth/signin`)
                 }
               } else if (navigator.userAgent.indexOf('Android') !== -1) {
                 if (navigator.userAgent.toLowerCase().indexOf('line') !== -1) {
-                  let link = document.createElement('a');
-                  link.setAttribute("href", `intent:${serverUrl}/auth/signin#Intent;end`);
-                  link.setAttribute("target", "_blank");
-                  link.click();
+                  let link = document.createElement('a')
+                  link.setAttribute("href", `intent:${serverUrl}/auth/signin#Intent;end`)
+                  link.setAttribute("target", "_blank")
+                  link.click()
                 } else {
-                  window.open(`googlechrome://${serverUrl.substring(8)}/auth/signin`);
+                  window.open(`googlechrome://${serverUrl.substring(8)}/auth/signin`)
                 }
               }
             }
