@@ -1,8 +1,12 @@
-import ReactDOM from 'react-dom';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux';
-import Store from './redux/store';
+import ReactDOM from 'react-dom'
+import App from './App'
+import reportWebVitals from './reportWebVitals'
+import { Provider } from 'react-redux'
+import Store from './redux/store'
+import ReactGA from "react-ga4"
+
+ReactGA.initialize(`${process.env.REACT_APP_GA_MEASUREMENT_ID}`)
+
 ReactDOM.render(
   <Provider store={Store}>
     <App />
