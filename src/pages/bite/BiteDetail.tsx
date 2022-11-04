@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, useMemo } from "react"
+import { useEffect, useState, useContext, useMemo, useRef } from "react"
 import { useParams, useNavigate, useLocation } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import Avatar from "../../components/general/avatar"
@@ -7,7 +7,7 @@ import ReactPlayer from "react-player"
 import UnLockFreeModal from "../../components/modals/UnLockFreeModal"
 import PurchaseModal from "../../components/modals/PurchaseModal"
 import PaymentModal from "../../components/modals/PaymentModal"
-import { BackIcon, ClockIcon, PlayIcon, UnlockIcon, AscendIcon, DescendIcon, LockedIcon } from "../../assets/svg"
+import { BackIcon, ClockIcon, UnlockIcon, AscendIcon, DescendIcon, LockedIcon } from "../../assets/svg"
 import { LanguageContext } from "../../routes/authRoute"
 import { biteAction } from "../../redux/actions/biteActions"
 import { paymentAction } from "../../redux/actions/paymentActions"
@@ -27,6 +27,7 @@ const BiteDetail = () => {
     const biteState = useSelector((state: any) => state.bite)
     const transactionState = useSelector((state: any) => state.transaction)
     const paymentState = useSelector((state: any) => state.payment)
+    let playerRefs = [useRef<any>(null), useRef<any>(null), useRef<any>(null)]
 
     const { state } = location
     const { payment } = paymentState
@@ -36,8 +37,6 @@ const BiteDetail = () => {
     const { transactions } = transactionState
 
     const [sort, setSort] = useState(-1)
-    const [videoIndex, setVideoIndex] = useState(-1)
-    const [play, setPlay] = useState(false)
     const [copied, setCopied] = useState(false)
     const [currency, setCurrency] = useState('usd')
 
@@ -281,15 +280,7 @@ const BiteDetail = () => {
                         <div className="bite-videos scroll-bar">
                             {bite?.videos.map((video: any, index: any) => (
                                 <div key={index}>
-                                    <div className="bite-video" onClick={() => {
-                                        if (play) {
-                                            if (index !== videoIndex) setVideoIndex(index)
-                                            else {
-                                                setPlay(false)
-                                                setVideoIndex(-1)
-                                            }
-                                        }
-                                    }} style={{ backgroundColor: bite.currency ? lock ? '#97D8D4' : '#D8F7D8' : '#FBBEB1' }}>
+                                    <div className="bite-video" style={{ backgroundColor: bite.currency ? lock ? '#97D8D4' : '#D8F7D8' : '#FBBEB1' }}>
                                         {lock ?
                                             <>
                                                 <img
@@ -310,39 +301,23 @@ const BiteDetail = () => {
                                                 </div>
                                             </>
                                             :
-                                            <>
-                                                {(play && index === videoIndex) ?
-                                                    <ReactPlayer
-                                                        className="react-player"
-                                                        url={video.videoUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.videoUrl}` : ''}
-                                                        playing={play}
-                                                        // playsinline={true}
-                                                        config={{
-                                                            file: {
-                                                                attributes: {
-                                                                    controlsList: 'nodownload noremoteplayback noplaybackrate',
-                                                                    disablePictureInPicture: true,
-                                                                }
-                                                            }
-                                                        }}
-                                                        controls
-                                                    />
-                                                    :
-                                                    <>
-                                                        <img
-                                                            src={video.coverUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.coverUrl}` : ""}
-                                                            alt="cover"
-                                                            width={'100%'}
-                                                        />
-                                                        <div className="play-icon"
-                                                            onClick={() => {
-                                                                setVideoIndex(index)
-                                                                setPlay(true)
-                                                            }}
-                                                        ><PlayIcon color="white" /></div>
-                                                    </>
-                                                }
-                                            </>
+                                            <ReactPlayer
+                                                className="react-player"
+                                                url={video.videoUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.videoUrl}` : ''}
+                                                playing={true}
+                                                config={{
+                                                    file: {
+                                                        attributes: {
+                                                            controlsList: 'nodownload noremoteplayback noplaybackrate',
+                                                            disablePictureInPicture: true,
+                                                        }
+                                                    }
+                                                }}
+                                                light={video.coverUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.coverUrl}` : ''}
+                                                controls
+                                                onPause={() => playerRefs[index]?.current?.showPreview()}
+                                                ref={playerRefs[index]}
+                                            />
                                         }
                                     </div>
                                 </div>
