@@ -140,7 +140,6 @@
       flex-direction: row;
       overflow-x: scroll;
 
-
       .dareme {
         cursor: pointer;
         margin: 0 5px;
@@ -194,14 +193,35 @@
         border-width: 1px 0px 0px 0px;
       }
 
-      .daremes {
-        scroll-snap-type: x mandatory;
+      .css-doq0dk {
+        .css-1fzpoyk:first-child {
+          position: relative;
+          opacity: 0.8 !important;
 
-        .dareme {
-          scroll-snap-align: center;
+          &::after {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: url('../img/dark.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+          }
+        }
 
-          &:hover {
-            transform: none;
+        .css-1fzpoyk:last-child {
+          opacity: 0.8 !important;
+
+          &::after {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: url('../img/dark.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
           }
         }
       }

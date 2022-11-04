@@ -69,12 +69,12 @@ const BiteCardHome = (props: any) => {
             }
         } return "FREE"
     }
-    
+
     const lock = useMemo(() => {
         if (user === null) return true
         if (user.role === "ADMIN" || (bite.owner && String(bite.owner._id) === String(user.id))) return false
         return bite.purchasedUsers.every((purchaseInfo: any) => String(purchaseInfo.purchasedBy) !== String(user.id))
-     }, [user, bite])
+    }, [user, bite])
 
     return (
         <div

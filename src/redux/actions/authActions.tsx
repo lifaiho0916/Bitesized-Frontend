@@ -83,7 +83,7 @@ export const authAction = {
   editProfile: (name: any, url: any, category: any, bioText: any, subscribe: any, avatarFile: any, navUrl: any, userId: any, navigate: any) => async (dispatch: Dispatch<any>, getState: any) => {
     try {
       dispatch({ type: SET_LOADING_TRUE })
-      let resultAvatar = null
+      let resultAvatar: any = null
       if (avatarFile) {
         const formData = new FormData()
         formData.append("file", avatarFile)

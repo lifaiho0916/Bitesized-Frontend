@@ -7,7 +7,6 @@ import { EN, CH } from "../constants/language"
 import { SET_LANGUAGE } from '../redux/types'
 import Layout from '../layout/layout'
 import Layout1 from "../layout/layout1"
-import ReactGA from "react-ga4"
 // import socketIOClient from "socket.io-client"
 
 interface routeProps {

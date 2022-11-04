@@ -1,7 +1,9 @@
 import { useNavigate, useLocation } from "react-router-dom"
-import { useEffect, useContext, useState, useLayoutEffect } from "react"
+import { useEffect, useContext, useState, useLayoutEffect, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { LanguageContext } from "../routes/authRoute"
+import Carousel from "react-spring-3d-carousel"
+import { config } from "react-spring"
 import Avatar from "../components/general/avatar"
 import BiteCardHome from "../components/bite/BiteCardHome"
 import { SET_USERS } from "../redux/types"
@@ -27,8 +29,9 @@ const Home = () => {
   const userState = useSelector((state: any) => state.auth)
   const biteState = useSelector((state: any) => state.bite)
   const contexts = useContext(LanguageContext)
-  const [scrollIndex, setScrollIndex] = useState(0)
-  const [scrollWidth, setScrollWidth] = useState<any>([])
+  const [goToSlide, setGoToSlide] = useState<any>(null)
+  const carouselRef = useRef<any>(null)
+  const [cards, setCards] = useState<any>([])
 
   const { users } = userState
   const { bites } = biteState
@@ -49,30 +52,52 @@ const Home = () => {
   }
 
   useEffect(() => { dispatch(biteAction.getHomeSessions()) }, [location, dispatch])
+
+  let xDown: any = null
+  let yDown: any = null
+
+  const getTouches = (evt: any) => { return (evt.touches || evt.originalEvent.touches) }
+
+  const handleTouchStart = (evt: any) => {
+    const firstTouch = getTouches(evt)[0]
+    xDown = firstTouch.clientX
+    yDown = firstTouch.clientY
+  }
+
+  const handleTouchMove = (evt: any) => {
+    if (!xDown || !yDown) return
+
+    let xUp = evt.touches[0].clientX
+    let yUp = evt.touches[0].clientY
+
+    let xDiff = xDown - xUp
+    let yDiff = yDown - yUp
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+      if (xDiff > 0) {
+        if (goToSlide + 1 > bites.length - 1) setGoToSlide(0)
+        else setGoToSlide((prev: any) => prev + 1)
+      }
+      else {
+        if (goToSlide - 1 < 0) setGoToSlide(bites.length - 1)
+        else setGoToSlide((prev: any) => prev - 1)
+      }
+    }
+    xDown = null
+    yDown = null
+  }
+
   useEffect(() => {
-    // 0 
-    // 0 341(341) 
-    // 0 343(343) 686(343) (3 bites)
-    // 0 343(343) 688(345) 1031(343)
-    // 0 343(343) 688(345) 1033(345) 1376(343)
-    let array: any = []
-    let left = 0
-    bites.forEach((bite: any, index: any, biteArray: any) => {
-      if (index === 0) array.push(left)
-      else if (index === 1) {
-        if (biteArray.length === 2) left = left + 341
-        else left = left + 343
-        array.push(left)
+    setCards(bites.map((bite: any, i: any) => {
+      return {
+        key: i,
+        content: (
+          <div style={{ width: 'fit-content', height: 'fit-content', transform: 'scale(0.9)' }}>
+            <BiteCardHome bite={bite} index={i} />
+          </div>
+        )
       }
-      else if (index === biteArray.length - 1) {
-        left = left + 343
-        array.push(left)
-      } else {
-        left = left + 345
-        array.push(left)
-      }
-    })
-    setScrollWidth(array)
+    }))
   }, [bites])
 
   return (
@@ -86,19 +111,34 @@ const Home = () => {
             <div className="see-more-btn">{width < 680 ? '··· ' : ''}see more</div>
           </div>
           <div className="underline"></div>
-          <div className="daremes scroll-bar"
-            onScroll={(e: any) => {
-              scrollWidth.forEach((width: any, index: any) => {
-                if (Math.abs(e.target.scrollLeft - width) <= 1) setScrollIndex(index)
-              })
-            }}
-          >
-            {bites.map((bite: any, i: any) => (
-              <div className="dareme" key={i} style={(width < 680 && i === scrollIndex) ? { transform: 'scale(1.03)' } : {}}>
-                <BiteCardHome bite={bite} />
-              </div>
-            ))}
-          </div>
+          {width > 680 ?
+            <div className="daremes scroll-bar">
+              {bites.map((bite: any, i: any) => (
+                <div className="dareme" key={i}>
+                  <BiteCardHome bite={bite} />
+                </div>
+              ))}
+            </div>
+            :
+            <div style={{ height: '650px' }}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+            >
+              <Carousel
+                slides={
+                  cards.map((slide: any, index: any) => {
+                    return { ...slide, onClick: () => setGoToSlide(index) }
+                  })
+                }
+                goToSlide={goToSlide}
+                offsetRadius={1}
+                showNavigation={false}
+                animationConfig={config.gentle}
+                ref={carouselRef}
+              />
+            </div>
+          }
+
         </div>
       }
       {users.length > 0 &&
