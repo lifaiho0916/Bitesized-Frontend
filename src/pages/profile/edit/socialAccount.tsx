@@ -1,6 +1,7 @@
-// import axios from 'axios';
+import axios from 'axios';
 import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google'
 import { useNavigate } from 'react-router-dom';
 import { BackIcon, InstagramIcon, YoutubeIcon } from '../../../assets/svg';
 import { accountAction } from '../../../redux/actions/socialAccountActions';
@@ -33,25 +34,38 @@ const Socialaccount = () => {
     }
   };
 
-  useEffect(() => {
-    if (user) dispatch(accountAction.getAccounts(user.id));
-  }, [dispatch, user]);
+  useEffect(() => { if (user) dispatch(accountAction.getAccounts(user.id)) }, [dispatch, user])
 
-  // const responseGoogleSuccess = async (response: any) => {
-  //   try {
-  //     const access_token = response.accessToken;
-  //     const youtubeApiUrl = `https://youtube.googleapis.com/youtube/v3/channels?part=id&mine=true&access_token=${access_token}&key=${process.env.REACT_APP_GOOGLE_CLIENT_ID}`;
-  //     const response1 = await axios.get(youtubeApiUrl);
-  //     const data = {
-  //       id: response1.data.items[0].id,
-  //       name: 'youtube',
-  //       metadata: JSON.stringify(response1.data.items),
-  //     };
-  //     dispatch(accountAction.addAccount(data));
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const CustomGoogleLogin = (props: any) => {
+    const googleLogin = useGoogleLogin({
+      onSuccess: async tokenResponse => {
+        try {
+          // const youtubeApiUrl = `https://www.googleapis.com/youtube/v3/channels?part=id&mine=true&access_token=${access_token}&key=${process.env.REACT_APP_GOOGLE_CLIENT_ID}`;
+          const youtubeApiUrl = `https://www.googleapis.com/youtube/v3/channels?part=id&mine=true&access_token=${tokenResponse.access_token}`
+          const response = await axios.get(youtubeApiUrl)
+
+          const data = {
+            id: response.data.items[0].id,
+            name: 'youtube',
+            metadata: JSON.stringify(response.data.items)
+          }
+
+          window.open(`https://www.youtube.com/channel/${data.id}`)
+          // dispatch(accountAction.addAccount(data))
+        } catch (err) {
+          console.log(err)
+        }
+      },
+      onError: errorResponse => console.log(errorResponse),
+      scope: 'https://www.googleapis.com/auth/youtube.readonly'
+    })
+
+    return (
+      <div className='connect-btn' onClick={() => googleLogin()}>
+        <span>Connect</span>
+      </div>
+    )
+  }
 
   return (
     <div className='social-accounts-wrapper'>
@@ -93,17 +107,9 @@ const Socialaccount = () => {
                   <span>Remove</span>
                 </div>
               ) : (
-                // <GoogleLogin
-                //   clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
-                //   render={(renderProps) => (
-                    <div className='connect-btn'>
-                      <span>Connect</span>
-                    </div>
-                //   )}
-                //   onSuccess={responseGoogleSuccess}
-                //   cookiePolicy={'single_host_origin'}
-                //   scope='https://www.googleapis.com/auth/youtube.readonly'
-                // />
+                <GoogleOAuthProvider clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}>
+                  <CustomGoogleLogin dispatch={dispatch} />
+                </GoogleOAuthProvider>
               )}
             </div>
           </div>
