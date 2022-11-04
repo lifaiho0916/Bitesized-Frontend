@@ -30,7 +30,6 @@ const Home = () => {
   const biteState = useSelector((state: any) => state.bite)
   const contexts = useContext(LanguageContext)
   const [goToSlide, setGoToSlide] = useState<any>(null)
-  const carouselRef = useRef<any>(null)
   const [cards, setCards] = useState<any>([])
 
   const { users } = userState
@@ -87,6 +86,21 @@ const Home = () => {
     yDown = null
   }
 
+  const preventTouch = (e: any) => {
+    const minValue = 10 // threshold
+    let xUp = e.touches[0].clientX
+    let yUp = e.touches[0].clientY
+
+    let xDiff = xDown - xUp
+    let yDiff = yDown - yUp
+
+    if (Math.abs(xDiff) > minValue && Math.abs(yDiff) < 50) {
+      e.preventDefault()
+      e.returnValue = false
+      return false
+    }
+  }
+
   useEffect(() => {
     setCards(bites.map((bite: any, i: any) => {
       return {
@@ -99,6 +113,13 @@ const Home = () => {
       }
     }))
   }, [bites])
+
+  useEffect(() => {
+    window.addEventListener('touchmove', preventTouch, { passive: false })
+    return () => {
+      window.removeEventListener('touchmove', preventTouch)
+    }
+  }, [])
 
   return (
     <div className="home-wrapper">
@@ -120,7 +141,7 @@ const Home = () => {
               ))}
             </div>
             :
-            <div style={{ height: '650px' }}
+            <div className="daremes-mobile"
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
             >
@@ -134,7 +155,6 @@ const Home = () => {
                 offsetRadius={1}
                 showNavigation={false}
                 animationConfig={config.gentle}
-                ref={carouselRef}
               />
             </div>
           }
