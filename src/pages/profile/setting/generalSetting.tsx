@@ -9,22 +9,17 @@ import {
   BackIcon
 } from "../../../assets/svg"
 import { WalletIcon } from "../../../constants/awesomeIcons"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { LanguageContext } from "../../../routes/authRoute"
 import { SET_PREVIOUS_ROUTE } from "../../../redux/types"
 import "../../../assets/styles/profile/generalSettingStyle.scss"
 
 const GeneralSetting = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
   const userState = useSelector((state: any) => state.auth);
   const contexts = useContext(LanguageContext);
   const user = userState.user;
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location]);
 
   return (
     <div className="setting-wrapper">
@@ -35,11 +30,8 @@ const GeneralSetting = () => {
       </div>
       <div className="setting-general">
         <div className="settings">
-          <div
-            className="setting"
-            onClick={() => navigate(`/myaccount/setting/payment`)}
-          >
-            <div className="part">
+          <div className="setting" onClick={() => navigate(`/myaccount/setting/payment`)}>
+            <div className="part" style={{ marginLeft: '4px' }}>
               <WalletIcon color="black" />
               <div className="title">{contexts.SETTINGS_LETTER.PAYOUT}</div>
             </div>
