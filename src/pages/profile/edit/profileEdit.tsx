@@ -178,9 +178,10 @@ const ProfileEdit = () => {
         <div
           className="social-link"
           onClick={() => {
-            const state = { ...profile, name: name, personalisedUrl: url, bioText: bioText }
-            dispatch({ type: SET_PROFILE, payload: state })
-            navigate("/myaccount/edit/connect-social")
+            alert("Will be ready soon")
+            // const state = { ...profile, name: name, personalisedUrl: url, bioText: bioText }
+            // dispatch({ type: SET_PROFILE, payload: state })
+            // navigate("/myaccount/edit/connect-social")
           }}
         >
           <ContainerBtn
