@@ -315,7 +315,6 @@ const BiteDetail = () => {
                                                 }}
                                                 light={video.coverUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.coverUrl}` : ''}
                                                 controls
-                                                onPause={() => playerRefs[index]?.current?.showPreview()}
                                                 ref={playerRefs[index]}
                                             />
                                         }
