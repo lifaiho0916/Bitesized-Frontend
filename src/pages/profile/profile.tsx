@@ -48,14 +48,6 @@ const Profile = () => {
   }, [authuser, user])
 
   useEffect(() => {
-    if (code !== null && authuser) {
-      if (user) {
-        if (String(user.id) !== String(authuser._id)) navigate(`/${authuser.personalisedUrl}`)
-      } else navigate(`/${authuser.personalisedUrl}`)
-    }
-  }, [code, user, authuser, navigate])
-
-  useEffect(() => {
     // 0 
     // 0 295(295)
     // 0 297(297) 595(298)
