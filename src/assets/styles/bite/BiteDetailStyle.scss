@@ -303,7 +303,7 @@
                         height: 40px;
                         background: #efa058;
                         border-radius: 50%;
-                
+
                         &:hover {
                             background: #f2b176;
                         }
@@ -320,6 +320,77 @@
                         justify-content: center;
                     }
                 }
+            }
+        }
+
+        .creator-bites {
+            margin: 0px auto;
+            max-width: 880px;
+            padding: 0px 20px;
+
+            .section-header {
+                display: flex;
+                align-items: center;
+
+                span {
+                    margin-left: 10px;
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 20px;
+                    line-height: 24px;
+                    color: #EFA058;
+                }
+            }
+
+            .bite-card {
+                padding: 15px 0px;
+                display: flex;
+                overflow-x: scroll;
+
+                &::-webkit-scrollbar {
+                    height: 12px;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background-color: rgba(245, 195, 149, 0.1);
+                    border-radius: 10px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background: rgba(245, 195, 149, 0.5);
+                    border-radius: 10px;
+                    transition: 0.2s;
+                    height: 20px;
+
+                    &:hover {
+                        background: #efa058;
+                    }
+                }
+
+                @media (max-width: 880px) {
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+
+                .profile-bite {
+                    display: flex;
+                    justify-content: center;
+                    margin: 0 10px;
+                    background-color: transparent;
+                    transition: 0.2s;
+                    cursor: pointer;
+
+                    &:hover {
+                        transform: scale(1.03);
+                    }
+                }
+            }
+
+            .divider {
+                margin: 10px 0px;
+                border-top: 0.5px solid #54504E;
             }
         }
     }
@@ -345,6 +416,10 @@
                         margin: 10px auto;
                     }
                 }
+            }
+
+            .creator-bites {
+                .bite-card {}
             }
         }
     }

@@ -31,8 +31,8 @@ const Profile = () => {
   const { user, users } = userState
   const authuser = users.length ? users[0] : null
   const [isSame, setIsSame] = useState(false)
-  const [scrollIndex, setScrollIndex] = useState(0)
-  const [scrollWidth, setScrollWidth] = useState<any>([])
+  // const [scrollIndex, setScrollIndex] = useState(0)
+  // const [scrollWidth, setScrollWidth] = useState<any>([])
 
   const [searchParams] = useSearchParams()
   const code = searchParams.get("mybites")
@@ -53,29 +53,29 @@ const Profile = () => {
     // 0 297(297) 595(298)
     // 0 297(297) 597(300) 895(298)
     // 0 297(297) 597(300) 897(300) 1195(298)
-    let array: any = []
-    let left = 0
-    bites.filter((bite: any, index: any) => {
-      if (isSame) {
-        if (code === null) return String(bite.owner._id) !== String(authuser._id)
-        else return String(bite.owner._id) === String(authuser._id)
-      } else return true
-    }).forEach((bite: any, index: any, biteArray: any) => {
-      if (index === 0) array.push(left)
-      else if (index === 1) {
-        if (biteArray.length === 2) left = left + 295
-        else left = left + 297
-        array.push(left)
-      }
-      else if (index === biteArray.length - 1) {
-        left = left + 298
-        array.push(left)
-      } else {
-        left = left + 300
-        array.push(left)
-      }
-    })
-    setScrollWidth([...array])
+    // let array: any = []
+    // let left = 0
+    // bites.filter((bite: any, index: any) => {
+    //   if (isSame) {
+    //     if (code === null) return String(bite.owner._id) !== String(authuser._id)
+    //     else return String(bite.owner._id) === String(authuser._id)
+    //   } else return true
+    // }).forEach((bite: any, index: any, biteArray: any) => {
+    //   if (index === 0) array.push(left)
+    //   else if (index === 1) {
+    //     if (biteArray.length === 2) left = left + 295
+    //     else left = left + 297
+    //     array.push(left)
+    //   }
+    //   else if (index === biteArray.length - 1) {
+    //     left = left + 298
+    //     array.push(left)
+    //   } else {
+    //     left = left + 300
+    //     array.push(left)
+    //   }
+    // })
+    // setScrollWidth([...array])
   }, [bites, isSame, code, authuser])
 
   return (

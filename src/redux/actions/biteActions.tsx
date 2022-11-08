@@ -391,4 +391,17 @@ export const biteAction = {
             dispatch({ type: SET_LOADING_FALSE })
         }
     },
+
+    getBitesByUserIdAndCategory: (userId: any, biteId: any) => async (dispatch: Dispatch<any>) => {
+        try {
+            const response = await api.getBitesByUserIdAndCategory(userId, biteId)
+            const { data } = response
+            if (data.success) {
+                const { payload } = data
+                dispatch({ type: SET_BITES, payload: payload.bites })
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
 }

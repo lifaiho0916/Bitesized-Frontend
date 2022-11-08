@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, useMemo } from "react"
+import { useEffect, useState, useContext, useMemo, useLayoutEffect } from "react"
 import { useParams, useNavigate, useLocation } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import Avatar from "../../components/general/avatar"
@@ -7,7 +7,8 @@ import ReactPlayer from "react-player"
 import UnLockFreeModal from "../../components/modals/UnLockFreeModal"
 import PurchaseModal from "../../components/modals/PurchaseModal"
 import PaymentModal from "../../components/modals/PaymentModal"
-import { BackIcon, ClockIcon, UnlockIcon, AscendIcon, DescendIcon, LockedIcon } from "../../assets/svg"
+import BiteCardProfile from "../../components/bite/BiteCardProfile"
+import { BackIcon, ClockIcon, UnlockIcon, AscendIcon, DescendIcon, LockedIcon, Bite1Icon, BiteIcon } from "../../assets/svg"
 import { LanguageContext } from "../../routes/authRoute"
 import { biteAction } from "../../redux/actions/biteActions"
 import { paymentAction } from "../../redux/actions/paymentActions"
@@ -16,11 +17,23 @@ import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../redux/types"
 import NoTransactionImg from "../../assets/img/no-bite-transaction.png"
 import "../../assets/styles/bite/BiteDetailStyle.scss"
 
+const useWindowSize = () => {
+    const [size, setSize] = useState(0)
+    useLayoutEffect(() => {
+        const updateSize = () => { setSize(window.innerWidth) }
+        window.addEventListener("resize", updateSize)
+        updateSize()
+        return () => window.removeEventListener("resize", updateSize)
+    }, [])
+    return size
+}
+
 const BiteDetail = () => {
     const { biteId } = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const location = useLocation()
+    const width = useWindowSize()
     const contexts = useContext(LanguageContext)
     const loadState = useSelector((state: any) => state.load)
     const userState = useSelector((state: any) => state.auth)
@@ -31,7 +44,7 @@ const BiteDetail = () => {
     const { state } = location
     const { payment } = paymentState
     const { prevRoute, dlgState, currencyRate } = loadState
-    const { bite } = biteState
+    const { bite, bites } = biteState
     const { user } = userState
     const { transactions } = transactionState
 
@@ -101,6 +114,7 @@ const BiteDetail = () => {
     }, [biteId, dispatch])
     useEffect(() => { if (dlgState === 'unlock_bite') setOpenFreeUnLock(true) }, [dlgState])
     useEffect(() => { if (isOwner) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort)) }, [isOwner])
+    useEffect(() => { if (bite.owner && isOwner === false) dispatch(biteAction.getBitesByUserIdAndCategory(bite.owner._id, bite._id)) }, [bite, isOwner])
 
     const displayEmptyRow = (count: any) => {
         var indents: any = []
@@ -325,9 +339,42 @@ const BiteDetail = () => {
                             ))}
                         </div>
                     </div>
+                    {isOwner === false &&
+                        <>
+                            <div className="creator-bites">
+                                <div className="section-header">
+                                    <Bite1Icon color="#EFA058" width={width < 680 ? 50 : 30} height={width < 680 ? 50 : 30} />
+                                    <span>Other Bite-sized knowledge from this creator</span>
+                                </div>
+                                <div className="bite-card">
+                                    {bites.filter((bite: any) => bite.isCreator === true).map((bite: any, index: any) => (
+                                        <div className="profile-bite" key={index}>
+                                            <BiteCardProfile bite={bite} />
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="divider"></div>
+                            </div>
+
+                            <div className="creator-bites" style={{ marginTop: '20px' }}>
+                                <div className="section-header">
+                                    <BiteIcon color="#EFA058" width={width < 680 ? 45 : 25} height={width < 680 ? 45 : 25} />
+                                    <span>Featured Bite-sized knowledge you may like</span>
+                                </div>
+                                <div className="bite-card">
+                                    {bites.filter((bite: any) => bite.isCreator === true).map((bite: any, index: any) => (
+                                        <div className="profile-bite" key={index}>
+                                            <BiteCardProfile bite={bite} />
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="divider"></div>
+                            </div>
+                        </>
+                    }
                 </div>
             }
-        </div>
+        </div >
     )
 }
 
