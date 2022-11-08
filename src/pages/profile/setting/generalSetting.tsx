@@ -30,7 +30,7 @@ const GeneralSetting = () => {
       </div>
       <div className="setting-general">
         <div className="settings">
-          <div className="setting" onClick={() => navigate(`/myaccount/setting/payment`)}>
+          <div className="setting" onClick={() => navigate(`/myaccount/setting/payout`)}>
             <div className="part" style={{ marginLeft: '4px' }}>
               <WalletIcon color="black" />
               <div className="title">{contexts.SETTINGS_LETTER.PAYOUT}</div>

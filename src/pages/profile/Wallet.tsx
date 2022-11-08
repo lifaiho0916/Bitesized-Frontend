@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom"
 import {
     MoneyIcon,
     MoreIcon,
-    SpreadIcon,
-    // StripeIcon,
     BackIcon,
     AddIcon,
     VisaCardIcon,
@@ -58,13 +56,11 @@ const Wallet = () => {
     const { transactions } = transactionState
     const { currencyRate } = loadState
     const { payment } = paymentState
-    const [openConnectStripe, setOpenConnectStripe] = useState(false)
     const [moreInfo, setMoreInfo] = useState(false)
     const [removeCard, setRemoveCard] = useState(false)
     const wrapRef = useRef<any>(null)
     const wrapRef1 = useRef<any>(null)
     const contexts = useContext(LanguageContext)
-    // const [stripePayout, setStripePayout] = useState(false)
     const res = useOutsideAlerter(wrapRef, moreInfo)
     const res1 = useOutsideAlerter(wrapRef1, removeCard)
     const [payout, setPayout] = useState(false)
@@ -103,16 +99,6 @@ const Wallet = () => {
                 <AddCardModal
                     show={openAddCard}
                     onClose={() => setOpenAddCard(false)}
-                />
-                <Dialog
-                    display={openConnectStripe}
-                    wrapExit={() => { setOpenConnectStripe(false); }}
-                    title="Stay tuned!"
-                    context={"We will be launching this\nfeature soon."}
-                    icon={{
-                        pos: 0,
-                        icon: <SpreadIcon color="#EFA058" width="60px" height="60px" />
-                    }}
                 />
                 <Dialog
                     display={payout}
@@ -165,11 +151,7 @@ const Wallet = () => {
                                     fillStyle="outline"
                                     shape="rounded"
                                     text={contexts.WALLET_LETTER.CASH_OUT}
-                                    handleSubmit={() => {
-                                        // setPayout(true) 
-                                        // setOpenConnectStripe(true)
-                                        window.open("https://www.creatogether.app/altpayout", '_blank')
-                                    }}
+                                    handleSubmit={() => navigate('/myaccount/setting/payout')}
                                 />
                             </div>
                         </div>
