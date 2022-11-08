@@ -63,6 +63,8 @@ const BiteDetail = () => {
         return true
     }, [user, bite])
 
+    const isOwner = useMemo(() => { return (user && bite.owner && (String(user.id) === String(bite.owner._id))) }, [user, bite])
+
     const localPrice = useMemo(() => {
         if (currencyRate && user && bite.owner) {
             const rate = bite.currency === 'usd' ? 1.0 : currencyRate[`${bite.currency}`]
@@ -98,9 +100,7 @@ const BiteDetail = () => {
         dispatch(biteAction.getBiteById(biteId))
     }, [biteId, dispatch])
     useEffect(() => { if (dlgState === 'unlock_bite') setOpenFreeUnLock(true) }, [dlgState])
-    useEffect(() => {
-        if (user && bite.owner && (String(user.id) === String(bite.owner._id))) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort))
-    }, [biteId, sort, dispatch, state, user, bite])
+    useEffect(() => { if (isOwner) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort)) }, [isOwner])
 
     const displayEmptyRow = (count: any) => {
         var indents: any = []
@@ -200,7 +200,7 @@ const BiteDetail = () => {
                             </div>
                         }
                     </div>
-                    {((state && state.owner === true) || (user && bite.owner && (String(user.id) === String(bite.owner._id)))) &&
+                    {isOwner &&
                         <>
                             <div className="header-title" style={{ marginTop: '40px' }}>Bite transaction history</div>
                             {transactions.length > 0 ?
