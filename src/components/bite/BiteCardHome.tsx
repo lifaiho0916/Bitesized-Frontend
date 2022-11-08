@@ -1,18 +1,15 @@
 import { useState, useContext, useMemo } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { useNavigate, useLocation } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import Avatar from "../general/avatar"
 import { LanguageContext } from "../../routes/authRoute"
 import { ClockIcon, LockedIcon, NoOfPeopleIcon, UnlockIcon } from "../../assets/svg"
-import { SET_PREVIOUS_ROUTE } from "../../redux/types"
 import NextBtn from "../../assets/img/next-bright.png"
 import "../../assets/styles/bite/BiteCardHomeStyle.scss"
 
 const BiteCardHome = (props: any) => {
     const { bite } = props
     const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const location = useLocation()
     const contexts = useContext(LanguageContext)
     const userState = useSelector((state: any) => state.auth)
     const loadState = useSelector((state: any) => state.load)
@@ -22,15 +19,7 @@ const BiteCardHome = (props: any) => {
     const [videoIndex, setVideoIndex] = useState(0)
     const [hover, setHover] = useState(false)
 
-    const clickCard = () => {
-        if (user) {
-            dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
-            navigate(`/bite/detail/${bite._id}`, { state: { owner: user.id === bite.owner._id ? true : false } })
-        } else {
-            dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/bite/detail/${bite._id}` })
-            navigate('/auth/signup')
-        }
-    }
+    const clickCard = () => { navigate(`/bite/detail/${bite._id}`) }
 
     const PrevVideo = (e: any) => {
         e.stopPropagation()

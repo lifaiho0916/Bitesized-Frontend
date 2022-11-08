@@ -12,7 +12,7 @@ import { LanguageContext } from "../../routes/authRoute"
 import { biteAction } from "../../redux/actions/biteActions"
 import { paymentAction } from "../../redux/actions/paymentActions"
 import { transactionAction } from "../../redux/actions/transactionActions"
-import { SET_DIALOG_STATE } from "../../redux/types"
+import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../redux/types"
 import NoTransactionImg from "../../assets/img/no-bite-transaction.png"
 import "../../assets/styles/bite/BiteDetailStyle.scss"
 
@@ -74,8 +74,13 @@ const BiteDetail = () => {
     }, [bite, user, currencyRate])
 
     const unLockBite = () => {
-        if (bite.currency) setOpenPurchaseModal(true)
-        else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null, null, null))
+        if (user) {
+            if (bite.currency) setOpenPurchaseModal(true)
+            else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null, null, null))
+        } else {
+            dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
+            navigate('/auth/signin')
+        }
     }
 
     const getLocalCurrency = (currency: any) => {
@@ -94,9 +99,7 @@ const BiteDetail = () => {
     }, [biteId, dispatch])
     useEffect(() => { if (dlgState === 'unlock_bite') setOpenFreeUnLock(true) }, [dlgState])
     useEffect(() => {
-        if ((state && state.owner === true) || (user && bite.owner && (String(user.id) === String(bite.owner._id)))) {
-            dispatch(transactionAction.getTransactionsByBiteId(biteId, sort))
-        }
+        if (user && bite.owner && (String(user.id) === String(bite.owner._id))) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort))
     }, [biteId, sort, dispatch, state, user, bite])
 
     const displayEmptyRow = (count: any) => {
