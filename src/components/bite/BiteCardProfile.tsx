@@ -68,7 +68,10 @@ const BiteCardProfile = (props: any) => {
         if (user) {
             dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
             navigate(`/bite/detail/${bite._id}`, { state: { owner: user.id === bite.owner._id ? true : false } })
-        } else navigate('/auth/signup')
+        } else {
+            dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
+            navigate('/auth/signup')
+        }
     }
 
     return (

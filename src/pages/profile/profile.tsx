@@ -94,10 +94,10 @@ const Profile = () => {
             <div className="creators-bite">
               {(bites.length > 0 && authuser) ?
                 <div className="bite-card" onScroll={(e: any) => {
-                  console.log(e.target.scrollLeft)
-                  scrollWidth.forEach((width: any, index: any) => {
-                    if (Math.abs(e.target.scrollLeft - width) <= 1) setScrollIndex(index)
-                  })
+                  // console.log(e.target.scrollLeft)
+                  // scrollWidth.forEach((width: any, index: any) => {
+                  //   if (Math.abs(e.target.scrollLeft - width) <= 1) setScrollIndex(index)
+                  // })
                 }}>
                   {bites.filter((bite: any) => {
                     if (code === null) return String(bite.owner._id) !== String(authuser._id)
@@ -127,7 +127,7 @@ const Profile = () => {
                       }
                     }
                   }).map((bite: any, index: any) => (
-                    <div className="profile-bite" key={index} style={(width < 680 && index === scrollIndex) ? { transform: 'scale(1.03)' } : {}}>
+                    <div className="profile-bite" key={index} /*style={(width < 680 && index === scrollIndex) ? { transform: 'scale(1.03)' } : {}}*/>
                       <BiteCardProfile bite={bite} same={isSame} />
                     </div>
                   ))}
@@ -167,9 +167,9 @@ const Profile = () => {
             </div>
             {(bites.length > 0 && authuser) ?
               <div className="bite-card" onScroll={(e: any) => {
-                scrollWidth.forEach((width: any, index: any) => {
-                  if (Math.abs(e.target.scrollLeft - width) <= 1) setScrollIndex(index)
-                })
+                // scrollWidth.forEach((width: any, index: any) => {
+                //   if (Math.abs(e.target.scrollLeft - width) <= 1) setScrollIndex(index)
+                // })
               }}>
                 {bites.sort((first: any, second: any) => {
                   if (user) {
@@ -197,7 +197,7 @@ const Profile = () => {
                   }
                 })
                   .map((bite: any, index: any) => (
-                    <div className="profile-bite" key={index} style={(width < 680 && index === scrollIndex) ? { transform: 'scale(1.03)' } : {}}>
+                    <div className="profile-bite" key={index} /*style={(width < 680 && index === scrollIndex) ? { transform: 'scale(1.03)' } : {}}*/>
                       <BiteCardProfile bite={bite} />
                     </div>
                   ))}

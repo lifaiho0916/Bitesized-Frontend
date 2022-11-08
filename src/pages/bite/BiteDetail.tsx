@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, useMemo, useRef } from "react"
+import { useEffect, useState, useContext, useMemo } from "react"
 import { useParams, useNavigate, useLocation } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import Avatar from "../../components/general/avatar"
@@ -27,7 +27,6 @@ const BiteDetail = () => {
     const biteState = useSelector((state: any) => state.bite)
     const transactionState = useSelector((state: any) => state.transaction)
     const paymentState = useSelector((state: any) => state.payment)
-    let playerRefs = [useRef<any>(null), useRef<any>(null), useRef<any>(null)]
 
     const { state } = location
     const { payment } = paymentState
@@ -157,6 +156,7 @@ const BiteDetail = () => {
                                         avatar={bite.owner.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${bite.owner.avatar}` : bite.owner.avatar}
                                         username={bite.owner.name}
                                         avatarStyle={"horizontal"}
+                                        handleClick={() => navigate(`/${bite.owner.personalisedUrl}`)}
                                     />
                                 }
                                 <Button
@@ -315,7 +315,6 @@ const BiteDetail = () => {
                                                 }}
                                                 light={video.coverUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.coverUrl}` : ''}
                                                 controls
-                                                ref={playerRefs[index]}
                                             />
                                         }
                                     </div>
