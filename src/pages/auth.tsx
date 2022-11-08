@@ -250,9 +250,9 @@ const Auth = (props: any) => {
                 onMouseOver={() => setIsHover(true)}
                 onMouseLeave={() => setIsHover(false)}
                 style={aStyle}
-                href="https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713" target="_blank"> {contexts.AUTH_LETTER.TERMS}</a>{contexts.AUTH_LETTER.AND}<a onMouseOver={() => setIsHover1(true)}
+                href="https://www.creatogether.app/tandc" target="_blank"> {contexts.AUTH_LETTER.TERMS}</a>{contexts.AUTH_LETTER.AND}<a onMouseOver={() => setIsHover1(true)}
                   onMouseLeave={() => setIsHover1(false)}
-                  style={aStyle1} href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33" target="_blank">{contexts.AUTH_LETTER.PRIVACY_POLICY}</a></p>
+                  style={aStyle1} href="https://www.creatogether.app/tandc" target="_blank">{contexts.AUTH_LETTER.PRIVACY_POLICY}</a></p>
           ) : (
             <div style={{ display: "flex" }}>
               <p>{contexts.AUTH_LETTER.NEW_CREATO}&nbsp;</p>

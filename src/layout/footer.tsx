@@ -77,11 +77,11 @@ const Footer = () => {
             },
             {
               text: contexts.FOOTER_LETTER.TERMS_AND_CONDITIONS,
-              link: 'https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713'
+              link: 'https://www.creatogether.app/tandc'
             },
             {
               text: contexts.FOOTER_LETTER.PRIVACY_POLICY,
-              link: 'https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33'
+              link: 'https://www.creatogether.app/tandc'
             }
           ]}
         />
