@@ -76,7 +76,10 @@ const BiteDetail = () => {
         return true
     }, [user, bite])
 
-    const isOwner = useMemo(() => { return (user && bite.owner && (String(user.id) === String(bite.owner._id))) }, [user, bite])
+    const isOwner = useMemo(() => {
+        if (user && bite.owner && (String(user.id) === String(bite.owner._id))) return true
+        else return false
+    }, [user, bite])
 
     const localPrice = useMemo(() => {
         if (currencyRate && user && bite.owner) {
@@ -109,9 +112,9 @@ const BiteDetail = () => {
     }
 
     useEffect(() => {
-        dispatch(paymentAction.getPayment())
+        if (user) dispatch(paymentAction.getPayment())
         dispatch(biteAction.getBiteById(biteId))
-    }, [biteId, dispatch])
+    }, [biteId, dispatch, user])
     useEffect(() => { if (dlgState === 'unlock_bite') setOpenFreeUnLock(true) }, [dlgState])
     useEffect(() => { if (isOwner) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort)) }, [isOwner])
     useEffect(() => { if (bite.owner && isOwner === false) dispatch(biteAction.getBitesByUserIdAndCategory(bite.owner._id, bite._id)) }, [bite, isOwner])
@@ -341,35 +344,39 @@ const BiteDetail = () => {
                     </div>
                     {isOwner === false &&
                         <>
-                            <div className="creator-bites">
-                                <div className="section-header">
-                                    <Bite1Icon color="#EFA058" width={width < 680 ? 50 : 30} height={width < 680 ? 50 : 30} />
-                                    <span>Other Bite-sized knowledge from this creator</span>
+                            {bites.filter((bite: any) => bite.isCreator === true).length > 0 &&
+                                <div className="creator-bites">
+                                    <div className="section-header">
+                                        <Bite1Icon color="#EFA058" width={width < 680 ? 50 : 30} height={width < 680 ? 50 : 30} />
+                                        <span>Other Bite-sized knowledge from this creator</span>
+                                    </div>
+                                    <div className="bite-card">
+                                        {bites.filter((bite: any) => bite.isCreator === true).map((bite: any, index: any) => (
+                                            <div className="profile-bite" key={index}>
+                                                <BiteCardProfile bite={bite} />
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="divider"></div>
                                 </div>
-                                <div className="bite-card">
-                                    {bites.filter((bite: any) => bite.isCreator === true).map((bite: any, index: any) => (
-                                        <div className="profile-bite" key={index}>
-                                            <BiteCardProfile bite={bite} />
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="divider"></div>
-                            </div>
+                            }
 
-                            <div className="creator-bites" style={{ marginTop: '20px' }}>
-                                <div className="section-header">
-                                    <BiteIcon color="#EFA058" width={width < 680 ? 45 : 25} height={width < 680 ? 45 : 25} />
-                                    <span>Featured Bite-sized knowledge you may like</span>
+                            {bites.filter((bite: any) => bite.isCreator === false).length > 0 &&
+                                <div className="creator-bites" style={{ marginTop: '20px' }}>
+                                    <div className="section-header">
+                                        <BiteIcon color="#EFA058" width={width < 680 ? 45 : 25} height={width < 680 ? 45 : 25} />
+                                        <span>Featured Bite-sized knowledge you may like</span>
+                                    </div>
+                                    <div className="bite-card">
+                                        {bites.filter((bite: any) => bite.isCreator === false).map((bite: any, index: any) => (
+                                            <div className="profile-bite" key={index}>
+                                                <BiteCardProfile bite={bite} />
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="divider"></div>
                                 </div>
-                                <div className="bite-card">
-                                    {bites.filter((bite: any) => bite.isCreator === true).map((bite: any, index: any) => (
-                                        <div className="profile-bite" key={index}>
-                                            <BiteCardProfile bite={bite} />
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="divider"></div>
-                            </div>
+                            }
                         </>
                     }
                 </div>
