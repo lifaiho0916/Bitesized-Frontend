@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
 import Button from "../../../components/general/button"
 import { biteAction } from "../../../redux/actions/biteActions"
-import { SearchIcon, AscendIcon, DescendIcon } from "../../../assets/svg"
+import { SearchIcon, AscendIcon, DescendIcon, VisibleIcon, HiddenIcon } from "../../../assets/svg"
 import { SET_BITE, SET_UPLOADED_PROCESS } from "../../../redux/types"
 import "../../../assets/styles/admin/editBite/AdminBiteListStyle.scss"
 
@@ -81,6 +81,7 @@ const AdminBiteList = () => {
                                 </th>
                                 <th>Post Time</th>
                                 <th>Bite title</th>
+                                <th>Status</th>
                                 <th>Author</th>
                             </tr>
                         </thead>
@@ -94,6 +95,7 @@ const AdminBiteList = () => {
                                     <td>{new Date(bite.date).toUTCString().slice(5, 16)}</td>
                                     <td>{new Date(bite.date).toUTCString().slice(17, 25)}</td>
                                     <td>{bite.title}</td>
+                                    <td style={{ textAlign: 'center' }}>{bite.visible ? <VisibleIcon color="#EFA058" /> : <HiddenIcon color="#EFA058" />}</td>
                                     <td>{bite.owner.name}</td>
                                 </tr>
                             ))}

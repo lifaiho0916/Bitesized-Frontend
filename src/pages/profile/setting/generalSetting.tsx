@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import {
   AlertIcon,
