@@ -1,10 +1,15 @@
 import { Dispatch } from "redux"
 import { SET_LOADING_FALSE, SET_LOADING_TRUE, SET_NAME_EXIST, SET_USER, SET_USERS, SET_URL_EXIST, SET_CURRENCY_RATE } from "../types";
 import ReactGA from "react-ga4"
+import { googleLogout } from "@react-oauth/google"
+import decode from "jwt-decode"
 import * as api from '../../api'
 
 export const authAction = {
   logout: (navigate: any) => async (dispatch: Dispatch<any>) => {
+    const token = JSON.parse(localStorage.getItem(`${process.env.REACT_APP_CREATO_TOKEN}`) || '{}')
+    const decodedToken: any = decode(token)
+    if (decodedToken.authType === 'Google') googleLogout()
     localStorage.clear()
     dispatch({ type: SET_USER, payload: null })
     navigate("/")
