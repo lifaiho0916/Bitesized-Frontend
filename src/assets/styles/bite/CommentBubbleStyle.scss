@@ -1,7 +1,7 @@
 .comment-bubble-wrapper {
     box-sizing: border-box;
     max-width: 760px;
-    height: 200px;
+    height: fit-content;
     background: #FFFFFF;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
     border-radius: 50px 50px 50px 0px;
@@ -10,19 +10,112 @@
     .avatar-name-action {
         display: flex;
         justify-content: space-between;
-        
-        .avatar-name {
-            .avatar {
 
+        .avatar-name {
+            display: flex;
+            align-items: center;
+
+            .avatar {
+                margin-right: 8px;
             }
 
             .name-category {
+                font-family: 'Lato';
+                font-style: normal;
+                color: #000000;
 
+                .name {
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 18px;
+                }
+
+                .category {
+                    margin-top: 5px;
+                    width: calc(100% - 10px);
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 300;
+                    font-size: 12px;
+                    line-height: 14px;
+                    letter-spacing: 0.02em;
+
+                }
             }
         }
 
         .action-part {
+            display: flex;
+            align-items: center;
+            position: relative;
 
+            .drop-down-list {
+                right: 0px;
+                bottom: 0px;
+                position: absolute;
+                background-color: #ffffff;
+                width: 250px;
+                box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+                border-radius: 10px;
+                z-index: 10;
+                height: fit-content;
+                overflow: hidden;
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility 0s, opacity 0.2s linear;
+
+                .list {
+                    width: 100%;
+                    height: 52px;
+                    cursor: pointer;
+                    font-style: normal;
+                    font-size: 16px;
+                    line-height: 20px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    a {
+                        color: black;
+
+                        &:hover {
+                            color: grey;
+                        }
+                    }
+
+                    &:hover {
+                        color: grey;
+                    }
+                }
+            }
+        }
+    }
+
+    .comment-body {
+        padding: 10px 10px 0px 10px;
+
+        .comment-text {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18px;
+            color: #54504E;
+
+            .see-more-less {
+                color: #EFA058;
+                cursor: pointer;
+            }
+        }
+
+        .commented-date {
+            margin-top: 10px;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 18px;
+            color: #54504E;
         }
     }
 }

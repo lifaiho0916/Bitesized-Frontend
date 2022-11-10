@@ -127,7 +127,12 @@ const BiteDetail = () => {
     useEffect(() => { if (dlgState === 'unlock_bite') setOpenFreeUnLock(true) }, [dlgState])
     useEffect(() => { if (isOwner) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort)) }, [isOwner, biteId, sort, dispatch])
     useEffect(() => { if (bite.owner && isOwner === false) dispatch(biteAction.getBitesByUserIdAndCategory(bite.owner._id, bite._id)) }, [bite.title, isOwner, dispatch])
-
+    useEffect(() => {
+        if (bite.comments && bite.comments.length) {
+            const buffer: any = document.getElementById("scroll")
+            buffer.scrollTop = buffer.scrollHeight
+        }
+    }, [bite])
     const displayEmptyRow = (count: any) => {
         var indents: any = []
         for (var i = 0; i < count; i++) {
@@ -356,10 +361,10 @@ const BiteDetail = () => {
                         </div>
                         <div className="comment-body">
                             {bite.comments.length > 0 ?
-                                <div className="bubble-part scroll-bar-lg">
+                                <div className="bubble-part scroll-bar-lg" id="scroll">
                                     {bite.comments.map((comment: any, index: any) => (
                                         <div className="bubble" key={index}>
-                                            <CommentBubble comment={comment} />
+                                            <CommentBubble comment={comment} isOwner={user && bite.owner && String(user.id) === String(bite.owner._id) ? true : false} />
                                         </div>
                                     ))}
                                 </div>
@@ -368,7 +373,8 @@ const BiteDetail = () => {
                                     <span>Be the first one to comment</span>
                                 </div>
                             }
-                            {user &&
+                            {
+                                user &&
                                 <div className="input-comment">
                                     <div style={{ width: comment === "" ? '100%' : 'calc(100% - 60px)' }}>
                                         {
@@ -406,8 +412,8 @@ const BiteDetail = () => {
                                     }
                                 </div>
                             }
-                        </div>
-                    </div>
+                        </div >
+                    </div >
 
                     {isOwner === false &&
                         <>
@@ -444,7 +450,7 @@ const BiteDetail = () => {
                             }
                         </>
                     }
-                </div>
+                </div >
             }
         </div >
     )
