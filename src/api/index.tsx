@@ -29,6 +29,7 @@ export const removeVideoFromBite = (id: any, index: any) => API.delete(`/api/bit
 export const changeVideoVisible = (id: any, index: any, data: any) => API.put(`/api/bite/${id}/${index}/setvisible`, data)
 export const getBitesByUserIdAndCategory = (userId: any, biteId: any) => API.get(`/api/bite/user/${userId}?biteId=${biteId}`)
 export const sendComment = (id: any, data: any) => API.put(`/api/bite/${id}/comment`, data)
+export const deleteComment = (id: any, index: any) => API.delete(`/api/bite/${id}/comment/${index}`)
 
 export const getAuthData = () => API.get('/api/auth')
 export const getCurrencyRate = () => API.get('/api/auth/currencyrate')

@@ -419,5 +419,21 @@ export const biteAction = {
             console.log(err)
             dispatch({ type: SET_LOADING_FALSE })
         }
+    },
+
+    deleteComment: (biteId: any, index: any) => async (dispatch: Dispatch<any>) => {
+        try {
+            dispatch({ type: SET_LOADING_TRUE })
+            const response = await api.deleteComment(biteId, index)
+            const { data } = response
+            if (data.success) {
+                const { payload } = data
+                dispatch({ type: SET_BITE, payload: payload.bite })
+            }
+            dispatch({ type: SET_LOADING_FALSE })
+        } catch (err) {
+            console.log(err)
+            dispatch({ type: SET_LOADING_FALSE })
+        }
     }
 }

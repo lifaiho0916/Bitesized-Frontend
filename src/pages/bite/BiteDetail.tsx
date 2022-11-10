@@ -364,7 +364,12 @@ const BiteDetail = () => {
                                 <div className="bubble-part scroll-bar-lg" id="scroll">
                                     {bite.comments.map((comment: any, index: any) => (
                                         <div className="bubble" key={index}>
-                                            <CommentBubble comment={comment} isOwner={user && bite.owner && String(user.id) === String(bite.owner._id) ? true : false} />
+                                            <CommentBubble
+                                                comment={comment}
+                                                isOwner={user && bite.owner && String(user.id) === String(bite.owner._id) ? true : false}
+                                                index={index}
+                                                biteId={biteId}
+                                            />
                                         </div>
                                     ))}
                                 </div>

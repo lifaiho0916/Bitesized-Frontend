@@ -1,8 +1,10 @@
 import { useMemo, useContext, useState, useRef, useEffect } from "react"
 import Avatar from "../general/avatar"
+import { useDispatch } from "react-redux"
 import ShowMoreText from "react-show-more-text"
 import { LanguageContext } from "../../routes/authRoute"
 import { DeleteIcon, MoreIcon } from "../../assets/svg"
+import { biteAction } from "../../redux/actions/biteActions"
 import "../../assets/styles/bite/CommentBubbleStyle.scss"
 
 const useOutsideAlerter = (ref: any, moreInfo: any) => {
@@ -24,7 +26,8 @@ const useOutsideAlerter = (ref: any, moreInfo: any) => {
 
 const CommentBubble = (props: any) => {
     const contexts = useContext(LanguageContext)
-    const { comment, isOwner } = props
+    const dispatch = useDispatch()
+    const { comment, isOwner, index, biteId } = props
     const wrapRef = useRef<any>(null)
     const [more, setMore] = useState(false)
     const res = useOutsideAlerter(wrapRef, more)
@@ -73,6 +76,7 @@ const CommentBubble = (props: any) => {
                             <div className="drop-down-list" style={more === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef}>
                                 <div className="list" onClick={() => {
                                     setMore(false)
+                                    dispatch(biteAction.deleteComment(biteId, index))
                                 }}><DeleteIcon color="#54504E" /><span style={{ marginLeft: '10px' }}>Delete Comment</span></div>
                             </div>
                         </>
