@@ -342,6 +342,102 @@
                     color: #EFA058;
                 }
             }
+
+            .comment-body {
+                .no-comments {
+                    margin: 20px 0px;
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 18px;
+                    text-align: center;
+                    color: #54504E;
+                }
+
+                .input-comment {
+                    margin-top: 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-end;
+
+                    .mobile-input {
+                        .input-part {
+                            &:hover {
+                                border-color: #efa058;
+                            }
+
+                            box-sizing: border-box;
+                            background: #FFFFFF;
+                            border: 1px solid #54504E;
+                            border-radius: 15px;
+                            min-height: 48px;
+                            padding: 12px 16px;
+
+                            textarea {
+                                border: 0px;
+                                padding: 0px;
+                                font-family: 'Lato';
+                                font-style: normal;
+                                color: #54504e;
+                                font-weight: 400;
+                                font-size: 16px;
+                                line-height: 20px;
+                                width: 100%;
+                                resize: none;
+
+                                &:focus {
+                                    outline: none;
+                                }
+
+                                &::-webkit-scrollbar {
+                                    width: 7px;
+                                }
+
+                                &::-webkit-scrollbar-track {
+                                    background-color: rgba(245, 195, 149, 0.1);
+                                    border-radius: 10px;
+                                }
+
+                                &::-webkit-scrollbar-thumb {
+                                    background: rgba(245, 195, 149, 0.5);
+                                    border-radius: 10px;
+                                    transition: 0.2s;
+                                    width: 7px;
+                        
+                                    &:hover {
+                                        background: #efa058;
+                                    }
+                                }
+                            }
+                        }
+
+                        .word-count {
+                            margin-top: 5px;
+                            font-style: normal;
+                            font-weight: 300;
+                            font-size: 12px;
+                            line-height: 14px;
+                            text-align: right;
+                            letter-spacing: 0.02em;
+                            color: #a6a29f;
+                        }
+                    }
+
+                    .send-btn {
+                        margin-bottom: 20px;
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 48px;
+                        height: 48px;
+                        background: #EFA058;
+                        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
+                        border-radius: 60px;
+                    }
+                }
+            }
         }
 
         .creator-bites {
@@ -409,10 +505,10 @@
                 }
             }
 
-            .divider {
-                margin: 10px 0px;
-                border-top: 0.5px solid #54504E;
-            }
+            // .divider {
+            //     margin: 10px 0px;
+            //     border-top: 0.5px solid #54504E;
+            // }
         }
     }
 }

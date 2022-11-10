@@ -1469,7 +1469,7 @@ export const CommentIcon = (props: any) => (
 )
 
 export const SendIcon = (props: any) => (
-  <svg width={props.width ? props.width : "21"} height={props.height ? props.height : "18"} viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width={props.width ? props.width : "21"} height={props.height ? props.height : "18"} cursor="pointer" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M0.00999999 18L21 9L0.00999999 0L0 7L15 9L0 11L0.00999999 18Z" fill={props.color} />
   </svg>
 )

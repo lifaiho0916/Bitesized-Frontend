@@ -403,5 +403,21 @@ export const biteAction = {
         } catch (err) {
             console.log(err)
         }
+    },
+
+    sendComment: (biteId: any, comment: any) => async (dispatch: Dispatch<any>) => {
+        try {
+            dispatch({ type: SET_LOADING_TRUE })
+            const response = await api.sendComment(biteId, { comment: comment })
+            const { data } = response
+            if (data.success) {
+                const { payload } = data
+                dispatch({ type: SET_BITE, payload: payload.bite })
+            }
+            dispatch({ type: SET_LOADING_FALSE })
+        } catch (err) {
+            console.log(err)
+            dispatch({ type: SET_LOADING_FALSE })
+        }
     }
 }

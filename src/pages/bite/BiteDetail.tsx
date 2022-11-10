@@ -1,14 +1,16 @@
 import { useEffect, useState, useContext, useMemo, useLayoutEffect } from "react"
 import { useParams, useNavigate, useLocation } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
+import TextareaAutosize from 'react-textarea-autosize'
 import Avatar from "../../components/general/avatar"
 import Button from "../../components/general/button"
+import Input from "../../components/general/input"
 import ReactPlayer from "react-player"
 import UnLockFreeModal from "../../components/modals/UnLockFreeModal"
 import PurchaseModal from "../../components/modals/PurchaseModal"
 import PaymentModal from "../../components/modals/PaymentModal"
 import BiteCardProfile from "../../components/bite/BiteCardProfile"
-import { BackIcon, ClockIcon, UnlockIcon, AscendIcon, DescendIcon, LockedIcon, Bite1Icon, BiteIcon, CommentIcon } from "../../assets/svg"
+import { BackIcon, ClockIcon, UnlockIcon, AscendIcon, DescendIcon, LockedIcon, Bite1Icon, BiteIcon, CommentIcon, SendIcon } from "../../assets/svg"
 import { LanguageContext } from "../../routes/authRoute"
 import { biteAction } from "../../redux/actions/biteActions"
 import { paymentAction } from "../../redux/actions/paymentActions"
@@ -51,6 +53,7 @@ const BiteDetail = () => {
     const [sort, setSort] = useState(-1)
     const [copied, setCopied] = useState(false)
     const [currency, setCurrency] = useState('usd')
+    const [comment, setComment] = useState('')
 
     const [openFreeUnlock, setOpenFreeUnLock] = useState(false)
     const [openPurchaseModal, setOpenPurchaseModal] = useState(false)
@@ -111,13 +114,18 @@ const BiteDetail = () => {
         return res
     }
 
+    const sendComment = () => {
+        dispatch(biteAction.sendComment(biteId, comment))
+        setComment("")
+    }
+
     useEffect(() => {
         if (user) dispatch(paymentAction.getPayment())
         dispatch(biteAction.getBiteById(biteId))
     }, [biteId, dispatch, user])
     useEffect(() => { if (dlgState === 'unlock_bite') setOpenFreeUnLock(true) }, [dlgState])
-    useEffect(() => { if (isOwner) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort)) }, [isOwner])
-    useEffect(() => { if (bite.owner && isOwner === false) dispatch(biteAction.getBitesByUserIdAndCategory(bite.owner._id, bite._id)) }, [bite, isOwner])
+    useEffect(() => { if (isOwner) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort)) }, [isOwner, biteId, sort, dispatch])
+    useEffect(() => { if (bite.owner && isOwner === false) dispatch(biteAction.getBitesByUserIdAndCategory(bite.owner._id, bite._id)) }, [bite, isOwner, dispatch])
 
     const displayEmptyRow = (count: any) => {
         var indents: any = []
@@ -134,7 +142,7 @@ const BiteDetail = () => {
                 <div className="page-title"><span>Bite Details</span></div>
                 <div style={{ width: '24px' }}></div>
             </div>
-            {bite &&
+            {bite.title &&
                 <div className="bite-detail">
                     <UnLockFreeModal
                         show={openFreeUnlock}
@@ -171,14 +179,12 @@ const BiteDetail = () => {
                                 <ClockIcon color="#DE5A67" width={18} height={18} />&nbsp;<span>{displayTime(bite?.time)}</span>
                             </div>
                             <div className="avatar">
-                                {bite.owner &&
-                                    <Avatar
-                                        avatar={bite.owner.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${bite.owner.avatar}` : bite.owner.avatar}
-                                        username={bite.owner.name}
-                                        avatarStyle={"horizontal"}
-                                        handleClick={() => navigate(`/${bite.owner.personalisedUrl}`)}
-                                    />
-                                }
+                                <Avatar
+                                    avatar={bite.owner.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${bite.owner.avatar}` : bite.owner.avatar}
+                                    username={bite.owner.name}
+                                    avatarStyle={"horizontal"}
+                                    handleClick={() => navigate(`/${bite.owner.personalisedUrl}`)}
+                                />
                                 <Button
                                     text="Subscribe"
                                     fillStyle="fill"
@@ -198,7 +204,7 @@ const BiteDetail = () => {
                                 }
                             </div>
                             <div className="bite-title">
-                                <span>{bite?.title}</span>
+                                <span>{bite.title}</span>
                             </div>
                         </div>
                         {lock &&
@@ -298,7 +304,7 @@ const BiteDetail = () => {
                     }
                     <div className="video-part">
                         <div className="bite-videos scroll-bar">
-                            {bite?.videos.map((video: any, index: any) => (
+                            {bite.videos.map((video: any, index: any) => (
                                 <div key={index}>
                                     <div className="bite-video" style={{ backgroundColor: bite.currency ? lock ? '#97D8D4' : '#D8F7D8' : '#FBBEB1' }}>
                                         {lock ?
@@ -342,11 +348,60 @@ const BiteDetail = () => {
                             ))}
                         </div>
                     </div>
+
                     <div className="comment">
                         <div className="section-header">
                             <CommentIcon color="#EFA058" width={30} height={30} /><span>Comments</span>
                         </div>
+                        <div className="comment-body">
+                            {bite.comments.length > 0 ?
+                                <div></div>
+                                :
+                                <div className="no-comments">
+                                    <span>Be the first one to comment</span>
+                                </div>
+                            }
+                            {user &&
+                                <div className="input-comment">
+                                    <div style={{ width: comment === "" ? '100%' : 'calc(100% - 60px)' }}>
+                                        {
+                                            width < 680 ?
+                                                <div className="mobile-input">
+                                                    <div className="input-part">
+                                                        <TextareaAutosize
+                                                            minRows={1}
+                                                            maxRows={3}
+                                                            onChange={e => setComment(e.target.value)}
+                                                            value={comment}
+                                                            maxLength={200}
+                                                            placeholder="Add a comment"
+                                                        />
+                                                    </div>
+                                                    <div className="word-count">
+                                                        <span>({comment.length}/200 characters)</span>
+                                                    </div>
+                                                </div>
+                                                :
+                                                <Input
+                                                    type={"input"}
+                                                    placeholder="Add a comment"
+                                                    title={comment}
+                                                    setTitle={setComment}
+                                                    width={'100%'}
+                                                    wordCount={200}
+                                                />
+                                        }
+                                    </div>
+                                    {comment !== "" &&
+                                        <div className="send-btn" onClick={sendComment}>
+                                            <SendIcon color="white" width={22} height={22} />
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
                     </div>
+
                     {isOwner === false &&
                         <>
                             {bites.filter((bite: any) => bite.isCreator === true).length > 0 &&
@@ -362,7 +417,6 @@ const BiteDetail = () => {
                                             </div>
                                         ))}
                                     </div>
-                                    <div className="divider"></div>
                                 </div>
                             }
 
@@ -379,7 +433,6 @@ const BiteDetail = () => {
                                             </div>
                                         ))}
                                     </div>
-                                    <div className="divider"></div>
                                 </div>
                             }
                         </>
