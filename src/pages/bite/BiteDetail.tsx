@@ -8,7 +8,7 @@ import UnLockFreeModal from "../../components/modals/UnLockFreeModal"
 import PurchaseModal from "../../components/modals/PurchaseModal"
 import PaymentModal from "../../components/modals/PaymentModal"
 import BiteCardProfile from "../../components/bite/BiteCardProfile"
-import { BackIcon, ClockIcon, UnlockIcon, AscendIcon, DescendIcon, LockedIcon, Bite1Icon, BiteIcon } from "../../assets/svg"
+import { BackIcon, ClockIcon, UnlockIcon, AscendIcon, DescendIcon, LockedIcon, Bite1Icon, BiteIcon, CommentIcon } from "../../assets/svg"
 import { LanguageContext } from "../../routes/authRoute"
 import { biteAction } from "../../redux/actions/biteActions"
 import { paymentAction } from "../../redux/actions/paymentActions"
@@ -340,6 +340,11 @@ const BiteDetail = () => {
                                     </div>
                                 </div>
                             ))}
+                        </div>
+                    </div>
+                    <div className="comment">
+                        <div className="section-header">
+                            <CommentIcon color="#EFA058" width={30} height={30} /><span>Comments</span>
                         </div>
                     </div>
                     {isOwner === false &&

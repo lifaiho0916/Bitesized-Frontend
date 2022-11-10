@@ -1461,3 +1461,15 @@ export const Bite1Icon = (props: any) => (
     <path d="M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18ZM12 3L1 9L12 15L21 10.09V17H23V9L12 3Z" fill={props.color} />
   </svg>
 )
+
+export const CommentIcon = (props: any) => (
+  <svg width={props.width ? props.width : "20"} height={props.height ? props.height : "20"} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 0H2C0.9 0 0 0.9 0 2V14C0 15.1 0.9 16 2 16H16L20 20V2C20 0.9 19.1 0 18 0ZM16 12H4V10H16V12ZM16 9H4V7H16V9ZM16 6H4V4H16V6Z" fill={props.color} />
+  </svg>
+)
+
+export const SendIcon = (props: any) => (
+  <svg width={props.width ? props.width : "21"} height={props.height ? props.height : "18"} viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0.00999999 18L21 9L0.00999999 0L0 7L15 9L0 11L0.00999999 18Z" fill={props.color} />
+  </svg>
+)

@@ -323,6 +323,27 @@
             }
         }
 
+        .comment {
+            margin: 20px auto;
+            max-width: 880px;
+            padding: 0px 20px;
+
+            .section-header {
+                display: flex;
+                align-items: center;
+
+                span {
+                    margin-left: 10px;
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 20px;
+                    line-height: 24px;
+                    color: #EFA058;
+                }
+            }
+        }
+
         .creator-bites {
             margin: 0px auto;
             max-width: 880px;
