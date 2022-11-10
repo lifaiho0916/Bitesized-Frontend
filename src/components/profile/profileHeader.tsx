@@ -1,6 +1,6 @@
-import { useEffect, useState, useContext, useRef, useLayoutEffect } from "react"
+import { useEffect, useState, useContext, useRef, useLayoutEffect, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { LanguageContext } from "../../routes/authRoute"
 import Button from "../general/button"
 import Avatar from "../general/avatar"
@@ -33,13 +33,9 @@ const useOutsideAlerter = (ref: any, moreInfo: any) => {
 const ProfileHeader = (props: any) => {
   const { same, profileUser } = props
   const navigate = useNavigate()
-  const userStore = useSelector((state: any) => state.auth);
   const dispatch = useDispatch()
-  const { user } = userStore
   const contexts = useContext(LanguageContext)
-  const [categoryText, setCategoryText] = useState("")
   const [moreInfo, setMoreInfo] = useState(false)
-  const [subscribed, setSubscribed] = useState(false)
   const wrapRef = useRef<any>(null)
   const res = useOutsideAlerter(wrapRef, moreInfo)
   const ref = useRef<any>(null)
@@ -47,42 +43,23 @@ const ProfileHeader = (props: any) => {
   const [showMore, setShowMore] = useState(false)
   const [showLink, setShowLink] = useState(false)
 
-  useEffect(() => {
-    if (profileUser && profileUser.categories.length) {
-      let categories = profileUser.categories
-      let texts = ""
-      categories.sort((a: any, b: any) => { return a > b ? 1 : a < b ? -1 : 0 })
-      categories.forEach((categoryIndex: any, index: any) => {
-        texts += contexts.CREATOR_CATEGORY_LIST[categoryIndex]
-        if (index < categories.length - 1) texts += "/"
-      })
-      setCategoryText(texts)
+  const categoryText = useMemo(() => {
+    if (profileUser) {
+      if (profileUser.categories.length === 0) return ""
+      else {
+        let categories = profileUser.categories
+        let texts = ""
+        categories.sort((a: any, b: any) => { return a > b ? 1 : a < b ? -1 : 0 })
+        categories.forEach((categoryIndex: any, index: any) => {
+          texts += contexts.CREATOR_CATEGORY_LIST[categoryIndex]
+          if (index < categories.length - 1) texts += "/"
+        })
+        return texts
+      }
     }
   }, [profileUser, contexts.CREATOR_CATEGORY_LIST])
 
-  useEffect(() => {
-    // if (user && profileUser) {
-    //   profileUser.subscribed_users.forEach((item: any) => {
-    //     if (item + "" === user.id + "") setSubscribed(true)
-    //   })
-    // }
-  }, [user, profileUser])
-
-  const subscribedUser = async () => {
-    // try {
-    //   if (user) {
-    //     const result = await subscribeUser(profileUser._id)
-    //     if (result.data.success) setSubscribed(!subscribed)
-    //   } else navigate('/auth/signin')
-    // } catch (err) {
-    //   console.log({ err })
-    // }
-  }
-
-  useEffect(() => {
-    if (!res) setMoreInfo(res)
-  }, [res])
-
+  useEffect(() => { if (!res) setMoreInfo(res) }, [res])
   useLayoutEffect(() => {
     if (ref) {
       const updateSize = () => {

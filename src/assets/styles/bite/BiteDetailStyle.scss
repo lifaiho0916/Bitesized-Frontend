@@ -160,6 +160,28 @@
             }
         }
 
+        .scroll-bar-lg {
+            &::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background-color: rgba(245, 195, 149, 0.1);
+                border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: rgba(245, 195, 149, 0.5);
+                border-radius: 10px;
+                transition: 0.2s;
+                height: 10px;
+
+                &:hover {
+                    background: #efa058;
+                }
+            }
+        }
+
         table,
         tr,
         th,
@@ -355,6 +377,17 @@
                     color: #54504E;
                 }
 
+                .bubble-part {
+                    max-height: 400px;
+                    margin: 20px 0px;
+                    overflow-y: auto;
+
+                    .bubble {
+                        margin: 8px 20px 8px 5px;
+                        max-width: 760px;
+                    }
+                }
+
                 .input-comment {
                     margin-top: 20px;
                     display: flex;
@@ -404,7 +437,7 @@
                                     border-radius: 10px;
                                     transition: 0.2s;
                                     width: 7px;
-                        
+
                                     &:hover {
                                         background: #efa058;
                                     }

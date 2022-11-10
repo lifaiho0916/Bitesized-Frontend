@@ -1,0 +1,28 @@
+.comment-bubble-wrapper {
+    box-sizing: border-box;
+    max-width: 760px;
+    height: 200px;
+    background: #FFFFFF;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 50px 50px 50px 0px;
+    padding: 20px;
+
+    .avatar-name-action {
+        display: flex;
+        justify-content: space-between;
+        
+        .avatar-name {
+            .avatar {
+
+            }
+
+            .name-category {
+
+            }
+        }
+
+        .action-part {
+
+        }
+    }
+}

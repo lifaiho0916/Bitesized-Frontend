@@ -10,6 +10,7 @@ import UnLockFreeModal from "../../components/modals/UnLockFreeModal"
 import PurchaseModal from "../../components/modals/PurchaseModal"
 import PaymentModal from "../../components/modals/PaymentModal"
 import BiteCardProfile from "../../components/bite/BiteCardProfile"
+import CommentBubble from "../../components/bite/CommentBubble"
 import { BackIcon, ClockIcon, UnlockIcon, AscendIcon, DescendIcon, LockedIcon, Bite1Icon, BiteIcon, CommentIcon, SendIcon } from "../../assets/svg"
 import { LanguageContext } from "../../routes/authRoute"
 import { biteAction } from "../../redux/actions/biteActions"
@@ -125,7 +126,7 @@ const BiteDetail = () => {
     }, [biteId, dispatch, user])
     useEffect(() => { if (dlgState === 'unlock_bite') setOpenFreeUnLock(true) }, [dlgState])
     useEffect(() => { if (isOwner) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort)) }, [isOwner, biteId, sort, dispatch])
-    useEffect(() => { if (bite.owner && isOwner === false) dispatch(biteAction.getBitesByUserIdAndCategory(bite.owner._id, bite._id)) }, [bite, isOwner, dispatch])
+    useEffect(() => { if (bite.owner && isOwner === false) dispatch(biteAction.getBitesByUserIdAndCategory(bite.owner._id, bite._id)) }, [bite.title, isOwner, dispatch])
 
     const displayEmptyRow = (count: any) => {
         var indents: any = []
@@ -355,7 +356,13 @@ const BiteDetail = () => {
                         </div>
                         <div className="comment-body">
                             {bite.comments.length > 0 ?
-                                <div></div>
+                                <div className="bubble-part scroll-bar-lg">
+                                    {bite.comments.map((comment: any, index: any) => (
+                                        <div className="bubble" key={index}>
+                                            <CommentBubble comment={comment} />
+                                        </div>
+                                    ))}
+                                </div>
                                 :
                                 <div className="no-comments">
                                     <span>Be the first one to comment</span>
