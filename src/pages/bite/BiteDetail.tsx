@@ -126,7 +126,7 @@ const BiteDetail = () => {
     }, [biteId, dispatch, user])
     useEffect(() => { if (dlgState === 'unlock_bite') setOpenFreeUnLock(true) }, [dlgState])
     useEffect(() => { if (isOwner) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort)) }, [isOwner, biteId, sort, dispatch])
-    useEffect(() => { if (bite.owner && isOwner === false) dispatch(biteAction.getBitesByUserIdAndCategory(bite.owner._id, bite._id)) }, [bite.owner, bite._id, isOwner, dispatch])
+    useEffect(() => { if (bite.owner && isOwner === false) dispatch(biteAction.getBitesByUserIdAndCategory(bite.owner._id, bite._id)) }, [bite.title, isOwner, dispatch])
     useEffect(() => {
         if (bite.comments && bite.comments.length) {
             const buffer: any = document.getElementById("scroll")
@@ -363,11 +363,11 @@ const BiteDetail = () => {
                             {bite.comments.length > 0 ?
                                 <div className="bubble-part scroll-bar-lg" id="scroll">
                                     {bite.comments.map((comment: any, index: any) => (
-                                        <div className="bubble" key={index}>
+                                        <div className="bubble" key={index} style={(user && String(comment.commentedBy._id) === String(user.id)) && width > 680 ? { marginLeft: 'auto' } : {}}>
                                             <CommentBubble
                                                 comment={comment}
                                                 isOwnBite={user && bite.owner && String(user.id) === String(bite.owner._id) ? true : false}
-                                                isOwnComment={(user && String(comment.commentedBy) === String(user.id)) ? true : false}
+                                                isOwnComment={(user && String(comment.commentedBy._id) === String(user.id)) ? true : false}
                                                 index={index}
                                                 biteId={biteId}
                                             />

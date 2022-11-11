@@ -2,9 +2,7 @@
     box-sizing: border-box;
     max-width: 760px;
     height: fit-content;
-    background: #FFFFFF;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
-    border-radius: 50px 50px 50px 0px;
     padding: 20px;
 
     .avatar-name-action {
@@ -22,7 +20,7 @@
             .name-category {
                 font-family: 'Lato';
                 font-style: normal;
-                color: #000000;
+                width: calc(100% - 10px);
 
                 .name {
                     font-weight: 600;
@@ -32,14 +30,12 @@
 
                 .category {
                     margin-top: 5px;
-                    width: calc(100% - 10px);
                     font-family: 'Lato';
                     font-style: normal;
                     font-weight: 300;
                     font-size: 12px;
                     line-height: 14px;
                     letter-spacing: 0.02em;
-
                 }
             }
         }
@@ -100,7 +96,14 @@
             font-weight: 400;
             font-size: 14px;
             line-height: 18px;
-            color: #54504E;
+
+            .content-css-owner {
+                color: white;
+            }
+
+            .content-css {
+                color: #54504E;
+            }
 
             .see-more-less {
                 color: #EFA058;
@@ -115,7 +118,6 @@
             font-weight: 700;
             font-size: 14px;
             line-height: 18px;
-            color: #54504E;
         }
     }
 }

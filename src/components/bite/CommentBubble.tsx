@@ -51,7 +51,19 @@ const CommentBubble = (props: any) => {
     useEffect(() => { if (!res) setMore(res) }, [res])
 
     return (
-        <div className="comment-bubble-wrapper">
+        <div className="comment-bubble-wrapper"
+            style={isOwnComment ?
+                {
+                    borderRadius: '50px 50px 0px 50px',
+                    background: '#EFA058'
+                }
+                :
+                {
+                    borderRadius: '50px 50px 50px 0px',
+                    background: '#FFFFFF'
+                }
+            }
+        >
             <div className="avatar-name-action" >
                 <div className="avatar-name">
                     <div className="avatar">
@@ -60,19 +72,19 @@ const CommentBubble = (props: any) => {
                             size="mobile"
                         />
                     </div>
-                    <div className="name-category">
+                    <div className="name-category" style={{ color: isOwnComment ? 'white' : '#000000' }}>
                         <div className="name">
                             <span>{comment?.commentedBy?.name}</span>
                         </div>
                         <div className="category">
-                            <span>{categoryText}</span>
+                            <span>{comment?.commentedBy?.role === "ADMIN" ? "Creato Admin" : categoryText}</span>
                         </div>
                     </div>
                 </div>
                 <div className="action-part">
                     {(isOwnBite || isOwnComment) &&
                         <>
-                            <div onClick={() => setMore(true)}><MoreIcon color="black" /></div>
+                            <div onClick={() => setMore(true)}><MoreIcon color={isOwnComment ? "white" : "black"} /></div>
                             <div className="drop-down-list" style={more === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef}>
                                 <div className="list" onClick={() => {
                                     setMore(false)
@@ -89,7 +101,7 @@ const CommentBubble = (props: any) => {
                         lines={3}
                         more="... see more"
                         less="... see less"
-                        className="content-css"
+                        className={isOwnComment ? "content-css-owner" : "content-css"}
                         anchorClass="see-more-less"
                         expanded={false}
                         width={0}
@@ -98,7 +110,7 @@ const CommentBubble = (props: any) => {
                         {comment?.text}
                     </ShowMoreText>
                 </div>
-                <div className="commented-date">
+                <div className="commented-date" style={isOwnComment ? { color: 'white', display: 'flex', justifyContent: 'flex-end' } : { color: '#54504E' }}>
                     <span>{comment.commentedAt ? comment.commentedAt.substring(5, 7) + '.' + comment.commentedAt.substring(8, 10) + '.' + comment.commentedAt.substring(0, 4) : ''}</span>
                 </div>
             </div>
