@@ -126,7 +126,7 @@ const BiteDetail = () => {
     }, [biteId, dispatch, user])
     useEffect(() => { if (dlgState === 'unlock_bite') setOpenFreeUnLock(true) }, [dlgState])
     useEffect(() => { if (isOwner) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort)) }, [isOwner, biteId, sort, dispatch])
-    useEffect(() => { if (bite.owner && isOwner === false) dispatch(biteAction.getBitesByUserIdAndCategory(bite.owner._id, bite._id)) }, [bite.title, isOwner, dispatch])
+    useEffect(() => { if (bite.owner && isOwner === false) dispatch(biteAction.getBitesByUserIdAndCategory(bite.owner._id, bite._id)) }, [bite.owner, bite._id, isOwner, dispatch])
     useEffect(() => {
         if (bite.comments && bite.comments.length) {
             const buffer: any = document.getElementById("scroll")
@@ -366,7 +366,8 @@ const BiteDetail = () => {
                                         <div className="bubble" key={index}>
                                             <CommentBubble
                                                 comment={comment}
-                                                isOwner={user && bite.owner && String(user.id) === String(bite.owner._id) ? true : false}
+                                                isOwnBite={user && bite.owner && String(user.id) === String(bite.owner._id) ? true : false}
+                                                isOwnComment={(user && String(comment.commentedBy) === String(user.id)) ? true : false}
                                                 index={index}
                                                 biteId={biteId}
                                             />

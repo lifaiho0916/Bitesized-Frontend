@@ -27,7 +27,7 @@ const useOutsideAlerter = (ref: any, moreInfo: any) => {
 const CommentBubble = (props: any) => {
     const contexts = useContext(LanguageContext)
     const dispatch = useDispatch()
-    const { comment, isOwner, index, biteId } = props
+    const { comment, isOwnBite, index, biteId, isOwnComment } = props
     const wrapRef = useRef<any>(null)
     const [more, setMore] = useState(false)
     const res = useOutsideAlerter(wrapRef, more)
@@ -46,13 +46,13 @@ const CommentBubble = (props: any) => {
                 return texts
             }
         }
-    }, [comment])
+    }, [comment, contexts.CREATOR_CATEGORY_LIST])
 
     useEffect(() => { if (!res) setMore(res) }, [res])
 
     return (
         <div className="comment-bubble-wrapper">
-            <div className="avatar-name-action">
+            <div className="avatar-name-action" >
                 <div className="avatar-name">
                     <div className="avatar">
                         <Avatar
@@ -70,7 +70,7 @@ const CommentBubble = (props: any) => {
                     </div>
                 </div>
                 <div className="action-part">
-                    {isOwner &&
+                    {(isOwnBite || isOwnComment) &&
                         <>
                             <div onClick={() => setMore(true)}><MoreIcon color="black" /></div>
                             <div className="drop-down-list" style={more === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef}>

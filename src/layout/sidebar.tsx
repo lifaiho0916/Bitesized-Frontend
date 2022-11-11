@@ -5,7 +5,8 @@ import {
   EditIcon,
   AddIcon,
   MoneyIcon,
-  SearchIcon
+  SearchIcon,
+  CommentIcon
 } from "../assets/svg"
 import "../assets/styles/sidebarStyle.scss"
 
@@ -27,7 +28,7 @@ const NavLink = (props: any) => {
 
 const Sidebar = () => {
   const location = useLocation();
-  const [hoverPath, setHoverPath] = useState("");
+  const [hoverPath, setHoverPath] = useState("")
   const [activePath, setActivePath] = useState("")
 
   return (
@@ -71,6 +72,14 @@ const Sidebar = () => {
           </div>
           <div className="item-letter">
             <span>Profile - Users</span>
+          </div>
+        </NavLink>
+        <NavLink to="/admin/comment" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
+          <div className="icon" style={{ marginLeft: '2px' }}>
+            <CommentIcon className="icon-svg" color={location.pathname.indexOf('/admin/comment') !== -1 ? "#EFA058" : hoverPath === "/admin/comment" ? "#EFA058" : "#A6A29F"} />
+          </div>
+          <div className="item-letter">
+            <span>Comment</span>
           </div>
         </NavLink>
       </div>

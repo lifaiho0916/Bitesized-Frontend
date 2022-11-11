@@ -76,6 +76,7 @@ const AppRoutes = () => {
       <Route path="admin/profile-user/edit" element={<AuthRoute child={<AdminEditUser />} routeType="private" />} />
       <Route path="admin/profile-user/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
       <Route path="admin/transaction" element={<AuthRoute child={<AdminTransaction />} routeType="private" />} />
+      <Route path="admin/comment" element={<AuthRoute child={<AdminBiteList />} routeType="private" />} />
 
       <Route path="/not-founder-cover" element={<Error404 />} />
       <Route path="*" element={<Navigate to="/not-founder-cover" replace />} />
