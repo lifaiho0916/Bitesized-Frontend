@@ -18,6 +18,8 @@ import Socialaccount from '../pages/profile/edit/socialAccount'
 import Categories from '../pages/profile/edit/categories'
 import Wallet from '../pages/profile/Wallet'
 import Payout from '../pages/profile/Payout'
+import GeneralSetting from '../pages/profile/setting/generalSetting'
+import LanguageCurrency from '../pages/profile/setting/language'
 
 ///----------------ADMIN-----------------==////
 //CHECK-BITE
@@ -33,9 +35,8 @@ import AdminUserList from '../pages/admin/profileUser/AdminUserList'
 import AdminEditUser from '../pages/admin/profileUser/AdminEditUser'
 //Transaction
 import AdminTransaction from '../pages/admin/transaction/AdminTransaction'
-
-import GeneralSetting from '../pages/profile/setting/generalSetting'
-import LanguageCurrency from '../pages/profile/setting/language'
+//Comment
+import AdminComment from '../pages/admin/comment/AdminComment'
 
 import Error404 from '../pages/error/error404'
 
@@ -77,6 +78,7 @@ const AppRoutes = () => {
       <Route path="admin/profile-user/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
       <Route path="admin/transaction" element={<AuthRoute child={<AdminTransaction />} routeType="private" />} />
       <Route path="admin/comment" element={<AuthRoute child={<AdminBiteList />} routeType="private" />} />
+      <Route path="admin/comment/:biteId" element={<AuthRoute child={<AdminComment />} routeType="private" />} />
 
       <Route path="/not-founder-cover" element={<Error404 />} />
       <Route path="*" element={<Navigate to="/not-founder-cover" replace />} />
