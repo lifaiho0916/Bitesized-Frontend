@@ -6,7 +6,8 @@ import {
   AddIcon,
   MoneyIcon,
   SearchIcon,
-  CommentIcon
+  CommentIcon,
+  PrivacyIcon
 } from "../assets/svg"
 import "../assets/styles/sidebarStyle.scss"
 
@@ -80,6 +81,14 @@ const Sidebar = () => {
           </div>
           <div className="item-letter">
             <span>Comment</span>
+          </div>
+        </NavLink>
+        <NavLink to="/admin/terms-privacy" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
+          <div className="icon">
+            <PrivacyIcon className="icon-svg" color={location.pathname.indexOf('/admin/terms-privacy') !== -1 ? "#EFA058" : hoverPath === "/admin/terms-privacy" ? "#EFA058" : "#A6A29F"} />
+          </div>
+          <div className="item-letter">
+            <span>Terms and Privacy</span>
           </div>
         </NavLink>
       </div>
