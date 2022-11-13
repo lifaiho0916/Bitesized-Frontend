@@ -380,7 +380,7 @@ const BiteDetail = () => {
                                 </div>
                             }
                             {
-                                user &&
+                                (user && !lock) &&
                                 <div className="input-comment">
                                     <div style={{ width: comment === "" ? '100%' : 'calc(100% - 60px)' }}>
                                         {
