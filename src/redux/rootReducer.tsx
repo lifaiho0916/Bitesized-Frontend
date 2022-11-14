@@ -5,6 +5,7 @@ import biteReducer from "./reducers/biteReducer"
 import socialAccountReducer from "./reducers/socialAccountReducer"
 import transactionReducer from "./reducers/transactionReducer"
 import paymentReducer from "./reducers/paymentReducer"
+import settingRedcuer from "./reducers/settingReducer"
 
 const rootReducer = combineReducers({
     auth: authReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     bite: biteReducer,
     transaction: transactionReducer,
     accounts: socialAccountReducer,
-    payment: paymentReducer
+    payment: paymentReducer,
+    setting: settingRedcuer
 })
 
 export default rootReducer

@@ -32,7 +32,8 @@ export const sendComment = (id: any, data: any) => API.put(`/api/bite/${id}/comm
 export const deleteComment = (id: any, index: any) => API.delete(`/api/bite/${id}/comment/${index}`)
 
 export const getAuthData = () => API.get('/api/auth')
-export const getCurrencyRate = () => API.get('/api/auth/currencyrate')
+export const googleAuth = (data: any) => API.post('/api/auth/google', data)
+export const appleAuth = (data: any) => API.post('/api/auth/apple', data)
 export const editProfile = (data: any) => API.post('/api/auth/profile/save', data)
 export const editAvatar = (data: any, config: any) => API.post('/api/auth/avatar/upload', data, config)
 export const checkName = (data: any) => API.post('/api/auth/checkname', data)
@@ -58,8 +59,10 @@ export const getSocialAccount = (userId: any) => API.get(`/api/social-accounts/$
 export const addSocialAccount = (data: any) => API.post('/api/social-accounts/add', data)
 export const removeSocialAccount = (id: any) => API.delete(`/api/social-accounts/delete/${id}`)
 
-export const googleAuth = (data: any) => API.post('/api/auth/google', data)
-export const appleAuth = (data: any) => API.post('/api/auth/apple', data)
+//SETTING
+export const getCurrencyRate = () => API.get('/api/setting/currencyrate')
+export const getTermsAndPrivacy = () => API.get('/api/setting/terms-privacy')
+export const saveTermsAndPrivacy = (data: any) => API.post('/api/setting/terms-privacy', data)
 
 export const facebookSignin = (data: any) => API.post('/api/auth/facebookSignin', data)
 export const facebookSignup = (data: any) => API.post('/api/auth/facebookSignup', data)

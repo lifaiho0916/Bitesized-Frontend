@@ -22,7 +22,10 @@
     "axios": "^0.25.0",
     "babel-plugin-macros": "^3.1.0",
     "detect-inapp": "^1.4.0",
+    "draft-js": "^0.11.7",
+    "draftjs-to-html": "^0.9.1",
     "history": "^5.2.0",
+    "immutable": "^3.7.6",
     "jwt-decode": "^3.1.2",
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
@@ -30,9 +33,10 @@
     "react-avatar-editor": "^13.0.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^17.0.2",
+    "react-draft-wysiwyg": "^1.15.0",
     "react-facebook-login": "^4.1.1",
     "react-ga4": "^1.4.1",
-    "react-player": "^2.9.0",
+    "react-player": "^2.11.0",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
@@ -41,7 +45,6 @@
     "react-spring-3d-carousel": "^1.2.1",
     "react-textarea-autosize": "^8.4.0",
     "redux": "^4.1.2",
-    "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "reselect": "^4.1.5",
     "socket.io-client": "^4.4.1",
@@ -73,15 +76,20 @@
     ]
   },
   "devDependencies": {
+    "@types/draft-js": "^0.11.9",
+    "@types/draftjs-to-html": "^0.8.1",
+    "@types/immutable": "^3.8.7",
     "@types/jwt-decode": "^3.1.0",
     "@types/react-avatar-editor": "^13.0.0",
     "@types/react-beautiful-dnd": "^13.1.2",
+    "@types/react-draft-wysiwyg": "^1.13.4",
     "@types/react-facebook-login": "^4.1.5",
     "@types/react-redux": "^7.1.22",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-show-more-text": "^1.4.2",
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.0",
-    "@types/socket.io-client": "^3.0.0"
+    "@types/socket.io-client": "^3.0.0",
+    "redux-devtools-extension": "^2.13.9"
   }
 }
