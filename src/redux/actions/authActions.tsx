@@ -226,9 +226,7 @@ export const authAction = {
       try {
         dispatch({ type: SET_LOADING_TRUE });
         dispatch({ type: SET_USERS, payload: [] });
-        const response = await api.getCreatorsByCategory({
-          categories: categories,
-        });
+        const response = await api.getCreatorsByCategory(categories);
         const { data } = response;
         dispatch({ type: SET_LOADING_FALSE });
         const { payload } = data;
@@ -240,11 +238,11 @@ export const authAction = {
       }
     },
 
-  getUsersByCategory: (categories: any) => async (dispatch: Dispatch<any>) => {
+  getUsersByCategory: (categories: any, search: any) => async (dispatch: Dispatch<any>) => {
     try {
       dispatch({ type: SET_LOADING_TRUE });
       dispatch({ type: SET_USERS, payload: [] });
-      const response = await api.getUsersByCategory({ categories: categories });
+      const response = await api.getUsersByCategory(categories, search);
       const { data } = response;
       dispatch({ type: SET_LOADING_FALSE });
       const { payload } = data;

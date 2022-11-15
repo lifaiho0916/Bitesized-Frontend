@@ -5,6 +5,7 @@ import { LanguageContext } from "../../../routes/authRoute"
 import CategoryBtn from "../../../components/general/categoryBtn"
 import { authAction } from "../../../redux/actions/authActions"
 import CreatorSm from "../../../components/general/CreatorSm"
+import { SearchIcon } from "../../../assets/svg"
 import { SET_BITE_INITIAL, SET_UPLOADED_PROCESS } from "../../../redux/types"
 import "../../../assets/styles/admin/createFreeBite/AdminCreatorListStyle.scss"
 
@@ -15,6 +16,8 @@ const AdminCreatorList = (props: any) => {
     const [categories, setCategories] = useState<Array<any>>([])
     const userState = useSelector((state: any) => state.auth)
     const { users } = userState
+
+    const [search, setSearch] = useState("")
 
     const selectCategory = (index: any) => {
         var array = [...categories]
@@ -30,7 +33,7 @@ const AdminCreatorList = (props: any) => {
         return false
     }
 
-    useEffect(() => { dispatch(authAction.getUsersByCategory(categories)) }, [categories, dispatch])
+    useEffect(() => { dispatch(authAction.getUsersByCategory(categories, search)) }, [categories, dispatch])
 
     return (
         <div className="admin-creator-list-wrapper">
@@ -43,6 +46,15 @@ const AdminCreatorList = (props: any) => {
                         </div>
                     ))}
                 </div>
+            </div>
+            <div className="search-bar">
+                <SearchIcon color="#EFA058" />
+                <input
+                    placeholder="Username"
+                    className="search-input"
+                    onChange={(e) => { setSearch(e.target.value) }}
+                    onKeyUp={(e) => { if (e.keyCode === 13) dispatch(authAction.getUsersByCategory(categories, search)) }}
+                />
             </div>
             <div className="creators">
                 {users.map((user: any, index: any) => (
