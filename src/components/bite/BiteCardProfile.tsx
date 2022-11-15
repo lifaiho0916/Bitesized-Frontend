@@ -5,6 +5,7 @@ import { LanguageContext } from "../../routes/authRoute"
 import { ClockIcon, NoOfPeopleIcon, UnlockIcon, LockedIcon } from "../../assets/svg"
 import NextBtn from "../../assets/img/next-bright.png"
 import { SET_PREVIOUS_ROUTE } from "../../redux/types"
+import CONSTANT from "../../constants/constant"
 import "../../assets/styles/bite/BiteCardProfileStyle.scss"
 
 const BiteCardProfile = (props: any) => {
@@ -47,12 +48,8 @@ const BiteCardProfile = (props: any) => {
                 const usdAmount = price / rate
                 const rate1 = userCurrency === 'usd' ? 1.0 : currencyRate[`${userCurrency}`]
                 const localPrice = usdAmount * rate1
-                let res = ""
-                if (userCurrency === 'usd') res += 'US $'
-                else if (userCurrency === 'hkd') res += 'HK $'
-                else if (userCurrency === 'inr') res += 'Rp ₹'
-                else if (userCurrency === 'twd') res += 'NT $'
-                else res += 'RM '
+                const index = CONSTANT.CURRENCIES.findIndex((cur: any) => cur.toLowerCase() === userCurrency)
+                let res = CONSTANT.CURRENCY_SYMBOLS[index]
                 return res + localPrice.toFixed(2)
             }
         } return "FREE"

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 import Avatar from "../general/avatar"
 import CurrencySelect from "../stripe/CurrencySelect"
 import Button from "../general/button"
@@ -18,12 +19,8 @@ const PurchaseModal = (props: any) => {
 
     const displayPrice = (currency: any, price: any) => {
         if (currency) {
-            let res = ""
-            if (currency === 'usd') res += 'US $'
-            else if (currency === 'hkd') res += 'HK $'
-            else if (currency === 'inr') res += 'Rp ₹'
-            else if (currency === 'twd') res += 'NT $'
-            else res += 'RM '
+            const index = CONSTANT.CURRENCIES.findIndex((cur: any) => cur.toLowerCase() === currency)
+            let res = CONSTANT.CURRENCY_SYMBOLS[index]
             return res + price.toFixed(2)
         }
     }
@@ -100,7 +97,7 @@ const PurchaseModal = (props: any) => {
                             <span>(Including processing fee)</span>
                         </div>
                         <div className="terms-and-privacy">
-                            <span>By Clicking Next, you agree to <a href="https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713">Creato’s Terms & Conditions</a>, and <a href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33">Privacy Policy</a>, and for payment processor - Stripe to charge your payment method.</span>
+                            <span>By Clicking Next, you agree to <Link to="/terms">Creato’s Terms & Conditions</Link>, and <Link to="/privacy-policy">Privacy Policy</Link>, and for payment processor - Stripe to charge your payment method.</span>
                         </div>
                         <div className="next-btn" style={{ marginBottom: '15px' }}>
                             <Button

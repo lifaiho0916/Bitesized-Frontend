@@ -7,6 +7,7 @@ import Input from "../../../components/general/input"
 import { BackIcon, ClockIcon, CommentIcon, SendIcon } from "../../../assets/svg"
 import { LanguageContext } from "../../../routes/authRoute"
 import { biteAction } from "../../../redux/actions/biteActions"
+import CONSTANT from "../../../constants/constant"
 import "../../../assets/styles/admin/comment/AdminCommentStyle.scss"
 
 const AdminComment = (props: any) => {
@@ -46,12 +47,8 @@ const AdminComment = (props: any) => {
     }, [bite, user, currencyRate])
 
     const getLocalCurrency = (currency: any) => {
-        let res = ''
-        if (currency === 'usd') res += 'US $'
-        else if (currency === 'hkd') res += 'HK $'
-        else if (currency === 'inr') res += 'Rp ₹'
-        else if (currency === 'twd') res += 'NT $'
-        else res += 'RM '
+        const index = CONSTANT.CURRENCIES.findIndex((cur: any) => cur.toLowerCase() === currency)
+        let res = CONSTANT.CURRENCY_SYMBOLS[index]
         return res
     }
 

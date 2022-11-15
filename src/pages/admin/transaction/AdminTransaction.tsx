@@ -4,6 +4,7 @@ import { useSearchParams, useNavigate, useLocation } from "react-router-dom"
 import Button from "../../../components/general/button"
 import { SearchIcon } from "../../../assets/svg"
 import { transactionAction } from "../../../redux/actions/transactionActions"
+import CONSTANT from "../../../constants/constant"
 import "../../../assets/styles/admin/transaction/AdminTransactionStyle.scss"
 
 const AdminTransaction = () => {
@@ -24,20 +25,10 @@ const AdminTransaction = () => {
     }
 
     const getLocalCurrency = (currency: any) => {
-        let res = ''
-        if (currency === 'usd') res += 'US $'
-        else if (currency === 'hkd') res += 'HK $'
-        else if (currency === 'inr') res += 'Rp ₹'
-        else if (currency === 'twd') res += 'NT $'
-        else res += 'RM '
+        const index = CONSTANT.CURRENCIES.findIndex((cur: any) => cur.toLowerCase() === currency)
+        let res = CONSTANT.CURRENCY_SYMBOLS[index]
         return res
     }
-
-    // US $1
-    // HK $1
-    // Rp ₹1 (Indian rupees)
-    // NT $1 (Taiwan)
-    // RM 5 (Malaysian ringgit)
 
     useEffect(() => {
         dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search))

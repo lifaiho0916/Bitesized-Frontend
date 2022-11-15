@@ -18,6 +18,7 @@ import { paymentAction } from "../../redux/actions/paymentActions"
 import { transactionAction } from "../../redux/actions/transactionActions"
 import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../redux/types"
 import NoTransactionImg from "../../assets/img/no-bite-transaction.png"
+import CONSTANT from "../../constants/constant"
 import "../../assets/styles/bite/BiteDetailStyle.scss"
 
 const useWindowSize = () => {
@@ -106,12 +107,8 @@ const BiteDetail = () => {
     }
 
     const getLocalCurrency = (currency: any) => {
-        let res = ''
-        if (currency === 'usd') res += 'US $'
-        else if (currency === 'hkd') res += 'HK $'
-        else if (currency === 'inr') res += 'Rp ₹'
-        else if (currency === 'twd') res += 'NT $'
-        else res += 'RM '
+        const index = CONSTANT.CURRENCIES.findIndex((cur: any) => cur.toLowerCase() === currency)
+        let res = CONSTANT.CURRENCY_SYMBOLS[index]
         return res
     }
 

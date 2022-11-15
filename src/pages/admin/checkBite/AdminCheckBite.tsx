@@ -7,6 +7,7 @@ import { biteAction } from "../../../redux/actions/biteActions"
 import { BackIcon, ClockIcon, DescendIcon, AscendIcon } from "../../../assets/svg"
 import { LanguageContext } from "../../../routes/authRoute"
 import { transactionAction } from "../../../redux/actions/transactionActions"
+import CONSTANT from "../../../constants/constant"
 import "../../../assets/styles/admin/editBite/AdminEditBiteStyle.scss"
 
 const AdminCheckBite = () => {
@@ -28,12 +29,8 @@ const AdminCheckBite = () => {
     }
 
     const getLocalCurrency = (currency: any) => {
-        let res = ''
-        if (currency === 'usd') res += 'US $'
-        else if (currency === 'hkd') res += 'HK $'
-        else if (currency === 'inr') res += 'Rp ₹'
-        else if (currency === 'twd') res += 'NT $'
-        else res += 'RM '
+        const index = CONSTANT.CURRENCIES.findIndex((cur: any) => cur.toLowerCase() === currency)
+        let res = CONSTANT.CURRENCY_SYMBOLS[index]
         return res
     }
 

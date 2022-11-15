@@ -24,6 +24,7 @@ import AddCardModal from "../../components/modals/AddCardModal"
 import { LanguageContext } from "../../routes/authRoute"
 import { transactionAction } from "../../redux/actions/transactionActions"
 import { paymentAction } from "../../redux/actions/paymentActions"
+import CONSTANT from "../../constants/constant"
 import "../../assets/styles/profile/profileWalletStyle.scss"
 
 
@@ -69,12 +70,8 @@ const Wallet = () => {
     const [openAddCard, setOpenAddCard] = useState(false)
 
     const getLocalCurrency = (currency: any) => {
-        let res = ''
-        if (currency === 'usd') res += 'US $'
-        else if (currency === 'hkd') res += 'HK $'
-        else if (currency === 'inr') res += 'Rp ₹'
-        else if (currency === 'twd') res += 'NT $'
-        else res += 'RM '
+        const index = CONSTANT.CURRENCIES.findIndex((cur: any) => cur.toLowerCase() === currency)
+        let res = CONSTANT.CURRENCY_SYMBOLS[index]
         return res
     }
 

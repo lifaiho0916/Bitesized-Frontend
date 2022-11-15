@@ -86,6 +86,7 @@ const CONSTANT = {
             owner: "- Stephen Hawking"
         }
     ],
+    CURRENCY_SYMBOLS: ['US $', 'Rp ₹', 'NT $', 'HK $', 'RM ', 'A$', '€', '£', 'C$', 'R', 'JP¥', '₣' ,'NZ$', '¥', 'S$', '฿', '₱', 'Rp'],
     CURRENCIES: ['USD', 'INR', 'TWD', 'HKD', 'MYR', 'AUD', 'EUR', 'GBP', 'CAD', 'ZAR', 'JPY', 'CHF', 'NZD', 'CNY', 'SGD', 'THB', 'PHP', 'IDR'],
     DISPLAY_CURRENCIES: [
         'USD - US Dollar', 
