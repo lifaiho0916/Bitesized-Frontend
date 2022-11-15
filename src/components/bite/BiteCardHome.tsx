@@ -5,6 +5,7 @@ import Avatar from "../general/avatar"
 import { LanguageContext } from "../../routes/authRoute"
 import { ClockIcon, LockedIcon, NoOfPeopleIcon, UnlockIcon } from "../../assets/svg"
 import NextBtn from "../../assets/img/next-bright.png"
+import CONSTANT from "../../constants/constant"
 import "../../assets/styles/bite/BiteCardHomeStyle.scss"
 
 const BiteCardHome = (props: any) => {

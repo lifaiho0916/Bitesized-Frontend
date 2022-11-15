@@ -4,10 +4,9 @@ import Avatar from "../general/avatar"
 import CurrencySelect from "../stripe/CurrencySelect"
 import Button from "../general/button"
 import { CloseIcon } from "../../assets/svg"
+import CONSTANT from "../../constants/constant"
 import "../../assets/styles/modals/PurchaseModalStyle.scss"
 
-const currencies = ['USD', 'INR', 'TWD', 'HKD', 'MYR']
-const displayCurrencies = ['USD - US Dollar', 'INR - Indian Rupee', 'TWD - New Taiwan Dollar', 'HKD - Hong Kong Dollar', 'MYR - Malaysian Ringgit']
 
 const PurchaseModal = (props: any) => {
     const { show, onClose, bite, handleSubmit, setCurrency } = props
@@ -32,16 +31,16 @@ const PurchaseModal = (props: any) => {
     const displaySelectedPrice = (biteCurrency: any, price: any) => {
         if (currencyRate) {
             const usdPrice = biteCurrency === 'usd' ? price : price / currencyRate[`${biteCurrency}`]
-            const currency = currencies[option].toLowerCase()
+            const currency = CONSTANT.CURRENCIES[option].toLowerCase()
             const rate = currency === 'usd' ? 1.0 : currencyRate[`${currency}`]
             return ((usdPrice * 1.034 + 0.3) * rate).toFixed(2)
         }
     }
 
-    useEffect(() => { setCurrency(currencies[option].toLowerCase()) }, [option])
+    useEffect(() => { setCurrency(CONSTANT.CURRENCIES[option].toLowerCase()) }, [option])
     useEffect(() => {
         if (user) {
-            const foundIndex = currencies.findIndex((currency: any) => currency.toLowerCase() === user.currency)
+            const foundIndex = CONSTANT.CURRENCIES.findIndex((currency: any) => currency.toLowerCase() === user.currency)
             setOption(foundIndex)
         }
     }, [user])
@@ -88,14 +87,14 @@ const PurchaseModal = (props: any) => {
                             label="You will pay in:"
                             option={option}
                             setOption={setOption}
-                            options={displayCurrencies}
+                            options={CONSTANT.DISPLAY_CURRENCIES}
                             width={'100%'}
                         />
 
                         <div className="charge-amount">
                             <span>You will be charged for&nbsp;</span>
                             <span style={{ color: '#EF4444' }}>{bite.owner ? displaySelectedPrice(bite.currency, bite.price) : ''}</span>
-                            <span>&nbsp;in {currencies[option]}</span>
+                            <span>&nbsp;in {CONSTANT.CURRENCIES[option]}</span>
                         </div>
                         <div className="charge-amount" style={{ marginTop: '0px' }}>
                             <span>(Including processing fee)</span>

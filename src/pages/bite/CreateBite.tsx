@@ -34,8 +34,6 @@ const reOrder = (list: any, startIndex: any, endIndex: any) => {
     return result
 }
 
-const currencies = ['USD', 'INR', 'TWD', 'HKD', 'MYR']
-
 const CreateBite = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -74,7 +72,7 @@ const CreateBite = () => {
             ...bite,
             title: title,
             price: price,
-            currency: (currencies[currency]).toLowerCase()
+            currency: (CONSTANT.CURRENCIES[currency]).toLowerCase()
         }
         dispatch(biteAction.saveBite(newBite, user.personalisedUrl, navigate))
     }
@@ -138,7 +136,7 @@ const CreateBite = () => {
             ...bite,
             title: title,
             price: price,
-            currency: (currencies[currency]).toLowerCase()
+            currency: (CONSTANT.CURRENCIES[currency]).toLowerCase()
         }
         dispatch({ type: SET_BITE, payload: newBite })
         dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
@@ -208,6 +206,14 @@ const CreateBite = () => {
         background: isDragging ? '#FFC88F' : '#FFFFFF',
         ...draggableStyle,
     })
+
+    useEffect(() => {
+        if(user) {
+            CONSTANT.CURRENCIES.forEach((cur: any, index: any) => {
+                if(cur.toLowerCase() === user.currency) setCurrency(index)
+            })
+        }
+    }, [user])
 
     return (
         <div className="create-bite-wrapper">
@@ -427,7 +433,7 @@ const CreateBite = () => {
                                 width={'100%'}
                                 option={currency}
                                 setOption={setCurrency}
-                                options={currencies}
+                                options={CONSTANT.DISPLAY_CURRENCIES}
                             />
                         </div>
 

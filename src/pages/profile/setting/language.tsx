@@ -6,10 +6,8 @@ import { useSelector } from "react-redux"
 import Button from "../../../components/general/button"
 import CurrencySelect from "../../../components/stripe/CurrencySelect"
 import { authAction } from "../../../redux/actions/authActions"
+import CONSTANT from "../../../constants/constant"
 import "../../../assets/styles/profile/languageStyle.scss"
-
-const currencies = ['USD - US Dollar', 'INR - Indian Rupee', 'TWD - New Taiwan Dollar', 'HKD - Hong Kong Dollar', 'MYR - Malaysian Ringgit']
-const currenciesLowercase = ['usd', 'inr', 'twd', 'hkd', 'myr']
 
 const LanguageCurrency = () => {
   const navigate = useNavigate()
@@ -22,12 +20,12 @@ const LanguageCurrency = () => {
   const [option, setOption] = useState(0)
   
   const saveSetting = () => {
-    dispatch(authAction.setLanguageCurrency(lang, currenciesLowercase[option], navigate))
+    dispatch(authAction.setLanguageCurrency(lang, CONSTANT.CURRENCIES[option].toLowerCase(), navigate))
   }
 
   useEffect(() => {
     if (user) {
-      const foundIndex = currenciesLowercase.findIndex((currency) => currency === user.currency)
+      const foundIndex = CONSTANT.CURRENCIES.findIndex((currency) => currency.toLowerCase() === user.currency)
       setOption(foundIndex)
     }
   }, [user])
@@ -63,7 +61,7 @@ const LanguageCurrency = () => {
           </div>
           <div className="currency-setting">
             <CurrencySelect
-              options={currencies}
+              options={CONSTANT.DISPLAY_CURRENCIES}
               option={option}
               setOption={setOption}
               width={'100%'}
