@@ -1,10 +1,8 @@
 import { useMemo, useContext, useState, useRef, useEffect } from "react"
 import Avatar from "../general/avatar"
-import { useDispatch } from "react-redux"
 import ShowMoreText from "react-show-more-text"
 import { LanguageContext } from "../../routes/authRoute"
 import { DeleteIcon, MoreIcon } from "../../assets/svg"
-import { biteAction } from "../../redux/actions/biteActions"
 import "../../assets/styles/bite/CommentBubbleStyle.scss"
 
 const useOutsideAlerter = (ref: any, moreInfo: any) => {
@@ -26,8 +24,7 @@ const useOutsideAlerter = (ref: any, moreInfo: any) => {
 
 const CommentBubble = (props: any) => {
     const contexts = useContext(LanguageContext)
-    const dispatch = useDispatch()
-    const { comment, isOwnBite, index, biteId, isOwnComment } = props
+    const { comment, isOwnBite, index, isOwnComment, deleteComment } = props
     const wrapRef = useRef<any>(null)
     const [more, setMore] = useState(false)
     const res = useOutsideAlerter(wrapRef, more)
@@ -88,7 +85,7 @@ const CommentBubble = (props: any) => {
                             <div className="drop-down-list" style={more === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef}>
                                 <div className="list" onClick={() => {
                                     setMore(false)
-                                    dispatch(biteAction.deleteComment(biteId, index))
+                                    deleteComment(index)
                                 }}><DeleteIcon color="#54504E" /><span style={{ marginLeft: '10px' }}>Delete Comment</span></div>
                             </div>
                         </>
@@ -102,7 +99,7 @@ const CommentBubble = (props: any) => {
                         more="... see more"
                         less="... see less"
                         className={isOwnComment ? "content-css-owner" : "content-css"}
-                        anchorClass="see-more-less"
+                        anchorClass={isOwnComment ? "see-more-less-own" : "see-more-less"}
                         expanded={false}
                         width={0}
                         truncatedEndingComponent={""}
@@ -111,7 +108,7 @@ const CommentBubble = (props: any) => {
                     </ShowMoreText>
                 </div>
                 <div className="commented-date" style={isOwnComment ? { color: 'white', display: 'flex', justifyContent: 'flex-end' } : { color: '#54504E' }}>
-                    <span>{comment.commentedAt ? comment.commentedAt.substring(5, 7) + '.' + comment.commentedAt.substring(8, 10) + '.' + comment.commentedAt.substring(0, 4) : ''}</span>
+                    <span>{comment.commentedAt ? comment.commentedAt.substring(8, 10) + '.' + comment.commentedAt.substring(5, 7) + '.' + comment.commentedAt.substring(0, 4) : ''}</span>
                 </div>
             </div>
         </div>

@@ -9,6 +9,7 @@ import ReactPlayer from "react-player"
 import UnLockFreeModal from "../../components/modals/UnLockFreeModal"
 import PurchaseModal from "../../components/modals/PurchaseModal"
 import PaymentModal from "../../components/modals/PaymentModal"
+import DelCommentModal from "../../components/modals/DelCommentModal"
 import BiteCardProfile from "../../components/bite/BiteCardProfile"
 import CommentBubble from "../../components/bite/CommentBubble"
 import { BackIcon, ClockIcon, UnlockIcon, AscendIcon, DescendIcon, LockedIcon, Bite1Icon, BiteIcon, CommentIcon, SendIcon } from "../../assets/svg"
@@ -56,10 +57,12 @@ const BiteDetail = () => {
     const [copied, setCopied] = useState(false)
     const [currency, setCurrency] = useState('usd')
     const [comment, setComment] = useState('')
+    const [deleteIndex, setDeleteIndex] = useState(-1)
 
     const [openFreeUnlock, setOpenFreeUnLock] = useState(false)
     const [openPurchaseModal, setOpenPurchaseModal] = useState(false)
     const [openPaymentModal, setOpenPaymentModal] = useState(false)
+    const [openDeleteCommentModal, setOpenDeleteCommentModal] = useState(false)
 
     const displayTime = (left: any) => {
         const passTime = Math.abs(left)
@@ -175,6 +178,14 @@ const BiteDetail = () => {
                         bite={bite}
                         currency={currency}
                         payment={payment}
+                    />
+                    <DelCommentModal
+                        show={openDeleteCommentModal}
+                        onClose={() => setOpenDeleteCommentModal(false)}
+                        handleSubmit={() => {
+                            setOpenDeleteCommentModal(false)
+                            dispatch(biteAction.deleteComment(biteId, deleteIndex))
+                        }}
                     />
                     <div className="main-detail">
                         <div className="avatar-title">
@@ -366,7 +377,10 @@ const BiteDetail = () => {
                                                 isOwnBite={user && bite.owner && String(user.id) === String(bite.owner._id) ? true : false}
                                                 isOwnComment={(user && String(comment.commentedBy._id) === String(user.id)) ? true : false}
                                                 index={index}
-                                                biteId={biteId}
+                                                deleteComment={(i: any) => {
+                                                    setDeleteIndex(i)
+                                                    setOpenDeleteCommentModal(true)
+                                                }}
                                             />
                                         </div>
                                     ))}
