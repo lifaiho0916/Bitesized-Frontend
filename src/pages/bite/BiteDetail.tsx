@@ -90,10 +90,12 @@ const BiteDetail = () => {
     }, [user, bite])
 
     const localPrice = useMemo(() => {
-        if (currencyRate && user && bite.owner) {
+        if (currencyRate && bite.owner) {
             const rate = bite.currency === 'usd' ? 1.0 : currencyRate[`${bite.currency}`]
             const usdAmount = bite.price / rate
-            const rate1 = user.currency === 'usd' ? 1.0 : currencyRate[`${user.currency}`]
+            let rate1: any
+            if(user) rate1 = user.currency === 'usd' ? 1.0 : currencyRate[`${user.currency}`]
+            else rate1 = 1.0
             const price = usdAmount * rate1
             return price.toFixed(2)
         }
@@ -209,7 +211,7 @@ const BiteDetail = () => {
                             </div>
                             <div className="status-chip">
                                 <div className={`chip ${bite.currency ? 'paid' : 'free'}`}>
-                                    {bite.currency ? user ? getLocalCurrency(user.currency) + localPrice : '' : 'Free'}
+                                    {bite.currency ? getLocalCurrency(user ? user.currency : 'usd') + localPrice : 'Free'}
                                 </div>
                                 {!lock &&
                                     <div className={`chip ${(state && state.owner === true) ? 'mine' : 'unlock'}`}>
