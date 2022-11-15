@@ -28,9 +28,13 @@
 }
 
 @media screen and (max-width: 680px) {
-    .erms-privacy-wrapper {
+    .terms-privacy-wrapper {
         .page-header {
             margin: 15px auto;
+        }
+
+        .terms-privacy {
+            padding: 0px 15px;
         }
     }
 }
