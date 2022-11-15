@@ -67,11 +67,14 @@ export const biteAction = {
             let len = 0
 
             bite.videos.forEach((video: any, index: any) => {
-                if (video.id) {
+                if(typeof video.coverUrl === "object") {
                     uploadFiles.push({
                         index: index,
                         file: video.coverUrl
                     })
+                    len++
+                }
+                if (typeof video.videoUrl === "object") {
                     uploadFiles.push({
                         index: index,
                         file: video.videoUrl
@@ -93,7 +96,7 @@ export const biteAction = {
                         const { payload } = data
                         bite.videos[upload.index].coverUrl = payload.path
                         cnt++
-                        if (cnt === (len * 2)) {
+                        if (cnt === len) {
                             const response1 = await api.UpdateBite(bite._id, { bite: bite })
                             if (response1.data.success) {
                                 dispatch({ type: SET_UPLOADING, payload: false })
@@ -113,7 +116,7 @@ export const biteAction = {
                         const { payload } = data
                         bite.videos[upload.index].videoUrl = payload.path
                         cnt++
-                        if (cnt === (len * 2)) {
+                        if (cnt === len) {
                             const response1 = await api.UpdateBite(bite._id, { bite: bite })
                             if (response1.data.success) {
                                 dispatch({ type: SET_UPLOADING, payload: false })
