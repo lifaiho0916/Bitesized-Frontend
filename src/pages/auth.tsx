@@ -1,36 +1,40 @@
-import { useState, useContext } from "react"
+import { useState, useContext } from "react";
 // import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google'
-import AppleLogin from 'react-apple-login'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from "react-redux"
-import axios from "axios"
-import ThirdPartBrowserModal from "../components/modals/ThirdPartyBrowserModal"
-import { LanguageContext } from "../routes/authRoute"
-import { AppleIcon, GoogleIcon } from "../constants/awesomeIcons"
-import { authAction } from "../redux/actions/authActions"
-import "../assets/styles/signupStyle.scss"
-const InApp = require("detect-inapp")
+import { GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
+import AppleLogin from "react-apple-login";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import ThirdPartBrowserModal from "../components/modals/ThirdPartyBrowserModal";
+import { LanguageContext } from "../routes/authRoute";
+import { AppleButton, GoogleButton } from "../assets/svg";
+import { authAction } from "../redux/actions/authActions";
+import "../assets/styles/signupStyle.scss";
+const InApp = require("detect-inapp");
 
 declare global {
   interface Window {
-    FB: any
+    FB: any;
   }
 }
 
 const CustomGoogleLogin = (props: any) => {
-  const { dispatch, lang, preveRoute, navigate } = props
+  const { dispatch, lang, prevRoute, navigate } = props;
   const googleLogin = useGoogleLogin({
-    onSuccess: async tokenResponse => {
+    onSuccess: async (tokenResponse) => {
       try {
-        const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo',
-          { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } })
-        const { data } = userInfo
+        const userInfo = await axios.get(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
+        );
+        const { data } = userInfo;
 
-        let browser = ""
-        if (navigator.userAgent.indexOf("Chrome") !== -1) browser = 'Chrome'
-        else if (navigator.userAgent.indexOf("Safari") !== -1) browser = "Safari"
-        else if (navigator.userAgent.indexOf("Firefox") !== -1) browser = 'Firefox'
+        let browser = "";
+        if (navigator.userAgent.indexOf("Chrome") !== -1) browser = "Chrome";
+        else if (navigator.userAgent.indexOf("Safari") !== -1)
+          browser = "Safari";
+        else if (navigator.userAgent.indexOf("Firefox") !== -1)
+          browser = "Firefox";
 
         const userData = {
           name: data.name,
@@ -38,37 +42,53 @@ const CustomGoogleLogin = (props: any) => {
           authId: data.sub,
           avatar: data.picture,
           lang: lang,
-          browser: browser
-        }
+          browser: browser,
+        };
 
-        dispatch(authAction.googleAuth(userData, navigate, preveRoute))
+        dispatch(authAction.googleAuth(userData, navigate, prevRoute));
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     },
-    onError: errorResponse => console.log(errorResponse),
-  })
+    onError: (errorResponse) => console.log(errorResponse),
+  });
 
   return (
-    <div className="icon" onClick={() => googleLogin()}>
-      <GoogleIcon color="#EFA058" />
+    <div
+      style={{
+        cursor: "pointer",
+        background: "#FFFFFF",
+        boxShadow: "2px 4px 10px rgba(0, 0, 0, 0.15)",
+        borderRadius: "10px",
+        width: "42px",
+        height: "42px",
+      }}
+      onClick={() => googleLogin()}
+    >
+      <GoogleButton />
     </div>
-  )
-}
+  );
+};
 
 const Auth = (props: any) => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const loadState = useSelector((state: any) => state.load)
-  const { prevRoute } = loadState
-  const inapp = new InApp(navigator.userAgent || navigator.vendor || window.FB)
-  const [openWith, setOpenWith] = useState((inapp.browser === 'instagram' || inapp.browser === 'facebook' || navigator.userAgent.toLowerCase().indexOf('line') !== -1) ? true : false)
-  const [isHover, setIsHover] = useState(false)
-  const [isHover1, setIsHover1] = useState(false)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const loadState = useSelector((state: any) => state.load);
+  const { prevRoute } = loadState;
+  const inapp = new InApp(navigator.userAgent || navigator.vendor || window.FB);
+  const [openWith, setOpenWith] = useState(
+    inapp.browser === "instagram" ||
+      inapp.browser === "facebook" ||
+      navigator.userAgent.toLowerCase().indexOf("line") !== -1
+      ? true
+      : false
+  );
+  const [isHover, setIsHover] = useState(false);
+  const [isHover1, setIsHover1] = useState(false);
   // const [openSignupMethodErrorDlg, SetOpenSignupMethodErrorDlg] = useState(false)
-  const userState = useSelector((state: any) => state.auth)
-  const contexts = useContext(LanguageContext)
-  const { lang } = userState
+  const userState = useSelector((state: any) => state.auth);
+  const contexts = useContext(LanguageContext);
+  const { lang } = userState;
 
   const signupStyle = {
     fontWeight: "bold",
@@ -78,7 +98,7 @@ const Auth = (props: any) => {
     alignItems: "center",
     color: isHover === true ? "black" : "#BCB6A9",
     textDecoration: isHover === true ? "underline" : "none",
-  }
+  };
 
   const aStyle = {
     fontWeight: "bold",
@@ -87,7 +107,7 @@ const Auth = (props: any) => {
     alignItems: "center",
     color: isHover === true ? "black" : "#BCB6A9",
     textDecoration: isHover === true ? "underline" : "none",
-  }
+  };
 
   const aStyle1 = {
     fontWeight: "bold",
@@ -96,7 +116,7 @@ const Auth = (props: any) => {
     alignItems: "center",
     color: isHover1 === true ? "black" : "#BCB6A9",
     textDecoration: isHover1 === true ? "underline" : "none",
-  }
+  };
 
   // const responseFacebook = (response: any) => {
   //   console.log(response)
@@ -118,21 +138,22 @@ const Auth = (props: any) => {
 
   const responseApple = (response: any) => {
     if (!response.error) {
-      let browser = ""
-      if (navigator.userAgent.indexOf("Chrome") !== -1) browser = 'Chrome'
-      else if (navigator.userAgent.indexOf("Safari") !== -1) browser = "Safari"
-      else if (navigator.userAgent.indexOf("Firefox") !== -1) browser = 'Firefox'
+      let browser = "";
+      if (navigator.userAgent.indexOf("Chrome") !== -1) browser = "Chrome";
+      else if (navigator.userAgent.indexOf("Safari") !== -1) browser = "Safari";
+      else if (navigator.userAgent.indexOf("Firefox") !== -1)
+        browser = "Firefox";
 
       const userData = {
         token: response.authorization.id_token,
         userInfo: response.user ? response.user : null,
         browser: browser,
         lang: lang,
-      }
+      };
 
-      dispatch(authAction.appleAuth(userData, navigate, prevRoute))
+      dispatch(authAction.appleAuth(userData, navigate, prevRoute));
     }
-  }
+  };
 
   // useEffect(() => {
   //   if (dlgState.state) {
@@ -168,21 +189,21 @@ const Auth = (props: any) => {
         show={openWith}
         onClose={() => setOpenWith(false)}
         handleSubmit={() => {
-          const url = `${process.env.REACT_APP_CLIENT_URL}`
-          if (navigator.userAgent.indexOf('like Mac') !== -1) {
-            if (navigator.userAgent.toLowerCase().indexOf('line') !== -1) {
-              window.open(`googlechrome://${url.substring(8)}/auth/signin`)
+          const url = `${process.env.REACT_APP_CLIENT_URL}`;
+          if (navigator.userAgent.indexOf("like Mac") !== -1) {
+            if (navigator.userAgent.toLowerCase().indexOf("line") !== -1) {
+              window.open(`googlechrome://${url.substring(8)}/auth/signin`);
             } else {
-              window.open(`googlechrome://${url.substring(8)}/auth/signin`)
+              window.open(`googlechrome://${url.substring(8)}/auth/signin`);
             }
-          } else if (navigator.userAgent.indexOf('Android') !== -1) {
-            if (navigator.userAgent.toLowerCase().indexOf('line') !== -1) {
-              let link = document.createElement('a')
-              link.setAttribute("href", `intent:${url}/auth/signin#Intent;end`)
-              link.setAttribute("target", "_blank")
-              link.click()
+          } else if (navigator.userAgent.indexOf("Android") !== -1) {
+            if (navigator.userAgent.toLowerCase().indexOf("line") !== -1) {
+              let link = document.createElement("a");
+              link.setAttribute("href", `intent:${url}/auth/signin#Intent;end`);
+              link.setAttribute("target", "_blank");
+              link.click();
             } else {
-              window.open(`googlechrome://${url.substring(8)}/auth/signin`)
+              window.open(`googlechrome://${url.substring(8)}/auth/signin`);
             }
           }
         }}
@@ -209,11 +230,13 @@ const Auth = (props: any) => {
           </h2>
         )}
         <div className="icons">
-          <GoogleOAuthProvider clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}>
+          <GoogleOAuthProvider
+            clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
+          >
             <CustomGoogleLogin
               lang={lang}
               dispatch={dispatch}
-              preveRoute={prevRoute}
+              prevRoute={prevRoute}
               navigate={navigate}
             />
           </GoogleOAuthProvider>
@@ -237,40 +260,63 @@ const Auth = (props: any) => {
             responseMode="query"
             usePopup={true}
             render={(renderProps) => (
-              <div className="icon" onClick={renderProps.onClick}>
-                <AppleIcon color="#EFA058" />
+              <div
+                style={{
+                  cursor: "pointer",
+                  background: "#FFFFFF",
+                  boxShadow: "2px 4px 10px rgba(0, 0, 0, 0.15)",
+                  borderRadius: "10px",
+                  width: "42px",
+                  height: "42px",
+                }}
+                onClick={renderProps.onClick}
+              >
+                <AppleButton />
               </div>
             )}
           />
         </div>
-        {
-          props.isSignin === false ? (
-            <p>{contexts.AUTH_LETTER.BY_SIGN_UP}
-              <a
-                onMouseOver={() => setIsHover(true)}
-                onMouseLeave={() => setIsHover(false)}
-                style={aStyle}
-                href="https://www.creatogether.app/tandc" target="_blank"> {contexts.AUTH_LETTER.TERMS}</a>{contexts.AUTH_LETTER.AND}<a onMouseOver={() => setIsHover1(true)}
-                  onMouseLeave={() => setIsHover1(false)}
-                  style={aStyle1} href="https://www.creatogether.app/tandc" target="_blank">{contexts.AUTH_LETTER.PRIVACY_POLICY}</a></p>
-          ) : (
-            <div style={{ display: "flex" }}>
-              <p>{contexts.AUTH_LETTER.NEW_CREATO}&nbsp;</p>
-              <p
-                onMouseOver={() => setIsHover(true)}
-                onMouseLeave={() => setIsHover(false)}
-                onClick={() => navigate('/auth/signup')}
-                style={signupStyle}
-              >
-                {contexts.AUTH_LETTER.SIGN_UP}
-              </p>
-              <p>&nbsp;{contexts.AUTH_LETTER.NOW}</p>
-            </div>
-          )
-        }
-      </div >
+        {props.isSignin === false ? (
+          <p>
+            {contexts.AUTH_LETTER.BY_SIGN_UP}
+            <a
+              onMouseOver={() => setIsHover(true)}
+              onMouseLeave={() => setIsHover(false)}
+              style={aStyle}
+              href="https://www.creatogether.app/tandc"
+              target="_blank"
+            >
+              {" "}
+              {contexts.AUTH_LETTER.TERMS}
+            </a>
+            {contexts.AUTH_LETTER.AND}
+            <a
+              onMouseOver={() => setIsHover1(true)}
+              onMouseLeave={() => setIsHover1(false)}
+              style={aStyle1}
+              href="https://www.creatogether.app/tandc"
+              target="_blank"
+            >
+              {contexts.AUTH_LETTER.PRIVACY_POLICY}
+            </a>
+          </p>
+        ) : (
+          <div style={{ display: "flex" }}>
+            <p>{contexts.AUTH_LETTER.NEW_CREATO}&nbsp;</p>
+            <p
+              onMouseOver={() => setIsHover(true)}
+              onMouseLeave={() => setIsHover(false)}
+              onClick={() => navigate("/auth/signup")}
+              style={signupStyle}
+            >
+              {contexts.AUTH_LETTER.SIGN_UP}
+            </p>
+            <p>&nbsp;{contexts.AUTH_LETTER.NOW}</p>
+          </div>
+        )}
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Auth
+export default Auth;
