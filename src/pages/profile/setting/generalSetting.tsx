@@ -9,7 +9,7 @@ import {
   BackIcon
 } from "../../../assets/svg"
 import { WalletIcon } from "../../../constants/awesomeIcons"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { LanguageContext } from "../../../routes/authRoute"
 import { SET_PREVIOUS_ROUTE } from "../../../redux/types"
 import "../../../assets/styles/profile/generalSettingStyle.scss"
@@ -58,22 +58,22 @@ const GeneralSetting = () => {
               </div>
             </div>
           </a>
-          <a href="https://www.notion.so/Terms-Conditions-of-Use-4e807f509cf54d569031fe254afbf713" target='_blank' rel="noreferrer">
+          <Link to="/terms">
             <div className="setting">
               <div className="part">
                 <NoOfPeopleIcon color="" />
                 <div className="title">{contexts.SETTINGS_LETTER.TERMS_CONDITIONS}</div>
               </div>
             </div>
-          </a>
-          <a href="https://www.notion.so/Privacy-Policy-f718ec335447402a8bb863cb72d3ee33" target="_blank" rel="noreferrer">
+          </Link>
+          <Link to="/privacy-policy">
             <div className="setting">
               <div className="part">
                 <NoOfPeopleIcon color="" />
                 <div className="title">{contexts.SETTINGS_LETTER.PRIVACY_POLICIES}</div>
               </div>
             </div>
-          </a>
+          </Link>
           <a href="https://www.creatogether.app/contact-us" target="_blank" rel="noreferrer">
             <div className="setting">
               <div className="part">

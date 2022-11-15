@@ -21,6 +21,8 @@ import Payout from '../pages/profile/Payout'
 import GeneralSetting from '../pages/profile/setting/generalSetting'
 import LanguageCurrency from '../pages/profile/setting/language'
 
+import TermsAndPrivacy from "../pages/terms/TermsAndPrivacy"
+
 ///----------------ADMIN-----------------==////
 //CHECK-BITE
 import AdminCheckBite from '../pages/admin/checkBite/AdminCheckBite'
@@ -54,6 +56,9 @@ const AppRoutes = () => {
       <Route path="bite/create/paid" element={<AuthRoute child={<CreateBite />} routeType="private" />} />
       <Route path="bite/create/edit-thumbnail" element={<AuthRoute child={<EditCoverImage />} routeType="private" />} />
       <Route path="bite/detail/:biteId" element={<AuthRoute child={<BiteDetail />} />} />
+
+      <Route path="terms" element={<AuthRoute child={<TermsAndPrivacy />} />} />
+      <Route path="privacy-policy" element={<AuthRoute child={<TermsAndPrivacy />} />} />
 
       <Route path="/:creatorLink" element={<AuthRoute child={<Profile />} />} />
       <Route path="creators" element={<AuthRoute child={<Creators />} />} />

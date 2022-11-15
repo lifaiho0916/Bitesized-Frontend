@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Editor } from "react-draft-wysiwyg";
-import draftToHtml from "draftjs-to-html";
 import Button from "../../../components/general/button";
 import { settingAction } from "../../../redux/actions/settingActions";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";

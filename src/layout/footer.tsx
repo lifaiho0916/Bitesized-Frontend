@@ -8,13 +8,16 @@ import {
   TwitterIcon,
   YoutubeIcon,
 } from "../assets/svg";
+import { Link } from "react-router-dom";
 import { LanguageContext } from "../routes/authRoute";
 import "../assets/styles/footerStyle.scss";
 
 const List = (props: any) => {
-  const { title, subtitles } = props;
+  const { title, subtitles, contexts } = props;
   const [expand, setExpand] = useState<boolean>(true);
-  const handleExpand = () => { setExpand(!expand); };
+  const handleExpand = () => {
+    setExpand(!expand);
+  };
 
   const style = {
     icon: {
@@ -25,7 +28,7 @@ const List = (props: any) => {
       transition: "0.5s",
       opacity: expand ? "1" : "0",
       visibility: expand ? "visible" : "hidden",
-      overflow: 'hidden',
+      overflow: "hidden",
       height: expand ? "160px" : "0",
       position: expand ? "relative" : "relative",
     },
@@ -39,11 +42,19 @@ const List = (props: any) => {
         </div>
       </div>
       <div className="content" style={style.content as React.CSSProperties}>
-        {subtitles.map((subtitle: any, i: number) => (
-          <a key={i} href={subtitle.link} target="_blank">
-            {subtitle.text}
-          </a>
-        ))}
+        {subtitles.map((subtitle: any, i: number) => {
+          if (
+            subtitle.text === contexts.FOOTER_LETTER.TERMS_AND_CONDITIONS ||
+            subtitle.text === contexts.FOOTER_LETTER.PRIVACY_POLICY
+          )
+            return <Link key={i} to={subtitle.link}>{subtitle.text}</Link>;
+          else
+            return (
+              <a key={i} href={subtitle.link} target="_blank">
+                {subtitle.text}
+              </a>
+            );
+        })}
       </div>
     </div>
   );
@@ -60,13 +71,14 @@ const Footer = () => {
           subtitles={[
             {
               text: contexts.FOOTER_LETTER.OUR_STORY,
-              link: 'https://www.creatogether.app'
+              link: "https://www.creatogether.app",
             },
             {
               text: contexts.FOOTER_LETTER.HOW_IT_WORKS,
-              link: 'https://www.creatogether.app/how-it-works'
-            }
+              link: "https://www.creatogether.app/how-it-works",
+            },
           ]}
+          contexts={contexts}
         />
         <List
           title="Support"
@@ -77,32 +89,37 @@ const Footer = () => {
             },
             {
               text: contexts.FOOTER_LETTER.TERMS_AND_CONDITIONS,
-              link: 'https://www.creatogether.app/tandc'
+              link: `/terms`,
             },
             {
               text: contexts.FOOTER_LETTER.PRIVACY_POLICY,
-              link: 'https://www.creatogether.app/tandc'
-            }
+              link: `/privacy-policy`,
+            },
           ]}
+          contexts={contexts}
         />
         <List
           title="Discover"
           subtitles={[
             {
               text: contexts.FOOTER_LETTER.CONTACT_US,
-              link: 'https://www.creatogether.app/contact-us',
+              link: "https://www.creatogether.app/contact-us",
             },
             {
               text: contexts.FOOTER_LETTER.BLOG,
-              link: 'https://www.creatogether.app/blogs'
-            }
+              link: "https://www.creatogether.app/blogs",
+            },
           ]}
+          contexts={contexts}
         />
       </div>
       <div className="footer-bottom">
         <div className="social-links">
           <div className="icon">
-            <a href="https://www.instagram.com/creatogether.app" target="_blank">
+            <a
+              href="https://www.instagram.com/creatogether.app"
+              target="_blank"
+            >
               <InstagramIcon color="black" />
             </a>
           </div>
@@ -117,12 +134,15 @@ const Footer = () => {
             </a>
           </div>
           <div className="icon">
-            <a href="https://www.linkedin.com/company/creatogether" target="_blank">
+            <a
+              href="https://www.linkedin.com/company/creatogether"
+              target="_blank"
+            >
               <LinkedInIcon color="black" />
             </a>
           </div>
           <div className="icon">
-            <a href="https://apple.co/32BG7d3" target='_blank'>
+            <a href="https://apple.co/32BG7d3" target="_blank">
               <AppleMusicIcon color="black" />
             </a>
           </div>
