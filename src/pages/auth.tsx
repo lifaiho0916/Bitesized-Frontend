@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 // import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
 import AppleLogin from "react-apple-login";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import ThirdPartBrowserModal from "../components/modals/ThirdPartyBrowserModal";
@@ -279,26 +279,24 @@ const Auth = (props: any) => {
         {props.isSignin === false ? (
           <p>
             {contexts.AUTH_LETTER.BY_SIGN_UP}
-            <a
+            <Link
               onMouseOver={() => setIsHover(true)}
               onMouseLeave={() => setIsHover(false)}
               style={aStyle}
-              href="https://www.creatogether.app/tandc"
-              target="_blank"
+              to="/terms"
             >
               {" "}
               {contexts.AUTH_LETTER.TERMS}
-            </a>
+            </Link>
             {contexts.AUTH_LETTER.AND}
-            <a
+            <Link
               onMouseOver={() => setIsHover1(true)}
               onMouseLeave={() => setIsHover1(false)}
               style={aStyle1}
-              href="https://www.creatogether.app/tandc"
-              target="_blank"
+              to="/privacy-policy"
             >
               {contexts.AUTH_LETTER.PRIVACY_POLICY}
-            </a>
+            </Link>
           </p>
         ) : (
           <div style={{ display: "flex" }}>
