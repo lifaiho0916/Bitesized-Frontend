@@ -18,8 +18,10 @@ const ProfileEdit = () => {
   const dispatch = useDispatch()
   let imageEditor: any = null
   const userState = useSelector((state: any) => state.auth)
+  const loadState = useSelector((state: any) => state.load)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const { user, profile, nameExist, urlExist } = userState
+  const { prevRoute } = loadState
   const [name, setName] = useState<string>(profile.name)
   const [url, setUrl] = useState<string>(profile.personalisedUrl)
   const [bioText, setBioText] = useState(profile.bioText)
@@ -37,7 +39,7 @@ const ProfileEdit = () => {
         const blob = await res.blob()
         imageFile = new File([blob], 'avatar.png', blob)
       }
-      dispatch(authAction.editProfile(name, url, profile.category, bioText, subscribe, imageFile, "", user.id, navigate))
+      dispatch(authAction.editProfile(name, url, profile.category, bioText, subscribe, imageFile, prevRoute , user.id, navigate))
     }
   }
 

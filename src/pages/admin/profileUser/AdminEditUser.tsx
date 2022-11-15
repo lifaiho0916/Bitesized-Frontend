@@ -55,7 +55,7 @@ const AdminEditUser = () => {
                 const blob = await res.blob()
                 imageFile = new File([blob], 'avatar.png', blob)
             }
-            dispatch(authAction.editProfile(name, url, profile.category, bioText, subscribe, imageFile, "admin/profile-user", user._id, navigate))
+            dispatch(authAction.editProfile(name, url, profile.category, bioText, subscribe, imageFile, "/admin/profile-user", user._id, navigate))
         }
     }
 

@@ -86,7 +86,7 @@ const AuthRoute = (props: routeProps) => {
 
     return (
         <LanguageContext.Provider value={contexts}>
-            {location.pathname.indexOf('admin') !== -1 ? <Layout1 child={child} /> : <Layout child={child} />}
+            {location.pathname.indexOf('/admin') !== -1 ? <Layout1 child={child} /> : <Layout child={child} />}
         </LanguageContext.Provider>
     );
 }
