@@ -39,7 +39,7 @@ const ProfileEdit = () => {
         const blob = await res.blob()
         imageFile = new File([blob], 'avatar.png', blob)
       }
-      dispatch(authAction.editProfile(name, url, profile.category, bioText, subscribe, imageFile, prevRoute , user.id, navigate))
+      dispatch(authAction.editProfile(name, url, profile.category, bioText, subscribe, imageFile, prevRoute.indexOf('bite') !== -1 ? prevRoute : `/${url}` , user.id, navigate))
     }
   }
 
