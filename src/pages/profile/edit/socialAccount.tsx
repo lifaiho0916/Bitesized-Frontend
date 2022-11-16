@@ -3,7 +3,9 @@ import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google'
 import { useNavigate } from 'react-router-dom';
-import { BackIcon, InstagramIcon, YoutubeIcon } from '../../../assets/svg';
+import { BackIcon } from '../../../assets/svg';
+import YoutubeBtn from "../../../assets/svg/youtube.svg"
+import IgBtn from "../../../assets/svg/ig.svg"
 import { accountAction } from '../../../redux/actions/socialAccountActions';
 import InstagramLogin from './InstagramLogin'
 import '../../../assets/styles/profile/socialAccountStyle.scss';
@@ -83,7 +85,7 @@ const Socialaccount = () => {
           <div className='content'>
             <div className='icon-title'>
               <div className='icon'>
-                <InstagramIcon color='#EFA058' />
+                <img src={IgBtn} alt="igBtn" />
               </div>
               <div className='title'>Instagram</div>
             </div>
@@ -94,7 +96,7 @@ const Socialaccount = () => {
           <div className='content'>
             <div className='icon-title'>
               <div className='icon'>
-                <YoutubeIcon color='#EFA058' />
+                <img src={YoutubeBtn} alt="youtubeBtn" />
               </div>
               <div className='title'>Youtube</div>
             </div>

@@ -80,8 +80,8 @@ const ProfileHeader = (props: any) => {
           avatar={profileUser ? profileUser.avatar.indexOf('uploads') === -1 ? profileUser.avatar : `${process.env.REACT_APP_SERVER_URL}/${profileUser.avatar}` : ''}
         />
         <div className="social-icon-other">
-          <div style={{ marginLeft: '15px' }}><YoutubeIcon color="#E17253" /></div>
-          <div style={{ marginLeft: '5px' }}><InstagramIcon color="#E17253" /></div>
+          {/* <div style={{ marginLeft: '15px' }}><YoutubeIcon color="#E17253" /></div>
+          <div style={{ marginLeft: '5px' }}><InstagramIcon color="#E17253" /></div> */}
         </div>
       </div>
       <div className="ellipsis-icon" onClick={() => setMoreInfo(true)}>

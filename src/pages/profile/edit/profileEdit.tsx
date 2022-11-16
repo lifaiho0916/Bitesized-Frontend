@@ -180,10 +180,9 @@ const ProfileEdit = () => {
         <div
           className="social-link"
           onClick={() => {
-            alert("Will be ready soon")
-            // const state = { ...profile, name: name, personalisedUrl: url, bioText: bioText }
-            // dispatch({ type: SET_PROFILE, payload: state })
-            // navigate("/myaccount/edit/connect-social")
+            const state = { ...profile, name: name, personalisedUrl: url, bioText: bioText, subscribe: subscribe }
+            dispatch({ type: SET_PROFILE, payload: state })
+            navigate("/myaccount/edit/connect-social")
           }}
         >
           <ContainerBtn
