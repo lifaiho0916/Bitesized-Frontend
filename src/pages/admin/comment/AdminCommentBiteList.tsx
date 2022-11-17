@@ -91,8 +91,8 @@ const AdminCommentBiteList = () => {
                                     dispatch({ type: SET_BITE, payload: bite })
                                     navigate(`${location.pathname}/${bite._id}`)
                                 }}>
-                                    <td>{new Date(bite.date).toUTCString().slice(5, 16)}</td>
-                                    <td>{new Date(bite.date).toUTCString().slice(17, 25)}</td>
+                                    <td>{new Date(bite.commentDate).toUTCString().slice(5, 16)}</td>
+                                    <td>{new Date(bite.commentDate).toUTCString().slice(17, 25)}</td>
                                     <td>
                                         <div style={{ display: 'flex', alignItems: 'center' }}>
                                             <div className={ bite.commentNotification && bite.commentNotification === true ? "red-dot" : "normal"}></div>     
