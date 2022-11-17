@@ -22,10 +22,12 @@ const BiteCardProfile = (props: any) => {
     const [videoIndex, setVideoIndex] = useState(0)
     const [hover, setHover] = useState(false)
 
-    const PrevVideo = () => {
+    const PrevVideo = (e: any) => {
+        e.stopPropagation()
         if (videoIndex > 0) setVideoIndex((index) => index - 1)
     }
-    const NextVideo = () => {
+    const NextVideo = (e: any) => {
+        e.stopPropagation()
         if (videoIndex < bite.videos.length - 1) setVideoIndex((index) => index + 1)
     }
 
