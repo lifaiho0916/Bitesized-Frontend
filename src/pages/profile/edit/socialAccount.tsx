@@ -36,7 +36,7 @@ const Socialaccount = () => {
     }
   };
 
-  useEffect(() => { if (user) dispatch(accountAction.getAccounts(user.id)) }, [dispatch, user])
+  // useEffect(() => { if (user) dispatch(accountAction.getAccounts(user.id)) }, [dispatch, user])
 
   const CustomGoogleLogin = (props: any) => {
     const googleLogin = useGoogleLogin({
