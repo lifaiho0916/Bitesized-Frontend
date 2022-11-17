@@ -64,7 +64,8 @@ const Socialaccount = () => {
 
     return (
       <div className='connect-btn' onClick={() => googleLogin()}>
-        <span>Connect</span>
+        {/* <span>Connect</span> */}
+        <img src={YoutubeBtn} alt="youtubeBtn" /><span>Connect</span>
       </div>
     )
   }

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import IgBtn from "../../../assets/svg/ig.svg"
 import { accountAction } from '../../../redux/actions/socialAccountActions';
 
 export const InstagramLogin = () => {
@@ -94,7 +95,7 @@ export const InstagramLogin = () => {
         className={hasInstagram ? 'remove-btn' : 'connect-btn'}
         onClick={hasInstagram ? removeHandler : clickHandler}
       >
-        <span>{hasInstagram ? 'Remove' : 'Connect'}</span>
+        {hasInstagram ? <span>'Remove'</span> : <><img src={IgBtn} alt="IgBtn" /><span>Connect</span></>}
       </div>
     </>
   );
