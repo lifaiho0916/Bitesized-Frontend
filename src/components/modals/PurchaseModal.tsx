@@ -40,7 +40,7 @@ const PurchaseModal = (props: any) => {
             const foundIndex = CONSTANT.CURRENCIES.findIndex((currency: any) => currency.toLowerCase() === user.currency)
             setOption(foundIndex)
         }
-    }, [user])
+    }, [user, show])
 
     return (
         <div className={`modal${show ? ' show' : ''}`} onClick={onClose}>
