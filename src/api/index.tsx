@@ -22,6 +22,7 @@ export const unLockBite = (id: any, data: any) => API.put(`/api/bite/${id}/unloc
 export const getBitesByPersonalisedUrl = (url: any, userId: any) => API.get(`/api/bite/personalurl/${url}${userId ? `?userId=${userId}` : ''}`)
 export const getBitesList = () => API.get('/api/bite/list')
 export const getBitesAdmin = (type: any, search: any, sort: any) => API.get(`/api/bite/adminlist?type=${type}&search=${search}&sort=${sort}`)
+export const getBitesSortByCommentAdmin = (type: any, search: any, sort: any) => API.get(`/api/bite/list_comment?type=${type}&search=${search}&sort=${sort}`)
 export const getBiteById = (id: any) => API.get(`/api/bite/${id}`)
 export const changeBiteVisible = (id: any, data: any) => API.put(`/api/bite/${id}/setvisible`, data)
 export const deleteBite = (id: any) => API.delete(`/api/bite/${id}`)

@@ -19,7 +19,7 @@ const AdminCommentBiteList = () => {
 
     const [search, setSearch] = useState("")
 
-    useEffect(() => { dispatch(biteAction.getBitesAdmin(code, search, sort)) }, [code, location, sort])
+    useEffect(() => { dispatch(biteAction.getBitesSortByCommentAdmin(code, search, sort)) }, [code, location, sort])
 
     return (
         <div className="admin-bite-list-wrapper">

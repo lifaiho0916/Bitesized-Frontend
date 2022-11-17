@@ -348,6 +348,23 @@ export const biteAction = {
         }
     },
 
+    getBitesSortByCommentAdmin: (type: any, search: any, sort: any) => async (dispatch: Dispatch<any>) => {
+        try {
+            dispatch({ type: SET_LOADING_TRUE })
+            dispatch({ type: SET_BITE_INITIAL })
+            const response = await api.getBitesSortByCommentAdmin(type === null ? 'all' : type, search, sort)
+            const { data } = response
+            dispatch({ type: SET_LOADING_FALSE })
+            if (data.success) {
+                const { payload } = data
+                dispatch({ type: SET_BITES, payload: payload.bites })
+            }
+        } catch (err) {
+            console.log(err)
+            dispatch({ type: SET_LOADING_FALSE })
+        }
+    },
+
     deleteBite: (id: any, navigate: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
