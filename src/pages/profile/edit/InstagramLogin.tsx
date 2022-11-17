@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import IgBtn from "../../../assets/svg/ig.svg"
-import { accountAction } from '../../../redux/actions/socialAccountActions';
+import { useCallback, useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import IgBtn from "../../../assets/svg/ig.svg";
+import { accountAction } from "../../../redux/actions/socialAccountActions";
 
 export const InstagramLogin = () => {
   const [searchParams] = useSearchParams();
@@ -17,18 +17,18 @@ export const InstagramLogin = () => {
   const clickHandler = () => {
     const clientId = process.env.REACT_APP_INSTAGRAM_APP_ID;
     const scope = process.env.REACT_APP_INSTAGRAM_SCOPE;
-    const responseType = 'code';
+    const responseType = "code";
     const redirectUri = `https://${window.location.host}${window.location.pathname}`;
     window.location.href = `https://api.instagram.com/oauth/authorize/?app_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
   };
 
   const removeHandler = () => {
-    const { _id } = accounts.find((acc: any) => acc.name === 'instagram');
+    const { _id } = accounts.find((acc: any) => acc.name === "instagram");
     dispatch(accountAction.removeAccount(_id));
   };
 
   const hasInstagram: any = useMemo(() => {
-    const d = accounts.find((acc: any) => acc.name === 'instagram');
+    const d = accounts.find((acc: any) => acc.name === "instagram");
     return d && Object.keys(d).length > 0;
   }, [accounts]);
 
@@ -38,12 +38,12 @@ export const InstagramLogin = () => {
       const meta = {
         code,
         redirect_uri,
-        grant_type: 'authorization_code',
+        grant_type: "authorization_code",
       };
       console.log(meta.redirect_uri);
       const data = {
         id: code,
-        name: 'instagram',
+        name: "instagram",
         metadata: JSON.stringify(meta),
       };
       dispatch(
@@ -61,29 +61,29 @@ export const InstagramLogin = () => {
   );
 
   const openInstagramProfile = () => {
-    const data = accounts.find((acc: any) => acc.name === 'instagram');
+    const data = accounts.find((acc: any) => acc.name === "instagram");
     const { username } = JSON.parse(data.metadata);
     window.open(`https://www.instagram.com/${username}`);
   };
 
   const onFailure = useCallback(() => {
-    if (searchParams.get('error')) {
+    if (searchParams.get("error")) {
       const data = {
-        error: searchParams.get('error'),
-        error_reason: searchParams.get('error_reason'),
-        error_description: searchParams.get('error_description'),
+        error: searchParams.get("error"),
+        error_reason: searchParams.get("error_reason"),
+        error_description: searchParams.get("error_description"),
       };
       console.log(data);
     }
   }, [searchParams]);
 
   useEffect(() => {
-    const code = searchParams.get('code');
+    const code = searchParams.get("code");
     if (code) onSuccess(code);
     else onFailure();
   }, [onSuccess, onFailure, searchParams, dispatch, user]);
   useEffect(() => {
-    if (user && 'id' in user) {
+    if (user && "id" in user) {
       dispatch(accountAction.getAccounts(user?.id));
     }
   }, [dispatch, user]);
@@ -92,10 +92,17 @@ export const InstagramLogin = () => {
     <>
       {hasInstagram && <div onClick={openInstagramProfile}>View</div>}
       <div
-        className={hasInstagram ? 'remove-btn' : 'connect-btn'}
+        className={hasInstagram ? "remove-btn" : "connect-btn"}
         onClick={hasInstagram ? removeHandler : clickHandler}
       >
-        {hasInstagram ? <span>'Remove'</span> : <><img src={IgBtn} alt="IgBtn" /><span>Connect</span></>}
+        {hasInstagram ? (
+          <span>'Remove'</span>
+        ) : (
+          <>
+            <img src={IgBtn} alt="IgBtn" />
+            {/* <span>Connect</span> */}
+          </>
+        )}
       </div>
     </>
   );

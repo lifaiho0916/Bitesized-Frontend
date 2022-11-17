@@ -65,7 +65,8 @@ const Socialaccount = () => {
     return (
       <div className='connect-btn' onClick={() => googleLogin()}>
         {/* <span>Connect</span> */}
-        <img src={YoutubeBtn} alt="youtubeBtn" /><span>Connect</span>
+        <img src={YoutubeBtn} alt="youtubeBtn" />
+        {/* <span>Connect</span> */}
       </div>
     )
   }
@@ -86,7 +87,7 @@ const Socialaccount = () => {
           <div className='content'>
             <div className='icon-title'>
               <div className='icon'>
-                <img src={IgBtn} alt="igBtn" />
+                {/* <img src={IgBtn} alt="igBtn" /> */}
               </div>
               <div className='title'>Instagram</div>
             </div>
@@ -97,7 +98,7 @@ const Socialaccount = () => {
           <div className='content'>
             <div className='icon-title'>
               <div className='icon'>
-                <img src={YoutubeBtn} alt="youtubeBtn" />
+                {/* <img src={YoutubeBtn} alt="youtubeBtn" /> */}
               </div>
               <div className='title'>Youtube</div>
             </div>

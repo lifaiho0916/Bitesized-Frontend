@@ -167,7 +167,7 @@ export const biteAction = {
                         const response1 = await api.CreateBiteByUserId(userId, { bite: bite })
                         if (response1.data.success) {
                             dispatch({ type: SET_UPLOADING, payload: false })
-                            navigate("/admin/create-free-bite")
+                            navigate("/admin/create-bite")
                         }
                     }
                 } else {
@@ -187,7 +187,7 @@ export const biteAction = {
                         const response1 = await api.CreateBiteByUserId(userId, { bite: bite })
                         if (response1.data.success) {
                             dispatch({ type: SET_UPLOADING, payload: false })
-                            navigate("/admin/create-free-bite")
+                            navigate("/admin/create-bite")
                         }
                     }
                 }

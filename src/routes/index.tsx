@@ -30,8 +30,8 @@ import AdminCheckBite from '../pages/admin/checkBite/AdminCheckBite'
 import AdminBiteList from '../pages/admin/editBite/AdminBiteList'
 import AdminEditBite from '../pages/admin/editBite/AdminEditBite'
 //CREATE-FREE-BITE
-import AdminCreatorList from '../pages/admin/createFreeBite/AdminCreatorList'
-import AdminCreateFreeBite from '../pages/admin/createFreeBite/AdminCreateFreeBite'
+import AdminCreatorList from '../pages/admin/createBite/AdminCreatorList'
+import AdminCreateBite from '../pages/admin/createBite/AdminCreateBite'
 //ProfileUser
 import AdminUserList from '../pages/admin/profileUser/AdminUserList'
 import AdminEditUser from '../pages/admin/profileUser/AdminEditUser'
@@ -77,9 +77,10 @@ const AppRoutes = () => {
       <Route path="admin/edit-bite" element={<AuthRoute child={<AdminBiteList />} routeType="private" />} />
       <Route path="admin/edit-bite/:biteId" element={<AuthRoute child={<AdminEditBite />} routeType="private" />} />
       <Route path="admin/edit-bite/:biteId/edit-thumbnail" element={<AuthRoute child={<EditCoverImage />} routeType="private" />} />
-      <Route path="admin/create-free-bite" element={<AuthRoute child={<AdminCreatorList />} routeType="private" />} />
-      <Route path="admin/create-free-bite/detail" element={<AuthRoute child={<AdminCreateFreeBite />} routeType="private" />} />
-      <Route path="admin/create-free-bite/detail/edit-thumbnail" element={<AuthRoute child={<EditCoverImage />} routeType="private" />} />
+      <Route path="admin/create-bite" element={<AuthRoute child={<AdminCreatorList />} routeType="private" />} />
+      <Route path="admin/create-bite/free" element={<AuthRoute child={<AdminCreateBite />} routeType="private" />} />
+      <Route path="admin/create-bite/paid" element={<AuthRoute child={<AdminCreateBite />} routeType="private" />} />
+      <Route path="admin/create-bite/edit-thumbnail" element={<AuthRoute child={<EditCoverImage />} routeType="private" />} />
       <Route path="admin/profile-user" element={<AuthRoute child={<AdminUserList />} routeType="private" />} />
       <Route path="admin/profile-user/edit" element={<AuthRoute child={<AdminEditUser />} routeType="private" />} />
       <Route path="admin/profile-user/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />

@@ -51,12 +51,12 @@ const Sidebar = () => {
             <span>Edit Bite</span>
           </div>
         </NavLink>
-        <NavLink to="/admin/create-free-bite" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
+        <NavLink to="/admin/create-bite" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
           <div className="icon">
-            <AddIcon className="icon-svg" color={location.pathname.indexOf('/admin/create-free-bite') !== -1 ? "#EFA058" : hoverPath === "/admin/create-free-bite" ? "#EFA058" : "#A6A29F"} />
+            <AddIcon className="icon-svg" color={location.pathname.indexOf('/admin/create-bite') !== -1 ? "#EFA058" : hoverPath === "/admin/create-bite" ? "#EFA058" : "#A6A29F"} />
           </div>
           <div className="item-letter">
-            <span>Create FREE Bite - Users</span>
+            <span>Create Bite - Users</span>
           </div>
         </NavLink>
         <NavLink to="/admin/transaction" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>

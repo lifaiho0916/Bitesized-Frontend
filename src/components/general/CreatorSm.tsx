@@ -29,14 +29,22 @@ const CreatorSm = (props: any) => {
                     </div>
                 </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
                 <Button
-                    text={"Create FREE Bite"}
+                    text={"FREE Bite"}
                     fillStyle="outline"
                     color="primary"
-                    width={"155px"}
+                    width={"102px"}
                     icon={[<AddIcon color="#EFA058" />, <AddIcon color="white" />, <AddIcon color="white" />]}
-                    handleSubmit={handleSubmit}
+                    handleSubmit={() => handleSubmit(0)}
+                />
+                <Button
+                    text={"Paid Bite"}
+                    fillStyle="outline"
+                    color="primary"
+                    width={"102px"}
+                    icon={[<AddIcon color="#EFA058" />, <AddIcon color="white" />, <AddIcon color="white" />]}
+                    handleSubmit={() => handleSubmit(1)}
                 />
             </div>
         </div>

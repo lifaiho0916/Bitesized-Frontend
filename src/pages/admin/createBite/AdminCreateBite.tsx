@@ -6,13 +6,14 @@ import ContainerBtn from "../../../components/general/containerBtn"
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import ReactPlayer from "react-player"
 import Input from "../../../components/general/input"
+import CurrencySelect from "../../../components/stripe/CurrencySelect"
 import PublishBiteModal from "../../../components/modals/PublishBiteModal"
 import Button from "../../../components/general/button"
 import { BackIcon, RemoveIcon, AddIcon, PlayIcon, DragHandleIcon } from "../../../assets/svg"
 import { biteAction } from "../../../redux/actions/biteActions"
 import CONSTANT from "../../../constants/constant"
 import { SET_BITE, SET_PREVIOUS_ROUTE, SET_VIDEO_ALIGNS, SET_SELECTED_INDEXES } from "../../../redux/types"
-import "../../../assets/styles/admin/createFreeBite/AdminCreateFreeBiteStyle.scss"
+import "../../../assets/styles/admin/createBite/AdminCreateBiteStyle.scss"
 
 const reOrder = (list: any, startIndex: any, endIndex: any) => {
     const result = Array.from(list)
@@ -21,20 +22,22 @@ const reOrder = (list: any, startIndex: any, endIndex: any) => {
     return result
 }
 
-const AdminCreateFreeBite = () => {
+const AdminCreateBite = () => {
     const location = useLocation()
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const biteState = useSelector((state: any) => state.bite)
+    const { bite, thumbnails, selectedIndexs, aligns } = biteState
     const fileInputRef = useRef<HTMLInputElement>(null)
-    const [title, setTitle] = useState('')
+    const [title, setTitle] = useState(bite.title ? bite.title : '')
+    const [price, setPrice] = useState(bite.price ? bite.price : '')
+    const [currency, setCurrency] = useState(bite.currency ? bite.currency : 0)
     const [publishEnable, setPublishEnable] = useState(false)
     const { state } = location
     let user: any = null
     if (state) user = state.user
-
-    const { bite, thumbnails, selectedIndexs, aligns } = biteState
     const [play, setPlay] = useState(false)
+    const [free, setFree] = useState(false)
     const [videoIndex, setVideoIndex] = useState(-1)
     const [openPublish, setOpenPublish] = useState(false)
 
@@ -43,9 +46,14 @@ const AdminCreateFreeBite = () => {
         setOpenPublish(true)
     }
     const publishBite = () => {
-        const newBite = {
+        const newBite = free ? {
             ...bite,
             title: title,
+        } : {
+            ...bite,
+            title: title,
+            price: price,
+            currency: (CONSTANT.CURRENCIES[currency]).toLowerCase()
         }
         dispatch(biteAction.saveBiteByUserId(newBite, user._id, navigate))
     }
@@ -98,13 +106,18 @@ const AdminCreateFreeBite = () => {
         dispatch({ type: SET_BITE, payload: { ...bite, videos: videos } })
     }
     const gotoEditThumbnail = () => {
-        const newBite = {
+        const newBite = free ? {
             ...bite,
             title: title,
+        } : {
+            ...bite,
+            title: title,
+            price: price,
+            currency: (CONSTANT.CURRENCIES[currency]).toLowerCase()
         }
         dispatch({ type: SET_BITE, payload: newBite })
         dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
-        navigate('/admin/create-free-bite/detail/edit-thumbnail', { state: { user: user } })
+        navigate('/admin/create-bite/edit-thumbnail', { state: { user: user } })
     }
     const removeVideo = (index: any) => {
         let videos = bite.videos.filter((video: any, i: any) => i !== index)
@@ -162,16 +175,29 @@ const AdminCreateFreeBite = () => {
             setPublishEnable(false)
             return
         }
+        if (!free && (price === "" || Number(price) === 0)) {
+            setPublishEnable(false)
+            return
+        }
         setPublishEnable(true)
-    }, [title, bite])
+    }, [title, bite, free, price])
 
-    useEffect(() => { if (state === null) navigate('/admin/create-free-bite') }, [state, navigate])
+    useEffect(() => { if (state === null) navigate('/admin/create-bite') }, [state, navigate])
+    useEffect(() => { setFree(location.pathname.substring(location.pathname.length - 4) === 'free') }, [location])
+
+    useEffect(() => {
+        if(user) {
+            CONSTANT.CURRENCIES.forEach((cur: any, index: any) => {
+                if(cur.toLowerCase() === user.currency) setCurrency(index)
+            })
+        }
+    }, [user])
 
     return (
         <div className="create-free-bite-wrapper">
             <div className="page-header">
-                <div onClick={() => navigate('/admin/create-free-bite')}><BackIcon color="black" /></div>
-                <div className="page-title"><span>Posting on FREE Bite</span></div>
+                <div onClick={() => navigate('/admin/create-bite')}><BackIcon color="black" /></div>
+                <div className="page-title"><span>{free ? 'Posting on FREE Bite' : 'Posting on Paid Bite'}</span></div>
                 <div style={{ width: '24px' }}></div>
             </div>
             <PublishBiteModal
@@ -337,6 +363,43 @@ const AdminCreateFreeBite = () => {
                         />
                     </div>
 
+                    {!free &&
+                    <div>
+                    <div className="second-divider"></div>
+                    <div className="session-title">
+                        <span> $ Price to unlock</span>
+                    </div>
+                    <div className="session-input">
+                        <Input
+                            type="input"
+                            isNumber={true}
+                            width={'100%'}
+                            minnum={0}
+                            maxnum={100000000000000}
+                            step={0.1}
+                            placeholder="$1 USD is ideal for bite-size!"
+                            title={price}
+                            setTitle={setPrice}
+                        />
+                    </div>
+
+                    <div className="third-divider"></div>
+                    <div className="currency-selection">
+                        <CurrencySelect
+                            width={'100%'}
+                            option={currency}
+                            setOption={setCurrency}
+                            options={CONSTANT.DISPLAY_CURRENCIES}
+                        />
+                    </div>
+
+                    <div className="firth-divider"></div>
+                    <div className="currency-description">
+                        <span>(We will convert your price in USD as default)</span>
+                    </div>
+                </div>
+                    }
+
                     <div className="fifth-divider"></div>
                     <div className="publish-btn" onClick={publish}>
                         <ContainerBtn
@@ -353,4 +416,4 @@ const AdminCreateFreeBite = () => {
     )
 }
 
-export default AdminCreateFreeBite
+export default AdminCreateBite

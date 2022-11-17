@@ -7,7 +7,7 @@ import { authAction } from "../../../redux/actions/authActions"
 import CreatorSm from "../../../components/general/CreatorSm"
 import { SearchIcon } from "../../../assets/svg"
 import { SET_BITE_INITIAL, SET_UPLOADED_PROCESS } from "../../../redux/types"
-import "../../../assets/styles/admin/createFreeBite/AdminCreatorListStyle.scss"
+import "../../../assets/styles/admin/createBite/AdminCreatorListStyle.scss"
 
 const AdminCreatorList = (props: any) => {
     const navigate = useNavigate()
@@ -61,10 +61,10 @@ const AdminCreatorList = (props: any) => {
                     <div className="creator" key={index}>
                         <CreatorSm
                             user={user}
-                            handleSubmit={() => {
+                            handleSubmit={(type: any) => {
                                 dispatch({ type: SET_UPLOADED_PROCESS, payload: [0, 0, 0] })
                                 dispatch({ type: SET_BITE_INITIAL })
-                                navigate(`/admin/create-free-bite/detail`, { state: { user: user } })
+                                navigate(`/admin/create-bite/${type === 0 ? 'free' : 'paid'}`, { state: { user: user } })
                             }}
                         />
                     </div>
