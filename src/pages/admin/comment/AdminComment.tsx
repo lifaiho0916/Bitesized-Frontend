@@ -116,13 +116,12 @@ const AdminComment = (props: any) => {
   };
 
   useEffect(() => {
+    if (bite.title === null) navigate("/admin/comment");
+    if (bite.commentNotification && bite.commentNotification === true) dispatch(biteAction.clearCommentNotification(bite._id))
     if (bite.comments && bite.comments.length) {
       const buffer: any = document.getElementById("scroll");
       buffer.scrollTop = buffer.scrollHeight;
     }
-  }, [bite]);
-  useEffect(() => {
-    if (bite.title === null) navigate("/admin/comment");
   }, [bite]);
 
   return (

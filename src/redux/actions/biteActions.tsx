@@ -438,5 +438,13 @@ export const biteAction = {
             console.log(err)
             dispatch({ type: SET_LOADING_FALSE })
         }
+    },
+
+    clearCommentNotification: (biteId: any) => async (dispatch: Dispatch<any>) => {
+        try {
+            await api.clearCommentNotification(biteId)
+        } catch (err) {
+            console.log(err)
+        }
     }
 }

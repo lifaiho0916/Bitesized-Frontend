@@ -38,6 +38,7 @@ import AdminEditUser from '../pages/admin/profileUser/AdminEditUser'
 //Transaction
 import AdminTransaction from '../pages/admin/transaction/AdminTransaction'
 //Comment
+import AdminCommentBiteList from '../pages/admin/comment/AdminCommentBiteList'
 import AdminComment from '../pages/admin/comment/AdminComment'
 //Terms And Privacy
 import AdminTermsAndPrivacy from '../pages/admin/termsAndPrivacy/AdminTermsAndPrivacy'
@@ -85,7 +86,7 @@ const AppRoutes = () => {
       <Route path="admin/profile-user/edit" element={<AuthRoute child={<AdminEditUser />} routeType="private" />} />
       <Route path="admin/profile-user/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
       <Route path="admin/transaction" element={<AuthRoute child={<AdminTransaction />} routeType="private" />} />
-      <Route path="admin/comment" element={<AuthRoute child={<AdminBiteList />} routeType="private" />} />
+      <Route path="admin/comment" element={<AuthRoute child={<AdminCommentBiteList />} routeType="private" />} />
       <Route path="admin/comment/:biteId" element={<AuthRoute child={<AdminComment />} routeType="private" />} />
       <Route path="admin/terms-privacy" element={<AuthRoute child={<AdminTermsAndPrivacy />} routeType="private" />} />
 
