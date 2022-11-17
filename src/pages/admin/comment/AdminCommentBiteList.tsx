@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
 import Button from "../../../components/general/button"
 import { biteAction } from "../../../redux/actions/biteActions"
 import { SearchIcon, AscendIcon, DescendIcon, VisibleIcon, HiddenIcon } from "../../../assets/svg"
-import { SET_BITE, SET_UPLOADED_PROCESS } from "../../../redux/types"
+import { SET_BITE } from "../../../redux/types"
 import "../../../assets/styles/admin/editBite/AdminBiteListStyle.scss"
 
 const AdminCommentBiteList = () => {
@@ -71,7 +71,7 @@ const AdminCommentBiteList = () => {
                             <tr>
                                 <th>
                                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                        <span>Post Date</span>
+                                        <span>Latest comment post Date</span>
                                         <div style={{ cursor: 'pointer' }}
                                             onClick={() => setSort(-sort)}
                                         >
@@ -89,7 +89,6 @@ const AdminCommentBiteList = () => {
                             {bites.map((bite: any, index: any) => (
                                 <tr key={index} onClick={() => {
                                     dispatch({ type: SET_BITE, payload: bite })
-                                    dispatch({ type: SET_UPLOADED_PROCESS, payload: [0, 0, 0] })
                                     navigate(`${location.pathname}/${bite._id}`)
                                 }}>
                                     <td>{new Date(bite.date).toUTCString().slice(5, 16)}</td>
