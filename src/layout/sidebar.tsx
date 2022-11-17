@@ -76,7 +76,7 @@ const Sidebar = () => {
           </div>
         </NavLink>
         <NavLink to="/admin/comment" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
-          <div className="icon" style={{ marginLeft: '2px' }}>
+          <div className="icon" style={{ marginLeft: '2px', marginRight: '2px' }}>
             <CommentIcon className="icon-svg" color={location.pathname.indexOf('/admin/comment') !== -1 ? "#EFA058" : hoverPath === "/admin/comment" ? "#EFA058" : "#A6A29F"} />
           </div>
           <div className="item-letter">
