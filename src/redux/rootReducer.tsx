@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
     load: loadRedcuer,
     bite: biteReducer,
     transaction: transactionReducer,
-    accounts: socialAccountReducer,
+    account: socialAccountReducer,
     payment: paymentReducer,
     setting: settingRedcuer
 })

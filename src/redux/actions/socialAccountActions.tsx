@@ -1,36 +1,51 @@
 import { Dispatch } from 'redux';
 import * as api from '../../api';
 import {
-  ADD_SOCIAL_ACCOUNTS,
-  DELETE_SOCIAL_ACCOUNTS,
-  GET_SOCIAL_ACCOUNTS,
+  SET_SOCIAL_ACCOUNT,
+  SET_LOADING_FALSE,
+  SET_LOADING_TRUE
 } from '../types';
 export const accountAction = {
-  getAccounts: (userId: any) => async (dispatch: Dispatch<any>) => {
+  getAccount: (userId: any) => async (dispatch: Dispatch<any>) => {
     try {
-      const response = await api.getSocialAccount(userId);
-      dispatch({ type: GET_SOCIAL_ACCOUNTS, payload: response.data.data });
+      const response = await api.getSocialAccount(userId)
+      const { data } = response
+      
+      if(data.success) {
+        const { payload } = data
+        dispatch({ type: SET_SOCIAL_ACCOUNT, payload: payload.socialAccount})
+      }
     } catch (error) {
       console.log(error);
     }
   },
-  addAccount:
-    (data: any, cb: Function = () => {}) =>
-    async (dispatch: Dispatch<any>) => {
+  addAccount: (socialInfo: any) => async (dispatch: Dispatch<any>) => {
       try {
-        const response = await api.addSocialAccount(data);
-        dispatch({ type: ADD_SOCIAL_ACCOUNTS, payload: response.data.data });
-        cb(true);
+        dispatch({ type: SET_LOADING_TRUE })
+        const response = await api.addSocialAccount(socialInfo)
+        const { data } = response
+        dispatch({ type: SET_LOADING_FALSE })
+        if(data.success) {
+          const { payload } = data
+          dispatch({ type: SET_SOCIAL_ACCOUNT, payload: payload.socialAccount });
+        }
       } catch (error) {
-        cb(false);
-        console.log(error);
+        dispatch({ type: SET_LOADING_FALSE })
+        console.log(error)
       }
     },
-  removeAccount: (id: any) => async (dispatch: Dispatch<any>) => {
+  removeAccount: (id: any, social: any) => async (dispatch: Dispatch<any>) => {
     try {
-      await api.removeSocialAccount(id);
-      dispatch({ type: DELETE_SOCIAL_ACCOUNTS, payload: id });
+      dispatch({ type: SET_LOADING_TRUE })
+      const response = await api.removeSocialAccount(id, social)
+      const { data } = response
+      dispatch({ type: SET_LOADING_FALSE })
+      if(data.success) {
+        const { payload } = data
+        dispatch({ type: SET_SOCIAL_ACCOUNT, payload: payload.socialAccount })
+      }
     } catch (error) {
+      dispatch({ type: SET_LOADING_FALSE })
       console.log(error);
     }
   },

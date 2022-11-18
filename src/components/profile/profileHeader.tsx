@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext, useRef, useLayoutEffect, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { LanguageContext } from "../../routes/authRoute"
 import Button from "../general/button"
 import Avatar from "../general/avatar"
@@ -43,6 +43,9 @@ const ProfileHeader = (props: any) => {
   const [showMore, setShowMore] = useState(false)
   const [showLink, setShowLink] = useState(false)
 
+  const accountState = useSelector((state: any) => state.account)
+  const { account } = accountState
+
   const categoryText = useMemo(() => {
     if (profileUser) {
       if (profileUser.categories.length === 0) return ""
@@ -70,6 +73,10 @@ const ProfileHeader = (props: any) => {
       window.addEventListener("resize", updateSize)
       return () => window.removeEventListener("resize", updateSize)
     }
+  }, [profileUser])
+
+  useEffect(() => {
+    console.log(profileUser)
   }, [profileUser])
 
   return (

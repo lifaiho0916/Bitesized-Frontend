@@ -58,8 +58,8 @@ export const addCard = (data: any) => API.post('/api/payment/card', data)
 export const deleteCard = () => API.delete('/api/payment/card')
 
 export const getSocialAccount = (userId: any) => API.get(`/api/social-accounts/${userId}`)
-export const addSocialAccount = (data: any) => API.post('/api/social-accounts/add', data)
-export const removeSocialAccount = (id: any) => API.delete(`/api/social-accounts/delete/${id}`)
+export const addSocialAccount = (data: any) => API.post('/api/social-accounts', data)
+export const removeSocialAccount = (id: any, social: any) => API.delete(`/api/social-accounts/${id}?social=${social}`)
 
 //SETTING
 export const getCurrencyRate = () => API.get('/api/setting/currencyrate')

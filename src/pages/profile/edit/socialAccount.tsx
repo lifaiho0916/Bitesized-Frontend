@@ -14,29 +14,21 @@ const Socialaccount = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userState = useSelector((state: any) => state.auth);
-  const accountState = useSelector((state: any) => state.accounts);
-  const { accounts } = accountState;
+  const accountState = useSelector((state: any) => state.account);
+  const { account } = accountState;
   const { user } = userState;
 
   const openConnectedYoutubeChannel = () => {
-    const { id } = accounts.find((acc: any) => acc.name === 'youtube');
+    const { id } = account.find((acc: any) => acc.name === 'youtube');
     window.open(`https://www.youtube.com/channel/${id}`);
   };
 
   const hasYoutubeData: any = useMemo(() => {
-    if (accounts.length <= 0) return false;
-    const d = accounts.find((acc: any) => acc.name === 'youtube');
-    return d && Object.keys(d).length > 0;
-  }, [accounts]);
+    if (account && account.youtube) return true
+    else return false
+  }, [account]);
 
-  const removeYoutube = () => {
-    const youtubeData = accounts.find((acc: any) => acc.name === 'youtube');
-    if (youtubeData && Object.keys(youtubeData).length > 0) {
-      dispatch(accountAction.removeAccount(youtubeData._id));
-    }
-  };
-
-  // useEffect(() => { if (user) dispatch(accountAction.getAccounts(user.id)) }, [dispatch, user])
+  const removeYoutube = () => { if(hasYoutubeData) dispatch(accountAction.removeAccount(account._id, "youtube"))}
 
   const CustomGoogleLogin = (props: any) => {
     const googleLogin = useGoogleLogin({
@@ -47,13 +39,13 @@ const Socialaccount = () => {
           const response = await axios.get(youtubeApiUrl)
 
           const data = {
-            id: response.data.items[0].id,
-            name: 'youtube',
-            metadata: JSON.stringify(response.data.items)
+            user: user.id,
+            socialId: response.data.items[0].id,
+            type: 'youtube',
           }
 
-          window.open(`https://www.youtube.com/channel/${data.id}`)
-          // dispatch(accountAction.addAccount(data))
+          // window.open(`https://www.youtube.com/channel/${data.socialId}`)
+          dispatch(accountAction.addAccount(data))
         } catch (err) {
           console.log(err)
         }
@@ -70,6 +62,8 @@ const Socialaccount = () => {
       </div>
     )
   }
+
+  // useEffect(() => { if (user) dispatch(accountAction.getAccount(user.id)) }, [dispatch, user])
 
   return (
     <div className='social-accounts-wrapper'>
