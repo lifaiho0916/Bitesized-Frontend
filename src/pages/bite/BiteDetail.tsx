@@ -367,7 +367,7 @@ const BiteDetail = () => {
 
                     <div className="comment">
                         <div className="section-header">
-                            <CommentIcon color="#EFA058" width={30} height={30} /><span>Comments</span>
+                            <CommentIcon color="#EFA058" width={25} height={25} /><span>Comments</span>
                         </div>
                         <div className="comment-body">
                             {bite.comments.length > 0 ?

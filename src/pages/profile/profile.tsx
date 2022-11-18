@@ -6,9 +6,11 @@ import ProfileHeader from "../../components/profile/profileHeader";
 import ProfileMenu from "../../components/profileMenu";
 import Button from "../../components/general/button";
 import BiteCardProfile from "../../components/bite/BiteCardProfile";
-import { AddIcon, CreatoCoinIcon } from "../../assets/svg";
+import { AddIcon, Bite1Icon, CreatoCoinIcon, NotificationOutlineIcon } from "../../assets/svg";
 import { authAction } from "../../redux/actions/authActions";
+import subscriptionImg from "../../assets/img/subscription.png"
 import "../../assets/styles/profile/profileStyle.scss";
+import ContainerBtn from "../../components/general/containerBtn";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -56,13 +58,40 @@ const Profile = () => {
           </div>
         }
             {code === "subscription" ? 
-              <div></div>
+              <div className="subscription">
+                {(user && user.subscribe.available === true && user.subscribe.switch === true) &&
+                <>
+                  <div className="subscription-title">
+                    <CreatoCoinIcon color="#EA8426" /><span>Manage my subscription</span>
+                  </div>
+                  <div className="subscription-body">
+                    <div className="subscription-body-title">
+                      <span>Subscription</span>
+                    </div>
+                    <div className="subscription-body-main">
+                      <div className="image">
+                      <img src={subscriptionImg} alt="subscription" />
+                      </div>
+                      <div className="description">
+                        <span>You can provide subscription-only benefits for subscribe members, such as additional creative content, subscription to member-only communities, etc.</span>
+                        <div className="subscription-btn">
+                          <span>Set subscription</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+                }
+                <div className="subscription-title">
+                  <NotificationOutlineIcon color="#EA8426" width={24} /><span>I have subscribed</span>
+                </div>
+              </div>
               :
             <div className="creators-bite">
             {!isSame &&
               <div className="title">
-                <CreatoCoinIcon color="#EFA058" width={30} height={30} />
-                <p>{authuser ? authuser.name : ""}'s Bite</p>
+                <Bite1Icon color="#EFA058" width={30} height={30} />
+                <span>{authuser ? authuser.name : ""}’s Bite-sized knowledge</span>
               </div>
             }
               {bites.length > 0 && authuser ? (

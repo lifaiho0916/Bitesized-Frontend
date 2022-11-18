@@ -1098,7 +1098,7 @@ export const NotificationwithCircleIcon = (props: any) => (
 
 export const NotificationOutlineIcon = (props: any) => (
   <svg
-    width="20"
+    width={props.width ? props.width : "20"}
     height="20"
     viewBox="0 0 16 20"
     fill="none"

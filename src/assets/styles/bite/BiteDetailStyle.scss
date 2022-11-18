@@ -353,6 +353,8 @@
             .section-header {
                 display: flex;
                 align-items: center;
+                border-bottom: 2.5px solid #ea8426;
+                padding: 0px 0px 10px 20px;
 
                 span {
                     margin-left: 10px;
@@ -481,6 +483,8 @@
             .section-header {
                 display: flex;
                 align-items: center;
+                border-bottom: 2.5px solid #ea8426;
+                padding: 0px 0px 10px 20px;
 
                 span {
                     margin-left: 10px;
@@ -560,6 +564,18 @@
                     .bite-video {
                         margin: 10px auto;
                     }
+                }
+            }
+
+            .comment {
+                .section-header {
+                    padding-left: 30px;
+                }
+            }
+
+            .creator-bites {
+                .section-header {
+                    padding: 0px 0px 5px 30px;
                 }
             }
         }
