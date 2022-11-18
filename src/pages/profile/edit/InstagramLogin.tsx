@@ -10,8 +10,8 @@ export const InstagramLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userState = useSelector((state: any) => state.auth);
-  const accountState = useSelector((state: any) => state.accounts);
-  const { accounts } = accountState;
+  const accountState = useSelector((state: any) => state.account);
+  const { account } = accountState;
   const { user } = userState;
 
   const clickHandler = () => {
@@ -23,14 +23,14 @@ export const InstagramLogin = () => {
   };
 
   const removeHandler = () => {
-    const { _id } = accounts.find((acc: any) => acc.name === "instagram");
+    // const { _id } = accounts.find((acc: any) => acc.name === "instagram");
     // dispatch(accountAction.removeAccount(_id));
   };
 
   const hasInstagram: any = useMemo(() => {
-    const d = accounts.find((acc: any) => acc.name === "instagram");
-    return d && Object.keys(d).length > 0;
-  }, [accounts]);
+    if (account && account.instagram) return true
+    else return false
+  }, [account]);
 
   const onSuccess = useCallback(
     async (code) => {
@@ -61,9 +61,9 @@ export const InstagramLogin = () => {
   );
 
   const openInstagramProfile = () => {
-    const data = accounts.find((acc: any) => acc.name === "instagram");
-    const { username } = JSON.parse(data.metadata);
-    window.open(`https://www.instagram.com/${username}`);
+    // const data = accounts.find((acc: any) => acc.name === "instagram");
+    // const { username } = JSON.parse(data.metadata);
+    // window.open(`https://www.instagram.com/${username}`);
   };
 
   const onFailure = useCallback(() => {

@@ -7,12 +7,11 @@ const ProfileMenu = (props: any) => {
 
   return (
     <div className="profile-menu-wrapper">
-      <div className={selectedText === texts[0] ? "dareme-fanwall-active" : 'dareme-fanwall'} onClick={() => { navigate(`/${urls[0]}`) }}>
-        {texts[0]}
-      </div>
-      <div className={selectedText === texts[1] ? 'dareme-fanwall-active' : "dareme-fanwall"} onClick={() => { navigate(`/${urls[1]}`) }}>
-        {texts[1]}
-      </div>
+      {urls.map((url: any, index: any) => (
+        <div key={index} className={selectedText === texts[index] ? "dareme-fanwall-active" : 'dareme-fanwall'} onClick={() => { navigate(`/${url}`) }}>
+          {texts[index]}
+        </div>  
+      ))}
     </div>
   )
 }

@@ -46,161 +46,94 @@ const Profile = () => {
     <div className="profile-wrapper">
       <div className="profile">
         <ProfileHeader same={isSame} profileUser={authuser ? authuser : null} />
-        {isSame ? (
-          <>
-            <div className="profile-menu">
-              <ProfileMenu
-                selectedText={code === null ? "My Purchases" : "My Bites"}
-                texts={["My Purchases", "My Bites"]}
-                urls={
-                  authuser
-                    ? [
-                        authuser.personalisedUrl,
-                        `${authuser.personalisedUrl}?tab=mybites`,
-                      ]
-                    : ["", ""]
-                }
-              />
-            </div>
-              <div className="creators-bite">
-                {bites.length > 0 && authuser ? (
-                  <div className="bite-card">
-                    {bites.sort((first: any, second: any) => {
-                        if (user) {
-                          let firstDate: any = "2322";
-                          let secondDate: any = "2322";
-                          let firstIndex = first.purchasedUsers.findIndex((purchaseInfo: any) => String(purchaseInfo.purchasedBy) === String(user.id));
-                          let secondIndex = second.purchasedUsers.findIndex((purchaseInfo: any) => String(purchaseInfo.purchasedBy) === String(user.id));
-                          if (firstIndex !== -1) firstDate = first.purchasedUsers[firstIndex].purchasedAt;
-                          if (secondIndex !== -1) secondDate = second.purchasedUsers[secondIndex].purchasedAt;
-                          if (firstDate < secondDate) return 1;
-                          else if (firstDate > secondDate) return -1;
-                          else {
-                            if (first.date < second.date) return 1;
-                            else if (first.date > second.date) return -1;
-                            return 0;
-                          }
-                        } else {
-                          if (first.currency && second.currency === null) return 1;
-                          else if (first.currency === null && second.currency) return -1;
-                          else {
-                            if (first.date < second.date) return 1;
-                            else if (first.date > second.date) return -1;
-                            return 0;
-                          }
-                        }
-                      })
-                      .map((bite: any, index: any) => (
-                        <div
-                          className="profile-bite"
-                          key={
-                            index
-                          }
-                        >
-                          <BiteCardProfile bite={bite} same={isSame} />
-                        </div>
-                      ))}
-                  </div>
-                ) : (
-                  <div className="no-data">
-                    <span>There is no "Bite" yet </span>
-                    {code !== null && (
-                      <div
-                        style={{
-                          marginTop: "20px",
-                          display: "flex",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Button
-                          text="Create"
-                          fillStyle="fill"
-                          color="primary"
-                          shape="rounded"
-                          width={"300px"}
-                          icon={[
-                            <AddIcon color="white" />,
-                            <AddIcon color="white" />,
-                            <AddIcon color="white" />,
-                          ]}
-                          handleSubmit={() => navigate("/bite/create-type")}
-                        />
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-          </>
-        ) : (
-          <div className="creators-bite">
-            <div className="title">
-              <CreatoCoinIcon color="#EFA058" width={30} height={30} />
-              <p>{authuser ? authuser.name : ""}'s Bite</p>
-            </div>
-            {bites.length > 0 && authuser ? (
-              <div
-                className="bite-card"
-                onScroll={(e: any) => {
-                  // scrollWidth.forEach((width: any, index: any) => {
-                  //   if (Math.abs(e.target.scrollLeft - width) <= 1) setScrollIndex(index)
-                  // })
-                }}
-              >
-                {bites
-                  .sort((first: any, second: any) => {
-                    if (user) {
-                      let firstDate: any = "2222";
-                      let secondDate: any = "2222";
-                      let firstIndex = first.purchasedUsers.findIndex(
-                        (purchaseInfo: any) =>
-                          String(purchaseInfo.purchasedBy) === String(user.id)
-                      );
-                      let secondIndex = second.purchasedUsers.findIndex(
-                        (purchaseInfo: any) =>
-                          String(purchaseInfo.purchasedBy) === String(user.id)
-                      );
-                      if (firstIndex !== -1)
-                        firstDate =
-                          first.purchasedUsers[firstIndex].purchasedAt;
-                      if (secondIndex !== -1)
-                        secondDate =
-                          second.purchasedUsers[secondIndex].purchasedAt;
-                      if (firstDate > secondDate) return 1;
-                      else if (firstDate < secondDate) return -1;
-                      else {
-                        if (first.date < second.date) return 1;
-                        else if (first.date > second.date) return -1;
-                        return 0;
-                      }
-                    } else {
-                      if (first.currency && second.currency === null) return 1;
-                      else if (first.currency === null && second.currency)
-                        return -1;
-                      else {
-                        if (first.date < second.date) return 1;
-                        else if (first.date > second.date) return -1;
-                        return 0;
-                      }
-                    }
-                  })
-                  .map((bite: any, index: any) => (
-                    <div
-                      className="profile-bite"
-                      key={
-                        index
-                      }
-                    >
-                      <BiteCardProfile bite={bite} />
-                    </div>
-                  ))}
-              </div>
-            ) : (
-              <div className="no-data">
-                <span>There is no "Bite" yet </span>
-              </div>
-            )}
+        {isSame &&
+          <div className="profile-menu">
+            <ProfileMenu
+              selectedText={code === null ? "My Purchases" : "My Bites"}
+              texts={["My Purchases", "My Bites"]}
+              urls={
+                authuser
+                  ? [
+                      authuser.personalisedUrl,
+                      `${authuser.personalisedUrl}?tab=mybites`,
+                    ]
+                  : ["", ""]
+              }
+            />
           </div>
-        )}
+        }
+            {/* {code === "subscription" ? 
+            :
+            } */}
+            <div className="creators-bite">
+            {!isSame &&
+              <div className="title">
+                <CreatoCoinIcon color="#EFA058" width={30} height={30} />
+                <p>{authuser ? authuser.name : ""}'s Bite</p>
+              </div>
+            }
+              {bites.length > 0 && authuser ? (
+                <div className="bite-card">
+                  {bites.sort((first: any, second: any) => {
+                      if (user) {
+                        let firstDate: any = "2322";
+                        let secondDate: any = "2322";
+                        let firstIndex = first.purchasedUsers.findIndex((purchaseInfo: any) => String(purchaseInfo.purchasedBy) === String(user.id));
+                        let secondIndex = second.purchasedUsers.findIndex((purchaseInfo: any) => String(purchaseInfo.purchasedBy) === String(user.id));
+                        if (firstIndex !== -1) firstDate = first.purchasedUsers[firstIndex].purchasedAt;
+                        if (secondIndex !== -1) secondDate = second.purchasedUsers[secondIndex].purchasedAt;
+                        if (firstDate < secondDate) return 1;
+                        else if (firstDate > secondDate) return -1;
+                        else {
+                          if (first.date < second.date) return 1;
+                          else if (first.date > second.date) return -1;
+                          return 0;
+                        }
+                      } else {
+                        if (first.currency && second.currency === null) return 1;
+                        else if (first.currency === null && second.currency) return -1;
+                        else {
+                          if (first.date < second.date) return 1;
+                          else if (first.date > second.date) return -1;
+                          return 0;
+                        }
+                      }
+                    })
+                    .map((bite: any, index: any) => (
+                      <div className="profile-bite" key={index}>
+                        <BiteCardProfile bite={bite} same={isSame} />
+                      </div>
+                    ))}
+                </div>
+              ) : (
+                <div className="no-data">
+                  <span>There is no "Bite" yet </span>
+                  {code === 'mybites' && (
+                    <div
+                      style={{
+                        marginTop: "20px",
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Button
+                        text="Create"
+                        fillStyle="fill"
+                        color="primary"
+                        shape="rounded"
+                        width={"300px"}
+                        icon={[
+                          <AddIcon color="white" />,
+                          <AddIcon color="white" />,
+                          <AddIcon color="white" />,
+                        ]}
+                        handleSubmit={() => navigate("/bite/create-type")}
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
       </div>
     </div>
   );
