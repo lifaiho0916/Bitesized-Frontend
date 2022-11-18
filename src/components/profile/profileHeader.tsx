@@ -86,15 +86,15 @@ const ProfileHeader = (props: any) => {
           avatar={profileUser ? profileUser.avatar.indexOf('uploads') === -1 ? profileUser.avatar : `${process.env.REACT_APP_SERVER_URL}/${profileUser.avatar}` : ''}
         />
         <div className="social-icon-other">
-          {(account && account.youtube) &&
+          {(account && account.social && account.social.youtube) &&
             <div 
               style={{ width:'40px', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}
-              onClick={() => { window.open(`https://www.youtube.com/channel/${account.youtube}`, "_blank") }}
+              onClick={() => { window.open(`https://www.youtube.com/channel/${account.social.youtube}`, "_blank") }}
             >
               <img src={YoutubeSvg} alt="youtubeSvg" />
             </div>
           }
-          {(account && account.instagram) &&
+          {(account && account.social && account.social.instagram) &&
             <div 
               style={{width:'40px', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}
               onClick={() => {}}

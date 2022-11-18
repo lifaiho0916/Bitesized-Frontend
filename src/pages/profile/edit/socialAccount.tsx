@@ -34,7 +34,6 @@ const Socialaccount = () => {
     const googleLogin = useGoogleLogin({
       onSuccess: async tokenResponse => {
         try {
-          // const youtubeApiUrl = `https://www.googleapis.com/youtube/v3/channels?part=id&mine=true&access_token=${access_token}&key=${process.env.REACT_APP_GOOGLE_CLIENT_ID}`;
           const youtubeApiUrl = `https://www.googleapis.com/youtube/v3/channels?part=id&mine=true&access_token=${tokenResponse.access_token}`
           const response = await axios.get(youtubeApiUrl)
 
@@ -44,7 +43,8 @@ const Socialaccount = () => {
             type: 'youtube',
           }
 
-          // window.open(`https://www.youtube.com/channel/${data.socialId}`)
+          console.log(response.data.items?.length)
+
           dispatch(accountAction.addAccount(data))
         } catch (err) {
           console.log(err)

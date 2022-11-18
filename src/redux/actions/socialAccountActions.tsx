@@ -8,6 +8,7 @@ import {
 export const accountAction = {
   getAccount: (userId: any) => async (dispatch: Dispatch<any>) => {
     try {
+      dispatch({ type: SET_SOCIAL_ACCOUNT, payload: null })
       const response = await api.getSocialAccount(userId)
       const { data } = response
       
@@ -27,6 +28,7 @@ export const accountAction = {
         dispatch({ type: SET_LOADING_FALSE })
         if(data.success) {
           const { payload } = data
+          alert("Youtube account is connected successfully")
           dispatch({ type: SET_SOCIAL_ACCOUNT, payload: payload.socialAccount });
         }
       } catch (error) {
