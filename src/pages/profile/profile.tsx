@@ -49,22 +49,15 @@ const Profile = () => {
         {isSame &&
           <div className="profile-menu">
             <ProfileMenu
-              selectedText={code === null ? "My Purchases" : "My Bites"}
-              texts={["My Purchases", "My Bites"]}
-              urls={
-                authuser
-                  ? [
-                      authuser.personalisedUrl,
-                      `${authuser.personalisedUrl}?tab=mybites`,
-                    ]
-                  : ["", ""]
-              }
+              selectedText={code === null ? "My Purchases" : code === "mybites" ?  "My Bites" : "Subscription" }
+              texts={["My Purchases", "My Bites", "Subscription"]}
+              urls={ authuser ? [ authuser.personalisedUrl, `${authuser.personalisedUrl}?tab=mybites`, `${authuser.personalisedUrl}?tab=subscription` ] : ["", "", ""] }
             />
           </div>
         }
-            {/* {code === "subscription" ? 
-            :
-            } */}
+            {code === "subscription" ? 
+              <div></div>
+              :
             <div className="creators-bite">
             {!isSame &&
               <div className="title">
@@ -134,6 +127,7 @@ const Profile = () => {
                 </div>
               )}
             </div>
+        } 
       </div>
     </div>
   );

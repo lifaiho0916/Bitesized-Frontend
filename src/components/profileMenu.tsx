@@ -8,7 +8,7 @@ const ProfileMenu = (props: any) => {
   return (
     <div className="profile-menu-wrapper">
       {urls.map((url: any, index: any) => (
-        <div key={index} className={selectedText === texts[index] ? "dareme-fanwall-active" : 'dareme-fanwall'} onClick={() => { navigate(`/${url}`) }}>
+        <div key={index} className={selectedText === texts[index] ? "nav-menu-active" : 'nav-menu'} onClick={() => { navigate(`/${url}`) }}>
           {texts[index]}
         </div>  
       ))}
