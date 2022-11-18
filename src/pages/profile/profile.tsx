@@ -54,6 +54,11 @@ const Profile = () => {
               texts={["My Purchases", "My Bites", "Subscription"]}
               urls={ authuser ? [ authuser.personalisedUrl, `${authuser.personalisedUrl}?tab=mybites`, `${authuser.personalisedUrl}?tab=subscription` ] : ["", "", ""] }
             />
+            {/* <ProfileMenu
+              selectedText={code === null ? "My Purchases" : "My Bites" }
+              texts={["My Purchases", "My Bites"]}
+              urls={ authuser ? [ authuser.personalisedUrl, `${authuser.personalisedUrl}?tab=mybites` ] : ["", ""] }
+            /> */}
           </div>
         }
             {code === "subscription" ? 
@@ -87,10 +92,10 @@ const Profile = () => {
               </div>
               :
             <div className="creators-bite">
-            {!isSame &&
+            {(!isSame && authuser) &&
               <div className="title">
                 <Bite1Icon color="#EFA058" width={30} height={30} />
-                <span>{authuser ? authuser.name : ""}’s Bite-sized knowledge</span>
+                <span>{authuser.name}’s Bite-sized knowledge</span>
               </div>
             }
               {bites.length > 0 && authuser ? (
