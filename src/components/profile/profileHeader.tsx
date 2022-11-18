@@ -95,7 +95,12 @@ const ProfileHeader = (props: any) => {
             </div>
           }
           {(account && account.instagram) &&
-            <div style={{width:'40px', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}><img src={IgSvg} alt="igSvg" /></div>
+            <div 
+              style={{width:'40px', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}
+              onClick={() => {}}
+            >
+              <img src={IgSvg} alt="igSvg" />
+            </div>
           }
         </div>
       </div>

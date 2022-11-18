@@ -29,7 +29,7 @@ export const biteAction = {
                         const response1 = await api.CreateBite({ bite: bite })
                         if (response1.data.success) {
                             dispatch({ type: SET_UPLOADING, payload: false })
-                            navigate(`/${personalisedUrl}?mybites`)
+                            navigate(`/${personalisedUrl}?tab=mybites`)
                         }
                     }
                 } else {
@@ -49,7 +49,7 @@ export const biteAction = {
                         const response1 = await api.CreateBite({ bite: bite })
                         if (response1.data.success) {
                             dispatch({ type: SET_UPLOADING, payload: false })
-                            navigate(`/${personalisedUrl}?mybites`)
+                            navigate(`/${personalisedUrl}?tab=mybites`)
                         }
                     }
                 }
@@ -220,24 +220,17 @@ export const biteAction = {
         }
     },
 
-    getProfileSessions: (personalisedUrl: any, userId: any) => async (dispatch: Dispatch<any>) => {
+    getBitesByPersonalisedUrl: (url: any, userId: any, tab: any) => async (dispatch: Dispatch<any>) => {
         try {
-            dispatch({ type: SET_LOADING_TRUE })
             dispatch({ type: SET_BITES, payload: [] })
-            dispatch({ type: SET_USERS, payload: [] })
-            const responses = await Promise.all([
-                api.getBitesByPersonalisedUrl(personalisedUrl, userId),
-                api.getUserByPersonalisedUrl(personalisedUrl)
-            ])
-
-            dispatch({ type: SET_LOADING_FALSE })
-            if (responses[0].data.success && responses[1].data.success) {
-                dispatch({ type: SET_BITES, payload: responses[0].data.payload.bites })
-                dispatch({ type: SET_USERS, payload: responses[1].data.payload.users })
+            const response = await api.getBitesByPersonalisedUrl(url, userId, tab)
+            const { data } = response
+            if(data.success) {
+                const { payload } = data
+                dispatch({ type: SET_BITES, payload: payload.bites })
             }
         } catch (err) {
             console.log(err)
-            dispatch({ type: SET_LOADING_FALSE })
         }
     },
 

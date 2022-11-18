@@ -301,4 +301,21 @@ export const authAction = {
         dispatch({ type: SET_LOADING_FALSE });
       }
     },
+
+    getUserByPersonalisedUrl: (url: any) => async (dispatch: Dispatch<any>) => {
+      try {
+        dispatch({ type: SET_LOADING_TRUE })
+        dispatch({ type: SET_USERS, payload: [] })
+        const response: any = await api.getUserByPersonalisedUrl(url)
+        dispatch({ type: SET_LOADING_FALSE })
+        const { data } = response
+        if (data.success) {
+          const { payload}  = data  
+          dispatch({ type: SET_USERS, payload: payload.users })
+        }
+      } catch (err) {
+        dispatch({ type: SET_LOADING_FALSE })
+        console.log(err)
+      }
+    }
 };
