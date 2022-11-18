@@ -10,7 +10,6 @@ import { AddIcon, Bite1Icon, CreatoCoinIcon, NotificationOutlineIcon } from "../
 import { authAction } from "../../redux/actions/authActions";
 import subscriptionImg from "../../assets/img/subscription.png"
 import "../../assets/styles/profile/profileStyle.scss";
-import ContainerBtn from "../../components/general/containerBtn";
 
 const Profile = () => {
   const dispatch = useDispatch();

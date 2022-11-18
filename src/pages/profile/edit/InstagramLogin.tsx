@@ -1,25 +1,25 @@
 import { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import IgBtn from "../../../assets/svg/ig.svg";
 import { accountAction } from "../../../redux/actions/socialAccountActions";
+import IgBtn from "../../../assets/svg/ig.svg";
 
-export const InstagramLogin = () => {
+export const InstagramLogin = (props: any) => {
+  const { account } = props
   const [searchParams] = useSearchParams();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userState = useSelector((state: any) => state.auth);
-  const accountState = useSelector((state: any) => state.account);
-  const { account } = accountState;
   const { user } = userState;
 
   const clickHandler = () => {
-    const clientId = process.env.REACT_APP_INSTAGRAM_APP_ID;
-    const scope = process.env.REACT_APP_INSTAGRAM_SCOPE;
-    const responseType = "code";
-    const redirectUri = `https://${window.location.host}${window.location.pathname}`;
-    window.location.href = `https://api.instagram.com/oauth/authorize/?app_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
+    alert("We will launch it soon")
+    // const clientId = process.env.REACT_APP_INSTAGRAM_APP_ID;
+    // const scope = process.env.REACT_APP_INSTAGRAM_SCOPE;
+    // const responseType = "code";
+    // const redirectUri = `https://${window.location.host}${window.location.pathname}`;
+    // window.location.href = `https://api.instagram.com/oauth/authorize/?app_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
   };
 
   const removeHandler = () => {
@@ -28,7 +28,7 @@ export const InstagramLogin = () => {
   };
 
   const hasInstagram: any = useMemo(() => {
-    if (account && account.instagram) return true
+    if (account && account.social && account.social.instagram) return true
     else return false
   }, [account]);
 
@@ -82,29 +82,14 @@ export const InstagramLogin = () => {
     if (code) onSuccess(code);
     else onFailure();
   }, [onSuccess, onFailure, searchParams, dispatch, user]);
-  useEffect(() => {
-    if (user && "id" in user) {
-      // dispatch(accountAction.getAccounts(user?.id));
-    }
-  }, [dispatch, user]);
 
   return (
-    <>
-      {hasInstagram && <div onClick={openInstagramProfile}>View</div>}
-      <div
-        className={hasInstagram ? "remove-btn" : "connect-btn"}
-        onClick={hasInstagram ? removeHandler : clickHandler}
-      >
-        {hasInstagram ? (
-          <span>'Remove'</span>
-        ) : (
-          <>
-            <img src={IgBtn} alt="IgBtn" />
-            {/* <span>Connect</span> */}
-          </>
-        )}
-      </div>
-    </>
+    <div
+      className={hasInstagram ? "remove-btn" : "connect-btn"}
+      onClick={hasInstagram ? removeHandler : clickHandler}
+    >
+      {hasInstagram ? <span>Remove</span> : <span>Connect</span>}
+    </div>
   );
 };
 

@@ -18,19 +18,14 @@ const Socialaccount = () => {
   const { account } = accountState;
   const { user } = userState;
 
-  const openConnectedYoutubeChannel = () => {
-    const { id } = account.find((acc: any) => acc.name === 'youtube');
-    window.open(`https://www.youtube.com/channel/${id}`);
-  };
-
   const hasYoutubeData: any = useMemo(() => {
-    if (account && account.youtube) return true
+    if (account && account.social && account.social.youtube) return true
     else return false
   }, [account]);
 
   const removeYoutube = () => { if(hasYoutubeData) dispatch(accountAction.removeAccount(account._id, "youtube"))}
 
-  const CustomGoogleLogin = (props: any) => {
+  const CustomGoogleLogin = () => {
     const googleLogin = useGoogleLogin({
       onSuccess: async tokenResponse => {
         try {
@@ -43,10 +38,9 @@ const Socialaccount = () => {
             type: 'youtube',
           }
 
-          console.log(response.data.items?.length)
-
           dispatch(accountAction.addAccount(data))
         } catch (err) {
+          alert("Your Google acount doesn't have any YouTube channels")
           console.log(err)
         }
       },
@@ -56,14 +50,12 @@ const Socialaccount = () => {
 
     return (
       <div className='connect-btn' onClick={() => googleLogin()}>
-        {/* <span>Connect</span> */}
-        <img src={YoutubeBtn} alt="youtubeBtn" />
-        {/* <span>Connect</span> */}
+        <span>Connect</span>
       </div>
     )
   }
 
-  // useEffect(() => { if (user) dispatch(accountAction.getAccount(user.id)) }, [dispatch, user])
+  useEffect(() => { if (user) dispatch(accountAction.getAccount(user.id)) }, [dispatch, user])
 
   return (
     <div className='social-accounts-wrapper'>
@@ -81,24 +73,21 @@ const Socialaccount = () => {
           <div className='content'>
             <div className='icon-title'>
               <div className='icon'>
-                {/* <img src={IgBtn} alt="igBtn" /> */}
+                <img src={IgBtn} alt="igBtn" />
               </div>
               <div className='title'>Instagram</div>
             </div>
             <div className="btn">
-              <InstagramLogin />
+              <InstagramLogin account={account} />
             </div>
           </div>
           <div className='content'>
             <div className='icon-title'>
               <div className='icon'>
-                {/* <img src={YoutubeBtn} alt="youtubeBtn" /> */}
+                <img src={YoutubeBtn} alt="youtubeBtn" />
               </div>
               <div className='title'>Youtube</div>
             </div>
-            {hasYoutubeData && (
-              <div onClick={openConnectedYoutubeChannel}>View</div>
-            )}
             <div className='btn'>
               {hasYoutubeData ? (
                 <div className='remove-btn' onClick={removeYoutube}>
@@ -106,7 +95,7 @@ const Socialaccount = () => {
                 </div>
               ) : (
                 <GoogleOAuthProvider clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}>
-                  <CustomGoogleLogin dispatch={dispatch} />
+                  <CustomGoogleLogin />
                 </GoogleOAuthProvider>
               )}
             </div>
