@@ -24,7 +24,7 @@ export const InstagramLogin = () => {
 
   const removeHandler = () => {
     const { _id } = accounts.find((acc: any) => acc.name === "instagram");
-    dispatch(accountAction.removeAccount(_id));
+    // dispatch(accountAction.removeAccount(_id));
   };
 
   const hasInstagram: any = useMemo(() => {
@@ -46,16 +46,16 @@ export const InstagramLogin = () => {
         name: "instagram",
         metadata: JSON.stringify(meta),
       };
-      dispatch(
-        accountAction.addAccount(data, (result: Boolean) => {
-          if (result) {
-            // dispatch(accountAction.getAccounts(user.id));
-            setTimeout(() => {
-              navigate(pathname);
-            }, 2000);
-          }
-        })
-      );
+      // dispatch(
+      //   accountAction.addAccount(data, (result: Boolean) => {
+      //     if (result) {
+      //       // dispatch(accountAction.getAccounts(user.id));
+      //       setTimeout(() => {
+      //         navigate(pathname);
+      //       }, 2000);
+      //     }
+      //   })
+      // );
     },
     [dispatch, pathname, navigate]
   );
@@ -84,7 +84,7 @@ export const InstagramLogin = () => {
   }, [onSuccess, onFailure, searchParams, dispatch, user]);
   useEffect(() => {
     if (user && "id" in user) {
-      dispatch(accountAction.getAccounts(user?.id));
+      // dispatch(accountAction.getAccounts(user?.id));
     }
   }, [dispatch, user]);
 

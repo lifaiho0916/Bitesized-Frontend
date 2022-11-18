@@ -6,10 +6,11 @@ import Button from "../general/button"
 import Avatar from "../general/avatar"
 import {
   EditIcon,
-  InstagramIcon,
   MoreIcon,
-  YoutubeIcon,
 } from "../../assets/svg"
+import YoutubeSvg from "../../assets/svg/youtube.svg"
+import IgSvg from "../../assets/svg/ig.svg"
+import { accountAction } from "../../redux/actions/socialAccountActions"
 import { SET_NAME_EXIST, SET_PROFILE, SET_URL_EXIST } from "../../redux/types"
 import "../../assets/styles/profile/components/profileHeaderStyle.scss"
 
@@ -75,9 +76,7 @@ const ProfileHeader = (props: any) => {
     }
   }, [profileUser])
 
-  useEffect(() => {
-    console.log(profileUser)
-  }, [profileUser])
+  useEffect(() => { if(profileUser) dispatch(accountAction.getAccount(profileUser._id)) }, [profileUser])
 
   return (
     <div className="profile-header">
@@ -87,8 +86,17 @@ const ProfileHeader = (props: any) => {
           avatar={profileUser ? profileUser.avatar.indexOf('uploads') === -1 ? profileUser.avatar : `${process.env.REACT_APP_SERVER_URL}/${profileUser.avatar}` : ''}
         />
         <div className="social-icon-other">
-          {/* <div style={{ marginLeft: '15px' }}><YoutubeIcon color="#E17253" /></div>
-          <div style={{ marginLeft: '5px' }}><InstagramIcon color="#E17253" /></div> */}
+          {(account && account.youtube) &&
+            <div 
+              style={{ width:'40px', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}
+              onClick={() => { window.open(`https://www.youtube.com/channel/${account.youtube}`, "_blank") }}
+            >
+              <img src={YoutubeSvg} alt="youtubeSvg" />
+            </div>
+          }
+          {(account && account.instagram) &&
+            <div style={{width:'40px', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}><img src={IgSvg} alt="igSvg" /></div>
+          }
         </div>
       </div>
       <div className="ellipsis-icon" onClick={() => setMoreInfo(true)}>
