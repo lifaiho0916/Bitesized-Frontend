@@ -29,7 +29,7 @@ const List = (props: any) => {
       opacity: expand ? "1" : "0",
       visibility: expand ? "visible" : "hidden",
       overflow: "hidden",
-      height: expand ? "160px" : "0",
+      height: expand ? "fit-content" : "0",
       position: expand ? "relative" : "relative",
     },
   };
