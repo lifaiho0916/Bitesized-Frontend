@@ -14,7 +14,7 @@ const AdminTransaction = () => {
     const transactionState = useSelector((state: any) => state.transaction)
     const loadState = useSelector((state: any) => state.load)
     const [searchParams] = useSearchParams()
-    const code = searchParams.get('type')
+    const code = searchParams.get('tab')
     const [search, setSearch] = useState("")
     const { transactions } = transactionState
     const { currencyRate } = loadState
@@ -55,7 +55,7 @@ const AdminTransaction = () => {
                             shape="rounded"
                             color="primary"
                             with={"100px"}
-                            handleSubmit={() => navigate('/admin/transaction?type=paid')}
+                            handleSubmit={() => navigate('/admin/transaction?tab=paid')}
                         />
                     </div>
                     <div className="btn">
@@ -65,7 +65,7 @@ const AdminTransaction = () => {
                             shape="rounded"
                             color="primary"
                             with={"100px"}
-                            handleSubmit={() => navigate('/admin/transaction?type=free')}
+                            handleSubmit={() => navigate('/admin/transaction?tab=free')}
                         />
                     </div>
                     <div className="btn">
@@ -75,7 +75,7 @@ const AdminTransaction = () => {
                             shape="rounded"
                             color="primary"
                             with={"100px"}
-                            handleSubmit={() => navigate('/admin/transaction?type=earn')}
+                            handleSubmit={() => navigate('/admin/transaction?tab=earn')}
                         />
                     </div>
                     <div className="btn">
@@ -85,7 +85,7 @@ const AdminTransaction = () => {
                             shape="rounded"
                             color="primary"
                             with={"100px"}
-                            handleSubmit={() => navigate('/admin/transaction?type=cash')}
+                            handleSubmit={() => navigate('/admin/transaction?tab=cash')}
                         />
                     </div>
                 </div>

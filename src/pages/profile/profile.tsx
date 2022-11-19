@@ -9,6 +9,7 @@ import BiteCardProfile from "../../components/bite/BiteCardProfile";
 import { AddIcon, Bite1Icon, CreatoCoinIcon, NotificationOutlineIcon } from "../../assets/svg";
 import { authAction } from "../../redux/actions/authActions";
 import subscriptionImg from "../../assets/img/subscription.png"
+import { SET_PREVIOUS_ROUTE } from "../../redux/types";
 import "../../assets/styles/profile/profileStyle.scss";
 
 const Profile = () => {
@@ -31,6 +32,7 @@ const Profile = () => {
   useEffect(() => {
     const personalisedUrl = location.pathname.substring(1);
     dispatch(biteAction.getBitesByPersonalisedUrl(personalisedUrl, user?.id, code))
+    dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${user?.personalisedUrl}`})
   },[location.pathname, dispatch, user, code])
 
   const authuser = useMemo(() => {

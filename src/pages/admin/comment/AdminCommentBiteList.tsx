@@ -15,7 +15,7 @@ const AdminCommentBiteList = () => {
     const [sort, setSort] = useState(-1)
     const biteState = useSelector((state: any) => state.bite)
     const { bites } = biteState
-    const code = searchParams.get("type")
+    const code = searchParams.get("tab")
 
     const [search, setSearch] = useState("")
 
@@ -42,7 +42,7 @@ const AdminCommentBiteList = () => {
                             shape="rounded"
                             color="primary"
                             with={"100px"}
-                            handleSubmit={() => navigate(`${location.pathname}?type=paid`)}
+                            handleSubmit={() => navigate(`${location.pathname}?tab=paid`)}
                         />
                     </div>
                     <div className="btn">
@@ -52,7 +52,7 @@ const AdminCommentBiteList = () => {
                             shape="rounded"
                             color="primary"
                             with={"100px"}
-                            handleSubmit={() => navigate(`${location.pathname}?type=free`)}
+                            handleSubmit={() => navigate(`${location.pathname}?tab=free`)}
                         />
                     </div>
                 </div>

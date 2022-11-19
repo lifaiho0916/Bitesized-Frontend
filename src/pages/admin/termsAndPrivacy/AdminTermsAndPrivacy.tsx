@@ -14,7 +14,7 @@ const AdminTermsAndPrivacy = () => {
   const settingState = useSelector((state: any) => state.setting);
   const { termsAndPrivacy } = settingState;
   const [searchParams] = useSearchParams();
-  const code = searchParams.get("type");
+  const code = searchParams.get("tab");
   const [initialState, setInitialState] = useState<any>(null);
   const [changeState, setChangeState] = useState<any>(null);
 
@@ -27,7 +27,7 @@ const AdminTermsAndPrivacy = () => {
   };
 
   useEffect(() => {
-    if (code === null) navigate(`${location.pathname}?type=terms`);
+    if (code === null) navigate(`${location.pathname}?tab=terms`);
     else {
       if (code === "terms") {
         setInitialState(termsAndPrivacy ? termsAndPrivacy?.terms : null);
@@ -54,7 +54,7 @@ const AdminTermsAndPrivacy = () => {
               shape="rounded"
               color="primary"
               with={"100px"}
-              handleSubmit={() => navigate(`${location.pathname}?type=terms`)}
+              handleSubmit={() => navigate(`${location.pathname}?tab=terms`)}
             />
           </div>
           <div className="btn">
@@ -64,7 +64,7 @@ const AdminTermsAndPrivacy = () => {
               shape="rounded"
               color="primary"
               with={"100px"}
-              handleSubmit={() => navigate(`${location.pathname}?type=privacy`)}
+              handleSubmit={() => navigate(`${location.pathname}?tab=privacy`)}
             />
           </div>
         </div>
