@@ -70,6 +70,7 @@ export const biteAction = {
                 if(typeof video.coverUrl === "object") {
                     uploadFiles.push({
                         index: index,
+                        type: 'image',
                         file: video.coverUrl
                     })
                     len++
@@ -77,6 +78,7 @@ export const biteAction = {
                 if (typeof video.videoUrl === "object") {
                     uploadFiles.push({
                         index: index,
+                        type: 'video',
                         file: video.videoUrl
                     })
                     len++
@@ -88,7 +90,7 @@ export const biteAction = {
                 uploadFiles.forEach(async (upload: any, index: any) => {
                     const formData = new FormData()
                     formData.append("file", upload.file)
-                    if (index % 2 === 0) {
+                    if (upload.type === 'image') {
                         const response = await api.uploadCover(formData, {
                             headers: { "content-type": "multipart/form-data" }
                         })

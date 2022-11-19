@@ -27,7 +27,7 @@ const AdminCreateBite = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const biteState = useSelector((state: any) => state.bite)
-    const { bite, thumbnails, selectedIndexs, aligns } = biteState
+    const { bite, selectedIndexs, aligns } = biteState
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [title, setTitle] = useState(bite.title ? bite.title : '')
     const [price, setPrice] = useState(bite.price ? bite.price : '')
