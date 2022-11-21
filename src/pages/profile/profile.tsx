@@ -1,9 +1,10 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import draftToHtml from "draftjs-to-html";
 import { biteAction } from "../../redux/actions/biteActions";
 import ProfileHeader from "../../components/profile/profileHeader";
+import DelSubScriptionModal from "../../components/modals/DelSubScriptionPlanModal";
 import ProfileMenu from "../../components/profileMenu";
 import Button from "../../components/general/button";
 import BiteCardProfile from "../../components/bite/BiteCardProfile";
@@ -11,6 +12,8 @@ import {
   AddIcon,
   Bite1Icon,
   CreatoCoinIcon,
+  DeleteIcon,
+  HiddenIcon,
   MoreIcon,
   NotificationOutlineIcon,
 } from "../../assets/svg";
@@ -20,6 +23,23 @@ import subscriptionImg from "../../assets/img/subscription.png";
 import { SET_PREVIOUS_ROUTE } from "../../redux/types";
 import CONSTANT from "../../constants/constant";
 import "../../assets/styles/profile/profileStyle.scss";
+
+const useOutsideAlerter = (ref: any, moreInfo: any) => {
+  const [more, setMore] = useState(moreInfo)
+  useEffect(() => {
+      const handleClickOutside = (event: any) => {
+          setMore(moreInfo)
+          if (ref.current && !ref.current.contains(event.target)) {
+              if (moreInfo) setMore(false)
+          }
+      }
+      document.addEventListener("mousedown", handleClickOutside)
+      return () => {
+          document.removeEventListener("mousedown", handleClickOutside)
+      }
+  }, [ref, moreInfo])
+  return more
+}
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -35,11 +55,17 @@ const Profile = () => {
 
   const [searchParams] = useSearchParams();
   const code: any = searchParams.get("tab");
+  const [moreInfo, setMoreInfo] = useState(false)
+  const wrapRef = useRef<any>(null)
+  const res = useOutsideAlerter(wrapRef, moreInfo)
+  const [openDelPlan, setOpenDelPlan] = useState(false)
 
   useEffect(() => {
     const personalisedUrl = pathname.substring(1);
     dispatch(authAction.getUserByPersonalisedUrl(personalisedUrl));
   }, [pathname, dispatch]);
+
+  useEffect(() => { if (!res) setMoreInfo(res) }, [res])
 
   useEffect(() => {
     const personalisedUrl = pathname.substring(1);
@@ -77,6 +103,11 @@ const Profile = () => {
     <div className="profile-wrapper">
       <div className="profile">
         <ProfileHeader same={isSame} profileUser={authuser ? authuser : null} />
+        <DelSubScriptionModal
+          show={openDelPlan}
+          onClose={() => setOpenDelPlan(false)}
+          handleClick={() => dispatch(subScriptionAction.deleteSubScription(subScription?._id))}
+        />
         {isSame && (
           <div className="profile-menu">
             <ProfileMenu
@@ -147,8 +178,21 @@ const Profile = () => {
                         <div className="subscription-name-price">
                           <div className="subscription-name">
                             <span>{subScription.name}</span>
-                            <div>
-                              <MoreIcon color="black" />
+                            <div style={{ position: 'relative' }}>
+                              <div onClick={() => { setMoreInfo(true) }}><MoreIcon color="black" /></div>
+                              <div className="drop-down-list" style={moreInfo === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef}>
+                                <div className="list" onClick={() => {
+                                    setMoreInfo(false)
+                                }}>
+                                    <HiddenIcon color="#000000" /><span>Hide this subscription plan</span>
+                                </div>
+                                <div className="list" onClick={() => {
+                                    setMoreInfo(false)
+                                    setOpenDelPlan(true)
+                                }}>
+                                    <DeleteIcon color="#000000" /><span>Delete this subscription plan</span>
+                                </div>
+                            </div>
                             </div>
                           </div>
                           <div className="subscription-price">

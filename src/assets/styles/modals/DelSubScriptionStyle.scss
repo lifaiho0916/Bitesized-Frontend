@@ -18,7 +18,7 @@
         pointer-events: visible;
     }
 
-    #delbite {
+    #delsubscription {
         .modal-content {
             box-sizing: border-box;
             width: 275px;
@@ -39,7 +39,7 @@
                     font-weight: 600;
                     font-size: 20px;
                     line-height: 24px;
-                    color: #000000;
+                    color: #EFA058;
                 }
 
                 .close-btn {
@@ -48,6 +48,7 @@
             }
 
             .modal-body {
+                padding: 0px 10px;
                 margin-top: 10px;
                 margin-bottom: 10px;
                 font-family: 'Lato';

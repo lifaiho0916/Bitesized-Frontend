@@ -148,15 +148,59 @@
         .subscription-name-price {
           font-family: "Lato";
           font-style: normal;
+
           .subscription-name {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            font-weight: 800;
-            font-size: 20px;
-            line-height: 24px;
-            letter-spacing: 0.02em;
-            color: #efa058;
+
+            span {
+              font-weight: 800;
+              font-size: 20px;
+              line-height: 24px;
+              letter-spacing: 0.02em;
+              color: #efa058;
+            }
+
+            .drop-down-list {
+              right: 0px;
+              bottom: 0px;
+              position: absolute;
+              background-color: #ffffff;
+              width: 280px;
+              box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+              border-radius: 10px;
+              z-index: 10;
+              height: fit-content;
+              overflow: hidden;
+              visibility: hidden;
+              opacity: 0;
+              transition: visibility 0s, opacity 0.2s linear;
+
+              .list {
+                width: 100%;
+                height: 52px;
+                cursor: pointer;
+                font-style: normal;
+                font-size: 16px;
+                padding: 0px 20px;
+                line-height: 20px;
+                display: flex;
+                align-items: center;
+
+                span {
+                  margin-left: 5px;
+                  font-weight: 400;
+                  font-size: 16px;
+                  line-height: 20px;
+                  color: #000000;
+
+                  &:hover {
+                    color: grey;
+                  }
+                }
+              }
+            }
           }
 
           .subscription-price {
