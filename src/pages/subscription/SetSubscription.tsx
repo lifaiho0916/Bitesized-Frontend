@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { BackIcon } from "../../assets/svg"
+import { subScriptionAction } from "../../redux/actions/subScriptionActions"
 import "../../assets/styles/subscription/SetSubscriptionStyle.scss"
 
 const SetSubscription = (props: any) => {
@@ -21,6 +22,10 @@ const SetSubscription = (props: any) => {
                 <div onClick={() => navigate(`/${user?.personalisedUrl}?tab=subscription`)}><BackIcon color="black" /></div>
                 <div className="page-title"><span>Set subscription</span></div>
                 <div style={{ width: '24px' }}></div>
+            </div>
+            
+            <div className="set-subscription">
+
             </div>
         </div>
     )

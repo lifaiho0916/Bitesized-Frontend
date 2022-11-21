@@ -6,6 +6,7 @@ import socialAccountReducer from "./reducers/socialAccountReducer"
 import transactionReducer from "./reducers/transactionReducer"
 import paymentReducer from "./reducers/paymentReducer"
 import settingRedcuer from "./reducers/settingReducer"
+import subScriptionReducer from "./reducers/subScriptionReducer"
 
 const rootReducer = combineReducers({
     auth: authReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     transaction: transactionReducer,
     account: socialAccountReducer,
     payment: paymentReducer,
-    setting: settingRedcuer
+    setting: settingRedcuer,
+    subScription: subScriptionReducer
 })
 
 export default rootReducer
