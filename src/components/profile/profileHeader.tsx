@@ -32,7 +32,7 @@ const useOutsideAlerter = (ref: any, moreInfo: any) => {
 }
 
 const ProfileHeader = (props: any) => {
-  const { same, profileUser } = props
+  const { same, profileUser, user } = props
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const contexts = useContext(LanguageContext)
@@ -45,7 +45,19 @@ const ProfileHeader = (props: any) => {
   const [showLink, setShowLink] = useState(false)
 
   const accountState = useSelector((state: any) => state.account)
+  const subScriptionState = useSelector((state: any) => state.subScription);
   const { account } = accountState
+  const { subScription } = subScriptionState;
+
+  const hasYoutube = useMemo(() => {
+    if(account && account.social && account.social.youtube) return true
+    else return false
+  }, [account])
+
+  const hasInstagram = useMemo(() => {
+    if(account && account.social && account.social.instagram) return true
+    else return false
+  }, [account])
 
   const categoryText = useMemo(() => {
     if (profileUser) {
@@ -62,6 +74,12 @@ const ProfileHeader = (props: any) => {
       }
     }
   }, [profileUser, contexts.CREATOR_CATEGORY_LIST])
+
+  const subscribe = () => {
+    if(user) {
+      
+    } else navigate('/auth/signup')
+  }
 
   useEffect(() => { if (!res) setMoreInfo(res) }, [res])
   useLayoutEffect(() => {
@@ -86,7 +104,7 @@ const ProfileHeader = (props: any) => {
           avatar={profileUser ? profileUser.avatar.indexOf('uploads') === -1 ? profileUser.avatar : `${process.env.REACT_APP_SERVER_URL}/${profileUser.avatar}` : ''}
         />
         <div className="social-icon-other">
-          {(account && account.social && account.social.youtube) &&
+          {hasYoutube === true &&
             <div 
               style={{ width:'40px', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}
               onClick={() => { window.open(`https://www.youtube.com/channel/${account.social.youtube}`, "_blank") }}
@@ -94,7 +112,7 @@ const ProfileHeader = (props: any) => {
               <img src={YoutubeSvg} alt="youtubeSvg" />
             </div>
           }
-          {(account && account.social && account.social.instagram) &&
+          {hasInstagram === true &&
             <div 
               style={{width:'40px', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}
               onClick={() => {}}
@@ -117,13 +135,13 @@ const ProfileHeader = (props: any) => {
           </div>
         </div>
         <div className="btn-part">
-          {same === false &&
+          {(same === false && subScription) &&
             <Button
               text="Subscribe"
               fillStyle="fill"
               color="primary"
               shape="rounded"
-              handleSubmit={() => { window.open('https://www.creatogether.app/subscribenow', '_blank') }}
+              handleSubmit={subscribe}
             />
           }
         </div>

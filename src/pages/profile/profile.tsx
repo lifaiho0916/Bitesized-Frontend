@@ -95,10 +95,14 @@ const Profile = () => {
     return res;
   };
 
+  useEffect(() => {
+    if(authuser && code !== "subscription" && isSame === false) dispatch(subScriptionAction.getSubScription(authuser._id))
+  }, [isSame, authuser])
+
   return (
     <div className="profile-wrapper">
       <div className="profile">
-        <ProfileHeader same={isSame} profileUser={authuser ? authuser : null} />
+        <ProfileHeader same={isSame} profileUser={authuser ? authuser : null} user={user} />
         <DelSubScriptionModal
           show={openDelPlan}
           onClose={() => setOpenDelPlan(false)}
