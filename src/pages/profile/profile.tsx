@@ -5,6 +5,7 @@ import draftToHtml from "draftjs-to-html";
 import { biteAction } from "../../redux/actions/biteActions";
 import ProfileHeader from "../../components/profile/profileHeader";
 import DelSubScriptionModal from "../../components/modals/DelSubScriptionPlanModal";
+import HideSubScriptionModal from "../../components/modals/HideSubScriptionPlanModal";
 import ProfileMenu from "../../components/profileMenu";
 import Button from "../../components/general/button";
 import BiteCardProfile from "../../components/bite/BiteCardProfile";
@@ -16,6 +17,7 @@ import {
   HiddenIcon,
   MoreIcon,
   NotificationOutlineIcon,
+  VisibleIcon,
 } from "../../assets/svg";
 import { authAction } from "../../redux/actions/authActions";
 import { subScriptionAction } from "../../redux/actions/subScriptionActions";
@@ -59,6 +61,7 @@ const Profile = () => {
   const wrapRef = useRef<any>(null)
   const res = useOutsideAlerter(wrapRef, moreInfo)
   const [openDelPlan, setOpenDelPlan] = useState(false)
+  const [openHidePlan, setOpenHidePlan] = useState(false)
 
   useEffect(() => {
     const personalisedUrl = pathname.substring(1);
@@ -69,16 +72,9 @@ const Profile = () => {
 
   useEffect(() => {
     const personalisedUrl = pathname.substring(1);
-    if (code === "subscription")
-      dispatch(subScriptionAction.getSubScription(user?.id));
-    else
-      dispatch(
-        biteAction.getBitesByPersonalisedUrl(personalisedUrl, user?.id, code)
-      );
-    dispatch({
-      type: SET_PREVIOUS_ROUTE,
-      payload: `/${user?.personalisedUrl}`,
-    });
+    if (code === "subscription" && user) dispatch(subScriptionAction.getSubScription(user?.id));
+    else dispatch(biteAction.getBitesByPersonalisedUrl(personalisedUrl, user?.id, code));
+    dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${user?.personalisedUrl}` });
   }, [pathname, dispatch, user, code]);
 
   const authuser = useMemo(() => {
@@ -106,7 +102,18 @@ const Profile = () => {
         <DelSubScriptionModal
           show={openDelPlan}
           onClose={() => setOpenDelPlan(false)}
-          handleClick={() => dispatch(subScriptionAction.deleteSubScription(subScription?._id))}
+          handleSubmit={() => {
+            setOpenDelPlan(false)
+            dispatch(subScriptionAction.deleteSubScription(subScription?._id))
+          }}
+        />
+        <HideSubScriptionModal
+          show={openHidePlan}
+          onClose={() => setOpenHidePlan(false)}
+          handleSubmit={() => {
+            setOpenHidePlan(false)
+            dispatch(subScriptionAction.setSubScriptionVisible(subScription?._id, !subScription?.visible))
+          }}
         />
         {isSame && (
           <div className="profile-menu">
@@ -129,11 +136,6 @@ const Profile = () => {
                   : ["", "", ""]
               }
             />
-            {/* <ProfileMenu
-              selectedText={code === null ? "My Purchases" : "My Bites" }
-              texts={["My Purchases", "My Bites"]}
-              urls={ authuser ? [ authuser.personalisedUrl, `${authuser.personalisedUrl}?tab=mybites` ] : ["", ""] }
-            /> */}
           </div>
         )}
         {code === "subscription" ? (
@@ -147,7 +149,8 @@ const Profile = () => {
                     <span>Manage my subscription</span>
                   </div>
 
-                  <div className="subscription-body">
+                  {subScription && subScription.visible === false && <div className="hide-plan">***This subscription is hided***</div>}
+                  <div className="subscription-body" style={{ marginTop: subScription && subScription.visible === false ? '0px' : '30px' }}>
                     {subScription === null ? (
                       <>
                         <div className="subscription-body-title">
@@ -183,8 +186,11 @@ const Profile = () => {
                               <div className="drop-down-list" style={moreInfo === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef}>
                                 <div className="list" onClick={() => {
                                     setMoreInfo(false)
+                                    if(subScription.visible) setOpenHidePlan(true)
+                                    else dispatch(subScriptionAction.setSubScriptionVisible(subScription?._id, !subScription?.visible))
                                 }}>
-                                    <HiddenIcon color="#000000" /><span>Hide this subscription plan</span>
+                                    {subScription.visible ? <HiddenIcon color="#000000" /> : <VisibleIcon color="#000000" /> }
+                                    <span>{subScription.visible ? "Hide this subscription plan" : "Show this subscription plan" }</span>
                                 </div>
                                 <div className="list" onClick={() => {
                                     setMoreInfo(false)

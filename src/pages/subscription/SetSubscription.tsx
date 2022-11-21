@@ -75,7 +75,7 @@ const SetSubscription = (props: any) => {
         name: name,
         price: Number(price),
         currency: CONSTANT.CURRENCIES[option].toLowerCase(),
-        benefits: benefits,
+        benefits: benefits.filter((benefit: any) => benefit !== ""),
         description: description,
       };
       dispatch(

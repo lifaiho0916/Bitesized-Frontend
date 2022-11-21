@@ -120,6 +120,24 @@
         }
       }
 
+      .hide-plan {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 20px 0px 20px;
+        padding: 10px;
+        height: 30px;
+        background: #de5a67;
+        font-family: "Lato";
+        font-style: normal;
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 18px;
+        text-align: center;
+        letter-spacing: 0.02em;
+        color: #ffffff;
+      }
+
       .subscription-body {
         margin: 30px 20px 40px 20px;
         background: #ffffff;

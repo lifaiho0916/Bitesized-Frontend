@@ -55,5 +55,24 @@ export const subScriptionAction = {
             console.log(err)
             dispatch({ type: SET_LOADING_FALSE })
         }
+    },
+
+    setSubScriptionVisible: (planId: any, visible: any) => async (dispatch: Dispatch<any>) => {
+        try {
+            dispatch({ type: SET_LOADING_TRUE })
+            const response = await api.setSubScriptionVisible(planId, { visible: visible })
+            const { data } = response
+            dispatch({ type: SET_LOADING_FALSE })
+            if (data.success) {
+                const { payload } = data
+                dispatch({
+                    type: SET_SUBSCRIPTION,
+                    payload: payload.subScription
+                })
+            }
+        } catch (err) {
+            console.log(err)
+            dispatch({ type: SET_LOADING_FALSE })
+        }
     }
 }
