@@ -80,7 +80,7 @@ const Profile = () => {
                     </div>
                     <div className="description">
                       <span>You can provide subscription-only benefits for subscribe members, such as additional creative content, subscription to member-only communities, etc.</span>
-                      <div className="subscription-btn">
+                      <div className="subscription-btn" onClick={() => navigate('/subscription/set')}>
                         <span>Set subscription</span>
                       </div>
                     </div>

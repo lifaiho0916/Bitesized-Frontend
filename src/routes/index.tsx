@@ -13,6 +13,8 @@ import Profile from '../pages/profile/profile'
 import Creators from '../pages/profile/creators'
 import Bites from '../pages/profile/Bites'
 
+import SetSubscription from '../pages/subscription/SetSubscription'
+
 import ProfileEdit from '../pages/profile/edit/profileEdit'
 import Socialaccount from '../pages/profile/edit/socialAccount'
 import Categories from '../pages/profile/edit/categories'
@@ -64,6 +66,8 @@ const AppRoutes = () => {
       <Route path="/:creatorLink" element={<AuthRoute child={<Profile />} />} />
       <Route path="creators" element={<AuthRoute child={<Creators />} />} />
       <Route path="bites" element={<AuthRoute child={<Bites />} />} />
+
+      <Route path="subscription/set" element={<AuthRoute child={<SetSubscription />} routeType="private" />} />
 
       <Route path="myaccount/edit" element={<AuthRoute child={<ProfileEdit />} routeType="private" />} />
       <Route path="myaccount/edit/categories" element={<AuthRoute child={<Categories />} routeType="private" />} />
