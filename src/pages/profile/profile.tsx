@@ -22,7 +22,7 @@ import {
 import { authAction } from "../../redux/actions/authActions";
 import { subScriptionAction } from "../../redux/actions/subScriptionActions";
 import subscriptionImg from "../../assets/img/subscription.png";
-import { SET_PREVIOUS_ROUTE } from "../../redux/types";
+import { SET_PREVIOUS_ROUTE, SET_SUBSCRIPTION } from "../../redux/types";
 import CONSTANT from "../../constants/constant";
 import "../../assets/styles/profile/profileStyle.scss";
 
@@ -169,7 +169,10 @@ const Profile = () => {
                             </span>
                             <div
                               className="subscription-btn"
-                              onClick={() => navigate("/subscription/set")}
+                              onClick={() => {
+                                dispatch({ type: SET_SUBSCRIPTION, payload: null })
+                                navigate("/subscription/set")
+                              }}
                             >
                               <span>Set subscription</span>
                             </div>
@@ -211,7 +214,7 @@ const Profile = () => {
                         <div
                           className="subscription-description"
                           dangerouslySetInnerHTML={{
-                            __html: subScription.description ? draftToHtml(subScription.description) : "",
+                            __html: subScription.description ? draftToHtml(JSON.parse(subScription.description)) : "",
                           }}
                         />
                         <div style={{ borderTop: '2px solid #A6A29F', marginBottom: '15px' }}></div>
@@ -240,7 +243,7 @@ const Profile = () => {
                             fillStyle="fill"
                             width={'300px'}
                             color="primary"
-                            handleSubmit={() => {}}
+                            handleSubmit={() => navigate("/subscription/set")}
                           />
                         </div>
                       </>

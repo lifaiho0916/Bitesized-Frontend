@@ -8,7 +8,7 @@ import CurrencySelect from "../../components/stripe/CurrencySelect";
 import { AddIcon, BackIcon, RemoveIcon } from "../../assets/svg";
 import { subScriptionAction } from "../../redux/actions/subScriptionActions";
 import CONSTANT from "../../constants/constant";
-import { EditorState } from "draft-js";
+import { EditorState, convertFromRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../assets/styles/subscription/SetSubscriptionStyle.scss";
@@ -17,18 +17,16 @@ const SetSubscription = (props: any) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userState = useSelector((state: any) => state.auth);
+  const subScriptionState = useSelector((state: any) => state.subScription)
   const { user } = userState;
+  const { subScription } = subScriptionState
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [option, setOption] = useState(0);
-  const [editorState, setEditorState] = useState<any>(
-    EditorState.createEmpty()
-  );
+  const [editorState, setEditorState] = useState<any>(EditorState.createEmpty());
   const [description, setDescription] = useState<any>(null);
-  const [benefits, setBenefits] = useState<any>([
-    "1 month FREE pass to all Bite content",
-  ]);
+  const [benefits, setBenefits] = useState<any>([ "1 month FREE pass to all Bite content" ]);
 
   const publishEnable = useMemo(() => {
     if (name === "" || price === "" || Number(price) === 0) return false;
@@ -36,15 +34,22 @@ const SetSubscription = (props: any) => {
   }, [price, name]);
 
   useEffect(() => {
-    if (user) {
-      if (user.subscribe.available === false || user.subscribe.switch === false)
-        navigate(`/${user.personalisedUrl}`);
-      const foundIndex = CONSTANT.CURRENCIES.findIndex(
-        (currency: any) => currency.toLowerCase() === user.currency
-      );
-      setOption(foundIndex);
+    if(user) {
+      if (user.subscribe.available === false || user.subscribe.switch === false) navigate(`/${user.personalisedUrl}`)
+      if(subScription) {
+        setName(subScription.name)
+        setPrice(subScription.price)
+        setBenefits(subScription.benefits)
+        setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(subScription.description))))
+        setDescription(JSON.parse(subScription.description))
+        const foundIndex = CONSTANT.CURRENCIES.findIndex((currency: any) => currency.toLowerCase() === subScription.currency)
+        setOption(foundIndex)
+      } else {
+        const foundIndex = CONSTANT.CURRENCIES.findIndex((currency: any) => currency.toLowerCase() === user.currency)
+        setOption(foundIndex)
+      }
     }
-  }, [user, navigate]);
+  }, [subScription ,user, navigate])
 
   const onEditorStateChange = (state: any) => {
     const text = state.getCurrentContent().getPlainText("");
@@ -71,20 +76,39 @@ const SetSubscription = (props: any) => {
 
   const submit = () => {
     if (publishEnable) {
-      const newSubscription = {
+      const newSubscription = subScription._id ? {
         name: name,
         price: Number(price),
         currency: CONSTANT.CURRENCIES[option].toLowerCase(),
         benefits: benefits.filter((benefit: any) => benefit !== ""),
-        description: description,
+        description: JSON.stringify(description)
+      } : {
+        ...subScription,
+        name: name,
+        price: Number(price),
+        currency: CONSTANT.CURRENCIES[option].toLowerCase(),
+        benefits: benefits.filter((benefit: any) => benefit !== ""),
+        description: JSON.stringify(description)
       };
-      dispatch(
-        subScriptionAction.saveSubscription(
-          newSubscription,
-          navigate,
-          `/${user?.personalisedUrl}?tab=subscription`
-        )
-      );
+
+      if(subScription._id) {
+        dispatch(
+          subScriptionAction.editSubscription(
+            subScription._id,
+            newSubscription,
+            navigate,
+            `/${user?.personalisedUrl}?tab=subscription`
+          )
+        );
+      } else {
+        dispatch(
+          subScriptionAction.saveSubscription(
+            newSubscription,
+            navigate,
+            `/${user?.personalisedUrl}?tab=subscription`
+          )
+        );
+      }
     }
   };
 
