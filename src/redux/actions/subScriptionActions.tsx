@@ -22,15 +22,13 @@ export const subScriptionAction = {
         }
     },
 
-    saveSubscription: (subscription: any) => async (dispatch: Dispatch<any>) => {
+    saveSubscription: (subscription: any, navigate: any, url: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
             const response = await api.saveSubScription({ subScription: subscription })
             const { data } = response
             dispatch({ type: SET_LOADING_FALSE })
-            if (data.success) {
-                
-            }
+            if (data.success) navigate(url)
         } catch (err) {
             console.log(err)
             dispatch({ type: SET_LOADING_FALSE })

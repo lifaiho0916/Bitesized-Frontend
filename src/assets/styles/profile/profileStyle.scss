@@ -145,6 +145,64 @@
           }
         }
 
+        .subscription-name-price {
+          font-family: "Lato";
+          font-style: normal;
+          .subscription-name {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 800;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0.02em;
+            color: #efa058;
+          }
+
+          .subscription-price {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 18px;
+            color: #54504e;
+          }
+        }
+
+        .subscription-description {
+          margin-top: 20px;
+          font-family: "Lato";
+          font-style: normal;
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 18px;
+          color: #54504e;
+        }
+
+        .benefit-header {
+          font-family: "Lato";
+          font-style: normal;
+          font-weight: 800;
+          font-size: 16px;
+          line-height: 18px;
+          letter-spacing: 0.02em;
+          color: #54504e;
+        }
+
+        .benefits {
+          ul {
+            margin: 0px;
+            padding: 0px 0px 0px 25px;
+
+            li {
+              font-family: "Lato";
+              font-style: normal;
+              font-weight: 600;
+              font-size: 16px;
+              line-height: 18px;
+              color: #54504e;
+            }
+          }
+        }
+
         .subscription-body-main {
           display: flex;
           justify-content: space-between;

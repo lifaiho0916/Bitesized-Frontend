@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
+import draftToHtml from "draftjs-to-html";
 import { biteAction } from "../../redux/actions/biteActions";
 import ProfileHeader from "../../components/profile/profileHeader";
 import ProfileMenu from "../../components/profileMenu";
@@ -10,12 +11,14 @@ import {
   AddIcon,
   Bite1Icon,
   CreatoCoinIcon,
+  MoreIcon,
   NotificationOutlineIcon,
 } from "../../assets/svg";
 import { authAction } from "../../redux/actions/authActions";
 import { subScriptionAction } from "../../redux/actions/subScriptionActions";
 import subscriptionImg from "../../assets/img/subscription.png";
 import { SET_PREVIOUS_ROUTE } from "../../redux/types";
+import CONSTANT from "../../constants/constant";
 import "../../assets/styles/profile/profileStyle.scss";
 
 const Profile = () => {
@@ -62,6 +65,14 @@ const Profile = () => {
     else return false;
   }, [authuser, user]);
 
+  const getLocalCurrency = (currency: any) => {
+    const index = CONSTANT.CURRENCIES.findIndex(
+      (cur: any) => cur.toLowerCase() === currency
+    );
+    let res = CONSTANT.CURRENCY_SYMBOLS[index];
+    return res;
+  };
+
   return (
     <div className="profile-wrapper">
       <div className="profile">
@@ -100,13 +111,14 @@ const Profile = () => {
               user.subscribe.available === true &&
               user.subscribe.switch === true && (
                 <>
-                  {subScription === null ? (
-                    <>
-                      <div className="subscription-title">
-                        <CreatoCoinIcon color="#EA8426" />
-                        <span>Manage my subscription</span>
-                      </div>
-                      <div className="subscription-body">
+                  <div className="subscription-title">
+                    <CreatoCoinIcon color="#EA8426" />
+                    <span>Manage my subscription</span>
+                  </div>
+
+                  <div className="subscription-body">
+                    {subScription === null ? (
+                      <>
                         <div className="subscription-body-title">
                           <span>Subscription</span>
                         </div>
@@ -129,11 +141,61 @@ const Profile = () => {
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </>
-                  ) : (
-                    <></>
-                  )}
+                      </>
+                    ) : (
+                      <>
+                        <div className="subscription-name-price">
+                          <div className="subscription-name">
+                            <span>{subScription.name}</span>
+                            <div>
+                              <MoreIcon color="black" />
+                            </div>
+                          </div>
+                          <div className="subscription-price">
+                            <span>
+                              {getLocalCurrency(subScription.currency)}
+                              {subScription.price}/month
+                            </span>
+                          </div>
+                        </div>
+                        <div
+                          className="subscription-description"
+                          dangerouslySetInnerHTML={{
+                            __html: subScription.description ? draftToHtml(subScription.description) : "",
+                          }}
+                        />
+                        <div style={{ borderTop: '2px solid #A6A29F', marginBottom: '15px' }}></div>
+                        <div className="benefit-header">
+                          <span>Subscribers can enjoy</span>
+                        </div>
+                        <div className="benefits">
+                          <ul>
+                            {subScription.benefits.map((benefit: any, index: any) => (
+                              <li key={index}>{benefit}</li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div style={{ marginTop: '25px', display: 'flex', justifyContent: 'center' }}>
+                          <Button
+                            text="Subscription detail"
+                            fillStyle="fill"
+                            width={'300px'}
+                            color="primary"
+                            handleSubmit={() => {}}
+                          />
+                        </div>
+                        <div style={{ marginTop: '10px', display: 'flex', justifyContent: 'center' }}>
+                          <Button
+                            text="Edit subscription"
+                            fillStyle="fill"
+                            width={'300px'}
+                            color="primary"
+                            handleSubmit={() => {}}
+                          />
+                        </div>
+                      </>
+                    )}
+                  </div>
                 </>
               )}
             <div className="subscription-title">
