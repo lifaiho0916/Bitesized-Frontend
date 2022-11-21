@@ -62,7 +62,7 @@ export const addSocialAccount = (data: any) => API.post('/api/social-accounts', 
 export const removeSocialAccount = (id: any, social: any) => API.delete(`/api/social-accounts/${id}?social=${social}`)
 
 export const getSubScription = (userId: any) => API.get(`/api/subscription/${userId}`)
-
+export const saveSubScription = (data: any) => API.post('/api/subscription', data)
 //SETTING
 export const getCurrencyRate = () => API.get('/api/setting/currencyrate')
 export const getTermsAndPrivacy = () => API.get('/api/setting/terms-privacy')

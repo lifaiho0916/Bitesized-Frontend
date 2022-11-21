@@ -54,6 +54,7 @@ const Button = (props: any) => {
     cursor: "not-allowed",
     background: "#E1E0DF",
     padding: "16px",
+    width: props.width === undefined ? "fit-content" : props.width,
     borderRadius: borderRadius,
     color: "#938D8A",
     border: "1px solid #E1E0DF",

@@ -21,4 +21,19 @@ export const subScriptionAction = {
             dispatch({ type: SET_LOADING_FALSE })
         }
     },
+
+    saveSubscription: (subscription: any) => async (dispatch: Dispatch<any>) => {
+        try {
+            dispatch({ type: SET_LOADING_TRUE })
+            const response = await api.saveSubScription({ subScription: subscription })
+            const { data } = response
+            dispatch({ type: SET_LOADING_FALSE })
+            if (data.success) {
+                
+            }
+        } catch (err) {
+            console.log(err)
+            dispatch({ type: SET_LOADING_FALSE })
+        }
+    }
 }

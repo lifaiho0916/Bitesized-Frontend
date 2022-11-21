@@ -19,12 +19,167 @@
             color: #efa058;
         }
     }
+
+    .set-subscription {
+        display: flex;
+        justify-content: space-evenly;
+        max-width: 840px;
+        margin: 0px auto;
+
+        .subscription-detail {
+            margin-top: 10px;
+            background: #ffffff;
+            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+            padding: 25px 10px;
+            width: 340px;
+
+            .detail-title {
+                display: flex;
+                align-items: center;
+                height: 20px;
+                font-family: "Lato";
+                font-style: normal;
+                font-weight: 800;
+                font-size: 20px;
+                line-height: 20px;
+                letter-spacing: 0.05em;
+                color: #efa058;
+            }
+
+            p {
+                font-family: "Lato";
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 18px;
+                letter-spacing: 0.005em;
+                color: #000000;
+            }
+
+            .description-editor {
+                border: 1px solid #54504e;
+                border-radius: 15px;
+                padding: 5px 15px;
+                min-height: 50px;
+
+                .DraftEditor-root {
+                    height: fit-content;
+                    font-family: "Lato";
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 20px;
+
+                    .public-DraftEditorPlaceholder-root {
+                        font-style: italic;
+                        color: #bab6b5;
+                    }
+
+                    .public-DraftStyleDefault-block {
+                        margin: 0px;
+                        color: #54504e;
+                    }
+                }
+            }
+
+            .word-count {
+                margin-top: 5px;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 12px;
+                line-height: 14px;
+                text-align: right;
+                letter-spacing: 0.02em;
+                color: #a6a29f;
+            }
+
+            .benefit {
+                width: calc(100% - 40px);
+
+                &:hover {
+                    border-color: #efa058;
+                }
+
+                box-sizing: border-box;
+                background: #ffffff;
+                border: 1px solid #54504e;
+                border-radius: 15px;
+                padding: 12px 16px;
+
+                textarea {
+                    border: 0px;
+                    padding: 0px;
+                    font-family: "Lato";
+                    font-style: normal;
+                    color: #54504e;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 20px;
+                    width: 100%;
+                    resize: none;
+
+                    &:focus {
+                        outline: none;
+                    }
+
+                    &::placeholder {
+                        font-style: italic;
+                    }
+                }
+            }
+
+            .remove-btn {
+                width: 24px;
+                height: 24px;
+                border-radius: 24px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &.active {
+                    border: 1.2px solid #de5a67;
+                }
+
+                &.inactive {
+                    border: 1.2px solid #e1e0df;
+                }
+            }
+        }
+
+        .add-benefit {
+            height: 40px;
+            border: 1px dashed #efa058;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            span {
+                font-family: "Lato";
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 20px;
+                color: #efa058;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 680px) {
-    .set-subscription-wrapperr {
+    .set-subscription-wrapper {
         .page-header {
             margin: 15px auto;
+        }
+
+        .set-subscription {
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            .subscription-detail {
+                padding: 20px 10px;
+            }
         }
     }
 }

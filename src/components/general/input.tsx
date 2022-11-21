@@ -2,7 +2,6 @@ import { useEffect, useState, useContext } from "react";
 import { LanguageContext } from "../../routes/authRoute";
 import "../../assets/styles/inputStyle.scss";
 
-
 const Input = (props: any) => {
   const { type, readOnly, label, wordCount, placeholder, title, setTitle, setFocus, isNumber, isUrl, step, maxnum, minnum, width } = props;
   const [words, setWords] = useState<Number>(0);
