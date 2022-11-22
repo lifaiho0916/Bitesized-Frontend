@@ -1,0 +1,208 @@
+.modal {
+    z-index: 50;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+    pointer-events: none;
+
+    &.show {
+        opacity: 1;
+        pointer-events: visible;
+    }
+
+    #subscribe {
+        .modal-content {
+            box-sizing: border-box;
+            width: 800px;
+            background-color: #ffffff;
+            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+            padding: 15px;
+
+            .modal-header {
+                padding: 5px;
+                display: flex;
+                justify-content: space-between;
+
+                .close-btn {
+                    cursor: pointer;
+                }
+            }
+
+            .modal-body {
+                .purchase-card {
+                    box-sizing: border-box;
+                    width: 100%;
+                    background: #ffffff;
+                    padding: 10px;
+                    margin-bottom: 15px;
+
+                    .creator-name {
+                        font-family: "Lato";
+                        font-style: normal;
+                        font-weight: 800;
+                        font-size: 18px;
+                        line-height: 20px;
+                        text-align: center;
+                        letter-spacing: 0.02em;
+                        color: #efa058;
+                    }
+
+                    .creator-category {
+                        margin-top: 5px;
+                        font-family: "Lato";
+                        font-style: normal;
+                        font-weight: 500;
+                        font-size: 12px;
+                        line-height: 14px;
+                        text-align: center;
+                        letter-spacing: 0.02em;
+                        color: #54504e;
+                    }
+                }
+
+                .divider-desktop {
+                    margin: 10px auto;
+                    border-bottom: 1px solid #a6a29f;
+                }
+
+                .main-body {
+                    display: flex;
+                    justify-content: space-evenly;
+
+                    .divider {
+                        border-left: 1px solid #a6a29f;
+                    }
+
+                    .sub-body {
+                        width: 320px;
+                        padding: 10px;
+
+                        .sub-title {
+                            font-family: "Lato";
+                            font-style: normal;
+                            font-weight: 800;
+                            font-size: 18px;
+                            line-height: 20px;
+                            letter-spacing: 0.02em;
+                            color: #efa058;
+                        }
+
+                        .membership {
+                            font-family: "Lato";
+                            font-style: normal;
+                            font-weight: 600;
+                            font-size: 16px;
+                            line-height: 18px;
+                            color: #54504e;
+                        }
+
+                        .description {
+                            font-family: "Lato";
+                            font-style: normal;
+                            font-weight: 600;
+                            font-size: 16px;
+                            line-height: 18px;
+                            color: #54504e;
+                        }
+
+                        .benefits {
+                            ul {
+                                margin: 0px;
+                                padding: 0px 0px 0px 25px;
+
+                                li {
+                                    font-family: "Lato";
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    font-size: 16px;
+                                    line-height: 18px;
+                                    color: #54504e;
+                                }
+                            }
+                        }
+
+                        .charge-amount {
+                            display: flex;
+                            justify-content: center;
+                            margin-top: 20px;
+                            font-family: "Lato";
+                            font-style: normal;
+                            font-weight: 600;
+                            font-size: 14px;
+                            line-height: 18px;
+                            text-align: center;
+                            letter-spacing: 0.005em;
+                            color: #000000;
+                        }
+
+                        .terms-and-privacy {
+                            margin: 15px auto 0px auto;
+                            width: 250px;
+                            font-family: "Lato";
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 10px;
+                            line-height: 12px;
+                            display: flex;
+                            align-items: center;
+                            text-align: center;
+                            letter-spacing: 0.005em;
+                            color: #000000;
+
+                            a {
+                                text-decoration: none;
+                                color: #000000;
+                                font-weight: bold;
+                                font-size: 11px;
+                            }
+                        }
+
+                        .next-btn {
+                            margin-top: 15px;
+                            display: flex;
+                            justify-content: center;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .modal {
+        #subscribe {
+            .modal-content {
+                width: 330px;
+
+                .modal-body {
+                    .main-body {
+                        flex-direction: column;
+
+                        .divider {
+                            margin: 20px 0px;
+                            border-bottom: 1px solid #a6a29f;
+                        }
+
+                        .sub-body {
+                            width: 100%;
+                            padding: 0px;
+                        }
+                    }
+                    .divider-desktop {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

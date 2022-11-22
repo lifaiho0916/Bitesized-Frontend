@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { useSearchParams, useNavigate, useLocation } from "react-router-dom"
+import { useSearchParams, useLocation } from "react-router-dom"
 import Tabs from "../../../components/general/Tabs"
 import { SearchIcon } from "../../../assets/svg"
 import { transactionAction } from "../../../redux/actions/transactionActions"
@@ -8,7 +8,6 @@ import CONSTANT from "../../../constants/constant"
 import "../../../assets/styles/admin/transaction/AdminTransactionStyle.scss"
 
 const AdminTransaction = () => {
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const location = useLocation()
     const transactionState = useSelector((state: any) => state.transaction)
@@ -27,7 +26,7 @@ const AdminTransaction = () => {
 
     const getLocalCurrency = (currency: any) => {
         const index = CONSTANT.CURRENCIES.findIndex((cur: any) => cur.toLowerCase() === currency)
-        let res = CONSTANT.CURRENCY_SYMBOLS[index]
+        let res = CONSTANT.CURRENCIES[index] + ' ' + CONSTANT.CURRENCY_SYMBOLS[index]
         return res
     }
 
@@ -38,7 +37,7 @@ const AdminTransaction = () => {
         else if(code === "free") setOtpion(2)
         else if(code === "earn") setOtpion(3)
         else setOtpion(4)
-    }, [code, location])
+    }, [code, location, dispatch])
 
     return (
         <div className="transaction-wrapper">

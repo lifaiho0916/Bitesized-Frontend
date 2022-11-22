@@ -52,7 +52,7 @@ const BiteCardHome = (props: any) => {
                 const rate1 = userCurrency === 'usd' ? 1.0 : currencyRate[`${userCurrency}`]
                 const localPrice = usdAmount * rate1
                 const index = CONSTANT.CURRENCIES.findIndex((cur: any) => cur.toLowerCase() === userCurrency)
-                let res = CONSTANT.CURRENCY_SYMBOLS[index]
+                let res = CONSTANT.CURRENCIES[index] + ' ' + CONSTANT.CURRENCY_SYMBOLS[index]
                 return res + localPrice.toFixed(2)
             }
         } return "FREE"

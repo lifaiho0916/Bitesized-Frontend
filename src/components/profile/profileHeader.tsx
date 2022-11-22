@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { LanguageContext } from "../../routes/authRoute"
 import Button from "../general/button"
 import Avatar from "../general/avatar"
+import SubscribeModal from "../modals/SubscribeModal"
 import {
   EditIcon,
   MoreIcon,
@@ -43,11 +44,14 @@ const ProfileHeader = (props: any) => {
 
   const [showMore, setShowMore] = useState(false)
   const [showLink, setShowLink] = useState(false)
+  const [currency, setCurrency] = useState('usd')
 
   const accountState = useSelector((state: any) => state.account)
   const subScriptionState = useSelector((state: any) => state.subScription);
   const { account } = accountState
   const { subScription } = subScriptionState;
+
+  const [openSubscribeModal, setOpenSubscribeModal] = useState(false)
 
   const hasYoutube = useMemo(() => {
     if(account && account.social && account.social.youtube) return true
@@ -77,7 +81,7 @@ const ProfileHeader = (props: any) => {
 
   const subscribe = () => {
     if(user) {
-      
+      setOpenSubscribeModal(true)
     } else navigate('/auth/signup')
   }
 
@@ -98,6 +102,15 @@ const ProfileHeader = (props: any) => {
 
   return (
     <div className="profile-header">
+      <SubscribeModal
+        show={openSubscribeModal}
+        onClose={() => setOpenSubscribeModal(false)}
+        profileUser={profileUser}
+        categoryText={categoryText}
+        subScription={subScription}
+        setCurrency={setCurrency}
+        handleSubmit={() => { console.log("sss") }}
+      />
       <div className="avatar">
         <Avatar
           size="mobile"
@@ -135,7 +148,7 @@ const ProfileHeader = (props: any) => {
           </div>
         </div>
         <div className="btn-part">
-          {(same === false && subScription) &&
+          {(same === false && subScription && subScription.visible) &&
             <Button
               text="Subscribe"
               fillStyle="fill"

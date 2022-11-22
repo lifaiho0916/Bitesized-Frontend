@@ -20,7 +20,7 @@ const PurchaseModal = (props: any) => {
     const displayPrice = (currency: any, price: any) => {
         if (currency) {
             const index = CONSTANT.CURRENCIES.findIndex((cur: any) => cur.toLowerCase() === currency)
-            let res = CONSTANT.CURRENCY_SYMBOLS[index]
+            let res = CONSTANT.CURRENCIES[index] + ' ' + CONSTANT.CURRENCY_SYMBOLS[index]
             return res + price.toFixed(2)
         }
     }

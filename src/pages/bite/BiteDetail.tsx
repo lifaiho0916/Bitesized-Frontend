@@ -113,7 +113,7 @@ const BiteDetail = () => {
 
     const getLocalCurrency = (currency: any) => {
         const index = CONSTANT.CURRENCIES.findIndex((cur: any) => cur.toLowerCase() === currency)
-        let res = CONSTANT.CURRENCY_SYMBOLS[index]
+        let res = CONSTANT.CURRENCIES[index] + ' ' + CONSTANT.CURRENCY_SYMBOLS[index]
         return res
     }
 

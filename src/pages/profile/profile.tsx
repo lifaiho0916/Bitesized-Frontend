@@ -91,13 +91,13 @@ const Profile = () => {
     const index = CONSTANT.CURRENCIES.findIndex(
       (cur: any) => cur.toLowerCase() === currency
     );
-    let res = CONSTANT.CURRENCY_SYMBOLS[index];
+    let res = CONSTANT.CURRENCIES[index] + ' ' + CONSTANT.CURRENCY_SYMBOLS[index];
     return res;
   };
 
   useEffect(() => {
     if(authuser && code !== "subscription" && isSame === false) dispatch(subScriptionAction.getSubScription(authuser._id))
-  }, [isSame, authuser])
+  }, [isSame, authuser, code, dispatch])
 
   return (
     <div className="profile-wrapper">

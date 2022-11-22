@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
-import Button from "../../../components/general/button"
 import Tabs from "../../../components/general/Tabs"
 import { biteAction } from "../../../redux/actions/biteActions"
 import { SearchIcon, AscendIcon, DescendIcon, VisibleIcon, HiddenIcon } from "../../../assets/svg"
@@ -26,7 +25,7 @@ const AdminBiteList = () => {
         if(code === null) setOtpion(0)
         else if( code === "paid" ) setOtpion(1)
         else setOtpion(2)
-    }, [code, location, sort])
+    }, [code, location, sort, dispatch])
 
     return (
         <div className="admin-bite-list-wrapper">
@@ -35,18 +34,18 @@ const AdminBiteList = () => {
                     <Tabs
                         tabWidth="100px"
                         list={[
-                        { 
-                            text: "All record",
-                            route: `${location.pathname}`
-                        }, 
-                        { 
-                            text: "Paid Bite",
-                            route: `${location.pathname}?tab=paid`
-                        },
-                        {
-                            text: 'FREE Bite',
-                            route: `${location.pathname}?tab=free`
-                        }
+                            { 
+                                text: "All record",
+                                route: `${location.pathname}`
+                            }, 
+                            { 
+                                text: "Paid Bite",
+                                route: `${location.pathname}?tab=paid`
+                            },
+                            {
+                                text: 'FREE Bite',
+                                route: `${location.pathname}?tab=free`
+                            }
                         ]}
                         initialOption={option}
                     />
