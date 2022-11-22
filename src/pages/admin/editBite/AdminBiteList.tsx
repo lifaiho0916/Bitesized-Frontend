@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
 import Button from "../../../components/general/button"
+import Tabs from "../../../components/general/Tabs"
 import { biteAction } from "../../../redux/actions/biteActions"
 import { SearchIcon, AscendIcon, DescendIcon, VisibleIcon, HiddenIcon } from "../../../assets/svg"
 import { SET_BITE, SET_SELECTED_INDEXES, SET_UPLOADED_PROCESS } from "../../../redux/types"
@@ -13,48 +14,42 @@ const AdminBiteList = () => {
     const location = useLocation()
     const [searchParams] = useSearchParams()
     const [sort, setSort] = useState(-1)
+    const [option, setOtpion] = useState(0)
     const biteState = useSelector((state: any) => state.bite)
     const { bites } = biteState
     const code = searchParams.get("tab")
 
     const [search, setSearch] = useState("")
 
-    useEffect(() => { dispatch(biteAction.getBitesAdmin(code, search, sort)) }, [code, location, sort])
+    useEffect(() => { 
+        dispatch(biteAction.getBitesAdmin(code, search, sort)) 
+        if(code === null) setOtpion(0)
+        else if( code === "paid" ) setOtpion(1)
+        else setOtpion(2)
+    }, [code, location, sort])
 
     return (
         <div className="admin-bite-list-wrapper">
             <div className="admin-bite">
                 <div className="navigate-btns">
-                    <div className="btn">
-                        <Button
-                            text="All record"
-                            fillStyle={code === null ? "fill" : "outline"}
-                            shape="rounded"
-                            color="primary"
-                            with={"100px"}
-                            handleSubmit={() => navigate(`${location.pathname}`)}
-                        />
-                    </div>
-                    <div className="btn">
-                        <Button
-                            text="Paid Bite"
-                            fillStyle={code === 'paid' ? "fill" : "outline"}
-                            shape="rounded"
-                            color="primary"
-                            with={"100px"}
-                            handleSubmit={() => navigate(`${location.pathname}?tab=paid`)}
-                        />
-                    </div>
-                    <div className="btn">
-                        <Button
-                            text="FREE Bite"
-                            fillStyle={code === 'free' ? "fill" : "outline"}
-                            shape="rounded"
-                            color="primary"
-                            with={"100px"}
-                            handleSubmit={() => navigate(`${location.pathname}?tab=free`)}
-                        />
-                    </div>
+                    <Tabs
+                        tabWidth="100px"
+                        list={[
+                        { 
+                            text: "All record",
+                            route: `${location.pathname}`
+                        }, 
+                        { 
+                            text: "Paid Bite",
+                            route: `${location.pathname}?tab=paid`
+                        },
+                        {
+                            text: 'FREE Bite',
+                            route: `${location.pathname}?tab=free`
+                        }
+                        ]}
+                        initialOption={option}
+                    />
                 </div>
                 <div className="search-bar">
                     <SearchIcon color="#EFA058" />

@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { useSearchParams, useNavigate, useLocation } from "react-router-dom"
-import Button from "../../../components/general/button"
 import Tabs from "../../../components/general/Tabs"
 import { SearchIcon } from "../../../assets/svg"
 import { transactionAction } from "../../../redux/actions/transactionActions"
