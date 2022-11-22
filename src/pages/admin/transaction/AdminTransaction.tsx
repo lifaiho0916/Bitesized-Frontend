@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { useSearchParams, useNavigate, useLocation } from "react-router-dom"
 import Button from "../../../components/general/button"
+import Tabs from "../../../components/general/Tabs"
 import { SearchIcon } from "../../../assets/svg"
 import { transactionAction } from "../../../redux/actions/transactionActions"
 import CONSTANT from "../../../constants/constant"
@@ -15,6 +16,7 @@ const AdminTransaction = () => {
     const loadState = useSelector((state: any) => state.load)
     const [searchParams] = useSearchParams()
     const code = searchParams.get('tab')
+    const [option, setOtpion] = useState(0)
     const [search, setSearch] = useState("")
     const { transactions } = transactionState
     const { currencyRate } = loadState
@@ -32,62 +34,43 @@ const AdminTransaction = () => {
 
     useEffect(() => {
         dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search))
+        if(code === null) setOtpion(0)
+        else if(code === "paid") setOtpion(1)
+        else if(code === "free") setOtpion(2)
+        else if(code === "earn") setOtpion(3)
+        else setOtpion(4)
     }, [code, location])
 
     return (
         <div className="transaction-wrapper">
             <div className="transaction">
                 <div className="navigate-btns">
-                    <div className="btn">
-                        <Button
-                            text="All record"
-                            fillStyle={code === null ? "fill" : "outline"}
-                            shape="rounded"
-                            color="primary"
-                            with={"100px"}
-                            handleSubmit={() => navigate('/admin/transaction')}
-                        />
-                    </div>
-                    <div className="btn">
-                        <Button
-                            text="Paid Bite"
-                            fillStyle={code === 'paid' ? "fill" : "outline"}
-                            shape="rounded"
-                            color="primary"
-                            with={"100px"}
-                            handleSubmit={() => navigate('/admin/transaction?tab=paid')}
-                        />
-                    </div>
-                    <div className="btn">
-                        <Button
-                            text="FREE Bite"
-                            fillStyle={code === 'free' ? "fill" : "outline"}
-                            shape="rounded"
-                            color="primary"
-                            with={"100px"}
-                            handleSubmit={() => navigate('/admin/transaction?tab=free')}
-                        />
-                    </div>
-                    <div className="btn">
-                        <Button
-                            text="Earnings"
-                            fillStyle={code === 'earn' ? "fill" : "outline"}
-                            shape="rounded"
-                            color="primary"
-                            with={"100px"}
-                            handleSubmit={() => navigate('/admin/transaction?tab=earn')}
-                        />
-                    </div>
-                    <div className="btn">
-                        <Button
-                            text="Cash out"
-                            fillStyle={code === 'cash' ? "fill" : "outline"}
-                            shape="rounded"
-                            color="primary"
-                            with={"100px"}
-                            handleSubmit={() => navigate('/admin/transaction?tab=cash')}
-                        />
-                    </div>
+                    <Tabs
+                        tabWidth="100px"
+                        list={[
+                            { 
+                                text: "All record",
+                                route: `${location.pathname}`
+                            }, 
+                            { 
+                                text: "Paid Bite",
+                                route: `${location.pathname}?tab=paid`
+                            },
+                            {
+                                text: 'FREE Bite',
+                                route: `${location.pathname}?tab=free`
+                            },
+                            {
+                                text: 'Earnings',
+                                route: `${location.pathname}?tab=earn`
+                            },
+                            {
+                                text: 'Cash out',
+                                route:  `${location.pathname}?tab=cash`
+                            }
+                        ]}
+                        initialOption={option}
+                    />
                 </div>
                 <div className="search-bar">
                     <SearchIcon color="#EFA058" />
