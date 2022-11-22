@@ -1,0 +1,38 @@
+.tabs-wrapper {
+    box-sizing: border-box;
+    width: 100%;
+    border-bottom: 1px solid #e1e0df;
+
+    .tab-list {
+        display: flex;
+
+        .tab {
+            cursor: pointer;
+            position: relative;
+            background-color: white;
+            padding: 15px 10px;
+            font-family: "Lato";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20px;
+            color: #5e6366;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &.active {
+                color: #efa058;
+            }
+
+            .active-bar {
+                position: absolute;
+                bottom: 0px;
+                height: 4px;
+                width: 100%;
+                background: #efa058;
+                border-radius: 4px 4px 0px 0px;
+            }
+        }
+    }
+}

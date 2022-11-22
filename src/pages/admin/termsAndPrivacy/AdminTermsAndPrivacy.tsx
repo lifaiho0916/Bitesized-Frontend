@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Editor } from "react-draft-wysiwyg";
 import Button from "../../../components/general/button";
+import Tabs from "../../../components/general/Tabs";
 import { settingAction } from "../../../redux/actions/settingActions";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../../assets/styles/admin/termsAndPrivacy/AdminTermsAndPrivacyStyle.scss";
@@ -17,6 +18,7 @@ const AdminTermsAndPrivacy = () => {
   const code = searchParams.get("tab");
   const [initialState, setInitialState] = useState<any>(null);
   const [changeState, setChangeState] = useState<any>(null);
+  const [option, setOption] = useState(0)
 
   const save = () => {
     const payload = {
@@ -30,9 +32,11 @@ const AdminTermsAndPrivacy = () => {
     if (code === null) navigate(`${location.pathname}?tab=terms`);
     else {
       if (code === "terms") {
+        setOption(0)
         setInitialState(termsAndPrivacy ? termsAndPrivacy?.terms : null);
         setChangeState(termsAndPrivacy ? termsAndPrivacy?.terms : null);
       } else {
+        setOption(1)
         setInitialState(termsAndPrivacy ? termsAndPrivacy?.privacy : null);
         setChangeState(termsAndPrivacy ? termsAndPrivacy?.privacy : null);
       }
@@ -47,7 +51,21 @@ const AdminTermsAndPrivacy = () => {
     <div className="admin-terms-and-privacy-wrapper">
       <div className="admin-terms-and-privacy">
         <div className="navigate-btns">
-          <div className="btn">
+          <Tabs
+            tabWidth="150px"
+            list={[
+              { 
+                text: "Terms & Conditions",
+                route: `${location.pathname}?tab=terms`
+              }, 
+              { 
+                text: "Privacy Policy",
+                route: `${location.pathname}?tab=privacy`
+              }
+            ]}
+            initialOption={option}
+          />
+          {/* <div className="btn">
             <Button
               text="Terms & Conditions"
               fillStyle={code === "terms" ? "fill" : "outline"}
@@ -66,7 +84,7 @@ const AdminTermsAndPrivacy = () => {
               with={"100px"}
               handleSubmit={() => navigate(`${location.pathname}?tab=privacy`)}
             />
-          </div>
+          </div> */}
         </div>
         <Editor
           contentState={initialState}
