@@ -19,6 +19,7 @@ const AdminTermsAndPrivacy = () => {
   const [initialState, setInitialState] = useState<any>(null);
   const [changeState, setChangeState] = useState<any>(null);
   const [option, setOption] = useState(0)
+  const { pathname } = location
 
   const save = () => {
     const payload = {
@@ -29,7 +30,7 @@ const AdminTermsAndPrivacy = () => {
   };
 
   useEffect(() => {
-    if (code === null) navigate(`${location.pathname}?tab=terms`);
+    if (code === null) navigate(`${pathname}?tab=terms`);
     else {
       if (code === "terms") {
         setOption(0)
@@ -41,7 +42,7 @@ const AdminTermsAndPrivacy = () => {
         setChangeState(termsAndPrivacy ? termsAndPrivacy?.privacy : null);
       }
     }
-  }, [code, termsAndPrivacy]);
+  }, [code, termsAndPrivacy, pathname, navigate]);
 
   useEffect(() => {
     dispatch(settingAction.getTermsAndPrivacy());
@@ -56,35 +57,15 @@ const AdminTermsAndPrivacy = () => {
             list={[
               { 
                 text: "Terms & Conditions",
-                route: `${location.pathname}?tab=terms`
+                route: `${pathname}?tab=terms`
               }, 
               { 
                 text: "Privacy Policy",
-                route: `${location.pathname}?tab=privacy`
+                route: `${pathname}?tab=privacy`
               }
             ]}
             initialOption={option}
           />
-          {/* <div className="btn">
-            <Button
-              text="Terms & Conditions"
-              fillStyle={code === "terms" ? "fill" : "outline"}
-              shape="rounded"
-              color="primary"
-              with={"100px"}
-              handleSubmit={() => navigate(`${location.pathname}?tab=terms`)}
-            />
-          </div>
-          <div className="btn">
-            <Button
-              text="Privacy Policy"
-              fillStyle={code === "privacy" ? "fill" : "outline"}
-              shape="rounded"
-              color="primary"
-              with={"100px"}
-              handleSubmit={() => navigate(`${location.pathname}?tab=privacy`)}
-            />
-          </div> */}
         </div>
         <Editor
           contentState={initialState}
