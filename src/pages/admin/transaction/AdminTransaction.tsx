@@ -36,7 +36,8 @@ const AdminTransaction = () => {
         else if(code === "paid") setOtpion(1)
         else if(code === "free") setOtpion(2)
         else if(code === "earn") setOtpion(3)
-        else setOtpion(4)
+        else if(code === "cash") setOtpion(4)
+        else setOtpion(5)
     }, [code, location, dispatch])
 
     return (
@@ -65,6 +66,10 @@ const AdminTransaction = () => {
                             {
                                 text: 'Cash out',
                                 route:  `${location.pathname}?tab=cash`
+                            },
+                            {
+                                text: 'Subscription',
+                                route:  `${location.pathname}?tab=subscription`
                             }
                         ]}
                         initialOption={option}
