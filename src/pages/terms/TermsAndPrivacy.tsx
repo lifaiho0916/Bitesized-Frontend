@@ -19,9 +19,7 @@ const TermsAndPrivacy = (props: any) => {
   return (
     <div className="terms-privacy-wrapper">
       <div className="page-header">
-        <div onClick={() => {}}>
-          <BackIcon color="black" />
-        </div>
+        <div></div>
         <div className="page-title">
           <span>
             {location.pathname === "/terms"
@@ -29,7 +27,7 @@ const TermsAndPrivacy = (props: any) => {
               : "Privacy Policy"}
           </span>
         </div>
-        <div style={{ width: "24px" }}></div>
+        <div></div>
       </div>
 
       <div className="terms-privacy">
