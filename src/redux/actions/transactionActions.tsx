@@ -35,10 +35,10 @@ export const transactionAction = {
         }
     },
 
-    getTransactionsByUserId: (userId: any, type: any, sort: any) => async (dispatch: Dispatch<any>) => {
+    getTransactionsByUserId: (userId: any, type: any, sort: any, period: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_TRANSACTIONS, payload: [] })
-            const response = await api.getTransactionsByUserId(userId, type, sort)
+            const response = await api.getTransactionsByUserId(userId, type, sort, period)
             const { data } = response
             if (data.success) {
                 const { payload } = data

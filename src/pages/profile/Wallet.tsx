@@ -66,6 +66,7 @@ const Wallet = () => {
     const res1 = useOutsideAlerter(wrapRef1, removeCard)
     const [payout, setPayout] = useState(false)
     const [sort, setSort] = useState(-1)
+    const [period, setPeriod] = useState(30)
 
     const [openAddCard, setOpenAddCard] = useState(false)
 
@@ -82,7 +83,7 @@ const Wallet = () => {
 
     useEffect(() => { if (!res) setMoreInfo(res) }, [res])
     useEffect(() => { if (!res1) setRemoveCard(res1) }, [res1])
-    useEffect(() => { if (user) dispatch(transactionAction.getTransactionsByUserId(user.id, 0, sort)) }, [location, dispatch, user, sort])
+    useEffect(() => { if (user) dispatch(transactionAction.getTransactionsByUserId(user.id, 0, sort, period)) }, [location, dispatch, user, sort, period])
     useEffect(() => { dispatch(paymentAction.getPayment()) }, [dispatch, location])
 
     return (
@@ -161,28 +162,12 @@ const Wallet = () => {
                     <div className="header">
                         <div className="coin-icon"></div>
                         <div className="title">Transaction history</div>
-                        <div className="more-icon">
-                            <div onClick={() => { setMoreInfo(true) }}><MoreIcon color="black" /></div>
-                            <div className="drop-down-list" style={moreInfo === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef}>
-                                <div className="list" onClick={() => {
-                                    setMoreInfo(false)
-                                    dispatch(transactionAction.getTransactionsByUserId(user.id, 1, sort))
-                                }}>
-                                    {contexts.WALLET_LETTER.FIRST_DAYS}
-                                </div>
-                                <div className="list" onClick={() => {
-                                    setMoreInfo(false)
-                                    dispatch(transactionAction.getTransactionsByUserId(user.id, 2, sort))
-                                }}>
-                                    {contexts.WALLET_LETTER.SECOND_DAYS}
-                                </div>
-                                <div className="list" onClick={() => {
-                                    setMoreInfo(false)
-                                    dispatch(transactionAction.getTransactionsByUserId(user.id, 3, sort))
-                                }}>
-                                    {"Anytime"}
-                                </div>
-                            </div>
+                        <div className="time-period">
+                            <select onChange={(e) => { setPeriod(Number(e.target.value)) }}>
+                                <option value="30">Past 30 days</option>
+                                <option value="60">Past 60 days</option>
+                                <option value="-1">Anytime</option>
+                            </select>
                         </div>
                     </div>
                     <div className="transactions-data">
