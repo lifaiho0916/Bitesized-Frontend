@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { useSearchParams, useLocation } from "react-router-dom"
 import Tabs from "../../../components/general/Tabs"
-import { SearchIcon } from "../../../assets/svg"
+import { SearchIcon, AscendIcon, DescendIcon } from "../../../assets/svg"
 import { transactionAction } from "../../../redux/actions/transactionActions"
 import CONSTANT from "../../../constants/constant"
 import "../../../assets/styles/admin/transaction/AdminTransactionStyle.scss"
@@ -16,6 +16,7 @@ const AdminTransaction = () => {
     const code = searchParams.get('tab')
     const [option, setOtpion] = useState(0)
     const [search, setSearch] = useState("")
+    const [sort, setSort] = useState(-1)
     const { transactions } = transactionState
     const { currencyRate } = loadState
 
@@ -31,14 +32,14 @@ const AdminTransaction = () => {
     }
 
     useEffect(() => {
-        dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search))
+        dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search, sort))
         if(code === null) setOtpion(0)
         else if(code === "paid") setOtpion(1)
         else if(code === "free") setOtpion(2)
         else if(code === "earn") setOtpion(3)
         else if(code === "cash") setOtpion(4)
         else setOtpion(5)
-    }, [code, location, dispatch])
+    }, [code, location, dispatch, sort])
 
     return (
         <div className="transaction-wrapper">
@@ -81,14 +82,23 @@ const AdminTransaction = () => {
                         placeholder="Username"
                         className="search-input"
                         onChange={(e) => { setSearch(e.target.value) }}
-                        onKeyUp={(e) => { if (e.keyCode === 13) dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search)) }}
+                        onKeyUp={(e) => { if (e.keyCode === 13) dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search, sort)) }}
                     />
                 </div>
                 <div className="users-data scroll-bar">
                     <table className="data-table">
                         <thead>
                             <tr>
-                                <th>Date</th>
+                                <th>
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                        <span>Date</span>
+                                        <div style={{ cursor: 'pointer' }}
+                                            onClick={() => setSort(-sort)}
+                                        >
+                                            {sort === -1 ? <DescendIcon /> : <AscendIcon />}
+                                        </div>
+                                    </div>
+                                </th>
                                 <th>Time</th>
                                 <th>Username</th>
                                 <th>Description</th>
