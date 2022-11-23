@@ -3,11 +3,11 @@ import * as api from '../../api'
 import { SET_LOADING_FALSE, SET_LOADING_TRUE, SET_TRANSACTIONS } from "../types"
 
 export const transactionAction = {
-    getTransactions: (type: any, search: any, sort: any) => async (dispatch: Dispatch<any>) => {
+    getTransactions: (type: any, search: any, sort: any, period: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
             dispatch({ type: SET_TRANSACTIONS, payload: [] })
-            const response = await api.getTransactions(type, search, sort)
+            const response = await api.getTransactions(type, search, sort, period)
             const { data } = response
 
             dispatch({ type: SET_LOADING_FALSE })

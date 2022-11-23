@@ -49,7 +49,7 @@ export const changeUserVisible = (id: any, data: any) => API.put(`/api/auth/${id
 export const setLanguageCurrency = (data: any) => API.post('/api/auth/setting/lang-currency', data)
 export const setSubscribebyAdmin = (data: any) => API.put('/api/auth/subscribe/available', data)
 
-export const getTransactions = (type: any, search: any, sort: any) => API.get(`/api/transaction?type=${type}&search=${search}&sort=${sort}`)
+export const getTransactions = (type: any, search: any, sort: any, period: any) => API.get(`/api/transaction?type=${type}&search=${search}&sort=${sort}&period=${period}`)
 export const getTransactionsByUserId = (userId: any, type: any, sort: any) => API.get(`/api/transaction/user/${userId}?type=${type}&sort=${sort}`)
 export const getTransactionsByBiteId = (biteId: any, sort: any) => API.get(`/api/transaction/bite/${biteId}?sort=${sort}`)
 

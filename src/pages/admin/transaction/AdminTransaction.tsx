@@ -17,6 +17,7 @@ const AdminTransaction = () => {
     const [option, setOtpion] = useState(0)
     const [search, setSearch] = useState("")
     const [sort, setSort] = useState(-1)
+    const [period, setPeriod] = useState(30)
     const { transactions } = transactionState
     const { currencyRate } = loadState
 
@@ -32,14 +33,14 @@ const AdminTransaction = () => {
     }
 
     useEffect(() => {
-        dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search, sort))
+        dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search, sort, period))
         if(code === null) setOtpion(0)
         else if(code === "paid") setOtpion(1)
         else if(code === "free") setOtpion(2)
         else if(code === "earn") setOtpion(3)
         else if(code === "cash") setOtpion(4)
         else setOtpion(5)
-    }, [code, location, dispatch, sort])
+    }, [code, location, dispatch, sort, period])
 
     return (
         <div className="transaction-wrapper">
@@ -49,10 +50,10 @@ const AdminTransaction = () => {
                         <span>Transaction history</span>
                     </div>
                     <div className="time-period">
-                        <select>
-                            <option>Past 30 days</option>
-                            <option>Past 60 days</option>
-                            <option>Anytime</option>
+                        <select onChange={(e) => { setPeriod(Number(e.target.value)) }}>
+                            <option value="30">Past 30 days</option>
+                            <option value="60">Past 60 days</option>
+                            <option value="-1">Anytime</option>
                         </select>
                     </div>
                 </div>
@@ -94,7 +95,7 @@ const AdminTransaction = () => {
                         placeholder="Username"
                         className="search-input"
                         onChange={(e) => { setSearch(e.target.value) }}
-                        onKeyUp={(e) => { if (e.keyCode === 13) dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search, sort)) }}
+                        onKeyUp={(e) => { if (e.keyCode === 13) dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search, sort, period)) }}
                     />
                 </div>
                 <div className="users-data scroll-bar">
