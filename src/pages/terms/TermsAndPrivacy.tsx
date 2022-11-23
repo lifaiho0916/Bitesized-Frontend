@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { settingAction } from "../../redux/actions/settingActions";
-import { BackIcon } from "../../assets/svg";
 import draftToHtml from "draftjs-to-html";
 import "../../assets/styles/terms/TermsAndPrivacyStyle.scss";
 

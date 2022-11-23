@@ -140,6 +140,22 @@ const Profile = () => {
                   : ["", "", ""]
               }
             />
+             {/* <ProfileMenu
+              selectedText={
+                code === null
+                  ? "My Purchases"
+                  : "My Bites"
+              }
+              texts={["My Purchases", "My Bites"]}
+              urls={
+                authuser
+                  ? [
+                      authuser.personalisedUrl,
+                      `${authuser.personalisedUrl}?tab=mybites`,
+                    ]
+                  : ["", ""]
+              }
+            /> */}
           </div>
         )}
         {code === "subscription" ? (
