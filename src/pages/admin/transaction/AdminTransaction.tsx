@@ -44,6 +44,18 @@ const AdminTransaction = () => {
     return (
         <div className="transaction-wrapper">
             <div className="transaction">
+                <div className="transaction-header">
+                    <div className="header-title">
+                        <span>Transaction history</span>
+                    </div>
+                    <div className="time-period">
+                        <select>
+                            <option>Past 30 days</option>
+                            <option>Past 60 days</option>
+                            <option>Anytime</option>
+                        </select>
+                    </div>
+                </div>
                 <div className="navigate-btns">
                     <Tabs
                         tabWidth="100px"

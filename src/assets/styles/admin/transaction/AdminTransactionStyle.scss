@@ -23,10 +23,52 @@
         }
     }
 
-
     .transaction {
+        .transaction-header {
+            display: flex;
+            align-items: center;
+            margin: 0px 50px;
+
+            .header-title {
+                font-family: "Lato";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 20px;
+                color: #efa058;
+            }
+
+            .time-period {
+                display: flex;
+                align-items: center;
+                margin-left: 20px;
+
+                select {
+                    border-radius: 4px;
+                    height: 28px;
+                    font-family: "Lato";
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 14px;
+                    line-height: 18px;
+                    color: #54504e;
+
+                    option {
+                        font-family: "Lato";
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 14px;
+                        line-height: 18px;
+                        display: flex;
+                        align-items: center;
+                        color: #54504e;
+                    }
+                }
+            }
+        }
+
         .navigate-btns {
-            margin: 50px 50px 20px 50px;
+            margin: 25px 50px 20px 50px;
             display: flex;
             flex-wrap: wrap;
 
@@ -45,7 +87,7 @@
                 width: calc(100% - 50px);
                 height: 40px;
                 border: none;
-                background-color: #F5F5F4;
+                background-color: #f5f5f4;
                 font-size: 16px;
                 line-height: 20px;
                 font-weight: normal;
@@ -62,7 +104,7 @@
         th,
         td {
             border-collapse: collapse;
-            border: 0.25px solid #E1E0DF;
+            border: 0.25px solid #e1e0df;
         }
 
         .users-data {
@@ -81,7 +123,7 @@
                     letter-spacing: 0.005em;
                     color: #000000;
                     height: 40px;
-                    background-color: #F2B176;
+                    background-color: #f2b176;
 
                     tr {
                         text-align: left;
