@@ -39,10 +39,10 @@ const TermsAndPrivacy = (props: any) => {
               termsAndPrivacy
                 ? location.pathname === "/terms"
                   ? termsAndPrivacy.terms
-                    ? termsAndPrivacy.terms
+                    ? JSON.parse(termsAndPrivacy.terms)
                     : null
                   : termsAndPrivacy.privacy
-                  ? termsAndPrivacy.privacy
+                  ? JSON.parse(termsAndPrivacy.privacy)
                   : null
                 : null
             ),

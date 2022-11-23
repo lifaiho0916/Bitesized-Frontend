@@ -23,8 +23,8 @@ const AdminTermsAndPrivacy = () => {
 
   const save = () => {
     const payload = {
-      terms: code === "terms" ? changeState : termsAndPrivacy.terms,
-      privacy: code === "privacy" ? changeState : termsAndPrivacy.privacy,
+      terms: code === "terms" ? JSON.stringify(changeState) : JSON.stringify(termsAndPrivacy.terms),
+      privacy: code === "privacy" ? JSON.stringify(changeState) : JSON.stringify(termsAndPrivacy.privacy),
     };
     dispatch(settingAction.saveTermAndPrivacy(payload));
   };
@@ -34,12 +34,12 @@ const AdminTermsAndPrivacy = () => {
     else {
       if (code === "terms") {
         setOption(0)
-        setInitialState(termsAndPrivacy ? termsAndPrivacy?.terms : null);
-        setChangeState(termsAndPrivacy ? termsAndPrivacy?.terms : null);
+        setInitialState(termsAndPrivacy ? JSON.parse(termsAndPrivacy?.terms) : null);
+        setChangeState(termsAndPrivacy ? JSON.parse(termsAndPrivacy?.terms) : null);
       } else {
         setOption(1)
-        setInitialState(termsAndPrivacy ? termsAndPrivacy?.privacy : null);
-        setChangeState(termsAndPrivacy ? termsAndPrivacy?.privacy : null);
+        setInitialState(termsAndPrivacy ? JSON.parse(termsAndPrivacy?.privacy) : null);
+        setChangeState(termsAndPrivacy ? JSON.parse(termsAndPrivacy?.privacy) : null);
       }
     }
   }, [code, termsAndPrivacy, pathname, navigate]);

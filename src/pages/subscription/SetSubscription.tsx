@@ -76,7 +76,7 @@ const SetSubscription = (props: any) => {
 
   const submit = () => {
     if (publishEnable) {
-      const newSubscription = subScription._id ? {
+      const newSubscription = subScription === null ? {
         name: name,
         price: Number(price),
         currency: CONSTANT.CURRENCIES[option].toLowerCase(),
@@ -91,7 +91,7 @@ const SetSubscription = (props: any) => {
         description: JSON.stringify(description)
       };
 
-      if(subScription._id) {
+      if(subScription) {
         dispatch(
           subScriptionAction.editSubscription(
             subScription._id,
