@@ -27,7 +27,6 @@ import { paymentAction } from "../../redux/actions/paymentActions"
 import CONSTANT from "../../constants/constant"
 import "../../assets/styles/profile/profileWalletStyle.scss"
 
-
 const useOutsideAlerter = (ref: any, moreInfo: any) => {
     const [more, setMore] = useState(moreInfo)
     useEffect(() => {

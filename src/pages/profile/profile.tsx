@@ -169,7 +169,7 @@ const Profile = () => {
                     <span>Manage my subscription</span>
                   </div>
 
-                  {subScription && subScription.visible === false && <div className="hide-plan">***This subscription is hided***</div>}
+                  {subScription && subScription.visible === false && <div className="hide-plan">***This subscription is hidden***</div>}
                   <div className="subscription-body" style={{ marginTop: subScription && subScription.visible === false ? '0px' : '30px' }}>
                     {subScription === null ? (
                       <>

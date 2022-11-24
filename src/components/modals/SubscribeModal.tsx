@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import draftToHtml from "draftjs-to-html";
@@ -36,17 +36,14 @@ const SubscribeModal = (props: any) => {
     }
   };
 
-  const displaySelectedPrice = (planCurrency: any, price: any) => {
-    if (currencyRate) {
-      const usdPrice =
-        planCurrency === "usd"
-          ? price
-          : price / currencyRate[`${planCurrency}`];
+  const displaySelectedPrice =  useMemo(() => {
+    if (subScription && currencyRate) {
+      const prices = JSON.parse(subScription.multiPrices)
       const currency = CONSTANT.CURRENCIES[option].toLowerCase();
       const rate = currency === "usd" ? 1.0 : currencyRate[`${currency}`];
-      return ((usdPrice * 1.034 + 0.3) * rate).toFixed(2);
+      return (prices[`${currency}`] * 1.034 + 0.3 * rate).toFixed(2);
     }
-  };
+  }, [currencyRate, subScription, option]);
 
   useEffect(() => {
     setCurrency(CONSTANT.CURRENCIES[option].toLowerCase());
@@ -144,10 +141,7 @@ const SubscribeModal = (props: any) => {
                   <div className="charge-amount">
                     <span>You will be charged for&nbsp;</span>
                     <span style={{ color: "#EF4444" }}>
-                      {displaySelectedPrice(
-                        subScription.currency,
-                        subScription.price
-                      )}
+                      {displaySelectedPrice}
                     </span>
                     <span>&nbsp;in {CONSTANT.CURRENCIES[option]}</span>
                   </div>
