@@ -34,7 +34,7 @@ const PurchaseModal = (props: any) => {
         }
     }
 
-    useEffect(() => { setCurrency(CONSTANT.CURRENCIES[option].toLowerCase()) }, [option])
+    useEffect(() => { setCurrency(CONSTANT.CURRENCIES[option].toLowerCase()) }, [option, setCurrency])
     useEffect(() => {
         if (user) {
             const foundIndex = CONSTANT.CURRENCIES.findIndex((currency: any) => currency.toLowerCase() === user.currency)
