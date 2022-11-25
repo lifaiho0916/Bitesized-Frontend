@@ -122,7 +122,7 @@ const AdminComment = (props: any) => {
       const buffer: any = document.getElementById("scroll");
       buffer.scrollTop = buffer.scrollHeight;
     }
-  }, [bite]);
+  }, [bite, dispatch, navigate]);
 
   return (
     <div className="admin-comment-wrapper">
