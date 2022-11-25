@@ -104,17 +104,17 @@ const BiteCardProfile = (props: any) => {
                     <div className="cover-image" style={{ backgroundColor: bite.currency ? lock ? '#97D8D4' : '#D8F7D8' : '#FBBEB1' }}>
                         {videoIndex > 0 &&
                             <div className="prev-video" onClick={PrevVideo}>
-                                <img src={NextBtn} alt="next video" />
+                                <img src={NextBtn} alt="prevvideo" />
                             </div>
                         }
                         {videoIndex < bite.videos.length - 1 &&
                             <div className="next-video" onClick={NextVideo}>
-                                <img src={NextBtn} alt="next video" />
+                                <img src={NextBtn} alt="nextvideo" />
                             </div>
                         }
                         <img
                             src={`${process.env.REACT_APP_SERVER_URL}/${bite.videos[videoIndex].coverUrl}`}
-                            alt="cover Image"
+                            alt="coverImage"
                             width={'100%'}
                         />
                         {user === null &&

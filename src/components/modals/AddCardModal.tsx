@@ -55,7 +55,7 @@ const PaymentForm = (props: any) => {
         const cvcElement: any = elements?.getElement(CardCvcElement)
         if (cvcElement) cvcElement.clear()
         setHolder("")
-    }, [props.show])
+    }, [props.show, elements])
 
     const elementStyle = {
         lineHeight: '42px',

@@ -98,7 +98,7 @@ const ProfileHeader = (props: any) => {
     }
   }, [profileUser])
 
-  useEffect(() => { if(profileUser) dispatch(accountAction.getAccount(profileUser._id)) }, [profileUser])
+  useEffect(() => { if(profileUser) dispatch(accountAction.getAccount(profileUser._id)) }, [profileUser, dispatch])
 
   return (
     <div className="profile-header">

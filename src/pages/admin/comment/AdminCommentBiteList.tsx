@@ -25,7 +25,7 @@ const AdminCommentBiteList = () => {
         if(code === null) setOtpion(0)
         else if( code === "paid" ) setOtpion(1)
         else setOtpion(2)
-    }, [code, location, sort])
+    }, [code, location, sort, dispatch])
 
     return (
         <div className="admin-bite-list-wrapper">
