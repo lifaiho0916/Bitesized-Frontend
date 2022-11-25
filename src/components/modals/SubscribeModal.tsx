@@ -47,7 +47,7 @@ const SubscribeModal = (props: any) => {
 
   useEffect(() => {
     setCurrency(CONSTANT.CURRENCIES[option].toLowerCase());
-  }, [option]);
+  }, [option, setCurrency]);
   useEffect(() => {
     if (user) {
       const foundIndex = CONSTANT.CURRENCIES.findIndex(
