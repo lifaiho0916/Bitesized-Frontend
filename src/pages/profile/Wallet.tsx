@@ -82,7 +82,7 @@ const Wallet = () => {
 
     useEffect(() => { if (!res) setMoreInfo(res) }, [res])
     useEffect(() => { if (!res1) setRemoveCard(res1) }, [res1])
-    useEffect(() => { if (user) dispatch(transactionAction.getTransactionsByUserId(user.id, 0, sort, period)) }, [location, dispatch, user, sort, period])
+    useEffect(() => { if (user) dispatch(transactionAction.getTransactionsByUserId(user.id, sort, period)) }, [location, dispatch, user, sort, period])
     useEffect(() => { dispatch(paymentAction.getPayment()) }, [dispatch, location])
 
     return (
@@ -197,11 +197,15 @@ const Wallet = () => {
                                                 <td>
                                                     {transaction.type === 2 && <span style={{ color: '#D94E27' }}>- {currencyRate ? getLocalCurrency(transaction.currency) + `${transaction.localPrice.toFixed(1)}` : ''}</span>}
                                                     {transaction.type === 3 && <span style={{ color: '#10B981' }}>+ {currencyRate ? getLocalCurrency(transaction.bite.currency) + `${transaction.bite.price.toFixed(1)}` : ''}</span>}
+                                                    {(transaction.type === 6 && transaction.currency === undefined) && <span style={{ color: '#10B981' }}>+ {currencyRate ? getLocalCurrency(transaction.subscription.currency) + `${transaction.subscription.price.toFixed(1)}` : ''}</span>}
+                                                    {(transaction.type === 6 && transaction.currency) && <span style={{ color: '#D94E27' }}>- {currencyRate ? getLocalCurrency(transaction.currency) + `${transaction.localPrice.toFixed(1)}` : ''}</span>}
                                                 </td>
                                                 <td>
                                                     <span className="detail">
                                                         {transaction.type === 2 && `Unlock Paid bite: [${transaction.bite.title}]`}
                                                         {transaction.type === 3 && `Earnings from: [${transaction.bite.title}]`}
+                                                        {(transaction.type === 6 && transaction.currency) && `Subscription fee of: [${transaction.subscription.owner.name} - ${transaction.subscription.planName}]`}
+                                                        {(transaction.type === 6 && transaction.currency === undefined) &&`Subscription from: [${transaction.subscription.subscriber.name}]`}
                                                     </span>
                                                 </td>
                                                 <td>{new Date(transaction.createdAt).toUTCString().slice(5, 11)}</td>
