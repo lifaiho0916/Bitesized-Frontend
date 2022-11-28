@@ -6,6 +6,7 @@ import Button from "../general/button"
 import Avatar from "../general/avatar"
 import SubscribeModal from "../modals/SubscribeModal"
 import AddCardModal from "../modals/AddCardModal"
+import SubscribeSuccessModal from "../modals/SubscribeSoccessModal"
 import {
   CheckIcon,
   EditIcon,
@@ -53,12 +54,15 @@ const ProfileHeader = (props: any) => {
   const accountState = useSelector((state: any) => state.account)
   const subScriptionState = useSelector((state: any) => state.subScription);
   const paymentState = useSelector((state: any) => state.payment)
+  const loadState = useSelector((state: any) => state.load)
   const { account } = accountState
   const { subScription } = subScriptionState;
   const { payment } = paymentState
+  const { dlgState } = loadState
 
   const [openSubscribeModal, setOpenSubscribeModal] = useState(false)
   const [openAddCardModal, setOpenAddCardModal] = useState(false)
+  const [openSubscribeSuccessModal, setOpenSubscribeSuccessModal] = useState(false)
 
   const hasYoutube = useMemo(() => {
     if(account && account.social && account.social.youtube) return true
@@ -125,6 +129,7 @@ const ProfileHeader = (props: any) => {
   }, [profileUser])
 
   useEffect(() => { if(profileUser) dispatch(accountAction.getAccount(profileUser._id)) }, [profileUser, dispatch])
+  useEffect(() => { if(dlgState === "subscribed") setOpenSubscribeSuccessModal(true) }, [dlgState])
 
   return (
     <div className="profile-header">
@@ -140,6 +145,16 @@ const ProfileHeader = (props: any) => {
       <AddCardModal
         show={openAddCardModal}
         onClose={() => setOpenAddCardModal(false)}
+      />
+      <SubscribeSuccessModal
+        show={openSubscribeSuccessModal}
+        creatorName={profileUser?.name}
+        subscriptionName={subScription?.name}
+        onClose={() => setOpenSubscribeSuccessModal(false)}
+        handleSubmit={() => {
+          setOpenSubscribeSuccessModal(false)
+          navigate(`/${user?.personalisedUrl}?tab=subscription`)
+        }}
       />
       <div className="avatar">
         <Avatar

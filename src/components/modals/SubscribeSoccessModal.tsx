@@ -1,13 +1,13 @@
 import Button from "../general/button"
-import { CloseIcon, RewardIcon, BiteIcon } from "../../assets/svg"
-import "../../assets/styles/modals/UnLockFreeModalStyle.scss"
+import { CloseIcon, NotificationSubscribedIcon } from "../../assets/svg"
+import "../../assets/styles/modals/SubscribeSuccessModalStyle.scss"
 
-const UnLockFreeModal = (props: any) => {
-    const { show, onClose, bite, handleSubmit } = props
+const SubscribeSuccessModal = (props: any) => {
+    const { show, onClose, handleSubmit, creatorName, subscriptionName } = props
 
     return (
         <div className={`modal${show ? ' show' : ''}`} onClick={onClose}>
-            <div id="unlockfree">
+            <div id="subscribesuccess">
                 <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                     <div className="modal-header">
                         <span className="title">Successful</span>
@@ -17,17 +17,13 @@ const UnLockFreeModal = (props: any) => {
                     </div>
                     <div className="modal-body">
                         <div className="reward-icon">
-                            {(bite && bite.currency) ?
-                                <BiteIcon color="#efa058" width={60} height={60} />
-                                :
-                                <RewardIcon color="#efa058" width={60} height={60} />
-                            }
+                            <NotificationSubscribedIcon color="#efa058" width={60} height={60} />
                         </div>
                         <div className="sub-title">
-                            <span>You have unlocked this {bite.currency ? '' : 'FREE'} Bite </span>
+                            <span>You have subscribed</span>
                         </div>
                         <div className="bite-title">
-                            <span>{bite ? bite.title : ''}</span>
+                            {`${creatorName}'s ${subscriptionName}`}
                         </div>
                         <div className="check-profile-btn">
                             <Button
@@ -56,4 +52,4 @@ const UnLockFreeModal = (props: any) => {
     )
 }
 
-export default UnLockFreeModal
+export default SubscribeSuccessModal

@@ -1,6 +1,6 @@
 import { Dispatch } from "redux"
 import * as api from "../../api"
-import { SET_LOADING_FALSE, SET_LOADING_TRUE, SET_SUBSCRIPTION } from "../types"
+import { SET_LOADING_FALSE, SET_LOADING_TRUE, SET_SUBSCRIPTION, SET_DIALOG_STATE } from "../types"
 
 export const subScriptionAction = {
     getSubScription: (userId: any) => async (dispatch: Dispatch<any>) => {
@@ -97,6 +97,7 @@ export const subScriptionAction = {
             dispatch({ type: SET_LOADING_FALSE })
             if(data.success) {
                 const { payload } = data
+                dispatch({ type: SET_DIALOG_STATE, payload: 'subscribed' })
                 dispatch({
                     type: SET_SUBSCRIPTION,
                     payload: payload.subScription
