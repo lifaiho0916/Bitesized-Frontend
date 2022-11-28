@@ -13,7 +13,6 @@ import {
   AddIcon,
   Bite1Icon,
   CreatoCoinIcon,
-  DeleteIcon,
   HiddenIcon,
   MoreIcon,
   NotificationOutlineIcon,
@@ -21,6 +20,7 @@ import {
 } from "../../assets/svg";
 import { authAction } from "../../redux/actions/authActions";
 import { subScriptionAction } from "../../redux/actions/subScriptionActions";
+import { paymentAction } from "../../redux/actions/paymentActions";
 import subscriptionImg from "../../assets/img/subscription.png";
 import { SET_PREVIOUS_ROUTE, SET_SUBSCRIPTION } from "../../redux/types";
 import CONSTANT from "../../constants/constant";
@@ -96,7 +96,10 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if(authuser && code !== "subscription" && isSame === false) dispatch(subScriptionAction.getSubScription(authuser._id))
+    if(authuser && code !== "subscription" && isSame === false) {
+      dispatch(subScriptionAction.getSubScription(authuser._id))
+      dispatch(paymentAction.getPayment())
+    }
   }, [isSame, authuser, code, dispatch])
 
   return (
@@ -215,12 +218,12 @@ const Profile = () => {
                                     {subScription.visible ? <HiddenIcon color="#000000" /> : <VisibleIcon color="#000000" /> }
                                     <span>{subScription.visible ? "Hide this subscription plan" : "Show this subscription plan" }</span>
                                 </div>
-                                <div className="list" onClick={() => {
+                                {/* <div className="list" onClick={() => {
                                     setMoreInfo(false)
                                     setOpenDelPlan(true)
                                 }}>
                                     <DeleteIcon color="#000000" /><span>Delete this subscription plan</span>
-                                </div>
+                                </div> */}
                             </div>
                             </div>
                           </div>

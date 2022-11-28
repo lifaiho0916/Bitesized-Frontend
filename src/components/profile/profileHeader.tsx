@@ -5,13 +5,16 @@ import { LanguageContext } from "../../routes/authRoute"
 import Button from "../general/button"
 import Avatar from "../general/avatar"
 import SubscribeModal from "../modals/SubscribeModal"
+import AddCardModal from "../modals/AddCardModal"
 import {
+  CheckIcon,
   EditIcon,
   MoreIcon,
 } from "../../assets/svg"
 import YoutubeSvg from "../../assets/svg/youtube.svg"
 import IgSvg from "../../assets/svg/ig.svg"
 import { accountAction } from "../../redux/actions/socialAccountActions"
+import { subScriptionAction } from "../../redux/actions/subScriptionActions"
 import { SET_NAME_EXIST, SET_PROFILE, SET_URL_EXIST } from "../../redux/types"
 import "../../assets/styles/profile/components/profileHeaderStyle.scss"
 
@@ -45,13 +48,17 @@ const ProfileHeader = (props: any) => {
   const [showMore, setShowMore] = useState(false)
   const [showLink, setShowLink] = useState(false)
   const [currency, setCurrency] = useState('usd')
+  const [card, setCard] = useState(false)
 
   const accountState = useSelector((state: any) => state.account)
   const subScriptionState = useSelector((state: any) => state.subScription);
+  const paymentState = useSelector((state: any) => state.payment)
   const { account } = accountState
   const { subScription } = subScriptionState;
+  const { payment } = paymentState
 
   const [openSubscribeModal, setOpenSubscribeModal] = useState(false)
+  const [openAddCardModal, setOpenAddCardModal] = useState(false)
 
   const hasYoutube = useMemo(() => {
     if(account && account.social && account.social.youtube) return true
@@ -79,11 +86,30 @@ const ProfileHeader = (props: any) => {
     }
   }, [profileUser, contexts.CREATOR_CATEGORY_LIST])
 
+  const subscribed = useMemo(() => {
+    if(subScription && user) {
+      const value = subScription.subscribers.every((subscriber: any) => String(subscriber.subscriber) !== String(user.id))
+      return !value
+    } return false
+  }, [subScription, user])
+
   const subscribe = () => {
-    if(user) {
-      setOpenSubscribeModal(true)
-    } else navigate('/auth/signup')
+    if(user) setOpenSubscribeModal(true)
+    else navigate('/auth/signup')
   }
+
+  const handleSubscribe = () => {
+    setOpenSubscribeModal(false)
+    if(payment) dispatch(subScriptionAction.subscribePlan(subScription._id, currency))
+    else {
+      setCard(true)
+      setOpenAddCardModal(true)
+    }
+  }
+
+  useEffect(() => {
+    if(payment && card) dispatch(subScriptionAction.subscribePlan(subScription._id, currency))
+  }, [payment, card, currency, subScription, dispatch])
 
   useEffect(() => { if (!res) setMoreInfo(res) }, [res])
   useLayoutEffect(() => {
@@ -109,7 +135,11 @@ const ProfileHeader = (props: any) => {
         categoryText={categoryText}
         subScription={subScription}
         setCurrency={setCurrency}
-        handleSubmit={() => { console.log("sss") }}
+        handleSubmit={handleSubscribe}
+      />
+      <AddCardModal
+        show={openAddCardModal}
+        onClose={() => setOpenAddCardModal(false)}
       />
       <div className="avatar">
         <Avatar
@@ -149,13 +179,26 @@ const ProfileHeader = (props: any) => {
         </div>
         <div className="btn-part">
           {(same === false && subScription && subScription.visible) &&
-            <Button
-              text="Subscribe"
-              fillStyle="fill"
-              color="primary"
-              shape="rounded"
-              handleSubmit={subscribe}
-            />
+            <>
+            {subscribed ?
+              <Button
+                text="Subscribed"
+                fillStyle="outline"
+                color="primary"
+                shape="rounded"
+                icon={[<CheckIcon color="#EFA058"/>, <CheckIcon color="white"/>, <CheckIcon color="white"/>]}
+                handleSubmit={() => {}}
+              />
+             :
+              <Button
+                text="Subscribe"
+                fillStyle="fill"
+                color="primary"
+                shape="rounded"
+                handleSubmit={subscribe}
+              />
+            }
+            </>
           }
         </div>
       </div>
