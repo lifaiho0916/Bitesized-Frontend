@@ -92,7 +92,7 @@ const ProfileHeader = (props: any) => {
 
   const subscribed = useMemo(() => {
     if(subScription && user) {
-      const value = subScription.subscribers.every((subscriber: any) => String(subscriber.subscriber) !== String(user.id))
+      const value = subScription.subscribers.every((subscriber: any) => String(subscriber.user) !== String(user.id))
       return !value
     } return false
   }, [subScription, user])
@@ -112,7 +112,10 @@ const ProfileHeader = (props: any) => {
   }
 
   useEffect(() => {
-    if(payment && card) dispatch(subScriptionAction.subscribePlan(subScription._id, currency))
+    if(payment && card) {
+      dispatch(subScriptionAction.subscribePlan(subScription._id, currency))
+      setCard(false)
+    }
   }, [payment, card, currency, subScription, dispatch])
 
   useEffect(() => { if (!res) setMoreInfo(res) }, [res])

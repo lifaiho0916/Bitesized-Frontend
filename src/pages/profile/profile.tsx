@@ -72,8 +72,10 @@ const Profile = () => {
 
   useEffect(() => {
     const personalisedUrl = pathname.substring(1);
-    if (code === "subscription" && user) dispatch(subScriptionAction.getSubScription(user?.id));
-    else dispatch(biteAction.getBitesByPersonalisedUrl(personalisedUrl, user?.id, code));
+    if (code === "subscription" && user) {
+      dispatch(subScriptionAction.getSubScription(user?.id));
+      // dispatch(subScriptionAction.getSubscribersByUserId)
+    } else dispatch(biteAction.getBitesByPersonalisedUrl(personalisedUrl, user?.id, code));
     dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${user?.personalisedUrl}` });
   }, [pathname, dispatch, user, code]);
 
