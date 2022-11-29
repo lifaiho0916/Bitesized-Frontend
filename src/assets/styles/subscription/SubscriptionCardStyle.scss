@@ -1,0 +1,114 @@
+.subscription-card-wrapper {
+    width: 330px;
+    background: #ffffff;
+    box-shadow: 1.77517px 3.55033px 8.87583px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    height: fit-content;
+    padding: 30px 18px;
+
+    .user-info {
+        display: flex;
+
+        .user-name-category {
+            margin-left: 10px;
+            font-family: "Lato";
+            font-style: normal;
+            letter-spacing: 0.02em;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .username {
+                font-weight: 800;
+                font-size: 18px;
+                line-height: 20px;
+                color: #efa058;
+            }
+
+            .user-category {
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 14px;
+                color: #54504e;
+            }
+        }
+    }
+
+    .subscription-status {
+        margin-top: 20px;
+
+        .status-fee {
+            display: flex;
+            justify-content: space-between;
+
+            .status-fee-part {
+                width: 43%;
+                font-family: "Lato";
+                font-style: normal;
+
+                .status-title {
+                    font-weight: 600;
+                    font-size: 16px;
+                    line-height: 18px;
+                    color: #a6a29f;
+                    margin-bottom: 4px;
+                }
+
+                .status-info {
+                    font-weight: 800;
+                    font-size: 20px;
+                    line-height: 24px;
+                    letter-spacing: 0.02em;
+                    color: #efa058;
+                }
+            }
+        }
+    }
+
+    .status-date {
+        display: flex;
+        justify-content: space-between;
+
+        .status-date-part {
+            margin-bottom: 4px;
+            width: 43%;
+            font-family: "Lato";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 18px;
+            color: #54504e;
+        }
+    }
+
+    .benefits {
+        margin-top: 20px;
+        font-family: "Lato";
+        font-style: normal;
+
+        .benefits-title {
+            font-weight: 800;
+            font-size: 18px;
+            line-height: 20px;
+            letter-spacing: 0.02em;
+            color: #efa058;
+        }
+
+        .benefits-body {
+            margin-top: 4px;
+            ul {
+                margin: 0px;
+                padding: 0px 0px 0px 25px;
+
+                li {
+                    font-family: "Lato";
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 16px;
+                    line-height: 18px;
+                    color: #54504e;
+                }
+            }
+        }
+    }
+}

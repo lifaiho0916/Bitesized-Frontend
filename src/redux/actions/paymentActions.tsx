@@ -28,8 +28,9 @@ export const paymentAction = {
                 const { payload } = data
                 dispatch({ type: SET_PAYMENT, payload: payload.payment })
             }
-        } catch (err) {
-            console.log(err)
+        } catch (err: any) {
+            const { response } = err
+            console.log(response.data.msg)
             dispatch({ type: SET_LOADING_FALSE })
         }
     },

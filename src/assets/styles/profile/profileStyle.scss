@@ -145,6 +145,16 @@
         box-shadow: 1.77517px 3.55033px 8.87583px rgba(0, 0, 0, 0.15);
         padding: 25px;
 
+        .no-subscription {
+          font-family: "Lato";
+          font-style: normal;
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 18px;
+          text-align: center;
+          color: #938d8a;
+        }
+
         .subscription-body-title {
           display: flex;
           justify-content: center;

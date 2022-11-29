@@ -1,6 +1,6 @@
 import { Dispatch } from "redux"
 import * as api from "../../api"
-import { SET_LOADING_FALSE, SET_LOADING_TRUE, SET_SUBSCRIPTION, SET_DIALOG_STATE } from "../types"
+import { SET_LOADING_FALSE, SET_LOADING_TRUE, SET_SUBSCRIPTION, SET_DIALOG_STATE, SET_SUBSCRIBERS } from "../types"
 
 export const subScriptionAction = {
     getSubScription: (userId: any) => async (dispatch: Dispatch<any>) => {
@@ -106,6 +106,20 @@ export const subScriptionAction = {
         } catch (err) {
             console.log(err)
             dispatch({ type: SET_LOADING_FALSE })
+        }
+    },
+
+    getSubscribersByUserId: () => async (dispatch: Dispatch<any>) => {
+        try {
+            dispatch({ type: SET_SUBSCRIBERS, payload: [] })
+            const response = await api.getSubscribersByUserId()
+            const { data } = response
+            if(data.success) {
+                const { payload } = data
+                dispatch({ type: SET_SUBSCRIBERS, payload: payload.subscribers })
+            }
+        } catch (err) {
+            console.log(err)
         }
     }
 }

@@ -9,6 +9,7 @@ import HideSubScriptionModal from "../../components/modals/HideSubScriptionPlanM
 import ProfileMenu from "../../components/profileMenu";
 import Button from "../../components/general/button";
 import BiteCardProfile from "../../components/bite/BiteCardProfile";
+import SubscriptionCard from "../../components/SubscriptionCard";
 import {
   AddIcon,
   Bite1Icon,
@@ -53,7 +54,7 @@ const Profile = () => {
   const subScriptionState = useSelector((state: any) => state.subScription);
   const { bites } = biteState;
   const { user, users } = userState;
-  const { subScription } = subScriptionState;
+  const { subScription, subscribers } = subScriptionState;
 
   const [searchParams] = useSearchParams();
   const code: any = searchParams.get("tab");
@@ -74,7 +75,7 @@ const Profile = () => {
     const personalisedUrl = pathname.substring(1);
     if (code === "subscription" && user) {
       dispatch(subScriptionAction.getSubScription(user?.id));
-      // dispatch(subScriptionAction.getSubscribersByUserId)
+      dispatch(subScriptionAction.getSubscribersByUserId())
     } else dispatch(biteAction.getBitesByPersonalisedUrl(personalisedUrl, user?.id, code));
     dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${user?.personalisedUrl}` });
   }, [pathname, dispatch, user, code]);
@@ -145,22 +146,6 @@ const Profile = () => {
                   : ["", "", ""]
               }
             />
-             {/* <ProfileMenu
-              selectedText={
-                code === null
-                  ? "My Purchases"
-                  : "My Bites"
-              }
-              texts={["My Purchases", "My Bites"]}
-              urls={
-                authuser
-                  ? [
-                      authuser.personalisedUrl,
-                      `${authuser.personalisedUrl}?tab=mybites`,
-                    ]
-                  : ["", ""]
-              }
-            /> */}
           </div>
         )}
         {code === "subscription" ? (
@@ -279,6 +264,21 @@ const Profile = () => {
             <div className="subscription-title">
               <NotificationOutlineIcon color="#EA8426" width={24} />
               <span>I have subscribed</span>
+            </div>
+            <div className="subscription-body" style={{ boxShadow: 'none' }}>
+              {subscribers.length === 0 ? 
+                <div className="no-subscription">
+                  <span>There is no “subscription” yet </span> 
+                </div>
+                : 
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  {subscribers.map((subscriber: any, index: any) => (
+                    <div key={index} style={{ margin: '5px 10px' }}>
+                      <SubscriptionCard subscriber={subscriber}/>
+                    </div>
+                  ))}
+                </div>
+              }
             </div>
           </div>
         ) : (
