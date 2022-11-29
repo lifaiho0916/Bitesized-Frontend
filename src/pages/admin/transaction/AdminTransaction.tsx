@@ -130,16 +130,22 @@ const AdminTransaction = () => {
                                             {transaction.type === 1 && `Unlock FREE bite: [${transaction.bite.title}]`}
                                             {transaction.type === 2 && `Unlock Paid bite: [${transaction.bite.title}]`}
                                             {transaction.type === 3 && `Earnings from paid bite: [${transaction.bite.title}]`}
+                                            {(transaction.type === 6 && transaction.currency === undefined) && `Subscription from: [${transaction.subscription.subscriber.name} - ${transaction.subscription.planName}]` }
+                                            {(transaction.type === 6 && transaction.currency !== undefined) && `Subscription fee of: [${transaction.subscription.owner.name} - ${transaction.subscription.planName}]` }
                                         </td>
                                         <td>
                                             {transaction.type === 1 && <span style={{ color: '#D94E27' }}>- 0</span>}
-                                            {transaction.type === 2 && <span style={{ color: '#D94E27' }}>- {currencyRate ? (getUSD(transaction.bite.currency, transaction.bite.price)).toFixed(2) : ''}</span>}
+                                            {transaction.type === 2 && <span style={{ color: '#D94E27' }}>- {currencyRate ? (getUSD(transaction.currency, transaction.localPrice)).toFixed(2) : ''}</span>}
                                             {transaction.type === 3 && <span style={{ color: '#10B981' }}>+ {currencyRate ? (getUSD(transaction.bite.currency, transaction.bite.price)).toFixed(2) : ''}</span>}
+                                            {(transaction.type === 6 && transaction.currency === undefined) && <span style={{ color: '#10B981' }}>+ {currencyRate ? (getUSD(transaction.subscription.currency, transaction.subscription.price)).toFixed(2) : ''}</span>}
+                                            {(transaction.type === 6 && transaction.currency !== undefined) && <span style={{ color: '#D94E27' }}>- {currencyRate ? (getUSD(transaction.currency, transaction.localPrice)).toFixed(2) : ''}</span>}
                                         </td>
                                         <td>
                                             {transaction.type === 1 && <span style={{ color: '#D94E27' }}>- 0</span>}
-                                            {transaction.type === 2 && <span style={{ color: '#D94E27' }}>- {currencyRate ? getLocalCurrency(transaction.currency) + `${transaction.localPrice.toFixed(2)}` : ''}</span>}
-                                            {transaction.type === 3 && <span style={{ color: '#10B981' }}>+ {currencyRate ? getLocalCurrency(transaction.bite.currency) + `${transaction.bite.price.toFixed(2)}` : ''}</span>}
+                                            {transaction.type === 2 && <span style={{ color: '#D94E27' }}>- {getLocalCurrency(transaction.currency) + `${transaction.localPrice.toFixed(2)}`}</span>}
+                                            {transaction.type === 3 && <span style={{ color: '#10B981' }}>+ {getLocalCurrency(transaction.bite.currency) + `${transaction.bite.price.toFixed(2)}`}</span>}
+                                            {(transaction.type === 6 && transaction.currency === undefined) && <span style={{ color: '#10B981' }}>+ {getLocalCurrency(transaction.subscription.currency) + `${transaction.subscription.price.toFixed(2)}`}</span>}
+                                            {(transaction.type === 6 && transaction.currency !== undefined) && <span style={{ color: '#D94E27' }}>- {getLocalCurrency(transaction.currency) + `${transaction.localPrice.toFixed(2)}`}</span>}
                                         </td>
                                     </tr>
                                 ))}
