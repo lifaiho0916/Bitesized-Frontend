@@ -6,7 +6,7 @@ import CONSTANT from "../constants/constant"
 import "../assets/styles/subscription/SubscriptionCardStyle.scss"
 
 const SubscriptionCard = (props: any) => {
-    const { subscriber } = props
+    const { subscriber, handleSubmit } = props
     const contexts = useContext(LanguageContext)
 
     const categoryText = useMemo(() => {
@@ -26,10 +26,10 @@ const SubscriptionCard = (props: any) => {
       }, [subscriber, contexts.CREATOR_CATEGORY_LIST])
 
     const getLocalCurrency = (currency: any) => {
-    const index = CONSTANT.CURRENCIES.findIndex((cur: any) => cur.toLowerCase() === currency)
-    let res = CONSTANT.CURRENCIES[index] + ' ' + CONSTANT.CURRENCY_SYMBOLS[index]
-    return res
-}
+        const index = CONSTANT.CURRENCIES.findIndex((cur: any) => cur.toLowerCase() === currency)
+        let res = CONSTANT.CURRENCIES[index] + ' ' + CONSTANT.CURRENCY_SYMBOLS[index]
+        return res
+    }
 
     return (
         <div className="subscription-card-wrapper">
@@ -117,7 +117,7 @@ const SubscriptionCard = (props: any) => {
                         shape="rounded"
                         width={'240px'}
                         text="Unsubscribe"
-                        handleSubmit={() => {}}
+                        handleSubmit={handleSubmit}
                     />
                 </div>
             </div>

@@ -6,6 +6,8 @@ import { biteAction } from "../../redux/actions/biteActions";
 import ProfileHeader from "../../components/profile/profileHeader";
 import DelSubScriptionModal from "../../components/modals/DelSubScriptionPlanModal";
 import HideSubScriptionModal from "../../components/modals/HideSubScriptionPlanModal";
+import UnsubscribedConfirmModal from "../../components/modals/UnsubscribedConfirmModal";
+import UnsubscribedSuccessModal from "../../components/modals/UnsubscribedSuccessModal";
 import ProfileMenu from "../../components/profileMenu";
 import Button from "../../components/general/button";
 import BiteCardProfile from "../../components/bite/BiteCardProfile";
@@ -56,6 +58,8 @@ const Profile = () => {
   const { user, users } = userState;
   const { subScription, subscribers } = subScriptionState;
 
+  const [selectedIndex, setSelectedIndex] = useState(-1)
+
   const [searchParams] = useSearchParams();
   const code: any = searchParams.get("tab");
   const [moreInfo, setMoreInfo] = useState(false)
@@ -63,6 +67,8 @@ const Profile = () => {
   const res = useOutsideAlerter(wrapRef, moreInfo)
   const [openDelPlan, setOpenDelPlan] = useState(false)
   const [openHidePlan, setOpenHidePlan] = useState(false)
+  const [openUnsubscribeConfirm, setOpenUnsubscribeConfirm] = useState(false)
+  const [openUnsubscribedSuccess, setOpenUnsubscribedSuccess] = useState(false)
 
   useEffect(() => {
     const personalisedUrl = pathname.substring(1);
@@ -124,6 +130,26 @@ const Profile = () => {
             setOpenHidePlan(false)
             dispatch(subScriptionAction.setSubScriptionVisible(subScription?._id, !subScription?.visible))
           }}
+        />
+        <UnsubscribedConfirmModal
+          show={openUnsubscribeConfirm}
+          onClose={() => setOpenUnsubscribeConfirm(false)}
+          planName={selectedIndex !== -1 ? subscribers[selectedIndex]?.plan?.name : '' }
+          price={selectedIndex !== -1 ? JSON.parse(subscribers[selectedIndex]?.plan ? subscribers[selectedIndex]?.plan?.multiPrices : '{}')[`${subscribers[selectedIndex]?.currency}`] : undefined }
+          currency={selectedIndex !== -1 ? subscribers[selectedIndex]?.currency : undefined }
+          deadline={selectedIndex !== -1 ? subscribers[selectedIndex]?.nextInvoiceAt : ''}
+          handleSubmit={() => {
+            setOpenUnsubscribeConfirm(false)
+            setOpenUnsubscribedSuccess(true)
+          }}
+        />
+        <UnsubscribedSuccessModal
+          show={openUnsubscribedSuccess}
+          onClose={() => setOpenUnsubscribedSuccess(false)}
+          planName={selectedIndex !== -1 ? subscribers[selectedIndex]?.plan?.name : '' }
+          price={selectedIndex !== -1 ? JSON.parse(subscribers[selectedIndex]?.plan ? subscribers[selectedIndex]?.plan?.multiPrices : '{}')[`${subscribers[selectedIndex]?.currency}`] : undefined }
+          currency={selectedIndex !== -1 ? subscribers[selectedIndex]?.currency : undefined }
+          deadline={selectedIndex !== -1 ? subscribers[selectedIndex]?.nextInvoiceAt : ''}
         />
         {isSame && (
           <div className="profile-menu">
@@ -274,7 +300,13 @@ const Profile = () => {
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                   {subscribers.map((subscriber: any, index: any) => (
                     <div key={index} style={{ margin: '5px 10px' }}>
-                      <SubscriptionCard subscriber={subscriber}/>
+                      <SubscriptionCard 
+                        subscriber={subscriber}
+                        handleSubmit={() => {
+                          setSelectedIndex(index)
+                          setOpenUnsubscribeConfirm(true)
+                        }}
+                      />
                     </div>
                   ))}
                 </div>
