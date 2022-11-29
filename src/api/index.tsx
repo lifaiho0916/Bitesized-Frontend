@@ -68,6 +68,7 @@ export const setSubScriptionVisible = (id: any, data: any) => API.put(`/api/subs
 export const editSubScription = (id: any, data: any) => API.put(`/api/subscription/${id}`, data)
 export const subscribePlan = (id: any, data: any) => API.put(`/api/subscription/${id}/create`, data)
 export const getSubscribersByUserId = () => API.get('/api/subscription/user-subscribers')
+export const unSubscribe = (data: any) => API.put(`/api/subscription/unsubscribe`, data)
 //SETTING
 export const getCurrencyRate = () => API.get('/api/setting/currencyrate')
 export const getTermsAndPrivacy = () => API.get('/api/setting/terms-privacy')

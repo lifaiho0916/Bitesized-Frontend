@@ -1,4 +1,5 @@
 import { useMemo, useContext } from "react"
+import { useSelector } from "react-redux"
 import Avatar from "./general/avatar"
 import Button from "./general/button"
 import { LanguageContext } from "../routes/authRoute"
@@ -8,6 +9,8 @@ import "../assets/styles/subscription/SubscriptionCardStyle.scss"
 const SubscriptionCard = (props: any) => {
     const { subscriber, handleSubmit } = props
     const contexts = useContext(LanguageContext)
+    const loadState = useSelector((state: any) => state.load)
+    const { currencyRate } = loadState
 
     const categoryText = useMemo(() => {
         if (subscriber.plan) {
@@ -40,7 +43,7 @@ const SubscriptionCard = (props: any) => {
                 />
                 <div className="user-name-category">
                     <div className="username">
-                        <span>{subscriber?.plan?.user?.name}</span>
+                        <span>{subscriber && subscriber.plan.user.name}</span>
                     </div>
                     <div className="user-category">
                         <span>{categoryText}</span>
@@ -55,7 +58,7 @@ const SubscriptionCard = (props: any) => {
                             <span>Status</span>
                         </div>
                         <div className="status-info">
-                            <span>{subscriber ? subscriber.status ? 'Subscribing' : 'Unsubscribed' : ''} </span>
+                            <span>{(subscriber && currencyRate) ? subscriber.status ? 'Subscribing' : 'Unsubscribed' : ''} </span>
                         </div>
                     </div>
                     <div className="status-fee-part">
@@ -63,7 +66,7 @@ const SubscriptionCard = (props: any) => {
                             <span>Subscription fee</span>
                         </div>
                         <div className="status-info">
-                            <span>{subscriber && `${getLocalCurrency(subscriber.currency)}${JSON.parse(subscriber.plan.multiPrices)[`${subscriber.currency}`].toFixed(1)}`} </span>
+                            <span>{subscriber && `${getLocalCurrency(subscriber.currency)}${subscriber.status ? (JSON.parse(subscriber.plan.multiPrices)[`${subscriber.currency}`] * 1.034 + 0.3 * (subscriber.currency === 'usd' ? 1.0 : currencyRate[`${subscriber.currency}`])).toFixed(1) : subscriber.price.toFixed(1) }`} </span>
                         </div>
                     </div>
                 </div>
@@ -73,7 +76,7 @@ const SubscriptionCard = (props: any) => {
                         <span>Subscribe plan:</span>
                     </div>
                     <div className="status-date-part">
-                        <span>{subscriber?.plan?.name}</span>
+                        <span>{subscriber && (subscriber.status ? subscriber.plan.name : subscriber.planName)}</span>
                     </div>
                 </div>
                 <div className="status-date">
@@ -88,7 +91,7 @@ const SubscriptionCard = (props: any) => {
                 </div>
                 <div className="status-date">
                     <div className="status-date-part">
-                        <span>Next payment date:</span>
+                        <span>{subscriber && (subscriber.status ? 'Next payment date:' : 'Effective until:')}</span>
                     </div>
                     <div className="status-date-part">
                         <span>
@@ -103,23 +106,31 @@ const SubscriptionCard = (props: any) => {
                     <div className="benefits-body">
                         {subscriber && 
                             <ul>
-                                {subscriber.plan.benefits.map((benefit: any, index: any) => (
-                                    <li key={index}>{benefit}</li>
-                                ))}
+                                {subscriber.status ? 
+                                    subscriber.plan.benefits.map((benefit: any, index: any) => (
+                                        <li key={index}>{benefit}</li>
+                                    )) 
+                                :
+                                    subscriber.benefits.map((benefit: any, index: any) => (
+                                        <li key={index}>{benefit}</li>
+                                    ))
+                                }
                             </ul>
                         }
                     </div>
                 </div>
-                <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
-                    <Button
-                        fillStyle="fill"
-                        color="secondary"
-                        shape="rounded"
-                        width={'240px'}
-                        text="Unsubscribe"
-                        handleSubmit={handleSubmit}
-                    />
-                </div>
+                {(subscriber && subscriber.status === true) &&
+                    <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
+                        <Button
+                            fillStyle="fill"
+                            color="secondary"
+                            shape="rounded"
+                            width={'240px'}
+                            text="Unsubscribe"
+                            handleSubmit={handleSubmit}
+                        />
+                    </div>
+                }
             </div>
         </div>
     )

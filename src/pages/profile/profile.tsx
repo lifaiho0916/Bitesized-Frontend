@@ -25,7 +25,7 @@ import { authAction } from "../../redux/actions/authActions";
 import { subScriptionAction } from "../../redux/actions/subScriptionActions";
 import { paymentAction } from "../../redux/actions/paymentActions";
 import subscriptionImg from "../../assets/img/subscription.png";
-import { SET_PREVIOUS_ROUTE, SET_SUBSCRIPTION } from "../../redux/types";
+import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE, SET_SUBSCRIPTION } from "../../redux/types";
 import CONSTANT from "../../constants/constant";
 import "../../assets/styles/profile/profileStyle.scss";
 
@@ -53,10 +53,12 @@ const Profile = () => {
   const { pathname } = location;
   const biteState = useSelector((state: any) => state.bite);
   const userState = useSelector((state: any) => state.auth);
+  const loadState = useSelector((state: any) => state.load);
   const subScriptionState = useSelector((state: any) => state.subScription);
   const { bites } = biteState;
   const { user, users } = userState;
   const { subScription, subscribers } = subScriptionState;
+  const { dlgState } = loadState
 
   const [selectedIndex, setSelectedIndex] = useState(-1)
 
@@ -111,6 +113,13 @@ const Profile = () => {
     }
   }, [isSame, authuser, code, dispatch])
 
+  useEffect(() => {
+    if(dlgState === 'unsubscribed') {
+      setOpenUnsubscribeConfirm(false)
+      setOpenUnsubscribedSuccess(true)
+    }
+  }, [dlgState])
+
   return (
     <div className="profile-wrapper">
       <div className="profile">
@@ -134,22 +143,16 @@ const Profile = () => {
         <UnsubscribedConfirmModal
           show={openUnsubscribeConfirm}
           onClose={() => setOpenUnsubscribeConfirm(false)}
-          planName={selectedIndex !== -1 ? subscribers[selectedIndex]?.plan?.name : '' }
-          price={selectedIndex !== -1 ? JSON.parse(subscribers[selectedIndex]?.plan ? subscribers[selectedIndex]?.plan?.multiPrices : '{}')[`${subscribers[selectedIndex]?.currency}`] : undefined }
-          currency={selectedIndex !== -1 ? subscribers[selectedIndex]?.currency : undefined }
-          deadline={selectedIndex !== -1 ? subscribers[selectedIndex]?.nextInvoiceAt : ''}
-          handleSubmit={() => {
-            setOpenUnsubscribeConfirm(false)
-            setOpenUnsubscribedSuccess(true)
-          }}
+          subscriber={selectedIndex !== -1 && subscribers[selectedIndex] ? subscribers[selectedIndex] : undefined }
+          handleSubmit={() => { dispatch(subScriptionAction.unSubscribe(subscribers[selectedIndex]?._id)) }}
         />
         <UnsubscribedSuccessModal
           show={openUnsubscribedSuccess}
-          onClose={() => setOpenUnsubscribedSuccess(false)}
-          planName={selectedIndex !== -1 ? subscribers[selectedIndex]?.plan?.name : '' }
-          price={selectedIndex !== -1 ? JSON.parse(subscribers[selectedIndex]?.plan ? subscribers[selectedIndex]?.plan?.multiPrices : '{}')[`${subscribers[selectedIndex]?.currency}`] : undefined }
-          currency={selectedIndex !== -1 ? subscribers[selectedIndex]?.currency : undefined }
-          deadline={selectedIndex !== -1 ? subscribers[selectedIndex]?.nextInvoiceAt : ''}
+          onClose={() => {
+            setOpenUnsubscribedSuccess(false)
+            dispatch({ type: SET_DIALOG_STATE, payload: "" })
+          }}
+          subscriber={selectedIndex !== -1 && subscribers[selectedIndex] ? subscribers[selectedIndex] : undefined }
         />
         {isSame && (
           <div className="profile-menu">

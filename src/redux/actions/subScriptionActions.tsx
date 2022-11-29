@@ -121,5 +121,26 @@ export const subScriptionAction = {
         } catch (err) {
             console.log(err)
         }
+    },
+
+    unSubscribe: (id: any) => async (dispatch: Dispatch<any>, getState: any) => {
+        try {
+            dispatch({ type: SET_LOADING_TRUE })
+            const response = await api.unSubscribe({ id: id })
+            const { data } = response
+            dispatch({ type: SET_LOADING_FALSE })
+            if(data.success) {
+                const { payload } = data
+                const scribers = getState().subScription.subscribers;
+                let resScribers = scribers.map((scriber: any) => {
+                    if(String(scriber._id) === String(payload.subscriber._id)) return payload.subscriber
+                    else return scriber
+                })
+                dispatch({ type: SET_SUBSCRIBERS, payload: resScribers })
+                dispatch({ type: SET_DIALOG_STATE, payload: 'unsubscribed' })
+            }
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
