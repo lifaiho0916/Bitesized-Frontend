@@ -1,4 +1,5 @@
 .subscription-card-wrapper {
+    box-sizing: border-box;
     width: 330px;
     background: #ffffff;
     box-shadow: 1.77517px 3.55033px 8.87583px rgba(0, 0, 0, 0.15);
@@ -70,8 +71,16 @@
         justify-content: space-between;
 
         .status-date-part {
+
+            &:first-child {
+                width: 48%;
+            }
+
+            &:last-child {
+                width: 42%;
+            }
+
             margin-bottom: 4px;
-            width: 43%;
             font-family: "Lato";
             font-style: normal;
             font-weight: 600;

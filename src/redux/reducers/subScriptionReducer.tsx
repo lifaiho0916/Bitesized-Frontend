@@ -2,7 +2,8 @@ import * as actionTypes from "../types";
 
 const INITIAL_STATE: any = {
   subScription: null,
-  subscribers: []
+  subscribers: [],
+  total: 0,
 };
 
 const subScriptionReducer = (state: any = INITIAL_STATE, action: any) => {
@@ -20,6 +21,12 @@ const subScriptionReducer = (state: any = INITIAL_STATE, action: any) => {
           subscribers: payload
         }
       }
+    case actionTypes.SET_TOTAL_SUBSCRIBERS: {
+      return {
+        ...state,
+        total: payload
+      }
+    }
     default:
       return state;
   }

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
+import ReactPaginate from 'react-paginate'
 import draftToHtml from "draftjs-to-html";
 import { biteAction } from "../../redux/actions/biteActions";
 import ProfileHeader from "../../components/profile/profileHeader";
@@ -25,7 +26,7 @@ import { authAction } from "../../redux/actions/authActions";
 import { subScriptionAction } from "../../redux/actions/subScriptionActions";
 import { paymentAction } from "../../redux/actions/paymentActions";
 import subscriptionImg from "../../assets/img/subscription.png";
-import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE, SET_SUBSCRIPTION } from "../../redux/types";
+import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE, SET_SUBSCRIPTION, SET_TOTAL_SUBSCRIBERS } from "../../redux/types";
 import CONSTANT from "../../constants/constant";
 import "../../assets/styles/profile/profileStyle.scss";
 
@@ -57,10 +58,12 @@ const Profile = () => {
   const subScriptionState = useSelector((state: any) => state.subScription);
   const { bites } = biteState;
   const { user, users } = userState;
-  const { subScription, subscribers } = subScriptionState;
+  const { subScription, subscribers, total } = subScriptionState;
   const { dlgState } = loadState
 
   const [selectedIndex, setSelectedIndex] = useState(-1)
+  const [sort, setSort] = useState(0)
+  const [currentPage, setCurrentPage] = useState(0)
 
   const [searchParams] = useSearchParams();
   const code: any = searchParams.get("tab");
@@ -83,15 +86,27 @@ const Profile = () => {
     const personalisedUrl = pathname.substring(1);
     if (code === "subscription" && user) {
       dispatch(subScriptionAction.getSubScription(user?.id));
-      dispatch(subScriptionAction.getSubscribersByUserId())
     } else dispatch(biteAction.getBitesByPersonalisedUrl(personalisedUrl, user?.id, code));
     dispatch({ type: SET_PREVIOUS_ROUTE, payload: `/${user?.personalisedUrl}` });
   }, [pathname, dispatch, user, code]);
+
+  useEffect(() => {
+    if (code === "subscription" && user) {
+      dispatch(subScriptionAction.getSubscribersByUserId(sort, currentPage))
+    }
+  }, [code, sort, currentPage, user, dispatch])
 
   const authuser = useMemo(() => {
     if (users.length > 0) return users[0];
     else return null;
   }, [users]);
+
+  useEffect(() => { 
+    if(code === "subscription") {
+      dispatch({ type: SET_TOTAL_SUBSCRIBERS, payload: 0 }) 
+      setCurrentPage(0)
+    }
+  }, [code])
 
   const isSame = useMemo(() => {
     if (authuser && user && user.id === authuser._id) return true;
@@ -295,24 +310,59 @@ const Profile = () => {
               <span>I have subscribed</span>
             </div>
             <div className="subscription-body" style={{ boxShadow: 'none' }}>
-              {subscribers.length === 0 ? 
+              {total === 0 ? 
                 <div className="no-subscription">
                   <span>There is no “subscription” yet </span> 
                 </div>
                 : 
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                  {subscribers.map((subscriber: any, index: any) => (
-                    <div key={index} style={{ margin: '5px 10px' }}>
-                      <SubscriptionCard 
-                        subscriber={subscriber}
-                        handleSubmit={() => {
-                          setSelectedIndex(index)
-                          setOpenUnsubscribeConfirm(true)
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
+                <>
+                  <div className="sort-subscription">
+                    <span>Sort by:</span>
+                    <select onChange={(e) => { setSort(Number(e.target.value)) }} 
+                    >
+                      <option value="0">Latest join</option>
+                      <option value="1">Earliest join</option>
+                      <option value="2">Payment due date</option>
+                      <option value="3">Subscribing</option>
+                      <option value="4">Unsubscribed</option>
+                    </select>
+                  </div>
+                  <div className="subscription-data">
+                    {subscribers.map((subscriber: any, index: any) => (
+                      <div key={index} className="subscription-card">
+                        <SubscriptionCard 
+                          subscriber={subscriber}
+                          handleSubmit={() => {
+                            setSelectedIndex(index)
+                            setOpenUnsubscribeConfirm(true)
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="subscription-pagination">
+                    <ReactPaginate
+                      breakLabel="..."
+                      nextLabel=">"
+                      onPageChange={(e: any) => setCurrentPage(e.selected) }
+                      pageRangeDisplayed={1}
+                      pageCount={Math.ceil(total / 2)}
+                      previousLabel="<"
+                      marginPagesDisplayed={1}
+                      pageLinkClassName="page-link"
+                      previousLinkClassName="page-link"
+                      nextLinkClassName="page-link"
+                      breakLinkClassName="page-link"
+                      pageClassName="page-item"
+                      previousClassName="page-item"
+                      nextClassName="page-item"
+                      breakClassName="page-item"
+                      containerClassName="pagination"
+                      activeClassName="active"
+                      renderOnZeroPageCount={undefined}
+                    />
+                  </div>
+                </>
               }
             </div>
           </div>

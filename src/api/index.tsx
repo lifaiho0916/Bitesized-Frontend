@@ -67,7 +67,7 @@ export const deleteSubScription = (id: any) => API.delete(`/api/subscription/${i
 export const setSubScriptionVisible = (id: any, data: any) => API.put(`/api/subscription/${id}/setvisible`, data)
 export const editSubScription = (id: any, data: any) => API.put(`/api/subscription/${id}`, data)
 export const subscribePlan = (id: any, data: any) => API.put(`/api/subscription/${id}/create`, data)
-export const getSubscribersByUserId = () => API.get('/api/subscription/user-subscribers')
+export const getSubscribersByUserId = (sort: any, page: any) => API.get(`/api/subscription/user-subscribers?sort=${sort}&page=${page}`)
 export const unSubscribe = (data: any) => API.put(`/api/subscription/unsubscribe`, data)
 //SETTING
 export const getCurrencyRate = () => API.get('/api/setting/currencyrate')

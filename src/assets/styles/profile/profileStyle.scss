@@ -155,6 +155,118 @@
           color: #938d8a;
         }
 
+        .sort-subscription {
+          display: flex;
+          align-items: center;
+          margin-bottom: 20px;
+
+          span {
+            font-family: "Lato";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 18px;
+            display: flex;
+            align-items: center;
+            color: #54504e;
+          }
+
+          select {
+            margin-left: 15px;
+            border-radius: 4px;
+            height: 28px;
+            font-family: "Lato";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 18px;
+            color: #54504e;
+
+            option {
+              font-family: "Lato";
+              font-style: normal;
+              font-weight: 700;
+              font-size: 14px;
+              line-height: 18px;
+              display: flex;
+              align-items: center;
+              color: #54504e;
+            }
+          }
+        }
+
+        .subscription-data {
+          display: flex;
+          flex-wrap: wrap;
+          max-width: 760px;
+          margin: 0px auto;
+
+          .subscription-card {
+            margin: 0px 25px;
+          }
+        }
+
+        .subscription-pagination {
+          display: flex;
+          justify-content: center;
+          margin-top: 30px;
+
+          .pagination {
+            display: flex;
+            margin: 0px;
+            padding: 0px;
+
+            .page-item {
+              cursor: pointer;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin: 0px 4px;
+              width: 24px;
+              height: 24px;
+              border: 2px solid #7e7875;
+              border-radius: 5px;
+              font-family: "Lato";
+              font-style: normal;
+              font-weight: 700;
+              font-size: 16px;
+              line-height: 28px;
+              color: #7e7875;
+
+              &:hover {
+                color: #F5C395;
+                border: 2px solid #F5C395;
+              }
+
+              .page-link {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+            }
+
+            .active {
+              cursor: pointer;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin: 0px 4px;
+              width: 24px;
+              height: 24px;
+              border: 2px solid #EFA058;
+              border-radius: 5px;
+              font-family: "Lato";
+              font-style: normal;
+              font-weight: 700;
+              font-size: 16px;
+              line-height: 28px;
+              color: #EFA058;
+            }
+          }
+        }
+
         .subscription-body-title {
           display: flex;
           justify-content: center;
@@ -324,6 +436,24 @@
                 text-align: center;
                 color: #ffffff;
               }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .profile-wrapper {
+    .profile {
+      .subscription {
+        .subscription-body {
+          .subscription-data {
+            justify-content: center;
+
+            .subscription-card {
+              margin: 5px auto;
             }
           }
         }
