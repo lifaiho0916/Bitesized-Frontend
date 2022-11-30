@@ -91,11 +91,11 @@ const SubscriptionCard = (props: any) => {
                 </div>
                 <div className="status-date">
                     <div className="status-date-part">
-                        <span>{subscriber && (subscriber.status ? 'Next payment date:' : 'Effective until:')}</span>
+                        <span>Next payment date:</span>
                     </div>
                     <div className="status-date-part">
                         <span>
-                            {subscriber && subscriber.nextInvoiceAt.substring(8, 10) + "." + subscriber.nextInvoiceAt.substring(5, 7) + "." + subscriber.nextInvoiceAt.substring(0, 4)}
+                            {subscriber && (subscriber.status ? subscriber.nextInvoiceAt.substring(8, 10) + "." + subscriber.nextInvoiceAt.substring(5, 7) + "." + subscriber.nextInvoiceAt.substring(0, 4) : 'N/A' )}
                         </span>
                     </div>
                 </div>

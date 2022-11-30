@@ -92,8 +92,9 @@ const ProfileHeader = (props: any) => {
 
   const subscribed = useMemo(() => {
     if(subScription && user) {
-      const value = subScription.subscribers.every((subscriber: any) => String(subscriber.user) !== String(user.id))
-      return !value
+      const fitlers = subScription.subscribers.filter((subscriber: any) => (String(subscriber.user) === String(user.id)) && subscriber.status === true)
+      if(fitlers.length > 0) return true
+      else return false
     } return false
   }, [subScription, user])
 
@@ -209,7 +210,7 @@ const ProfileHeader = (props: any) => {
                 color="primary"
                 shape="rounded"
                 icon={[<CheckIcon color="#EFA058"/>, <CheckIcon color="white"/>, <CheckIcon color="white"/>]}
-                handleSubmit={() => {}}
+                handleSubmit={() => navigate(`/${user.personalisedUrl}?tab=subscription`)}
               />
              :
               <Button

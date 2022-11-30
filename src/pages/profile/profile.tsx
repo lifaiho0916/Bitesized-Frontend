@@ -106,7 +106,7 @@ const Profile = () => {
       dispatch({ type: SET_TOTAL_SUBSCRIBERS, payload: 0 }) 
       setCurrentPage(0)
     }
-  }, [code])
+  }, [code, dispatch])
 
   const isSame = useMemo(() => {
     if (authuser && user && user.id === authuser._id) return true;

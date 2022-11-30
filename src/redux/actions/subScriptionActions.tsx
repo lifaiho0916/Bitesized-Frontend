@@ -103,9 +103,11 @@ export const subScriptionAction = {
                     payload: payload.subScription
                 })
             }
-        } catch (err) {
+        } catch (err: any) {
             console.log(err)
             dispatch({ type: SET_LOADING_FALSE })
+            const { response } = err
+            alert(response.data.msg)
         }
     },
 
