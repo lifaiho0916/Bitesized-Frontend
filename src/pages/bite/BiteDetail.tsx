@@ -201,13 +201,14 @@ const BiteDetail = () => {
                                     avatarStyle={"horizontal"}
                                     handleClick={() => navigate(`/${bite.owner.personalisedUrl}`)}
                                 />
-                                <Button
+                                <div></div>
+                                {/* <Button
                                     text="Subscribe"
                                     fillStyle="fill"
                                     color="primary"
                                     shape="rounded"
                                     handleSubmit={() => { window.open('https://www.creatogether.app/subscribenow', '_blank') }}
-                                />
+                                /> */}
                             </div>
                             <div className="status-chip">
                                 <div className={`chip ${bite.currency ? 'paid' : 'free'}`}>

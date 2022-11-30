@@ -16,7 +16,7 @@ import YoutubeSvg from "../../assets/svg/youtube.svg"
 import IgSvg from "../../assets/svg/ig.svg"
 import { accountAction } from "../../redux/actions/socialAccountActions"
 import { subScriptionAction } from "../../redux/actions/subScriptionActions"
-import { SET_NAME_EXIST, SET_PROFILE, SET_URL_EXIST } from "../../redux/types"
+import { SET_DIALOG_STATE, SET_NAME_EXIST, SET_PROFILE, SET_URL_EXIST } from "../../redux/types"
 import "../../assets/styles/profile/components/profileHeaderStyle.scss"
 
 const useOutsideAlerter = (ref: any, moreInfo: any) => {
@@ -153,8 +153,12 @@ const ProfileHeader = (props: any) => {
         show={openSubscribeSuccessModal}
         creatorName={profileUser?.name}
         subscriptionName={subScription?.name}
-        onClose={() => setOpenSubscribeSuccessModal(false)}
+        onClose={() => {
+          dispatch({ type: SET_DIALOG_STATE, payload: "" })
+          setOpenSubscribeSuccessModal(false)}
+        }
         handleSubmit={() => {
+          dispatch({ type: SET_DIALOG_STATE, payload: "" })
           setOpenSubscribeSuccessModal(false)
           navigate(`/${user?.personalisedUrl}?tab=subscription`)
         }}
