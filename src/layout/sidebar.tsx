@@ -7,7 +7,8 @@ import {
   MoneyIcon,
   SearchIcon,
   CommentIcon,
-  PrivacyIcon
+  PrivacyIcon,
+  NotificationOutlineIcon
 } from "../assets/svg"
 import "../assets/styles/sidebarStyle.scss"
 
@@ -89,6 +90,14 @@ const Sidebar = () => {
           </div>
           <div className="item-letter">
             <span>Terms and Privacy</span>
+          </div>
+        </NavLink>
+        <NavLink to="/admin/subscription" pathname={location.pathname} setHoverPath={setHoverPath} setActivePath={setActivePath}>
+          <div className="icon" style={{ marginLeft: '3px' }}>
+            <NotificationOutlineIcon className="icon-svg" color={location.pathname.indexOf('/admin/subscription') !== -1 ? "#EFA058" : hoverPath === "/admin/subscription" ? "#EFA058" : "#A6A29F"} />
+          </div>
+          <div className="item-letter">
+            <span>Subscription</span>
           </div>
         </NavLink>
       </div>

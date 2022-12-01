@@ -150,6 +150,23 @@
 
                         td {
                             padding-left: 5px;
+                            padding-right: 5px;
+
+                            .see-more-btn {
+                                margin: 0px auto;
+                                width: fit-content;
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 14px;
+                                line-height: 18px;
+                                text-align: center;
+                                letter-spacing: 0.005em;
+                                color: #EFA058;
+
+                                &:hover {
+                                    text-decoration: underline;
+                                }
+                            }
                         }
 
                         &:hover {

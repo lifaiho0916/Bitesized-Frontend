@@ -46,12 +46,12 @@ const SubscriptionDetail = () => {
             } else return []
         }
         else return []
-    }, [subScription, page, totalCount])
+    }, [subScription, page])
 
     useEffect(() => { 
         setSelectedIndex(-1)
         dispatch(subScriptionAction.getSubscribersByOwner(code === null ? 'all' : code, sort))
-    }, [code, sort])
+    }, [code, sort, dispatch])
 
     return (
         <div className="subscription-detail-wrapper">
