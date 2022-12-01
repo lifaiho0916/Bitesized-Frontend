@@ -1,31 +1,60 @@
 .subscription-detail-wrapper {
-    .page-header {
-        box-sizing: border-box;
+  max-width: 880px;
+  margin: 0px auto;
+
+  .page-header {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 880px;
+    height: 52px;
+    margin: 25px auto;
+    padding: 0px 10px;
+
+    .page-title {
+      font-family: "Lato";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+      color: #efa058;
+    }
+  }
+
+  .subscription-detail {
+    padding: 0px 15px;
+
+    .subscription-detail-body {
+      margin: 30px 40px;
+
+      .subscription-detail-header {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        max-width: 880px;
-        height: 52px;
-        margin: 25px auto;
-        padding: 0px 10px;
 
-        .page-title {
+        .subscription-detail-title {
+          h2 {
             font-family: "Lato";
-            font-style: normal;
-            font-weight: 600;
-            font-size: 20px;
-            line-height: 24px;
-            text-align: center;
-            color: #efa058;
+            
+            color: #7e7875;
+          }
         }
-    }
-}
-
-@media screen and (max-width: 680px) {
-    .profile-wallet-wrapper {
-      .page-header {
-        margin: 15px auto;
       }
     }
   }
-  
+}
+
+@media screen and (max-width: 680px) {
+  .subscription-detail-wrapper {
+    .page-header {
+      margin: 15px auto;
+    }
+
+    .subscription-detail {
+      .subscription-detail-body {
+        margin: 20px 0px;
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+$primary-color-level5: #EFA058;
+$nuetral-color-level6: #7e7875;
+
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: "Lato" !important;
+}
+
+h1 {
+    font-style: normal;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+h2 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.005em;
+}
+
+// .color-primary {
+//     &--level6: $primary-color-level6
+// }
+
+.color-neutral {
+    color: #7e7875
+}

@@ -288,7 +288,7 @@ const Profile = () => {
                             fillStyle="fill"
                             width={'300px'}
                             color="primary"
-                            handleSubmit={() => {}}
+                            handleSubmit={() => navigate("/subscription/detail")}
                           />
                         </div>
                         <div style={{ marginTop: '10px', display: 'flex', justifyContent: 'center' }}>

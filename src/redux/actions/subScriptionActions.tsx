@@ -107,7 +107,8 @@ export const subScriptionAction = {
             console.log(err)
             dispatch({ type: SET_LOADING_FALSE })
             const { response } = err
-            alert(response.data.msg)
+            if(response.data.msg.type && response.data.msg.type === 'StripeInvalidRequestError')
+                alert(`Please select the same currency - ${response.data.msg.raw.message.substring(response.data.msg.raw.message.length - 3, response.data.msg.raw.message.length).toUpperCase()} as you have had a subscription made before.`)
         }
     },
 
@@ -123,6 +124,23 @@ export const subScriptionAction = {
             }
         } catch (err) {
             console.log(err)
+        }
+    },
+
+    getSubscribersByOwner: (code: any) => async (dispatch : Dispatch<any>) => {
+        try {
+            dispatch({ type: SET_LOADING_TRUE })
+            dispatch({ type: SET_SUBSCRIBERS, payload: [] })
+            const response = await api.getSubscribersByOwner(code)
+            const { data } = response
+            dispatch({ type: SET_LOADING_FALSE })
+            if(data.success) {
+                const { payload } = data
+                dispatch({ type: SET_SUBSCRIBERS, payload: payload.subscribers })
+            }
+        } catch (err) {
+            console.log(err)
+            dispatch({ type: SET_LOADING_FALSE })
         }
     },
 
