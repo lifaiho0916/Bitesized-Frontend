@@ -318,8 +318,7 @@ const Profile = () => {
                 <>
                   <div className="sort-subscription">
                     <span>Sort by:</span>
-                    <select onChange={(e) => { setSort(Number(e.target.value)) }} 
-                    >
+                    <select onChange={(e) => { setSort(Number(e.target.value)) }} >
                       <option value="0">Latest join</option>
                       <option value="1">Earliest join</option>
                       <option value="2">Payment due date</option>

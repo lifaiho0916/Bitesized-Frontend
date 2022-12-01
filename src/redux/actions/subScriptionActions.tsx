@@ -127,16 +127,16 @@ export const subScriptionAction = {
         }
     },
 
-    getSubscribersByOwner: (code: any) => async (dispatch : Dispatch<any>) => {
+    getSubscribersByOwner: (code: any, sort: any) => async (dispatch : Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
             dispatch({ type: SET_SUBSCRIBERS, payload: [] })
-            const response = await api.getSubscribersByOwner(code)
+            const response = await api.getSubscribersByOwner(code, sort)
             const { data } = response
             dispatch({ type: SET_LOADING_FALSE })
             if(data.success) {
                 const { payload } = data
-                dispatch({ type: SET_SUBSCRIBERS, payload: payload.subscribers })
+                dispatch({ type: SET_SUBSCRIPTION, payload: payload.subscription })
             }
         } catch (err) {
             console.log(err)

@@ -7,7 +7,7 @@ import CONSTANT from "../constants/constant"
 import "../assets/styles/subscription/SubscriptionCardStyle.scss"
 
 const SubscriptionCard = (props: any) => {
-    const { subscriber, handleSubmit } = props
+    const { subscriber, handleSubmit, user } = props
     const contexts = useContext(LanguageContext)
     const loadState = useSelector((state: any) => state.load)
     const { currencyRate } = loadState
@@ -63,10 +63,10 @@ const SubscriptionCard = (props: any) => {
                     </div>
                     <div className="status-fee-part">
                         <div className="status-title">
-                            <span>Subscription fee</span>
+                            <span>{user === true ? 'Earning' : 'Subscription fee'}</span>
                         </div>
                         <div className="status-info">
-                            <span>{subscriber && `${getLocalCurrency(subscriber.currency)}${subscriber.status ? (JSON.parse(subscriber.plan.multiPrices)[`${subscriber.currency}`] * 1.034 + 0.3 * (subscriber.currency === 'usd' ? 1.0 : currencyRate[`${subscriber.currency}`])).toFixed(1) : subscriber.price.toFixed(1) }`} </span>
+                            <span>{subscriber && `${getLocalCurrency(subscriber.currency)}${user === true ? subscriber.earnings.toFixed(1) : subscriber.status ? (JSON.parse(subscriber.plan.multiPrices)[`${subscriber.currency}`] * 1.034 + 0.3 * (subscriber.currency === 'usd' ? 1.0 : currencyRate[`${subscriber.currency}`])).toFixed(1) : subscriber.price.toFixed(1) }`} </span>
                         </div>
                     </div>
                 </div>
@@ -119,7 +119,7 @@ const SubscriptionCard = (props: any) => {
                         }
                     </div>
                 </div>
-                {(subscriber && subscriber.status === true) &&
+                {(subscriber && subscriber.status === true && user !== true) &&
                     <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
                         <Button
                             fillStyle="fill"
