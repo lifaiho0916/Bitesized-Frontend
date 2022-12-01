@@ -1,4 +1,7 @@
+//-----------------COLOR---------------------
+// PRIMARY
 $primary-color-level5: #EFA058;
+// NUETRAL
 $nuetral-color-level6: #7e7875;
 
 * {
@@ -22,10 +25,16 @@ h2 {
     letter-spacing: 0.005em;
 }
 
-// .color-primary {
-//     &--level6: $primary-color-level6
-// }
+.color {
+    &-primary {
+        &-level5 {
+            color: $primary-color-level5;
+        }
+    }
 
-.color-neutral {
-    color: #7e7875
+    &-nuetral {
+        &-level6 {
+            color: $nuetral-color-level6;
+        }
+    }
 }

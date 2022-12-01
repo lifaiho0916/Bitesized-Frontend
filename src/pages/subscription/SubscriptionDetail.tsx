@@ -32,8 +32,8 @@ const SubscriptionDetail = (props: any) => {
                 <div className="subscription-detail-body">
                     <div className="subscription-detail-header">
                         <div className="subscription-detail-title">
-                            <h1 className="color-primary">{code === null ? 'All record' : code === 'unsubscribed' ? 'Unsubscribed list' : 'Subscribing list' }</h1>
-                            <h2>Showing 1-10 items, N in total</h2>
+                            <h1 className="color-primary-level5">{code === null ? 'All record' : code === 'unsubscribed' ? 'Unsubscribed list' : 'Subscribing list' }</h1>
+                            <h2 className="color-nuetral-level6">Showing 1-10 items, N in total</h2>
                         </div>
                     </div>
                 </div>
