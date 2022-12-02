@@ -1,0 +1,223 @@
+.modal {
+    z-index: 50;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+    pointer-events: none;
+
+    &.show {
+        opacity: 1;
+        pointer-events: visible;
+    }
+
+    #editsubscription {
+        .modal-content {
+            box-sizing: border-box;
+            width: 750px;
+            background-color: #FFFFFF;
+            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+            padding: 10px;
+
+            .modal-header {
+                padding: 5px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                span {
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 20px;
+                    line-height: 24px;
+                    color: #EFA058;
+                }
+
+                .close-btn {
+                    width: 30px;
+                    height: 30px;
+                    background: #EFA058;
+                    border-radius: 8px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: #F2B176;
+                    }
+                }
+            }
+
+            .modal-body {
+                margin-top: 20px;
+
+                .set-subscription {
+                    display: flex;
+                    justify-content: space-evenly;
+                    max-width: 840px;
+                    margin: 0px auto;
+
+                    .subscription-detail {
+                        margin-top: 10px;
+                        background: #ffffff;
+                        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+                        padding: 25px 10px;
+                        width: 340px;
+                        height: fit-content;
+
+                        .detail-title {
+                            display: flex;
+                            align-items: center;
+                            height: 20px;
+                            font-family: "Lato";
+                            font-style: normal;
+                            font-weight: 800;
+                            font-size: 20px;
+                            line-height: 20px;
+                            letter-spacing: 0.05em;
+                            color: #efa058;
+                        }
+
+                        p {
+                            font-family: "Lato";
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 14px;
+                            line-height: 18px;
+                            letter-spacing: 0.005em;
+                            color: #000000;
+                        }
+
+                        .description-editor {
+                            border: 1px solid #54504e;
+                            border-radius: 15px;
+                            padding: 5px 15px;
+                            min-height: 50px;
+
+                            .DraftEditor-root {
+                                height: fit-content;
+                                font-family: "Lato";
+                                font-weight: 400;
+                                font-size: 16px;
+                                line-height: 20px;
+
+                                .public-DraftEditorPlaceholder-root {
+                                    font-style: italic;
+                                    color: #bab6b5;
+                                }
+
+                                .public-DraftStyleDefault-block {
+                                    margin: 0px;
+                                    color: #54504e;
+                                }
+                            }
+                        }
+
+                        .word-count {
+                            margin-top: 5px;
+                            font-style: normal;
+                            font-weight: 300;
+                            font-size: 12px;
+                            line-height: 14px;
+                            text-align: right;
+                            letter-spacing: 0.02em;
+                            color: #a6a29f;
+                        }
+
+                        .benefit {
+                            width: calc(100% - 40px);
+
+                            &:hover {
+                                border-color: #efa058;
+                            }
+
+                            box-sizing: border-box;
+                            background: #ffffff;
+                            border: 1px solid #54504e;
+                            border-radius: 15px;
+                            padding: 12px 16px;
+
+                            textarea {
+                                border: 0px;
+                                padding: 0px;
+                                font-family: "Lato";
+                                font-style: normal;
+                                color: #54504e;
+                                font-weight: 400;
+                                font-size: 16px;
+                                line-height: 20px;
+                                width: 100%;
+                                resize: none;
+
+                                &:focus {
+                                    outline: none;
+                                }
+
+                                &::placeholder {
+                                    font-style: italic;
+                                }
+                            }
+                        }
+
+                        .remove-btn {
+                            width: 24px;
+                            height: 24px;
+                            border-radius: 24px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+
+                            &.active {
+                                border: 1.2px solid #de5a67;
+                            }
+
+                            &.inactive {
+                                border: 1.2px solid #e1e0df;
+                            }
+                        }
+                    }
+
+                    .add-benefit {
+                        height: 40px;
+                        border: 1px dashed #efa058;
+                        border-radius: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+
+                        span {
+                            font-family: "Lato";
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 16px;
+                            line-height: 20px;
+                            color: #efa058;
+                        }
+                    }
+                }
+
+                .divider {
+                    margin-top: 20px;
+                    border-bottom: 1px solid #54504E;
+                }
+            }
+
+            .modal-footer {
+                display: flex;
+                justify-content: flex-end;
+                margin: 20px 10px 10px 10px;
+            }
+        }
+    }
+}

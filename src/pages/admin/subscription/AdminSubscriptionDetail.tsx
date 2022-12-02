@@ -6,6 +6,7 @@ import { BackIcon, EditIcon, HiddenIcon, VisibleIcon, ForwardIcon } from "../../
 import Button from "../../../components/general/button"
 import ProfileMenu from "../../../components/profileMenu"
 import Avatar from "../../../components/general/avatar"
+import EditSubscriptionModal from "../../../components/modals/EditSubscriptionModal"
 import SubscriptionCard from "../../../components/SubscriptionCard"
 import { subScriptionAction } from "../../../redux/actions/subScriptionActions"
 import { getLocalCurrency, getLocalPriceFromCurrency } from "../../../constants/functions"
@@ -24,6 +25,8 @@ const AdminSubscriptionDetail = () => {
     const [page, setPage] = useState(0)
     const { subScription } = subscriptionState
     const { currencyRate } = loadState
+
+    const [openEditSubscriptionModal, setOpenEditSubscriptionModal] = useState(false)
 
     const totalEarning = useMemo(() => {
         let price = 0;
@@ -64,6 +67,11 @@ const AdminSubscriptionDetail = () => {
                     onClick={() => dispatch(subScriptionAction.setSubScriptionVisible(subScription._id, !subScription.visible))}
                 >{subScription && (subScription.visible === true ? <VisibleIcon color="#EFA058" /> : <HiddenIcon color="#EFA058" /> )}</div>
             </div>
+            <EditSubscriptionModal
+                show={openEditSubscriptionModal}
+                onClose={() => setOpenEditSubscriptionModal(false)}
+                subScription={subScription ? subScription : null}
+            />
             {subScription &&
                 <div className="admin-subscription-detail">
                     <div className="subscription-overview">
@@ -110,6 +118,7 @@ const AdminSubscriptionDetail = () => {
                                         <EditIcon color="#EFA058" />, <EditIcon color="white" />, <EditIcon color="white" />
                                     ]}
                                     width={'100px'}
+                                    handleSubmit={() => setOpenEditSubscriptionModal(true)}
                                 />
                             </div>
                         </div>

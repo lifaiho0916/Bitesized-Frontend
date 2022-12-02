@@ -76,39 +76,21 @@ const SetSubscription = (props: any) => {
 
   const submit = () => {
     if (publishEnable) {
-      const newSubscription = subScription === null ? {
+      const newSubscription = {
         name: name,
         price: Number(price),
         currency: CONSTANT.CURRENCIES[option].toLowerCase(),
         benefits: benefits.filter((benefit: any) => benefit !== ""),
         description: JSON.stringify(description)
-      } : {
-        ...subScription,
-        name: name,
-        price: Number(price),
-        currency: CONSTANT.CURRENCIES[option].toLowerCase(),
-        benefits: benefits.filter((benefit: any) => benefit !== ""),
-        description: JSON.stringify(description)
-      };
-
-      if(subScription) {
-        dispatch(
-          subScriptionAction.editSubscription(
-            subScription._id,
-            newSubscription,
-            navigate,
-            `/${user?.personalisedUrl}?tab=subscription`
-          )
-        );
-      } else {
-        dispatch(
-          subScriptionAction.saveSubscription(
-            newSubscription,
-            navigate,
-            `/${user?.personalisedUrl}?tab=subscription`
-          )
-        );
       }
+      dispatch(
+        subScriptionAction.editSubscription(
+          subScription._id,
+          newSubscription,
+          navigate,
+          `/${user?.personalisedUrl}?tab=subscription`
+        )
+      )
     }
   };
 
