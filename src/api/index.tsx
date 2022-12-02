@@ -62,7 +62,7 @@ export const addSocialAccount = (data: any) => API.post('/api/social-accounts', 
 export const removeSocialAccount = (id: any, social: any) => API.delete(`/api/social-accounts/${id}?social=${social}`)
 
 export const getSubScription = (userId: any) => API.get(`/api/subscription/${userId}`)
-export const getSubScriptions = (sort: any, search: any) => API.get(`/api/subscription/list?sort=${sort}&search=${search}`)
+export const getSubScriptions = (type: any, sort: any, search: any) => API.get(`/api/subscription/list?type=${type}&sort=${sort}&search=${search}`)
 export const saveSubScription = (data: any) => API.post('/api/subscription', data)
 export const deleteSubScription = (id: any) => API.delete(`/api/subscription/${id}`)
 export const setSubScriptionVisible = (id: any, data: any) => API.put(`/api/subscription/${id}/setvisible`, data)

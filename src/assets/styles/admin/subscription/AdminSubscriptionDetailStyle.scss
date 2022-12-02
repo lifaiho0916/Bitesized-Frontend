@@ -1,0 +1,36 @@
+.admin-subscription-detail-wrapper {
+    margin-bottom: 50px;
+
+    .page-header {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 52px;
+        margin: 25px 20px;
+        padding: 0px 10px;
+
+        .page-title {
+            font-family: "Lato";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 24px;
+            text-align: center;
+            color: #efa058;
+        }
+    }
+
+    .admin-subscription-detail {
+        margin: 0px 20px;
+
+        .divider {
+            background: rgba(225, 224, 223, 0.2);
+            height: 30px;
+        }
+
+        .subscription-overview {
+            
+        }   
+    }
+}

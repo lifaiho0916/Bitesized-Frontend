@@ -14,7 +14,7 @@ const AdminTransaction = () => {
     const loadState = useSelector((state: any) => state.load)
     const [searchParams] = useSearchParams()
     const code = searchParams.get('tab')
-    const [option, setOtpion] = useState(0)
+    const [option, setOption] = useState(0)
     const [search, setSearch] = useState("")
     const [sort, setSort] = useState(-1)
     const [period, setPeriod] = useState(30)
@@ -34,12 +34,12 @@ const AdminTransaction = () => {
 
     useEffect(() => {
         dispatch(transactionAction.getTransactions(code === null ? 'all' : code, search, sort, period))
-        if(code === null) setOtpion(0)
-        else if(code === "paid") setOtpion(1)
-        else if(code === "free") setOtpion(2)
-        else if(code === "earn") setOtpion(3)
-        else if(code === "cash") setOtpion(4)
-        else setOtpion(5)
+        if(code === null) setOption(0)
+        else if(code === "paid") setOption(1)
+        else if(code === "free") setOption(2)
+        else if(code === "earn") setOption(3)
+        else if(code === "cash") setOption(4)
+        else setOption(5)
     }, [code, location, dispatch, sort, period])
 
     return (

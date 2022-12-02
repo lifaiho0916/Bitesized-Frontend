@@ -26,11 +26,11 @@ export const subScriptionAction = {
         }
     },
 
-    getSubScriptions: (sort: any, search: any) => async (dispatch: Dispatch<any>) => {
+    getSubScriptions: (type: any, sort: any, search: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
             dispatch({ type: SET_SUBSCRIPTIONS, payload: [] })
-            const response = await api.getSubScriptions(sort, search)
+            const response = await api.getSubScriptions(type, sort, search)
             const { data } = response
             dispatch({ type: SET_LOADING_FALSE })
             if(data.success) {

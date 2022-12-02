@@ -47,6 +47,7 @@ import AdminComment from '../pages/admin/comment/AdminComment'
 import AdminTermsAndPrivacy from '../pages/admin/termsAndPrivacy/AdminTermsAndPrivacy'
 //Subscription
 import AdminSubscriptionList from '../pages/admin/subscription/AdminSubscriptionList'
+import AdminSubscriptionDetail from '../pages/admin/subscription/AdminSybscriptionDetail'
 
 import Error404 from '../pages/error/error404'
 
@@ -98,6 +99,7 @@ const AppRoutes = () => {
       <Route path="admin/comment/:biteId" element={<AuthRoute child={<AdminComment />} routeType="private" />} />
       <Route path="admin/terms-privacy" element={<AuthRoute child={<AdminTermsAndPrivacy />} routeType="private" />} />
       <Route path="admin/subscription" element={<AuthRoute child={<AdminSubscriptionList />} routeType="private" />} />
+      <Route path="admin/subscription/:userId" element={<AuthRoute child={<AdminSubscriptionDetail />} routeType="private" />} />
 
       <Route path="/not-founder-cover" element={<Error404 />} />
       <Route path="*" element={<Navigate to="/not-founder-cover" replace />} />

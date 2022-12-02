@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
+import Tabs from "../../../components/general/Tabs"
 import { SearchIcon, AscendIcon, DescendIcon } from "../../../assets/svg"
 import { subScriptionAction } from "../../../redux/actions/subScriptionActions"
 import CONSTANT from "../../../constants/constant"
@@ -7,10 +9,15 @@ import "../../../assets/styles/admin/transaction/AdminTransactionStyle.scss"
 
 const AdminSubscriptionList = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const location = useLocation()
     const subscriptionState = useSelector((state: any) => state.subScription)
     const [search, setSearch] = useState("")
     const [sort, setSort] = useState(-1)
     const { subScriptions } = subscriptionState
+    const [option, setOption] = useState(0)
+    const [searchParams] = useSearchParams()
+    const code = searchParams.get('tab')
 
     const getLocalCurrency = (currency: any) => {
         const index = CONSTANT.CURRENCIES.findIndex((cur: any) => cur.toLowerCase() === currency)
@@ -18,7 +25,12 @@ const AdminSubscriptionList = () => {
         return res
     }
 
-    useEffect(() => { dispatch(subScriptionAction.getSubScriptions(sort, search)) }, [dispatch, sort])
+    useEffect(() => { 
+        dispatch(subScriptionAction.getSubScriptions(code === null ? 'all' : code, sort, search))
+        if(code === null) setOption(0)
+        else if(code === "ongoing") setOption(1)
+        else setOption(2)
+    }, [dispatch, sort, code])
 
     return (
         <div className="transaction-wrapper">
@@ -28,13 +40,33 @@ const AdminSubscriptionList = () => {
                         <span>List of subscription </span>
                     </div>
                 </div>
-                <div className="search-bar" style={{ marginTop: '30px' }}>
+                <div className="navigate-btns">
+                    <Tabs
+                        tabWidth="120px"
+                        list={[
+                            { 
+                                text: "All",
+                                route: `${location.pathname}`
+                            }, 
+                            { 
+                                text: "On-going",
+                                route: `${location.pathname}?tab=ongoing`
+                            },
+                            {
+                                text: 'Hidden',
+                                route: `${location.pathname}?tab=hidden`
+                            },
+                        ]}
+                        initialOption={option}
+                    />
+                </div>
+                <div className="search-bar">
                     <SearchIcon color="#EFA058" />
                     <input
                         placeholder="Username"
                         className="search-input"
                         onChange={(e) => { setSearch(e.target.value) }}
-                        onKeyUp={(e) => { if (e.keyCode === 13) dispatch(subScriptionAction.getSubScriptions(sort, search))
+                        onKeyUp={(e) => { if (e.keyCode === 13) dispatch(subScriptionAction.getSubScriptions(code === null ? 'all' : code, sort, search))
                     }}
                     />
                 </div>
@@ -81,7 +113,7 @@ const AdminSubscriptionList = () => {
                                         <td>{getLocalCurrency(subscription.currency) + JSON.parse(subscription.multiPrices)[subscription.currency]}</td>
                                         <td>{subscription.active ? 'On-going' : 'Hidden' }</td>
                                         <td>
-                                            <div className="see-more-btn">
+                                            <div className="see-more-btn" onClick={() => navigate(`/admin/subscription/${subscription.user._id}`)}>
                                                 <span>see more</span>
                                             </div>
                                         </td>
