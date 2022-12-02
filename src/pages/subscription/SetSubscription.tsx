@@ -83,14 +83,16 @@ const SetSubscription = (props: any) => {
         benefits: benefits.filter((benefit: any) => benefit !== ""),
         description: JSON.stringify(description)
       }
-      dispatch(
-        subScriptionAction.editSubscription(
-          subScription._id,
-          newSubscription,
-          navigate,
-          `/${user?.personalisedUrl}?tab=subscription`
+      if(subScription) {
+        dispatch(
+          subScriptionAction.editSubscription(
+            subScription._id,
+            newSubscription,
+            navigate,
+            `/${user?.personalisedUrl}?tab=subscription`
+          )
         )
-      )
+      } else dispatch(subScriptionAction.saveSubscription(newSubscription, navigate, `/${user?.personalisedUrl}?tab=subscription`))
     }
   };
 

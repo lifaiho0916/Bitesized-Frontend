@@ -310,22 +310,24 @@ const Profile = () => {
               <span>I have subscribed</span>
             </div>
             <div className="subscription-body" style={{ boxShadow: 'none' }}>
-              {total === 0 ? 
+              {total > 0 &&
+                <div className="sort-subscription">
+                  <span>Sort by:</span>
+                  <select onChange={(e) => { setSort(Number(e.target.value)) }} >
+                    <option value="0">Latest join</option>
+                    <option value="1">Earliest join</option>
+                    <option value="2">Payment due date</option>
+                    <option value="3">Subscribing</option>
+                    <option value="4">Unsubscribed</option>
+                  </select>
+                </div>
+              }
+              {subscribers.length === 0 ? 
                 <div className="no-subscription">
                   <span>There is no “subscription” yet </span> 
                 </div>
                 : 
                 <>
-                  <div className="sort-subscription">
-                    <span>Sort by:</span>
-                    <select onChange={(e) => { setSort(Number(e.target.value)) }} >
-                      <option value="0">Latest join</option>
-                      <option value="1">Earliest join</option>
-                      <option value="2">Payment due date</option>
-                      <option value="3">Subscribing</option>
-                      <option value="4">Unsubscribed</option>
-                    </select>
-                  </div>
                   <div className="subscription-data">
                     {subscribers.map((subscriber: any, index: any) => (
                       <div key={index} className="subscription-card">
@@ -345,7 +347,7 @@ const Profile = () => {
                       nextLabel=">"
                       onPageChange={(e: any) => setCurrentPage(e.selected) }
                       pageRangeDisplayed={1}
-                      pageCount={Math.ceil(total / 2)}
+                      pageCount={Math.ceil(subscribers.length / 2)}
                       previousLabel="<"
                       marginPagesDisplayed={1}
                       pageLinkClassName="page-link"
