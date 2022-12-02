@@ -22,15 +22,203 @@
     }
 
     .admin-subscription-detail {
-        margin: 0px 20px;
-
-        .divider {
-            background: rgba(225, 224, 223, 0.2);
-            height: 30px;
-        }
+        margin: 30px 20px;
 
         .subscription-overview {
-            
-        }   
+            margin: 20px 40px;
+
+            .plan-name {
+                margin-bottom: 20px;
+            }
+
+            .plan-description {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+
+                .plan-info {
+                    div {
+                        margin: 10px 0px;
+                    }
+                }
+
+                .plan-status {
+                    width: 250px;
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+
+        .subscriber-detail {
+            margin-top: 30px;
+
+            .record-menu {
+                max-width: 80%;
+                margin: 0px auto 30px auto;
+            }
+
+            .subscription-detail-body {
+                margin: 30px auto;
+                max-width: 880px;
+
+                .subscription-detail-header {
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 10px 0px;
+
+                    .subscription-detail-sort {
+                        display: flex;
+                        align-items: center;
+
+                        select {
+                            margin-left: 15px;
+                            border-radius: 4px;
+                            height: 28px;
+                            font-family: "Lato";
+                            font-style: normal;
+                            font-weight: 700;
+                            font-size: 14px;
+                            line-height: 18px;
+                            color: #54504e;
+
+                            option {
+                                font-family: "Lato";
+                                font-style: normal;
+                                font-weight: 700;
+                                font-size: 14px;
+                                line-height: 18px;
+                                display: flex;
+                                align-items: center;
+                                color: #54504e;
+                            }
+                        }
+                    }
+                }
+
+                .subscription-detail-main {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .subscriber-list {
+                        max-width: 350px;
+
+                        .subscriber-list-body {
+                            margin: 0px auto;
+                            width: 330px;
+
+                            .subscriber {
+                                cursor: pointer;
+                                padding: 2px 5px;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                border: 0.1px solid #E1E0DF;
+
+                                .avatar-name {
+                                    display: flex;
+
+                                    span {
+                                        font-style: normal;
+                                        font-weight: 400;
+                                        font-size: 12px;
+                                        line-height: 14px;
+                                        letter-spacing: 0.005em;
+                                    }
+                                }
+                            }
+                        }
+
+                        .subscription-detail-pagination {
+                            display: flex;
+                            justify-content: center;
+                            margin-top: 20px;
+
+                            .pagination {
+                                display: flex;
+                                margin: 0px;
+                                padding: 0px;
+
+                                .page-item {
+                                    cursor: pointer;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    margin: 0px 4px;
+                                    width: 24px;
+                                    height: 24px;
+                                    border: 2px solid #7e7875;
+                                    border-radius: 5px;
+                                    font-family: "Lato";
+                                    font-style: normal;
+                                    font-weight: 700;
+                                    font-size: 16px;
+                                    line-height: 28px;
+                                    color: #7e7875;
+
+                                    &:hover {
+                                        color: #F5C395;
+                                        border: 2px solid #F5C395;
+                                    }
+
+                                    .page-link {
+                                        width: 100%;
+                                        height: 100%;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                    }
+                                }
+
+                                .active {
+                                    cursor: pointer;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    margin: 0px 4px;
+                                    width: 24px;
+                                    height: 24px;
+                                    border: 2px solid #EFA058;
+                                    border-radius: 5px;
+                                    font-family: "Lato";
+                                    font-style: normal;
+                                    font-weight: 700;
+                                    font-size: 16px;
+                                    line-height: 28px;
+                                    color: #EFA058;
+                                }
+                            }
+                        }
+                    }
+
+                    .subscriber-detail {
+                        margin-top: 30px;
+                        width: 350px;
+                        max-height: 500px;
+                        overflow-y: auto;
+
+                        &::-webkit-scrollbar {
+                            width: 8px;
+                        }
+
+                        &::-webkit-scrollbar-track {
+                            background-color: rgba(245, 195, 149, 0.1);
+                            border-radius: 10px;
+                        }
+
+                        &::-webkit-scrollbar-thumb {
+                            background: rgba(245, 195, 149, 0.5);
+                            border-radius: 10px;
+                            transition: 0.2s;
+                            width: 8px;
+
+                            &:hover {
+                                background: #efa058;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

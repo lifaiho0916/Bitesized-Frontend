@@ -47,7 +47,7 @@ import AdminComment from '../pages/admin/comment/AdminComment'
 import AdminTermsAndPrivacy from '../pages/admin/termsAndPrivacy/AdminTermsAndPrivacy'
 //Subscription
 import AdminSubscriptionList from '../pages/admin/subscription/AdminSubscriptionList'
-import AdminSubscriptionDetail from '../pages/admin/subscription/AdminSybscriptionDetail'
+import AdminSubscriptionDetail from '../pages/admin/subscription/AdminSubscriptionDetail'
 
 import Error404 from '../pages/error/error404'
 

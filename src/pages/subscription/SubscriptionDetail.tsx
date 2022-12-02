@@ -49,9 +49,11 @@ const SubscriptionDetail = () => {
     }, [subScription, page])
 
     useEffect(() => { 
-        setSelectedIndex(-1)
-        dispatch(subScriptionAction.getSubscribersByOwner(code === null ? 'all' : code, sort))
-    }, [code, sort, dispatch])
+        if(user) {
+            setSelectedIndex(-1)
+            dispatch(subScriptionAction.getSubscribersByOwner(user.id, code === null ? 'all' : code, sort))
+        }
+    }, [code, sort, dispatch, user])
 
     return (
         <div className="subscription-detail-wrapper">
@@ -68,8 +70,8 @@ const SubscriptionDetail = () => {
                 <div className="subscriber-detail-mobile">
                     {selectedIndex !== -1 &&
                         <>
-                            {subScription.subscribers[selectedIndex].data.map((data: any) => (
-                                <div style={{ margin: '10px 0px', display: 'flex', justifyContent: 'center' }}>
+                            {subScription.subscribers[selectedIndex].data.map((data: any, index: any) => (
+                                <div style={{ margin: '10px 0px', display: 'flex', justifyContent: 'center' }} key={index}>
                                     <SubscriptionCard
                                         user={true}
                                         subscriber={{
@@ -99,8 +101,8 @@ const SubscriptionDetail = () => {
                             <div className="subscriber-list">
                                 <div className="subscription-detail-header">
                                     <div>
-                                        <h1 className="color-primary-level5">{code === null ? 'All record' : code === 'unsubscribed' ? 'Unsubscribed list' : 'Subscribing list' }</h1>
-                                        <h2 className="color-nuetral-level6">Showing {totalCount === 0 ? 0 : page * 10 + 1}-{Math.ceil(totalCount / 10) > (page + 1) ? 10 : totalCount - page * 10 } items, {totalCount} in total</h2>
+                                        <h4 className="color-primary-level5 bold-lg">{code === null ? 'All record' : code === 'unsubscribed' ? 'Unsubscribed list' : 'Subscribing list' }</h4>
+                                        <h6 className="color-nuetral-level6 bold-sm">Showing {totalCount === 0 ? 0 : page * 10 + 1}-{Math.ceil(totalCount / 10) > (page + 1) ? 10 : totalCount - page * 10 } items, {totalCount} in total</h6>
                                     </div>
                                     <div className="subscription-detail-sort">
                                     <select onChange={(e) => {

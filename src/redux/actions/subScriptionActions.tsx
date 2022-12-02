@@ -87,17 +87,20 @@ export const subScriptionAction = {
         }
     },
 
-    setSubScriptionVisible: (planId: any, visible: any) => async (dispatch: Dispatch<any>) => {
+    setSubScriptionVisible: (planId: any, visible: any) => async (dispatch: Dispatch<any>, getState: any) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
             const response = await api.setSubScriptionVisible(planId, { visible: visible })
             const { data } = response
             dispatch({ type: SET_LOADING_FALSE })
             if (data.success) {
-                const { payload } = data
-                dispatch({
-                    type: SET_SUBSCRIPTION,
-                    payload: payload.subScription
+                const subscription = getState().subScription.subScription
+                dispatch({ 
+                    type: SET_SUBSCRIPTION, 
+                    payload: {
+                        ...subscription,
+                        visible: visible
+                    }
                 })
             }
         } catch (err) {
@@ -144,11 +147,11 @@ export const subScriptionAction = {
         }
     },
 
-    getSubscribersByOwner: (code: any, sort: any) => async (dispatch : Dispatch<any>) => {
+    getSubscribersByOwner: (userId: any, code: any, sort: any) => async (dispatch : Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
-            dispatch({ type: SET_SUBSCRIBERS, payload: [] })
-            const response = await api.getSubscribersByOwner(code, sort)
+            dispatch({ type: SET_SUBSCRIPTION, payload: null })
+            const response = await api.getSubscribersByOwner(userId, code, sort)
             const { data } = response
             dispatch({ type: SET_LOADING_FALSE })
             if(data.success) {
