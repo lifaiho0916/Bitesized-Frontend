@@ -111,7 +111,7 @@ const AdminSubscriptionList = () => {
                                         <td>{subscription.name}</td>
                                         <td>{JSON.parse(subscription.multiPrices)['usd'].toFixed(1)}</td>
                                         <td>{getLocalCurrency(subscription.currency) + JSON.parse(subscription.multiPrices)[subscription.currency]}</td>
-                                        <td>{subscription.active ? 'On-going' : 'Hidden' }</td>
+                                        <td>{subscription.visible ? 'On-going' : 'Hidden' }</td>
                                         <td>
                                             <div className="see-more-btn" onClick={() => navigate(`/admin/subscription/${subscription.user._id}`)}>
                                                 <span>see more</span>
