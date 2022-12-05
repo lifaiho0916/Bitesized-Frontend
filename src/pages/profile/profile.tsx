@@ -26,8 +26,8 @@ import { authAction } from "../../redux/actions/authActions";
 import { subScriptionAction } from "../../redux/actions/subScriptionActions";
 import { paymentAction } from "../../redux/actions/paymentActions";
 import subscriptionImg from "../../assets/img/subscription.png";
+import { getLocalCurrency } from "../../constants/functions";
 import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE, SET_SUBSCRIPTION, SET_TOTAL_SUBSCRIBERS } from "../../redux/types";
-import CONSTANT from "../../constants/constant";
 import "../../assets/styles/profile/profileStyle.scss";
 
 const useOutsideAlerter = (ref: any, moreInfo: any) => {
@@ -112,14 +112,6 @@ const Profile = () => {
     if (authuser && user && user.id === authuser._id) return true;
     else return false;
   }, [authuser, user]);
-
-  const getLocalCurrency = (currency: any) => {
-    const index = CONSTANT.CURRENCIES.findIndex(
-      (cur: any) => cur.toLowerCase() === currency
-    );
-    let res = CONSTANT.CURRENCIES[index] + ' ' + CONSTANT.CURRENCY_SYMBOLS[index];
-    return res;
-  };
 
   useEffect(() => {
     if(authuser && code !== "subscription" && isSame === false) {

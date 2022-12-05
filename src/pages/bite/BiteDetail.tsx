@@ -10,16 +10,20 @@ import UnLockFreeModal from "../../components/modals/UnLockModal"
 import PurchaseModal from "../../components/modals/PurchaseModal"
 import PaymentModal from "../../components/modals/PaymentModal"
 import DelCommentModal from "../../components/modals/DelCommentModal"
+import AddCardModal from "../../components/modals/AddCardModal"
+import SubscribeModal from "../../components/modals/SubscribeModal"
+import SubscribeSuccessModal from "../../components/modals/SubscribeSoccessModal"
 import BiteCardProfile from "../../components/bite/BiteCardProfile"
 import CommentBubble from "../../components/bite/CommentBubble"
-import { BackIcon, ClockIcon, UnlockIcon, AscendIcon, DescendIcon, LockedIcon, Bite1Icon, BiteIcon, CommentIcon, SendIcon } from "../../assets/svg"
+import { BackIcon, ClockIcon, UnlockIcon, AscendIcon, DescendIcon, LockedIcon, Bite1Icon, BiteIcon, CommentIcon, SendIcon, CheckIcon } from "../../assets/svg"
 import { LanguageContext } from "../../routes/authRoute"
 import { biteAction } from "../../redux/actions/biteActions"
 import { paymentAction } from "../../redux/actions/paymentActions"
+import { subScriptionAction } from "../../redux/actions/subScriptionActions"
 import { transactionAction } from "../../redux/actions/transactionActions"
 import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE } from "../../redux/types"
+import { getLocalCurrency } from "../../constants/functions"
 import NoTransactionImg from "../../assets/img/no-bite-transaction.png"
-import CONSTANT from "../../constants/constant"
 import "../../assets/styles/bite/BiteDetailStyle.scss"
 
 const useWindowSize = () => {
@@ -45,6 +49,7 @@ const BiteDetail = () => {
     const biteState = useSelector((state: any) => state.bite)
     const transactionState = useSelector((state: any) => state.transaction)
     const paymentState = useSelector((state: any) => state.payment)
+    const subscriptionState = useSelector((state: any) => state.subScription)
 
     const { state } = location
     const { payment } = paymentState
@@ -52,17 +57,22 @@ const BiteDetail = () => {
     const { bite, bites } = biteState
     const { user } = userState
     const { transactions } = transactionState
+    const { subScription } = subscriptionState
 
     const [sort, setSort] = useState(-1)
     const [copied, setCopied] = useState(false)
     const [currency, setCurrency] = useState('usd')
     const [comment, setComment] = useState('')
     const [deleteIndex, setDeleteIndex] = useState(-1)
+    const [card, setCard] = useState(false)
 
     const [openFreeUnlock, setOpenFreeUnLock] = useState(false)
     const [openPurchaseModal, setOpenPurchaseModal] = useState(false)
     const [openPaymentModal, setOpenPaymentModal] = useState(false)
     const [openDeleteCommentModal, setOpenDeleteCommentModal] = useState(false)
+    const [openSubscribeModal, setOpenSubscribeModal] = useState(false)
+    const [openAddCardModal, setOpenAddCardModal] = useState(false)
+    const [openSubscribeSuccessModal, setOpenSubscribeSuccessModal] = useState(false)
 
     const displayTime = (left: any) => {
         const passTime = Math.abs(left)
@@ -101,20 +111,27 @@ const BiteDetail = () => {
         }
     }, [bite, user, currencyRate])
 
+    const subscribed = useMemo(() => {
+        if(subScription && user) {
+          const fitlers = subScription.subscribers.filter((subscriber: any) => (String(subscriber.user) === String(user.id)) && subscriber.status === true)
+          if(fitlers.length > 0) return true
+          else return false
+        } return false
+      }, [subScription, user])
+
     const unLockBite = () => {
         if (user) {
-            if (bite.currency) setOpenPurchaseModal(true)
-            else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null, null, null))
+            if (bite.currency) {
+                if(subscribed) { 
+                    dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null, null, null, true))
+                }
+                else setOpenPurchaseModal(true)
+            }
+            else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null, null, null, false))
         } else {
             dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
             navigate('/auth/signin')
         }
-    }
-
-    const getLocalCurrency = (currency: any) => {
-        const index = CONSTANT.CURRENCIES.findIndex((cur: any) => cur.toLowerCase() === currency)
-        let res = CONSTANT.CURRENCIES[index] + ' ' + CONSTANT.CURRENCY_SYMBOLS[index]
-        return res
     }
 
     const sendComment = () => {
@@ -122,19 +139,59 @@ const BiteDetail = () => {
         setComment("")
     }
 
+    const subscribe = () => {
+        if(user) setOpenSubscribeModal(true)
+        else navigate('/auth/signup')
+    }
+
+    const handleSubscribe = () => {
+        setOpenSubscribeModal(false)
+        if(payment) dispatch(subScriptionAction.subscribePlan(subScription._id, currency))
+        else {
+            setCard(true)
+            setOpenAddCardModal(true)
+        }
+    }
+
+    const categoryText = useMemo(() => {
+        if (bite.owner) {
+          if (bite.owner.categories.length === 0) return ""
+          else {
+            let categories = bite.owner.categories
+            let texts = ""
+            categories.sort((a: any, b: any) => { return a > b ? 1 : a < b ? -1 : 0 })
+            categories.forEach((categoryIndex: any, index: any) => {
+              texts += contexts.CREATOR_CATEGORY_LIST[categoryIndex]
+              if (index < categories.length - 1) texts += "/"
+            })
+            return texts
+          }
+        }
+      }, [bite, contexts.CREATOR_CATEGORY_LIST])
+
     useEffect(() => {
         if (user) dispatch(paymentAction.getPayment())
         dispatch(biteAction.getBiteById(biteId))
     }, [biteId, dispatch, user])
     useEffect(() => { if (dlgState === 'unlock_bite') setOpenFreeUnLock(true) }, [dlgState])
     useEffect(() => { if (isOwner) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort)) }, [isOwner, biteId, sort, dispatch])
-    useEffect(() => { if (bite.owner && isOwner === false) dispatch(biteAction.getBitesByUserIdAndCategory(bite.owner._id, bite._id)) }, [bite.title, isOwner, dispatch])
+    useEffect(() => { if (bite.owner && isOwner === false) {
+        dispatch(biteAction.getBitesByUserIdAndCategory(bite.owner._id, bite._id)) 
+        dispatch(subScriptionAction.getSubScription(bite.owner._id))
+    }}, [bite.title, isOwner, dispatch])
     useEffect(() => {
         if (bite.comments && bite.comments.length) {
             const buffer: any = document.getElementById("scroll")
             buffer.scrollTop = buffer.scrollHeight
         }
     }, [bite])
+    useEffect(() => {
+        if(payment && card) {
+          dispatch(subScriptionAction.subscribePlan(subScription._id, currency))
+          setCard(false)
+        }
+      }, [payment, card, currency, subScription, dispatch])
+
     const displayEmptyRow = (count: any) => {
         var indents: any = []
         for (var i = 0; i < count; i++) {
@@ -152,6 +209,36 @@ const BiteDetail = () => {
             </div>
             {bite.title &&
                 <div className="bite-detail">
+                    <AddCardModal
+                        show={openAddCardModal}
+                        onClose={() => setOpenAddCardModal(false)}
+                    />
+                    <SubscribeModal
+                        show={openSubscribeModal}
+                        onClose={() => setOpenSubscribeModal(false)}
+                        profileUser={{
+                            avatar: bite.owner.avatar,
+                            name: bite.owner.name
+                        }}
+                        categoryText={categoryText}
+                        subScription={subScription}
+                        setCurrency={setCurrency}
+                        handleSubmit={handleSubscribe}
+                    />
+                    <SubscribeSuccessModal
+                        show={openSubscribeSuccessModal}
+                        creatorName={bite.owner.name}
+                        subscriptionName={subScription?.name}
+                        onClose={() => {
+                        dispatch({ type: SET_DIALOG_STATE, payload: "" })
+                        setOpenSubscribeSuccessModal(false)}
+                        }
+                        handleSubmit={() => {
+                        dispatch({ type: SET_DIALOG_STATE, payload: "" })
+                        setOpenSubscribeSuccessModal(false)
+                        navigate(`/${user?.personalisedUrl}?tab=subscription`)
+                        }}
+                    />
                     <UnLockFreeModal
                         show={openFreeUnlock}
                         onClose={() => {
@@ -159,6 +246,7 @@ const BiteDetail = () => {
                             dispatch({ type: SET_DIALOG_STATE, payload: "" })
                         }}
                         bite={bite}
+                        subscribed={true}
                         handleSubmit={() => {
                             dispatch({ type: SET_DIALOG_STATE, payload: "" })
                             navigate(`/${user?.personalisedUrl}`)
@@ -201,14 +289,28 @@ const BiteDetail = () => {
                                     avatarStyle={"horizontal"}
                                     handleClick={() => navigate(`/${bite.owner.personalisedUrl}`)}
                                 />
-                                <div></div>
-                                {/* <Button
-                                    text="Subscribe"
-                                    fillStyle="fill"
-                                    color="primary"
-                                    shape="rounded"
-                                    handleSubmit={() => { window.open('https://www.creatogether.app/subscribenow', '_blank') }}
-                                /> */}
+                                 {(subScription && subScription.visible) &&
+                                    <>
+                                        {subscribed ?
+                                            <Button
+                                            text="Subscribed"
+                                            fillStyle="outline"
+                                            color="primary"
+                                            shape="rounded"
+                                            icon={[<CheckIcon color="#EFA058"/>, <CheckIcon color="white"/>, <CheckIcon color="white"/>]}
+                                            handleSubmit={() => navigate(`/${user.personalisedUrl}?tab=subscription`)}
+                                            />
+                                            :
+                                            <Button
+                                            text="Subscribe"
+                                            fillStyle="fill"
+                                            color="primary"
+                                            shape="rounded"
+                                            handleSubmit={subscribe}
+                                            />
+                                        }
+                                    </>
+                                }
                             </div>
                             <div className="status-chip">
                                 <div className={`chip ${bite.currency ? 'paid' : 'free'}`}>
@@ -227,7 +329,7 @@ const BiteDetail = () => {
                         {lock &&
                             <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
                                 <Button
-                                    text="Unlock this bite"
+                                    text={ subscribed ? "Unlock this bite for free" : "Unlock this bite"}
                                     fillStyle="outline"
                                     color="primary"
                                     shape="rounded"

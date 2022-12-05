@@ -46,7 +46,7 @@ const PaymentForm = (props: any) => {
             onClose()
             const rate = bite.currency === 'usd' ? 1.0 : currencyRate[`${bite.currency}`]
             const usdAmount = bite.price / rate
-            dispatch(biteAction.unLockBite(bite._id, currency, usdAmount, token.token, saveCheck, holder, numberInfo.brand))
+            dispatch(biteAction.unLockBite(bite._id, currency, usdAmount, token.token, saveCheck, holder, numberInfo.brand, false))
         } catch (err) {
             console.log(err)
             dispatch({ type: SET_LOADING_FALSE })

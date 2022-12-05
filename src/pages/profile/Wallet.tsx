@@ -205,15 +205,15 @@ const Wallet = () => {
                                         {transactions.map((transaction: any, index: any) => (
                                             <tr key={index}>
                                                 <td>
-                                                    {transaction.type === 2 && <span style={{ color: '#D94E27' }}>- {currencyRate ? getLocalCurrency(transaction.currency) + `${transaction.localPrice.toFixed(1)}` : ''}</span>}
-                                                    {transaction.type === 3 && <span style={{ color: '#10B981' }}>+ {currencyRate ? getLocalCurrency(transaction.bite.currency) + `${transaction.bite.price.toFixed(1)}` : ''}</span>}
+                                                    {transaction.type === 2 && <span style={{ color: '#D94E27' }}>- {transaction.bite.subscription ? 0 : currencyRate ? getLocalCurrency(transaction.currency) + `${transaction.localPrice.toFixed(1)}` : ''}</span>}
+                                                    {transaction.type === 3 && <span style={{ color: '#10B981' }}>+ {transaction.bite.subscription ? 0 :currencyRate ? getLocalCurrency(transaction.bite.currency) + `${transaction.bite.price.toFixed(1)}` : ''}</span>}
                                                     {(transaction.type === 6 && transaction.currency === undefined) && <span style={{ color: '#10B981' }}>+ {currencyRate ? getLocalCurrency(transaction.subscription.currency) + `${transaction.subscription.price.toFixed(1)}` : ''}</span>}
                                                     {(transaction.type === 6 && transaction.currency) && <span style={{ color: '#D94E27' }}>- {currencyRate ? getLocalCurrency(transaction.currency) + `${transaction.localPrice.toFixed(1)}` : ''}</span>}
                                                 </td>
                                                 <td>
                                                     <span className="detail">
-                                                        {transaction.type === 2 && `Unlock Paid bite: [${transaction.bite.title}]`}
-                                                        {transaction.type === 3 && `Earnings from: [${transaction.bite.title}]`}
+                                                        {transaction.type === 2 && `Unlock Paid bite${transaction.bite.subscription ? '(Subscription)' : ''}: [${transaction.bite.title}]`}
+                                                        {transaction.type === 3 && `Earnings from${transaction.bite.subscription ? '(Subscription)' : ''}: [${transaction.bite.title}]`}
                                                         {(transaction.type === 6 && transaction.currency) && `Subscription fee of: [${transaction.subscription.owner.name} - ${transaction.subscription.planName}]`}
                                                         {(transaction.type === 6 && transaction.currency === undefined) &&`Subscription from: [${transaction.subscription.subscriber.name}]`}
                                                     </span>

@@ -236,11 +236,11 @@ export const biteAction = {
         }
     },
 
-    unLockBite: (id: any, currency: any, amount: any, token: any, saveCheck: any, holder: any, cardType: any) => async (dispatch: Dispatch<any>) => {
+    unLockBite: (id: any, currency: any, amount: any, token: any, saveCheck: any, holder: any, cardType: any, subscribe: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
             let response: any = null
-            if (currency) response = await api.unLockBite(id, { currency: currency, amount: amount, token: token, saveCheck: saveCheck, holder: holder, cardType: cardType })
+            if (currency) response = await api.unLockBite(id, { currency: currency, amount: amount, token: token, saveCheck: saveCheck, holder: holder, cardType: cardType, subscribe: subscribe })
             else response = await api.unLockBite(id, {})
 
             dispatch({ type: SET_LOADING_FALSE })
