@@ -117,7 +117,15 @@ const BiteDetail = () => {
           if(fitlers.length > 0) return true
           else return false
         } return false
-      }, [subScription, user])
+    }, [subScription, user])
+
+    const subscriptionEnable = useMemo(() => {
+        if(subScription && user) {
+          const fitlers = subScription.subscribers.filter((subscriber: any) => (String(subscriber.user) === String(user.id)) && new Date(subscriber.nextInvoiceAt).getTime() > new Date().getTime())
+          if(fitlers.length > 0) return true
+          else return false
+        } return false
+    }, [subScription, user])
 
     const unLockBite = () => {
         if (user) {
@@ -169,10 +177,8 @@ const BiteDetail = () => {
         }
       }, [bite, contexts.CREATOR_CATEGORY_LIST])
 
-    useEffect(() => {
-        if (user) dispatch(paymentAction.getPayment())
-        dispatch(biteAction.getBiteById(biteId))
-    }, [biteId, dispatch, user])
+    useEffect(() => {if (user) dispatch(paymentAction.getPayment())}, [dispatch, user])
+    useEffect(() => { dispatch(biteAction.getBiteById(biteId)) }, [biteId, dispatch])
     useEffect(() => { if (dlgState === 'unlock_bite') setOpenFreeUnLock(true) }, [dlgState])
     useEffect(() => { if (isOwner) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort)) }, [isOwner, biteId, sort, dispatch])
     useEffect(() => { if (bite.owner && isOwner === false) {
@@ -246,7 +252,7 @@ const BiteDetail = () => {
                             dispatch({ type: SET_DIALOG_STATE, payload: "" })
                         }}
                         bite={bite}
-                        subscribed={true}
+                        subscribed={subscriptionEnable}
                         handleSubmit={() => {
                             dispatch({ type: SET_DIALOG_STATE, payload: "" })
                             navigate(`/${user?.personalisedUrl}`)
@@ -329,7 +335,7 @@ const BiteDetail = () => {
                         {lock &&
                             <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
                                 <Button
-                                    text={ subscribed ? "Unlock this bite for free" : "Unlock this bite"}
+                                    text={ subscriptionEnable ? "Unlock this bite for free" : "Unlock this bite"}
                                     fillStyle="outline"
                                     color="primary"
                                     shape="rounded"

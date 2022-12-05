@@ -1,5 +1,6 @@
 import { useMemo, useContext } from "react"
 import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import Avatar from "./general/avatar"
 import Button from "./general/button"
 import { LanguageContext } from "../routes/authRoute"
@@ -8,6 +9,7 @@ import "../assets/styles/subscription/SubscriptionCardStyle.scss"
 
 const SubscriptionCard = (props: any) => {
     const { subscriber, handleSubmit, user } = props
+    const navigate = useNavigate()
     const contexts = useContext(LanguageContext)
     const loadState = useSelector((state: any) => state.load)
     const { currencyRate } = loadState
@@ -40,6 +42,7 @@ const SubscriptionCard = (props: any) => {
                 <Avatar
                     size="mobile"
                     avatar={subscriber.plan ? subscriber.plan.user.avatar.indexOf('uploads') !== -1 ? `${process.env.REACT_APP_SERVER_URL}/${subscriber.plan.user.avatar}` : subscriber.plan.user.avatar : ''}
+                    handleClick={() => navigate(`/${subscriber.plan.user.personalisedUrl}`)}
                 />
                 <div className="user-name-category">
                     <div className="username">
