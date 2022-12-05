@@ -89,7 +89,7 @@ const EditSubscriptionModal = (props: any) => {
             <div id="editsubscription">
                 <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                     <div className="modal-header">
-                        <span>Delete subscription?</span>
+                        <span>Edit subscription</span>
                         <div className="close-btn" onClick={onClose}>
                             <CloseIcon color="white" width={30} height={30} />
                         </div>
