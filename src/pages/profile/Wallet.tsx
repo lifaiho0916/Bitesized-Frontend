@@ -21,6 +21,7 @@ import {
 import Dialog from "../../components/general/dialog"
 import Button from "../../components/general/button"
 import AddCardModal from "../../components/modals/AddCardModal"
+import RemoveCardModal from "../../components/modals/RemoveCardModal"
 import { LanguageContext } from "../../routes/authRoute"
 import { transactionAction } from "../../redux/actions/transactionActions"
 import { paymentAction } from "../../redux/actions/paymentActions"
@@ -68,6 +69,7 @@ const Wallet = () => {
     const [period, setPeriod] = useState(30)
 
     const [openAddCard, setOpenAddCard] = useState(false)
+    const [openRemoveCard, setOpenRemoveCard] = useState(false)
 
     const getLocalCurrency = (currency: any) => {
         const index = CONSTANT.CURRENCIES.findIndex((cur: any) => cur.toLowerCase() === currency)
@@ -93,6 +95,14 @@ const Wallet = () => {
                 <div style={{ width: '24px' }}></div>
             </div>
             <div className="profile-wallet">
+                <RemoveCardModal
+                    show={openRemoveCard}
+                    onClose={() => setOpenRemoveCard(false)}
+                    handleSubmit={() => {
+                        setOpenRemoveCard(false)
+                        dispatch(paymentAction.deleteCard())
+                    }}
+                />
                 <AddCardModal
                     show={openAddCard}
                     onClose={() => setOpenAddCard(false)}
@@ -225,11 +235,11 @@ const Wallet = () => {
                         </div>
                         {payment ?
                             <div className="more-icon">
-                                <div onClick={() => { setRemoveCard(true) }}><MoreIcon color="black" /></div>
+                                <div onClick={() => setRemoveCard(true)}><MoreIcon color="black" /></div>
                                 <div className="drop-down-list" style={removeCard === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef1}>
                                     <div className="list" onClick={() => {
                                         setRemoveCard(false)
-                                        dispatch(paymentAction.deleteCard())
+                                        setOpenRemoveCard(true)
                                     }}>Remove card</div>
                                 </div>
                             </div> :
