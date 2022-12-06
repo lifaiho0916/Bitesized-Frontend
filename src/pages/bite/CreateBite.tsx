@@ -1,4 +1,4 @@
-import { useEffect, useState, useLayoutEffect, useRef } from "react"
+import { useEffect, useState, useLayoutEffect, useRef, useMemo } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import ReactPlayer from "react-player"
@@ -8,6 +8,7 @@ import TeaserCardPopUp from "../../components/general/TeaserCardPopUp"
 import CurrencySelect from "../../components/stripe/CurrencySelect"
 import ContainerBtn from "../../components/general/containerBtn"
 import Dialog from "../../components/general/dialog"
+import Select from "../../components/general/select"
 import Button from "../../components/general/button"
 import PublishBiteModal from "../../components/modals/PublishBiteModal"
 import { AddIcon, BackIcon, PlayIcon, RemoveIcon, DragHandleIcon } from "../../assets/svg"
@@ -48,7 +49,7 @@ const CreateBite = () => {
     const [title, setTitle] = useState(bite.title ? bite.title : '')
     const [price, setPrice] = useState(bite.price ? bite.price : '')
     const [currency, setCurrency] = useState(0)
-    const [publishEnable, setPublishEnable] = useState(false)
+    const [category, setCategory] = useState(0)
     const [videoIndex, setVideoIndex] = useState(-1)
     const [free, setFree] = useState(false)
 
@@ -68,10 +69,12 @@ const CreateBite = () => {
         const newBite = free ? {
             ...bite,
             title: title,
+            category: category
         } : {
             ...bite,
             title: title,
             price: price,
+            category: category,
             currency: (CONSTANT.CURRENCIES[currency]).toLowerCase()
         }
         dispatch(biteAction.saveBite(newBite, user.personalisedUrl, navigate))
@@ -187,16 +190,10 @@ const CreateBite = () => {
         })
     }
 
-    useEffect(() => {
-        if (title === "" || bite.videos.length === 0) {
-            setPublishEnable(false)
-            return
-        }
-        if (!free && (price === "" || Number(price) === 0)) {
-            setPublishEnable(false)
-            return
-        }
-        setPublishEnable(true)
+    const publishEnable = useMemo(() => {
+        if (title === "" || bite.videos.length === 0) return false
+        if (!free && (price === "" || Number(price) === 0)) return false
+        return true
     }, [title, price, bite, free])
 
     useEffect(() => { setFree(location.pathname.substring(location.pathname.length - 4) === 'free') }, [location])
@@ -406,6 +403,20 @@ const CreateBite = () => {
                         setTitle={setTitle}
                     />
                 </div>
+
+                <div className="first-divider"></div>
+                <div className="session-title">
+                    <span>Category</span>
+                </div>
+                <div className="currency-selection">
+                    <Select
+                        width={'100%'}
+                        option={category}
+                        setOption={setCategory}
+                        options={CONSTANT.BITE_CATEGORIES}
+                    />
+                </div>
+                
 
                 {!free &&
                     <div>

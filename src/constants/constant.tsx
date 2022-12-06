@@ -107,7 +107,8 @@ const CONSTANT = {
         'THB - Thai Baht',
         'PHP - Philippine Peso',
         'IDR - Indonesian Rupiah'
-    ]
+    ],
+    BITE_CATEGORIES: ['Photography', 'Music', 'Design', 'Literature', 'History', 'Philosophy', 'Psychology', 'Social science', 'Education', 'Business', 'Language', 'Computer', 'Natural science', 'Lifestyle', 'Travel', 'Cooking', 'Sports', 'Heath', 'Religious']
 }
 
 export default CONSTANT;

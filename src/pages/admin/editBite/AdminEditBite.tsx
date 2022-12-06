@@ -13,6 +13,7 @@ import { BackIcon, VisibleIcon, HiddenIcon, DeleteIcon, AddIcon, RemoveIcon, Pla
 import { SET_BITE, SET_SELECTED_INDEXES, SET_VIDEO_ALIGNS, SET_PREVIOUS_ROUTE } from "../../../redux/types"
 import CONSTANT from "../../../constants/constant"
 import "../../../assets/styles/admin/editBite/AdminEditBiteStyle.scss"
+import Select from "../../../components/general/select"
 
 const reOrder = (list: any, startIndex: any, endIndex: any) => {
     const result = Array.from(list)
@@ -30,6 +31,7 @@ const AdminEditBite = () => {
     const biteState = useSelector((state: any) => state.bite)
     const { bite, selectedIndexs, aligns } = biteState
     const [title, setTitle] = useState("")
+    const [category, setCategory] = useState(bite.category ? bite.category : 0)
     const [removeIndex, setRemoveIndex] = useState(0)
     const [videoIndex, setVideoIndex] = useState(-1)
     const [play, setPlay] = useState(false)
@@ -54,7 +56,8 @@ const AdminEditBite = () => {
     const saveBite = () => {
         const resBite = {
             ...bite,
-            title: title !== '' ? title : bite.title
+            title: title !== '' ? title : bite.title,
+            category: category
         }
 
         dispatch(biteAction.editBite(resBite, navigate))
@@ -198,6 +201,11 @@ const AdminEditBite = () => {
                                 avatarStyle={"horizontal"}
                             />
                         }
+                        {bite.category &&
+                            <div className="bite-category">
+                                <span>{CONSTANT.BITE_CATEGORIES[bite.category]}</span>
+                            </div>
+                        }
                     </div>
                     <div className="bite-title">
                         <span>{bite?.title}</span>
@@ -212,6 +220,15 @@ const AdminEditBite = () => {
                         title={title}
                         setTitle={setTitle}
                         wordCount={100}
+                    />
+                </div>
+                <div className="edit-category">
+                    <h4 className="color-primary-level5">Category</h4>
+                    <Select
+                        width={'100%'}
+                        option={category}
+                        setOption={setCategory}
+                        options={CONSTANT.BITE_CATEGORIES}
                     />
                 </div>
                 <div className="edit-video">
