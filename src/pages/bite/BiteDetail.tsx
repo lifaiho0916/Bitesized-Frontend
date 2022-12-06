@@ -130,9 +130,7 @@ const BiteDetail = () => {
     const unLockBite = () => {
         if (user) {
             if (bite.currency) {
-                if(subscribed) { 
-                    dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null, null, null, true))
-                }
+                if(subscribed) dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null, null, null, true))
                 else setOpenPurchaseModal(true)
             }
             else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null, null, null, false))
@@ -179,7 +177,12 @@ const BiteDetail = () => {
 
     useEffect(() => {if (user) dispatch(paymentAction.getPayment())}, [dispatch, user])
     useEffect(() => { dispatch(biteAction.getBiteById(biteId)) }, [biteId, dispatch])
-    useEffect(() => { if (dlgState === 'unlock_bite') setOpenFreeUnLock(true) }, [dlgState])
+    useEffect(() => { 
+        if (dlgState === 'unlock_bite') {
+            setOpenFreeUnLock(true)
+            // dispatch(biteAction.getBiteById(biteId))
+        }
+    }, [dlgState])
     useEffect(() => { if (isOwner) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort)) }, [isOwner, biteId, sort, dispatch])
     useEffect(() => { if (bite.owner && isOwner === false) {
         dispatch(biteAction.getBitesByUserIdAndCategory(bite.owner._id, bite._id)) 
