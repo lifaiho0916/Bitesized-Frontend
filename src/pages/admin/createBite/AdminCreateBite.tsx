@@ -6,6 +6,7 @@ import ContainerBtn from "../../../components/general/containerBtn"
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import ReactPlayer from "react-player"
 import Input from "../../../components/general/input"
+import Select from "../../../components/general/select"
 import CurrencySelect from "../../../components/stripe/CurrencySelect"
 import PublishBiteModal from "../../../components/modals/PublishBiteModal"
 import Button from "../../../components/general/button"
@@ -31,6 +32,7 @@ const AdminCreateBite = () => {
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [title, setTitle] = useState(bite.title ? bite.title : '')
     const [price, setPrice] = useState(bite.price ? bite.price : '')
+    const [category, setCategory] = useState(bite.category ? bite.category : '')
     const [currency, setCurrency] = useState(bite.currency ? bite.currency : 0)
     const [publishEnable, setPublishEnable] = useState(false)
     const { state } = location
@@ -49,9 +51,11 @@ const AdminCreateBite = () => {
         const newBite = free ? {
             ...bite,
             title: title,
+            category: category,
         } : {
             ...bite,
             title: title,
+            category: category,
             price: price,
             currency: (CONSTANT.CURRENCIES[currency]).toLowerCase()
         }
@@ -109,10 +113,12 @@ const AdminCreateBite = () => {
         const newBite = free ? {
             ...bite,
             title: title,
+            category: category,
         } : {
             ...bite,
             title: title,
             price: price,
+            category: category,
             currency: (CONSTANT.CURRENCIES[currency]).toLowerCase()
         }
         dispatch({ type: SET_BITE, payload: newBite })
@@ -360,6 +366,19 @@ const AdminCreateBite = () => {
                             placeholder="How to be a content creators?"
                             title={title}
                             setTitle={setTitle}
+                        />
+                    </div>
+
+                    <div className="first-divider"></div>
+                    <div className="session-title">
+                        <span>Category</span>
+                    </div>
+                    <div className="session-input">
+                        <Select
+                            width={'100%'}
+                            option={category}
+                            setOption={setCategory}
+                            options={CONSTANT.BITE_CATEGORIES}
                         />
                     </div>
 

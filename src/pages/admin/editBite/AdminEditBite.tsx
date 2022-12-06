@@ -8,12 +8,12 @@ import Avatar from "../../../components/general/avatar"
 import Input from "../../../components/general/input"
 import ReactPlayer from "react-player"
 import Button from "../../../components/general/button"
+import Select from "../../../components/general/select"
 import { biteAction } from "../../../redux/actions/biteActions"
 import { BackIcon, VisibleIcon, HiddenIcon, DeleteIcon, AddIcon, RemoveIcon, PlayIcon, DragHandleIcon } from "../../../assets/svg"
 import { SET_BITE, SET_SELECTED_INDEXES, SET_VIDEO_ALIGNS, SET_PREVIOUS_ROUTE } from "../../../redux/types"
 import CONSTANT from "../../../constants/constant"
 import "../../../assets/styles/admin/editBite/AdminEditBiteStyle.scss"
-import Select from "../../../components/general/select"
 
 const reOrder = (list: any, startIndex: any, endIndex: any) => {
     const result = Array.from(list)

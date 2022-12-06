@@ -3,6 +3,7 @@ import * as actionTypes from '../types'
 const INITIAL_STATE: any = {
     bite: {
         title: null,
+        category: null,
         price: null,
         currency: null,
         videos: []
@@ -41,6 +42,7 @@ const biteReducer = (state: any = INITIAL_STATE, action: any) => {
                 bite: {
                     title: null,
                     price: null,
+                    category: null,
                     currency: null,
                     videos: []
                 },
