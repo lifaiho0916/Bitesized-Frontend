@@ -252,11 +252,11 @@ export const biteAction = {
         }
     },
 
-    getBitesList: () => async (dispatch: Dispatch<any>) => {
+    getBitesList: (categories: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
             dispatch({ type: SET_BITES, payload: [] })
-            const response = await api.getBitesList()
+            const response = await api.getBitesList(categories)
             const { data } = response
 
             dispatch({ type: SET_LOADING_FALSE })

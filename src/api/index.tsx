@@ -20,7 +20,7 @@ export const UpdateBite = (id: any, data: any) => API.put(`/api/bite/${id}`, dat
 export const getAllBites = (filter: any) => API.get(`/api/bite?filter=${filter}`)
 export const unLockBite = (id: any, data: any) => API.put(`/api/bite/${id}/unlock`, data)
 export const getBitesByPersonalisedUrl = (url: any, userId: any, tab: any) => API.get(`/api/bite/personalurl/${url}${userId ? `?userId=${userId}&tab=${tab}` : ''}`)
-export const getBitesList = () => API.get('/api/bite/list')
+export const getBitesList = (categories: any) => API.get(`/api/bite/list?categories=${categories}`)
 export const getBitesAdmin = (type: any, search: any, sort: any) => API.get(`/api/bite/adminlist?type=${type}&search=${search}&sort=${sort}`)
 export const getBitesSortByCommentAdmin = (type: any, search: any, sort: any) => API.get(`/api/bite/list_comment?type=${type}&search=${search}&sort=${sort}`)
 export const getBiteById = (id: any) => API.get(`/api/bite/${id}`)
