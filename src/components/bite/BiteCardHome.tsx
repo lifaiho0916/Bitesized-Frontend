@@ -131,7 +131,7 @@ const BiteCardHome = (props: any) => {
                         </div>
                     </div>
                 </div>
-                <div className={bite.currency ? !lock ? "price-unlocked" : "price-purchased" : "price-free"}>
+                <div className={bite.currency ? !lock ? "price-unlocked" : "price-purchased" : !lock ? "price-unlocked" : "price-free"}>
                     <span>{!lock ? 'Unlocked' : displayPrice(bite.currency, bite.price, user ? user.currency : 'usd')}</span>
                     {bite.purchasedUsers.length > 0 && <span style={{ marginLeft: '10px' }}><NoOfPeopleIcon color="white" width={18} height={18} />&nbsp;{bite.purchasedUsers.length} {bite.currency ? "purchased" : "unlocked"}</span>}
                 </div>

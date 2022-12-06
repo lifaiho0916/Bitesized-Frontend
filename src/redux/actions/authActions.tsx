@@ -317,5 +317,23 @@ export const authAction = {
         dispatch({ type: SET_LOADING_FALSE })
         console.log(err)
       }
+    },
+
+    getOwnersOfBites: () => async (dispatch: Dispatch<any>) => {
+      try {
+        dispatch({ type: SET_LOADING_TRUE })
+        dispatch({ type: SET_USERS, payload: [] })
+        const response = await api.getOwnersOfBites()
+
+        dispatch({ type: SET_LOADING_FALSE })
+        const { data } = response
+        if (data.success) {
+          const { payload } = data
+          dispatch({ type: SET_USERS, payload: payload.users })
+        }
+    } catch (err) {
+        console.log(err)
+        dispatch({ type: SET_LOADING_FALSE })
+    }
     }
 };

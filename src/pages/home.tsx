@@ -8,6 +8,8 @@ import Avatar from "../components/general/avatar"
 import BiteCardHome from "../components/bite/BiteCardHome"
 import { SET_USERS } from "../redux/types"
 import { biteAction } from "../redux/actions/biteActions"
+import { authAction } from "../redux/actions/authActions"
+import CONSTANT from "../constants/constant"
 import "../assets/styles/homeStyle.scss"
 
 const useWindowSize = () => {
@@ -35,6 +37,8 @@ const Home = () => {
   const { users } = userState
   const { bites } = biteState
 
+  const [biteFilter, setBiteFilter] = useState(0)
+
   const showCategories = (categories: any) => {
     let category = ''
     categories.forEach((cate: any, index: any) => {
@@ -50,7 +54,13 @@ const Home = () => {
     navigate(url)
   }
 
-  useEffect(() => { dispatch(biteAction.getHomeSessions()) }, [location, dispatch])
+  useEffect(() => {
+    dispatch(biteAction.getBitesFromHome(biteFilter))
+  }, [location, dispatch, biteFilter])
+
+  useEffect(() => {
+    dispatch(authAction.getOwnersOfBites())
+  }, [location, dispatch])
 
   let xDown: any = null
   let yDown: any = null
@@ -102,12 +112,13 @@ const Home = () => {
   }
 
   useEffect(() => {
+    if (bites.length === 2) setGoToSlide(0)
     setCards(bites.map((bite: any, i: any) => {
       return {
         key: i,
         content: (
           <div style={{ width: 'fit-content', height: 'fit-content', transform: 'scale(0.9)' }}>
-            <BiteCardHome bite={bite} index={i} />
+            <BiteCardHome bite={bite} />
           </div>
         )
       }
@@ -123,44 +134,101 @@ const Home = () => {
 
   return (
     <div className="home-wrapper">
-      {bites.length > 0 &&
-        <div className="section" style={{ marginTop: '20px' }}>
-          <div className="title">💡Bite-sized Knowledge</div>
-          <div className="see-more" onClick={gotoBites}>
-            <div className="description">Learn Something New In Minutes</div>
-            <div className="divider"></div>
-            <div className="see-more-btn">{width < 680 ? '··· ' : ''}see more</div>
-          </div>
-          <div className="underline"></div>
-          {width > 680 ?
-            <div className="daremes scroll-bar">
-              {bites.map((bite: any, i: any) => (
-                <div className="dareme" key={i}>
-                  <BiteCardHome bite={bite} />
-                </div>
-              ))}
-            </div>
-            :
-            <div className="daremes-mobile"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-            >
-              <Carousel
-                slides={
-                  cards.map((slide: any, index: any) => {
-                    return { ...slide, onClick: () => setGoToSlide(index) }
-                  })
-                }
-                goToSlide={goToSlide}
-                offsetRadius={1}
-                showNavigation={false}
-                animationConfig={config.gentle}
-              />
-            </div>
-          }
-
+      <div className="section" style={{ marginTop: '20px' }}>
+        <div className="title">💡Bite-sized Knowledge</div>
+        <div className="see-more" onClick={gotoBites}>
+          <div className="description">Learn Something New In Minutes</div>
+          <div className="divider"></div>
+          <div className="see-more-btn">{width < 680 ? '··· ' : ''}see more</div>
         </div>
-      }
+        <div className="underline"></div>
+        <div className="bite-tags">
+          <div
+            className={biteFilter === -1 ? "tag active" : "tag"}
+            onClick={() => setBiteFilter(-1)}
+          >
+            <span>Latest</span>
+          </div>
+          <div
+            className={biteFilter === 0 ? "tag active" : "tag"}
+            onClick={() => setBiteFilter(0)}
+          >
+            <span>All</span>
+          </div>
+          {CONSTANT.BITE_CATEGORIES.map((category: any, index: any) => (
+            <div
+              className={biteFilter === index + 1 ? "tag active" : "tag"}
+              key={index}
+              onClick={() => setBiteFilter(index + 1)}
+            >
+              <span>{category}</span>
+            </div>
+          ))}
+        </div>
+        {bites.length === 1 ?
+          <div className="daremes scroll-bar" style={width < 680 ? { justifyContent: 'center', height: '650px', position: 'relative' } : {}}>
+            {bites.map((bite: any, i: any) => (
+              <div className="dareme" key={i} style={width < 680 ? { position: 'absolute', transform: 'scale(0.9)', top: -15 } : {}}>
+                <BiteCardHome bite={bite} />
+              </div>
+            ))}
+          </div>
+          :
+          <>
+            {width > 680 ?
+              <div className="daremes scroll-bar">
+                {bites.map((bite: any, i: any) => (
+                  <div className="dareme" key={i}>
+                    <BiteCardHome bite={bite} />
+                  </div>
+                ))}
+              </div>
+              : bites.length === 2 ?
+                <div
+                  style={{ height: '650px', width: '100%', position: 'relative' }}
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                >
+                  {bites.map((bite: any, i: any) => (
+                    <div style={i === 0 ? {
+                      position: 'absolute',
+                      zIndex: goToSlide === 0 ? 5 : 0,
+                      left: goToSlide === 1 ? -60 : 0,
+                      transform: goToSlide !== i ? 'scale(0.50)' : 'scale(0.9)',
+                      transition: 'ease-in-out 0.3s',
+                      top: -15
+                    } : {
+                      position: 'absolute',
+                      zIndex: goToSlide === 1 ? 5 : 0,
+                      right: goToSlide === 0 ? -60 : 0,
+                      transform: goToSlide !== i ? 'scale(0.5)' : 'scale(0.9)',
+                      transition: 'ease-in-out 0.3s',
+                      top: -15
+                    }} key={i}>
+                      <div className={goToSlide !== i ? "dark" : ""} >
+                        <BiteCardHome bite={bite} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                :
+                <div className="daremes-mobile"
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  style={bites.length === 0 ? { height: 0 } : {}}
+                >
+                  <Carousel
+                    slides={cards.map((slide: any, index: any) => { return { ...slide, onClick: () => setGoToSlide(index) } })}
+                    goToSlide={goToSlide}
+                    offsetRadius={1}
+                    showNavigation={false}
+                    animationConfig={config.gentle}
+                  />
+                </div>
+            }
+          </>
+        }
+      </div>
       {users.length > 0 &&
         <div className="section">
           <div className="title">Creators You Might Like 🎨</div>

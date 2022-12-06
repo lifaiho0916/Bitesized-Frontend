@@ -60,9 +60,8 @@
     .see-more {
       display: flex;
       justify-content: space-between;
-      font-family: 'Lato';
+      font-family: "Lato";
       font-style: normal;
-
 
       .description {
         font-weight: 700;
@@ -70,13 +69,13 @@
         line-height: 20px;
         display: flex;
         align-items: center;
-        color: #EFA058;
+        color: #efa058;
       }
 
       .divider {
         width: calc(100% - 440px);
         margin-top: 10px;
-        border-top: 2px solid #FFC88F;
+        border-top: 2px solid #ffc88f;
       }
 
       .see-more-btn {
@@ -85,7 +84,7 @@
         font-weight: 700;
         font-size: 14px;
         line-height: 18px;
-        color: #EFA058;
+        color: #efa058;
 
         &:hover {
           transform: scale(1.1);
@@ -95,7 +94,67 @@
 
     .underline {
       width: 100%;
-      border: 0px solid #FFC88F;
+      border: 0px solid #ffc88f;
+    }
+
+    .bite-tags {
+      display: flex;
+      overflow-x: auto;
+
+      &::-webkit-scrollbar {
+        height: 8px;
+      }
+  
+      &::-webkit-scrollbar-track {
+        background-color: rgba(245, 195, 149, 0.1);
+        border-radius: 10px;
+      }
+  
+      &::-webkit-scrollbar-thumb {
+        background: rgba(245, 195, 149, 0.5);
+        border-radius: 10px;
+        transition: 0.2s;
+        height: 12px;
+  
+        &:hover {
+          background: #efa058;
+        }
+      }
+  
+      @media screen and (max-width: 680px) {
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+
+      .tag {
+        cursor: pointer;
+        margin: 10px 8px;
+        padding: 10px;
+        background: #f3f3f3;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: fit-content;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14px;
+        text-align: center;
+        color: #000000;
+        white-space: nowrap;
+
+        &:hover {
+          background-color: #F5C395;
+          color: white;
+        }
+
+        &.active {
+          background-color: #EFA058;
+          color: white;
+        }
+      }
     }
 
     .search-icon {
@@ -148,7 +207,7 @@
         transition: 0.2s;
 
         &:hover {
-          transform: scale(1.03)
+          transform: scale(1.03);
         }
       }
     }
@@ -171,7 +230,7 @@
         margin: 5px;
 
         &:hover {
-          transform: scale(1.2)
+          transform: scale(1.2);
         }
       }
     }
@@ -197,9 +256,25 @@
         border-width: 1px 0px 0px 0px;
       }
 
+      .dark {
+        display: flex;
+        opacity: 0.8 !important;
+
+        &::after {
+          position: absolute;
+          content: "";
+          width: 100%;
+          height: 100%;
+          z-index: 2;
+          background: url("../img/dark.png");
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+        }
+      }
+
       .css-doq0dk {
         .css-1fzpoyk:first-child {
-          position: relative;
           opacity: 0.8 !important;
 
           &::after {
@@ -207,7 +282,7 @@
             content: "";
             width: 100%;
             height: 100%;
-            background: url('../img/dark.png');
+            background: url("../img/dark.png");
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
@@ -222,7 +297,7 @@
             content: "";
             width: 100%;
             height: 100%;
-            background: url('../img/dark.png');
+            background: url("../img/dark.png");
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;

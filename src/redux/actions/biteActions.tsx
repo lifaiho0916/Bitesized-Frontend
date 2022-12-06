@@ -1,6 +1,6 @@
 import { Dispatch } from "redux"
 import * as api from "../../api"
-import { SET_LOADING_TRUE, SET_LOADING_FALSE, SET_BITES, SET_USERS, SET_DIALOG_STATE, SET_BITE, SET_BITE_INITIAL, SET_UPLOADED_PROCESS, SET_UPLOADING } from "../types"
+import { SET_LOADING_TRUE, SET_LOADING_FALSE, SET_BITES, SET_DIALOG_STATE, SET_BITE, SET_BITE_INITIAL, SET_UPLOADED_PROCESS, SET_UPLOADING } from "../types"
 
 export const biteAction = {
     saveBite: (bite: any, personalisedUrl: any, navigate: any) => async (dispatch: Dispatch<any>) => {
@@ -200,21 +200,16 @@ export const biteAction = {
         }
     },
 
-    getHomeSessions: () => async (dispatch: Dispatch<any>) => {
+    getBitesFromHome: (filter: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_LOADING_TRUE })
-            dispatch({ type: SET_DIALOG_STATE, payload: "" })
             dispatch({ type: SET_BITES, payload: [] })
-            dispatch({ type: SET_USERS, payload: [] })
-            const responses = await Promise.all([
-                api.getAllBites(),
-                api.getOwnersOfBites()
-            ])
-
+            const response = await api.getAllBites(filter)
             dispatch({ type: SET_LOADING_FALSE })
-            if (responses[0].data.success && responses[1].data.success) {
-                dispatch({ type: SET_BITES, payload: responses[0].data.payload.bites })
-                dispatch({ type: SET_USERS, payload: responses[1].data.payload.users })
+            const { data } = response
+            if (data.success) {
+                const { payload } = data
+                dispatch({ type: SET_BITES, payload: payload.bites })
             }
         } catch (err) {
             console.log(err)
@@ -279,7 +274,7 @@ export const biteAction = {
         try {
             dispatch({ type: SET_LOADING_TRUE })
             dispatch({ type: SET_BITE_INITIAL })
-            const response = await api.getAllBites()
+            const response = await api.getAllBites(0)
             const { data } = response
             dispatch({ type: SET_LOADING_FALSE })
             if (data.success) {
