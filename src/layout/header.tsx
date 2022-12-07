@@ -8,9 +8,9 @@ import SideMenu from "../components/sideMenu";
 import Avatar from "../components/general/avatar";
 import LangDialog from "../components/general/langDialog"
 import { authAction } from "../redux/actions/authActions";
-import { LogoIcon, AddIcon, LanguageIcon } from "../assets/svg";
+import { LogoIcon, AddIcon, LanguageIcon, SearchIcon } from "../assets/svg";
 import { LanguageContext } from "../routes/authRoute";
-import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE, SET_USERS } from "../redux/types";
+import { SET_PREVIOUS_ROUTE } from "../redux/types";
 import "../assets/styles/headerStyle.scss";
 
 const useWindowSize = () => {
@@ -65,7 +65,7 @@ const Header = () => {
   }, [location, dispatch]);
 
   return (
-    <div className="header-padding" style={user ? user.role === "ADMIN" ? width > 1010 ? {} : { padding: '87px' } : width > 1010 ? {} : { padding: '60px' } : {}}>
+    <div className="header-padding">
       <div className="header-wrapper">
         <LangDialog
           display={openLangSelect}
@@ -89,12 +89,28 @@ const Header = () => {
                         <ContainerBtn styleType="fill" text={"Admin"} />
                       </div>
                     }
+                    {/* <div className="desktop-search-bar">
+                      <div className="search-input">
+                        <div className="icon-part">
+                          <SearchIcon color="#7E7875" />
+                        </div>
+                        <div className="input-text">
+                          <input />
+                        </div>
+                      </div>
+                      <div className="search-icon">
+                        <SearchIcon color="#7E7875" />
+                      </div>
+                    </div> */}
                     <div className="desktop-create-btn" onClick={gotoCreate}>
                       <ContainerBtn
                         icon={[<AddIcon color="white" />, <AddIcon color="white" />]}
                         styleType="fill"
                         text={contexts.GENERAL_LETTER.CREATE}
                       />
+                    </div>
+                    <div className="mobile-create-btn" onClick={gotoCreate}>
+                        <AddIcon color="#54504e" />
                     </div>
                   </>
                 }
@@ -111,7 +127,7 @@ const Header = () => {
                   className="sideMeun"
                   style={{
                     right: sideMenuRightPosition,
-                    top: user.role === "ADMIN" ? width > 1010 ? '70px' : '175px' : width > 1010 ? '70px' : '119px'
+                    top: '65px'
                   }}
                 >
                   <SideMenu
@@ -126,7 +142,7 @@ const Header = () => {
                   <div className="lang-btn">
                     <Button
                       text={lang === 'EN' ?
-                        width > 880 ? ' 繁體中文' : '中文' :
+                        width > 880 ? '繁體中文' : '中文' :
                         width > 880 ? 'English' : 'Eng'
                       }
                       fillStyle="fill"
@@ -159,28 +175,12 @@ const Header = () => {
                 style={{
                   visibility: `${openSideMenu === true ? "visible" : "hidden"}`,
                   opacity: `${openSideMenu === true ? "0.2" : "0.0"}`,
-                  top: user.role === "ADMIN" ? width > 1010 ? '70px' : '175px' : width > 1010 ? '70px' : '119px'
+                  top: '65px'
                 }}
                 onClick={() => setOpenSideMenu(false)}
               ></div>
             }
           </div>
-          {user &&
-            <>
-              {user.role === "ADMIN" &&
-                <div className="mobile-admin-btn" onClick={gotoAdminHome}>
-                  <ContainerBtn styleType="fill" text={"Admin"} />
-                </div>
-              }
-              <div className="mobile-create-btn" onClick={gotoCreate}>
-                <ContainerBtn
-                  icon={[<AddIcon color="white" />, <AddIcon color="white" />]}
-                  styleType="fill"
-                  text={contexts.GENERAL_LETTER.CREATE}
-                />
-              </div>
-            </>
-          }
         </div>
       </div>
     </div >

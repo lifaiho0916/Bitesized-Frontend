@@ -181,6 +181,20 @@ const Profile = () => {
                     ]
                   : ["", "", ""]
               }
+              // selectedText={
+              //   code === null
+              //     ? "My Purchases"
+              //     : "My Bites"
+              // }
+              // texts={["My Purchases", "My Bites"]}
+              // urls={
+              //   authuser
+              //     ? [
+              //         authuser.personalisedUrl,
+              //         `${authuser.personalisedUrl}?tab=mybites`,
+              //       ]
+              //     : ["", ""]
+              // }
             />
           </div>
         )}
@@ -375,22 +389,12 @@ const Profile = () => {
                 {bites
                   .sort((first: any, second: any) => {
                     if (user) {
-                      let firstDate: any = "2322";
-                      let secondDate: any = "2322";
-                      let firstIndex = first.purchasedUsers.findIndex(
-                        (purchaseInfo: any) =>
-                          String(purchaseInfo.purchasedBy) === String(user.id)
-                      );
-                      let secondIndex = second.purchasedUsers.findIndex(
-                        (purchaseInfo: any) =>
-                          String(purchaseInfo.purchasedBy) === String(user.id)
-                      );
-                      if (firstIndex !== -1)
-                        firstDate =
-                          first.purchasedUsers[firstIndex].purchasedAt;
-                      if (secondIndex !== -1)
-                        secondDate =
-                          second.purchasedUsers[secondIndex].purchasedAt;
+                      let firstDate: any = "2022";
+                      let secondDate: any = "2022";
+                      let firstIndex = first.purchasedUsers.findIndex((purchaseInfo: any) => String(purchaseInfo.purchasedBy) === String(user.id));
+                      let secondIndex = second.purchasedUsers.findIndex((purchaseInfo: any) => String(purchaseInfo.purchasedBy) === String(user.id));
+                      if (firstIndex !== -1) firstDate = first.purchasedUsers[firstIndex].purchasedAt;
+                      if (secondIndex !== -1) secondDate = second.purchasedUsers[secondIndex].purchasedAt;
                       if (firstDate < secondDate) return 1;
                       else if (firstDate > secondDate) return -1;
                       else {
@@ -399,9 +403,8 @@ const Profile = () => {
                         return 0;
                       }
                     } else {
-                      if (first.currency && second.currency === null) return 1;
-                      else if (first.currency === null && second.currency)
-                        return -1;
+                      if (first.currency && second.currency === null) return -1;
+                      else if (first.currency === null && second.currency) return 1;
                       else {
                         if (first.date < second.date) return 1;
                         else if (first.date > second.date) return -1;

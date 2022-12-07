@@ -15,13 +15,9 @@
       justify-content: center;
       align-items: center;
       width: 100%;
-      height: fit-content;
-      padding: 10px 16px 6px 16px;
+      height: 65px;
+      padding: 6px 16px 6px 16px;
       border-bottom: 2px solid #bcb6a9;
-
-      @media (max-width: 1010px) {
-        flex-direction: column;
-      }
 
       .user-header {
         display: flex;
@@ -57,8 +53,81 @@
           align-items: center;
 
           .desktop-admin-btn {
-            width: 320px;
+            width: 280px;
             margin-right: 10px;
+
+            @media (max-width: 1010px) {
+              display: none;
+            }
+          }
+
+          .mobile-create-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #54504e;
+            border-radius: 40px;
+
+            @media (min-width: 1010px) {
+              display: none;
+            }
+          }
+
+          .desktop-search-bar {
+            width: 280px;
+            margin-right: 10px;
+            display: flex;
+
+            .search-input {
+              width: 230px;
+              height: 46px;
+              display: flex;
+              align-items: center;
+              border: 1px solid #54504e;
+              border-radius: 32px 0px 0px 32px;
+
+              .icon-part {
+                width: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+
+              .input-text {
+                width: 190px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                input {
+                  width: 97%;
+                  font-style: normal;
+                  font-weight: 600;
+                  font-size: 15px;
+                  line-height: 20px;
+                  letter-spacing: -0.24px;
+                  color: #7e7875;
+                  border: none;
+
+                  &:focus {
+                    outline: none;
+                  }
+                }
+              }
+            }
+
+            .search-icon {
+              width: 50px;
+              height: 46px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background: #f7f7f7;
+              border: 1px solid #d6d6d6;
+              border-radius: 0px 32px 32px 0px;
+            }
 
             @media (max-width: 1010px) {
               display: none;
@@ -66,14 +135,13 @@
           }
 
           .desktop-create-btn {
-            width: 320px;
+            width: 280px;
             margin-right: 10px;
 
             @media (max-width: 1010px) {
               display: none;
             }
           }
-
 
           img {
             padding-right: 7px;
@@ -97,8 +165,8 @@
               position: absolute;
               right: 12px;
               top: 1px;
-              background-color: #D94E27;
-              border: #D94E27;
+              background-color: #d94e27;
+              border: #d94e27;
               width: 8px;
               height: 8px;
               border-radius: 50%;
@@ -131,24 +199,6 @@
           left: 0 !important;
           transition: 0.3s !important;
           z-index: 8 !important;
-        }
-      }
-
-      .mobile-admin-btn {
-        margin-top: 5px;
-        width: 320px;
-
-        @media (min-width: 1009px) {
-          display: none;
-        }
-      }
-
-      .mobile-create-btn {
-        margin-top: 5px;
-        width: 320px;
-
-        @media (min-width: 1009px) {
-          display: none;
         }
       }
     }
