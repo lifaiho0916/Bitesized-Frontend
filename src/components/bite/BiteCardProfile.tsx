@@ -63,15 +63,7 @@ const BiteCardProfile = (props: any) => {
         return bite.purchasedUsers.every((purchaseInfo: any) => String(purchaseInfo.purchasedBy) !== String(user.id))
     }, [user, bite])
 
-    const clickCard = () => {
-        if (user) {
-            dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
-            navigate(`/bite/detail/${bite._id}`, { state: { owner: user.id === bite.owner._id ? true : false } })
-        } else {
-            dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
-            navigate('/auth/signup')
-        }
-    }
+    const clickCard = () => { navigate(`/bite/detail/${bite._id}`)}
 
     return (
         <div
