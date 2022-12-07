@@ -8,7 +8,7 @@ import SideMenu from "../components/sideMenu";
 import Avatar from "../components/general/avatar";
 import LangDialog from "../components/general/langDialog"
 import { authAction } from "../redux/actions/authActions";
-import { LogoIcon, AddIcon, LanguageIcon, SearchIcon } from "../assets/svg";
+import { LogoIcon, AddIcon, LanguageIcon, SearchIcon, BackIcon } from "../assets/svg";
 import { LanguageContext } from "../routes/authRoute";
 import { SET_PREVIOUS_ROUTE } from "../redux/types";
 import "../assets/styles/headerStyle.scss";
@@ -35,6 +35,7 @@ const Header = () => {
   const [openLangSelect, setOpenLangSelect] = useState(false)
   const sideMenuRightPosition = openSideMenu === true ? "0px" : "-300px"
   const { user, lang } = userState
+  const [openSearch, setOpenSearch] = useState(false)
 
   const handleSubmit = () => {
     dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
@@ -75,6 +76,27 @@ const Header = () => {
           langauge={lang}
         />
         <div className="header">
+          <div className="mobile-search-input"
+            style={{
+              transition: '0.3s',
+              marginRight: openSearch ? 0 : `${-width * 2}px`
+            }}
+          >
+            <div className="back-icon" onClick={() => setOpenSearch(false)}>
+              <BackIcon color="black" width={25} height={25} />
+            </div>
+            <div className="search-input">
+              <div className="icon-part">
+                <SearchIcon color="#7E7875" />
+              </div>
+              <div className="input-text">
+                <input />
+              </div>
+            </div>
+            <div className="search-icon">
+              <SearchIcon color="#7E7875" />
+            </div>
+          </div>
           <div className="user-header">
             <div className="dare-creator" onClick={gotoHome}>
               <div className="header-logo" style={{ marginRight: '10px' }}><LogoIcon width={40} height={40} /></div>
@@ -109,9 +131,11 @@ const Header = () => {
                         text={contexts.GENERAL_LETTER.CREATE}
                       />
                     </div>
-                    {/* <div className="mobile-" */}
+                    <div className="mobile-search-icon" onClick={() => setOpenSearch(true)}>
+                      <SearchIcon color="#54504e" width={30} height={30} />
+                    </div>
                     <div className="mobile-create-btn" onClick={gotoCreate}>
-                        <AddIcon color="#54504e" />
+                      <AddIcon color="#54504e" />
                     </div>
                   </>
                 }
