@@ -89,7 +89,7 @@ const Header = () => {
                         <ContainerBtn styleType="fill" text={"Admin"} />
                       </div>
                     }
-                    {/* <div className="desktop-search-bar">
+                    <div className="desktop-search-bar">
                       <div className="search-input">
                         <div className="icon-part">
                           <SearchIcon color="#7E7875" />
@@ -101,7 +101,7 @@ const Header = () => {
                       <div className="search-icon">
                         <SearchIcon color="#7E7875" />
                       </div>
-                    </div> */}
+                    </div>
                     <div className="desktop-create-btn" onClick={gotoCreate}>
                       <ContainerBtn
                         icon={[<AddIcon color="white" />, <AddIcon color="white" />]}
@@ -109,6 +109,7 @@ const Header = () => {
                         text={contexts.GENERAL_LETTER.CREATE}
                       />
                     </div>
+                    {/* <div className="mobile-" */}
                     <div className="mobile-create-btn" onClick={gotoCreate}>
                         <AddIcon color="#54504e" />
                     </div>

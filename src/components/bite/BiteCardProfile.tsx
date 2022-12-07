@@ -4,15 +4,12 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { LanguageContext } from "../../routes/authRoute"
 import { ClockIcon, NoOfPeopleIcon, UnlockIcon, LockedIcon } from "../../assets/svg"
 import NextBtn from "../../assets/img/next-bright.png"
-import { SET_PREVIOUS_ROUTE } from "../../redux/types"
 import CONSTANT from "../../constants/constant"
 import "../../assets/styles/bite/BiteCardProfileStyle.scss"
 
 const BiteCardProfile = (props: any) => {
     const { bite, same } = props
     const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const location = useLocation()
     const contexts = useContext(LanguageContext)
     const userState = useSelector((state: any) => state.auth)
     const loadState = useSelector((state: any) => state.load)
