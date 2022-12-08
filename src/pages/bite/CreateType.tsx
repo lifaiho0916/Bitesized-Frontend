@@ -27,7 +27,7 @@ const CreateType = () => {
             <div className="create-type">
                 <img src={CreateImage} alt="createImage" />
                 <div className="type-description">
-                    <span>I want to gift a Bite to fans!</span>
+                    <span>Share my knowledge for free</span>
                 </div>
                 <div className="first-divider"></div>
                 <Button
@@ -41,7 +41,7 @@ const CreateType = () => {
                 />
                 <div className="second-divider"></div>
                 <div className="type-description">
-                    <span>I want to earn some by Bite !</span>
+                    <span>Share my knowledge for earnings</span>
                 </div>
                 <div className="first-divider"></div>
                 <Button
