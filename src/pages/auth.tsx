@@ -31,10 +31,8 @@ const CustomGoogleLogin = (props: any) => {
 
         let browser = "";
         if (navigator.userAgent.indexOf("Chrome") !== -1) browser = "Chrome";
-        else if (navigator.userAgent.indexOf("Safari") !== -1)
-          browser = "Safari";
-        else if (navigator.userAgent.indexOf("Firefox") !== -1)
-          browser = "Firefox";
+        else if (navigator.userAgent.indexOf("Safari") !== -1) browser = "Safari";
+        else if (navigator.userAgent.indexOf("Firefox") !== -1) browser = "Firefox";
 
         const userData = {
           name: data.name,
@@ -211,7 +209,7 @@ const Auth = (props: any) => {
       <div className="signup-wrapper">
         {props.isSignin === false ? (
           <div>
-            <h4>{contexts.AUTH_LETTER.SIGN_UP_TO_ENJOY}</h4>
+            <h4>{contexts.AUTH.SIGN_UP_TO_ENJOY}</h4>
             <br />
             <ul>
               <li>✅ Gain bite-sized knowledge in seconds.</li>
@@ -299,17 +297,17 @@ const Auth = (props: any) => {
             </Link>
           </p>
         ) : (
-          <div style={{ display: "flex" }}>
-            <p>{contexts.AUTH_LETTER.NEW_CREATO}&nbsp;</p>
+          <div style={{ display: "flex", alignItems: 'center' }}>
+            <p>{contexts.AUTH.SIGN_UP_PART1}&nbsp;</p>
             <p
               onMouseOver={() => setIsHover(true)}
               onMouseLeave={() => setIsHover(false)}
               onClick={() => navigate("/auth/signup")}
               style={signupStyle}
             >
-              {contexts.AUTH_LETTER.SIGN_UP}
+              {contexts.AUTH.SIGN_UP_PART2}
             </p>
-            <p>&nbsp;{contexts.AUTH_LETTER.NOW}</p>
+            <p>&nbsp;{contexts.AUTH.SIGN_UP_PART3}</p>
           </div>
         )}
       </div>

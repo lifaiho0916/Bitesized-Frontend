@@ -13,6 +13,14 @@ export const EN = {
     OTHER_BSK: 'Other Bite-sized knowledge from this Creator',
     FEATURED_BSK: 'Featured Bite-sized knowledge you may like'
   },
+  ////////////////////////////////////////////////////
+  AUTH: {
+    HEADER: 'Welcome Back!',
+    LOGIN_WITH: 'Login with:',
+    SIGN_UP_PART1: 'New to Creato?',
+    SIGN_UP_PART2: 'Sign up',
+    SIGN_UP_PART3: 'now!'
+  },
   /////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'see more',

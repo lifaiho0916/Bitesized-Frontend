@@ -13,6 +13,14 @@ export const FR = {
     OTHER_BSK: 'Autres vidéos courtes de ce créateur',
     FEATURED_BSK: 'Vidéos courtes que vous pourriez aimer'
   },
+  ////////////////////////////////////////////////////
+  AUTH: {
+    HEADER: 'Content de vous revoir !',
+    LOGIN_WITH: 'Connectez-vous avec :',
+    SIGN_UP_PART1: 'Nouveau sur Creato ?',
+    SIGN_UP_PART2: `S'inscrire`,
+    SIGN_UP_PART3: 'maintenant !'
+  },
   //////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'voir plus',
