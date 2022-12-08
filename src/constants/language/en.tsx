@@ -11,7 +11,8 @@ export const EN = {
   /////////////////////////////////////////////////////
   BITE_DETAIL: {
     OTHER_BSK: 'Other Bite-sized knowledge from this Creator',
-    FEATURED_BSK: 'Featured Bite-sized knowledge you may like'
+    FEATURED_BSK: 'Featured Bite-sized knowledge you may like',
+    COMMENT_EMPTY_DESC: 'Be the first one to comment',
   },
   ////////////////////////////////////////////////////
   AUTH: {
@@ -35,6 +36,12 @@ export const EN = {
     BLOG: 'Blog',
     ALL_RESERVED: 'All Rights Reserved.',
   },
+  ////////////////////////////////////////////////////
+  BITE_LIST: {
+    TITLE: 'List of Bite-sized Knowledge',
+    CREATORS: 'Creators',
+    BITES: 'Bites',
+  },
   /////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'see more',
@@ -45,7 +52,6 @@ export const EN = {
     UNLOCK: 'Unlock',
     SUBSCRIBE: 'Subscribe',
     COMMENTS: 'Comments',
-    COMMENT_EMPTY_DESC: 'Be the first one to comment',
   },
   HEADER_TITLE: {
     CREATE_FUNDME: 'Create FundMe',

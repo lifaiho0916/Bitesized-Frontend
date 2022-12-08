@@ -502,7 +502,7 @@ const BiteDetail = () => {
                                 </div>
                                 :
                                 <div className="no-comments">
-                                    <span>{contexts.GENERAL.COMMENT_EMPTY_DESC}</span>
+                                    <span>{contexts.BITE_DETAIL.COMMENT_EMPTY_DESC}</span>
                                 </div>
                             }
                             {

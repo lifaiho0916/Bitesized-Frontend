@@ -11,7 +11,8 @@ export const FR = {
   /////////////////////////////////////////////////////
   BITE_DETAIL: {
     OTHER_BSK: 'Autres vidéos courtes de ce créateur',
-    FEATURED_BSK: 'Vidéos courtes que vous pourriez aimer'
+    FEATURED_BSK: 'Vidéos courtes que vous pourriez aimer',
+    COMMENT_EMPTY_DESC: 'Soyez le premier à commenter',
   },
   ////////////////////////////////////////////////////
   AUTH: {
@@ -35,6 +36,12 @@ export const FR = {
     BLOG: 'Blog',
     ALL_RESERVED: 'Tous droits réservés.',
   },
+  ////////////////////////////////////////////////////
+  BITE_LIST: {
+    TITLE: 'Liste des vidéos courtes',
+    CREATORS: 'Créateurs',
+    BITES: 'Vidéos',
+  },
   //////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'voir plus',
@@ -45,7 +52,6 @@ export const FR = {
     UNLOCK: 'Déverrouiller',
     SUBSCRIBE: `S'abonner`,
     COMMENTS: 'Commentaires',
-    COMMENT_EMPTY_DESC: 'Soyez le premier à commenter',
   },
   HEADER_TITLE: {
     CREATE_FUNDME: '創建 FundMe',

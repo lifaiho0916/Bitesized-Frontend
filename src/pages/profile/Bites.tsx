@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useLocation, useNavigate } from "react-router-dom"
 import ProfileMenu from "../../components/profileMenu"
 import CategoryBtn from "../../components/general/categoryBtn"
 import BiteCardProfile from "../../components/bite/BiteCardProfile"
 import { biteAction } from "../../redux/actions/biteActions"
+import { LanguageContext } from "../../routes/authRoute"
 import { BackIcon } from "../../assets/svg"
 import CONSTANT from "../../constants/constant"
 import '../../assets/styles/profile/creatorListStyle.scss'
@@ -13,6 +14,7 @@ const Bites = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const location = useLocation()
+    const contexts = useContext(LanguageContext)
     const biteState = useSelector((state: any) => state.bite)
     const { bites } = biteState
     const [categories, setCategories] = useState<Array<any>>([])
@@ -43,13 +45,13 @@ const Bites = () => {
         <div className="creator-wrapper">
             <div className="page-header">
                 <div onClick={() => { navigate('/') }}><BackIcon color="black" /></div>
-                <div className="page-title"><span>List of Bite-sized Knowledge</span></div>
+                <div className="page-title"><span>{contexts.BITE_LIST.TITLE}</span></div>
                 <div style={{ width: '24px' }}></div>
             </div>
             <div className="list-menu">
                 <ProfileMenu
-                    selectedText="Bites"
-                    texts={["Creators", "Bites"]}
+                    selectedText={contexts.BITE_LIST.BITES}
+                    texts={[contexts.BITE_LIST.CREATORS, contexts.BITE_LIST.BITES]}
                     urls={["creators", "bites"]}
                 />
             </div>
