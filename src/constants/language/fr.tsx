@@ -8,6 +8,11 @@ export const FR = {
     CREATOR: 'Créateurs que vous pourriez aimer🎨',
     CREATOR_DESC: 'Explorez les compétences et les connaissances des créateurs'
   },
+  /////////////////////////////////////////////////////
+  BITE_DETAIL: {
+    OTHER_BSK: 'Autres vidéos courtes de ce créateur',
+    FEATURED_BSK: 'Vidéos courtes que vous pourriez aimer'
+  },
   //////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'voir plus',
@@ -15,7 +20,10 @@ export const FR = {
     UNLOCKED_LOWER: 'déverrouillé',
     UNLOCKED_UPPER: 'Déverrouillé',
     PURCHASED: 'acheté',
-    UNLOCK: 'Ouvrir'
+    UNLOCK: 'Déverrouiller',
+    SUBSCRIBE: `S'abonner`,
+    COMMENTS: 'Commentaires',
+    COMMENT_EMPTY_DESC: 'Soyez le premier à commenter',
   },
   HEADER_TITLE: {
     CREATE_FUNDME: '創建 FundMe',

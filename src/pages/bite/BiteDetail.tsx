@@ -311,7 +311,7 @@ const BiteDetail = () => {
                                             />
                                             :
                                             <Button
-                                            text="Subscribe"
+                                            text={contexts.GENERAL.SUBSCRIBE}
                                             fillStyle="fill"
                                             color="primary"
                                             shape="rounded"
@@ -327,7 +327,7 @@ const BiteDetail = () => {
                                 </div>
                                 {!lock &&
                                     <div className={`chip ${(state && state.owner === true) ? 'mine' : 'unlock'}`}>
-                                        {(state && state.owner === true) ? 'My Bite' : 'Unlocked'}
+                                        {(state && state.owner === true) ? 'My Bite' : contexts.GENERAL.UNLOCKED_UPPER}
                                     </div>
                                 }
                             </div>
@@ -427,7 +427,6 @@ const BiteDetail = () => {
                                     />
                                 </div>
                             </div>
-
                         </>
                     }
                     <div className="video-part">
@@ -445,7 +444,7 @@ const BiteDetail = () => {
                                                 <div className="lock-video"></div>
                                                 <div className="lock-btn">
                                                     <Button
-                                                        text="Unlock"
+                                                        text={contexts.GENERAL.UNLOCK}
                                                         fillStyle="outline"
                                                         color="primary"
                                                         shape="rounded"
@@ -481,7 +480,7 @@ const BiteDetail = () => {
 
                     <div className="comment">
                         <div className="section-header">
-                            <CommentIcon color="#EFA058" width={25} height={25} /><span>Comments</span>
+                            <CommentIcon color="#EFA058" width={25} height={25} /><span>{contexts.GENERAL.COMMENTS}</span>
                         </div>
                         <div className="comment-body">
                             {bite.comments.length > 0 ?
@@ -503,7 +502,7 @@ const BiteDetail = () => {
                                 </div>
                                 :
                                 <div className="no-comments">
-                                    <span>Be the first one to comment</span>
+                                    <span>{contexts.GENERAL.COMMENT_EMPTY_DESC}</span>
                                 </div>
                             }
                             {
@@ -554,7 +553,7 @@ const BiteDetail = () => {
                                 <div className="creator-bites">
                                     <div className="section-header">
                                         <Bite1Icon color="#EFA058" width={width < 680 ? 50 : 30} height={width < 680 ? 50 : 30} />
-                                        <span>Other Bite-sized knowledge from this creator</span>
+                                        <span>{contexts.BITE_DETAIL.OTHER_BSK}</span>
                                     </div>
                                     <div className="bite-card">
                                         {bites.filter((bite: any) => bite.isCreator === true).map((bite: any, index: any) => (
@@ -570,7 +569,7 @@ const BiteDetail = () => {
                                 <div className="creator-bites" style={{ marginTop: '20px' }}>
                                     <div className="section-header">
                                         <BiteIcon color="#EFA058" width={width < 680 ? 45 : 25} height={width < 680 ? 45 : 25} />
-                                        <span>Featured Bite-sized knowledge you may like</span>
+                                        <span>{contexts.BITE_DETAIL.FEATURED_BSK}</span>
                                     </div>
                                     <div className="bite-card">
                                         {bites.filter((bite: any) => bite.isCreator === false).map((bite: any, index: any) => (

@@ -9,13 +9,21 @@ export const EN = {
     CREATOR_DESC: 'Explore Skills & Knowledge from Creators'
   },
   /////////////////////////////////////////////////////
+  BITE_DETAIL: {
+    OTHER_BSK: 'Other Bite-sized knowledge from this Creator',
+    FEATURED_BSK: 'Featured Bite-sized knowledge you may like'
+  },
+  /////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'see more',
     FREE: 'Free',
     UNLOCKED_LOWER: 'unlocked',
     UNLOCKED_UPPER: 'Unlocked',
     PURCHASED: 'purchased',
-    UNLOCK: 'Unlock'
+    UNLOCK: 'Unlock',
+    SUBSCRIBE: 'Subscribe',
+    COMMENTS: 'Comments',
+    COMMENT_EMPTY_DESC: 'Be the first one to comment',
   },
   HEADER_TITLE: {
     CREATE_FUNDME: 'Create FundMe',

@@ -1,6 +1,6 @@
 import { useState, useContext, useMemo } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import { LanguageContext } from "../../routes/authRoute"
 import { ClockIcon, NoOfPeopleIcon, UnlockIcon, LockedIcon } from "../../assets/svg"
 import NextBtn from "../../assets/img/next-bright.png"
