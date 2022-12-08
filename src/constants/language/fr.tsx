@@ -21,6 +21,20 @@ export const FR = {
     SIGN_UP_PART2: `S'inscrire`,
     SIGN_UP_PART3: 'maintenant !'
   },
+  ////////////////////////////////////////////////////
+  FOOTER: {
+    ABOUT_CREATO: 'À propos de Creato',
+    OUR_STORY: 'Notre histoire',
+    HOW_IT_WORKS: 'Comment ça fonctionne',
+    SUPPORT: 'Assistance',
+    FAQ: 'FAQ',
+    TANDC: 'Termes et conditions',
+    PRIVACY_POLICY: 'Politique de confidentialité',
+    DISCOVER: 'Découvrir',
+    CONTACT_US: 'Nous contacter',
+    BLOG: 'Blog',
+    ALL_RESERVED: 'Tous droits réservés.',
+  },
   //////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'voir plus',
@@ -264,19 +278,6 @@ export const FR = {
     HOT_DEALS: '熱門優惠:',
     DISCOUNT: '其他優惠:',
     STANDARDS: '標準:'
-  },
-  FOOTER_LETTER: {
-    OUR_STORY: '關於我們',
-    HOW_IT_WORKS: '怎樣運作',
-    BLOG: '部落格',
-    NEWS: '消息',
-    FAQ: '常見問題',
-    TERMS_AND_CONDITIONS: '條款和細則',
-    PRIVACY_POLICY: '私隱政策',
-    CONTACT_US: '聯絡我們',
-    COMMUNITY: 'Creato 社群',
-    JOIN_US: '加入我們',
-    RESOURCES: '資源'
   },
   SIDE_MENU: {
     PROFILE: '我的帳戶',

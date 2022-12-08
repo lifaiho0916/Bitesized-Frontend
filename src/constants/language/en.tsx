@@ -21,6 +21,20 @@ export const EN = {
     SIGN_UP_PART2: 'Sign up',
     SIGN_UP_PART3: 'now!'
   },
+  ////////////////////////////////////////////////////
+  FOOTER: {
+    ABOUT_CREATO: 'About Creato',
+    OUR_STORY: 'Our Story',
+    HOW_IT_WORKS: 'How it works',
+    SUPPORT: 'Support',
+    FAQ: 'FAQ',
+    TANDC: 'Terms & Conditions',
+    PRIVACY_POLICY: 'Privacy Policy',
+    DISCOVER: 'Discover',
+    CONTACT_US: 'Contact Us',
+    BLOG: 'Blog',
+    ALL_RESERVED: 'All Rights Reserved.',
+  },
   /////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'see more',
@@ -265,19 +279,6 @@ export const EN = {
     HOT_DEALS: 'Hot Deals:',
     DISCOUNT: 'Discounted packages:',
     STANDARDS: 'Standards:'
-  },
-  FOOTER_LETTER: {
-    OUR_STORY: 'Our Story',
-    HOW_IT_WORKS: 'How it works',
-    BLOG: 'Blog',
-    NEWS: 'News',
-    FAQ: 'FAQ',
-    TERMS_AND_CONDITIONS: 'Terms & Conditions',
-    PRIVACY_POLICY: 'Privacy Policy',
-    CONTACT_US: 'Contact Us',
-    COMMUNITY: 'Community',
-    JOIN_US: 'Join Us',
-    RESOURCES: 'Resources'
   },
   SIDE_MENU: {
     PROFILE: 'My Profile',

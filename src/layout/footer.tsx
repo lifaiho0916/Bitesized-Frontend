@@ -44,8 +44,8 @@ const List = (props: any) => {
       <div className="content" style={style.content as React.CSSProperties}>
         {subtitles.map((subtitle: any, i: number) => {
           if (
-            subtitle.text === contexts.FOOTER_LETTER.TERMS_AND_CONDITIONS ||
-            subtitle.text === contexts.FOOTER_LETTER.PRIVACY_POLICY
+            subtitle.text === contexts.FOOTER.TANDC ||
+            subtitle.text === contexts.FOOTER.PRIVACY_POLICY
           )
             return <Link key={i} to={subtitle.link}>{subtitle.text}</Link>;
           else
@@ -67,46 +67,46 @@ const Footer = () => {
     <div className="footer-wrapper">
       <div className="footer-top">
         <List
-          title="About Creato"
+          title={contexts.FOOTER.ABOUT_CREATO}
           subtitles={[
             {
-              text: contexts.FOOTER_LETTER.OUR_STORY,
+              text: contexts.FOOTER.OUR_STORY,
               link: "https://www.creatogether.app",
             },
             {
-              text: contexts.FOOTER_LETTER.HOW_IT_WORKS,
+              text: contexts.FOOTER.HOW_IT_WORKS,
               link: "https://www.creatogether.app/how-it-works",
             },
           ]}
           contexts={contexts}
         />
         <List
-          title="Support"
+          title={contexts.FOOTER.SUPPORT}
           subtitles={[
             {
-              text: contexts.FOOTER_LETTER.FAQ,
+              text: contexts.FOOTER.FAQ,
               link: "https://www.creatogether.app/faq",
             },
             {
-              text: contexts.FOOTER_LETTER.TERMS_AND_CONDITIONS,
+              text: contexts.FOOTER.TANDC,
               link: `/terms`,
             },
             {
-              text: contexts.FOOTER_LETTER.PRIVACY_POLICY,
+              text: contexts.FOOTER.PRIVACY_POLICY,
               link: `/privacy-policy`,
             },
           ]}
           contexts={contexts}
         />
         <List
-          title="Discover"
+          title={contexts.FOOTER.DISCOVER}
           subtitles={[
             {
-              text: contexts.FOOTER_LETTER.CONTACT_US,
+              text: contexts.FOOTER.CONTACT_US,
               link: "https://www.creatogether.app/contact-us",
             },
             {
-              text: contexts.FOOTER_LETTER.BLOG,
+              text: contexts.FOOTER.BLOG,
               link: "https://www.creatogether.app/blogs",
             },
           ]}
@@ -154,7 +154,8 @@ const Footer = () => {
         </div>
         <h3>C R E A T O</h3>
         <h5>BETA</h5>
-        <p>©2022, Creato All Rights Reserved.</p>
+        <br/>
+        <p>©{new Date().getFullYear()}, Creato {contexts.FOOTER.ALL_RESERVED}</p>
       </div>
     </div>
   );
