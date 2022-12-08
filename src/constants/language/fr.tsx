@@ -42,6 +42,16 @@ export const FR = {
     CREATORS: 'Créateurs',
     BITES: 'Vidéos',
   },
+  ///////////////////////////////////////////////////
+  SIDEMENU: {
+    MY_PROFILE: 'Mon profil',
+    MY_WALLET: 'Mon portefeuille',
+    LIST_OF_CREATORS: 'Liste des créateurs',
+    LIST_OF_BITES: 'Liste des vidéos',
+    LANGUAGE_CURRENCY: 'Langue et devise',
+    SETTING: 'Paramètres',
+    LOGOUT: 'Se déconnecter'
+  },
   //////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'voir plus',

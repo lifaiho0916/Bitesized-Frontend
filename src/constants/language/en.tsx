@@ -42,6 +42,16 @@ export const EN = {
     CREATORS: 'Creators',
     BITES: 'Bites',
   },
+  ///////////////////////////////////////////////////
+  SIDEMENU: {
+    MY_PROFILE: 'My Profile',
+    MY_WALLET: 'My Wallet',
+    LIST_OF_CREATORS: 'List of Creators',
+    LIST_OF_BITES: 'List of Bites',
+    LANGUAGE_CURRENCY: 'Language and Currency',
+    SETTING: 'Setting',
+    LOGOUT: 'Logout'
+  },
   /////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'see more',

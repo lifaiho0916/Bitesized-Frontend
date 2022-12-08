@@ -1,14 +1,7 @@
 import { useContext } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import {
-  ProfileIcon,
-  SettingIcon,
-  LanguageIcon,
-  ListViewIcon,
-  MoneyIcon,
-  GridViewIcon
-} from "../assets/svg"
+import { ProfileIcon, SettingIcon, LanguageIcon, ListViewIcon, MoneyIcon, GridViewIcon } from "../assets/svg"
 import { LanguageContext } from "../routes/authRoute"
 import { LogoutIcon } from "../constants/awesomeIcons"
 import "../assets/styles/sideMenuStyle.scss"
@@ -63,43 +56,43 @@ const SideMenu = (props: any) => {
           <div className="icon">
             <ProfileIcon color="black" />
           </div>
-          <p>{contexts.SIDE_MENU.PROFILE}</p>
+          <p>{contexts.SIDEMENU.MY_PROFILE}</p>
         </div>
         <div className="list" onClick={handleWallet}>
           <div className="icon">
             <MoneyIcon color="black" />
           </div>
-          <p>My Wallet</p>
+          <p>{contexts.SIDEMENU.MY_WALLET}</p>
         </div>
         <div className="list" onClick={handleCreators}>
           <div className="icon">
             <GridViewIcon color="black" />
           </div>
-          <p>{'List of Creators'}</p>
+          <p>{contexts.SIDEMENU.LIST_OF_CREATORS}</p>
         </div>
         <div className="list" onClick={handleBites}>
           <div className="icon">
             <ListViewIcon color="black" />
           </div>
-          <p>{'List of Bites'}</p>
+          <p>{contexts.SIDEMENU.LIST_OF_BITES}</p>
         </div>
         <div className="list" onClick={handleLanguage} >
           <div className="icon">
             <LanguageIcon color="black" />
           </div>
-          <p>Language and Currency</p>
+          <p>{contexts.SIDEMENU.LANGUAGE_CURRENCY}</p>
         </div>
         <div className="list" onClick={handleSetting}>
           <div className="icon">
             <SettingIcon color="black" />
           </div>
-          <p>{contexts.SIDE_MENU.SETTING}</p>
+          <p>{contexts.SIDEMENU.SETTING}</p>
         </div>
         <div className="logout list" onClick={props.handleLogout} >
           <div className="icon" style={{ paddingLeft: '2px' }}>
             <LogoutIcon color="black" />
           </div>
-          <p>{contexts.SIDE_MENU.LOG_OUT}</p>
+          <p>{contexts.SIDEMENU.LOGOUT}</p>
         </div>
       </div>
     </div>
