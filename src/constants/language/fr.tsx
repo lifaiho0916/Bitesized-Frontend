@@ -1,4 +1,4 @@
-export const CH = {
+export const FR = {
   CREATOR_CATEGORY_LIST: ["Blogger", "Chef", "Designer", "Fashionista", "Finance Advisor", "Fitness Trainer", "Gadgets Lover", "Gamer", "Illustrator", "Interview Coach", "Life Coach", "Live Streamer", "Musician", "Photographer", "Podcaster", "Teacher", "Tutor", "Writer", "Videographer"],
   PAYMENT_CURRENCIES: ['美元', '印度盧比', '新台幣', '港幣', '馬幣'],
   HOME_LETTER: {

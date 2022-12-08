@@ -1,5 +1,5 @@
 import { EN } from "./language/en";
-import { CH } from "./language/ch";
+import { FR } from "./language/fr";
 export {
-    EN, CH
+    EN, FR
 };

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router-dom'
 import decode from "jwt-decode"
 import { authAction } from "../redux/actions/authActions"
-import { EN, CH } from "../constants/language"
+import { EN, FR } from "../constants/language"
 import { SET_LANGUAGE } from '../redux/types'
 import Layout from '../layout/layout'
 import Layout1 from "../layout/layout1"
@@ -22,7 +22,7 @@ const AuthRoute = (props: routeProps) => {
     const { child, routeType } = props
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [contexts, setContexts] = useState(CH);
+    const [contexts, setContexts] = useState(EN);
     const authState = useSelector((state: any) => state.auth);
     const user = authState.user;
     const language = authState.lang;
@@ -36,7 +36,7 @@ const AuthRoute = (props: routeProps) => {
 
     useEffect(() => {
         if (user) {
-            const lang: any = user.language === 'EN' ? EN : CH;
+            const lang: any = user.language === 'EN' ? EN : FR;
             setContexts(lang);
             // socket.emit('connected', user.email, user.role);
             // socket.on("wallet_change", (donuts: any) => walletChange(donuts));
@@ -60,7 +60,7 @@ const AuthRoute = (props: routeProps) => {
 
     useEffect(() => {
         if (user === null) {
-            const lang: any = language === 'EN' ? EN : CH;
+            const lang: any = language === 'EN' ? EN : FR;
             setContexts(lang)
         }
     }, [language, user])

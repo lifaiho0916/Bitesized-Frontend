@@ -49,11 +49,11 @@ const LanguageCurrency = () => {
               </div>
               <label>English</label>
             </div>
-            <div className="language" onClick={() => setLang('CH')}>
+            <div className="language" onClick={() => setLang('FR')}>
               <div style={{ width: '24px', display: 'flex', justifyContent: 'center' }}>
                 {lang === 'EN' ? <CheckOffIcon color="#EFA058" /> : <CheckOnIcon color="#EFA058" />}
               </div>
-              <label>繁體中文</label>
+              <label>Français</label>
             </div>
           </div>
           <div className="lang-currency-title">

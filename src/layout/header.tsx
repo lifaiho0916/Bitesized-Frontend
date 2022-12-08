@@ -167,18 +167,17 @@ const Header = () => {
                   <div className="lang-btn">
                     <Button
                       text={lang === 'EN' ?
-                        width > 880 ? '繁體中文' : '中文' :
+                        width > 880 ? 'Français' : 'Fra' :
                         width > 880 ? 'English' : 'Eng'
                       }
                       fillStyle="fill"
                       color="primary"
                       shape="rounded"
-                      icon={width > 880 ? [
+                      icon={[
                         <LanguageIcon color="white" />,
                         <LanguageIcon color="white" />,
                         <LanguageIcon color="white" />
-                      ]
-                        : undefined}
+                      ]}
                       handleSubmit={setLang}
                     />
                   </div>
