@@ -51,7 +51,7 @@ const BiteCardProfile = (props: any) => {
                 let res = CONSTANT.CURRENCIES[index] + ' ' + CONSTANT.CURRENCY_SYMBOLS[index]
                 return res + localPrice.toFixed(2)
             }
-        } return "FREE"
+        } return contexts.GENERAL.FREE
     }
 
     const lock = useMemo(() => {
@@ -77,14 +77,14 @@ const BiteCardProfile = (props: any) => {
                 }}
             >
                 {same ?
-                    <span style={{ marginRight: '5px' }}>{(user && user.id === bite.owner._id) ? 'My Bite' : 'Unlocked'}</span>
+                    <span style={{ marginRight: '5px' }}>{(user && user.id === bite.owner._id) ? 'My Bite' : contexts.GENERAL.UNLOCKED_UPPER}</span>
                     :
-                    <span style={{ marginRight: '5px' }}>{bite.currency ? lock ? displayPrice(bite.currency, bite.price, user ? user.currency : 'usd') : 'Unlocked' : 'Free'}</span>
+                    <span style={{ marginRight: '5px' }}>{bite.currency ? lock ? displayPrice(bite.currency, bite.price, user ? user.currency : 'usd') : contexts.GENERAL.UNLOCKED_UPPER : contexts.GENERAL.FREE}</span>
                 }
                 {bite.purchasedUsers.length > 0 &&
                     <>
                         <NoOfPeopleIcon color="white" width={18} height={18} />
-                        <span>&nbsp;{bite.purchasedUsers.length} {bite.currency ? "purchased" : "unlocked"}</span>
+                        <span>&nbsp;{bite.purchasedUsers.length} {bite.currency ? contexts.GENERAL.PURCHASED : contexts.GENERAL.UNLOCKED_LOWER}</span>
                     </>
                 }
             </div>
@@ -110,7 +110,7 @@ const BiteCardProfile = (props: any) => {
                             <div className="lock-btn">
                                 <div className={`button ${hover ? 'hover' : ''}`}>
                                     {hover ? <UnlockIcon color="white" width={21} height={20} /> : <LockedIcon color="#EFA058" width={20} height={20} />}
-                                    <span>Unlock</span>
+                                    <span>{contexts.GENERAL.UNLOCK}</span>
                                 </div>
                             </div>
                         }

@@ -33,21 +33,13 @@ const LangDialog = (props: any) => {
         <div className="lang-dlg-language">
           {lang === "FR" ?
             <>
-              <div className="active">
-                Français
-              </div>
-              <div className="inactive" onClick={() => { setLang('EN') }}>
-                English
-              </div>
+              <div className="active">Français</div>
+              <div className="inactive" onClick={() => { setLang('EN') }}>English</div>
             </>
             :
             <>
-              <div className="inactive" onClick={() => { setLang('FR') }}>
-                Français
-              </div>
-              <div className="active">
-                English
-              </div>
+              <div className="inactive" onClick={() => { setLang('FR') }}>Français</div>
+              <div className="active">English</div>
             </>
           }
         </div>

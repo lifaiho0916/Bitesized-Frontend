@@ -72,7 +72,7 @@ const Header = () => {
           display={openLangSelect}
           wrapExit={() => { setOpenLangSelect(false) }}
           exit={() => { setOpenLangSelect(false) }}
-          title="語言/Language"
+          title="Langue/Language"
           langauge={lang}
         />
         <div className="header">
@@ -165,21 +165,24 @@ const Header = () => {
               <>
                 <div className="sign-lang-btn">
                   <div className="lang-btn">
-                    <Button
-                      text={lang === 'EN' ?
-                        width > 880 ? 'Français' : 'Fra' :
-                        width > 880 ? 'English' : 'Eng'
-                      }
-                      fillStyle="fill"
-                      color="primary"
-                      shape="rounded"
-                      icon={[
-                        <LanguageIcon color="white" />,
-                        <LanguageIcon color="white" />,
-                        <LanguageIcon color="white" />
-                      ]}
-                      handleSubmit={setLang}
-                    />
+                    {width > 680 ?
+                      <Button
+                        text={lang === 'EN' ? 'Français' : 'English'}
+                        fillStyle="fill"
+                        color="primary"
+                        shape="rounded"
+                        icon={[
+                          <LanguageIcon color="white" />,
+                          <LanguageIcon color="white" />,
+                          <LanguageIcon color="white" />
+                        ]}
+                        handleSubmit={setLang}
+                      />
+                      :
+                      <div className="mobile-btn" onClick={setLang}>
+                          <LanguageIcon color="white" />,
+                      </div>
+                    }
                   </div>
                   <div>
                     <Button

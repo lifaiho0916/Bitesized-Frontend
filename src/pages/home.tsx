@@ -135,14 +135,14 @@ const Home = () => {
   return (
     <div className="home-wrapper">
       <div className="section" style={{ marginTop: '20px' }}>
-        <div className="title">💡Bite-sized Knowledge</div>
+        <div className="title">{contexts.HOME.BSK}</div>
         <div className="see-more" onClick={gotoBites}>
-          <div className="description">Learn Something New In Minutes</div>
+          <div className="description">{contexts.HOME.BSK_DESC}</div>
           <div className="divider"></div>
-          <div className="see-more-btn">{width < 680 ? '··· ' : ''}see more</div>
+          <div className="see-more-btn">{width < 680 ? '··· ' : ''}{contexts.GENERAL.SEE_MORE}</div>
         </div>
         <div className="underline"></div>
-        {/* <div className="bite-tags">
+        <div className="bite-tags">
           <div
             className={biteFilter === -1 ? "tag active" : "tag"}
             onClick={() => setBiteFilter(-1)}
@@ -164,7 +164,7 @@ const Home = () => {
               <span>{category}</span>
             </div>
           ))}
-        </div> */}
+        </div>
         {bites.length === 1 ?
           <div className="daremes scroll-bar" style={width < 680 ? { justifyContent: 'center', height: '650px', position: 'relative' } : {}}>
             {bites.map((bite: any, i: any) => (
@@ -229,13 +229,14 @@ const Home = () => {
           </>
         }
       </div>
-      {users.length > 0 &&
+      {
+        users.length > 0 &&
         <div className="section">
-          <div className="title">Creators You Might Like 🎨</div>
+          <div className="title">{contexts.HOME.CREATOR}</div>
           <div className="see-more" onClick={gotoCreators}>
-            <div className="description">Explore Skills & Knowledge from Creators</div>
+            <div className="description">{contexts.HOME.CREATOR_DESC}</div>
             <div className="divider"></div>
-            <div className="see-more-btn">{width < 680 ? '··· ' : ''}see more</div>
+            <div className="see-more-btn">{width < 680 ? '··· ' : ''}{contexts.GENERAL.SEE_MORE}</div>
           </div>
           <div className="underline"></div>
           <div className="users scroll-bar">

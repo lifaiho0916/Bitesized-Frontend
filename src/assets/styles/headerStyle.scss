@@ -271,6 +271,21 @@
 
           .lang-btn {
             margin-right: 5px;
+
+            .mobile-btn {
+              cursor: pointer;
+              width: 53px;
+              height: 53px;
+              border-radius: 8px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background-color: rgb(239, 160, 88); 
+
+              &:hover {
+                background-color: #F5C395;
+              }
+            }
           }
         }
 

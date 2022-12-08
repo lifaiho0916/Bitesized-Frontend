@@ -1,13 +1,21 @@
 export const EN = {
   CREATOR_CATEGORY_LIST: ["Blogger", "Chef", "Designer", "Fashionista", "Finance Advisor", "Fitness Trainer", "Gadgets Lover", "Gamer", "Illustrator", "Interview Coach", "Life Coach", "Live Streamer", "Musician", "Photographer", "Podcaster", "Teacher", "Tutor", "Writer", "Videographer"],
   PAYMENT_CURRENCIES: ['USD', 'INR', 'TWD', 'HKD', 'MYR'],
-  HOME_LETTER: {
-    DAREME_LIST: 'DareMe - Create Content Together',
-    LETS_STARTED: "Let's Get Started",
-    PURCHASE_DONUTS: 'Purchase Donuts to Creators',
-    FUNDME_LIST: 'FundMe - Support Creative Journeys',
-    CREATORS_YOU_LIKE: 'Creators You also Like',
-    POST_ON_FANWALL: 'Posts on Fanwall',
+  //////////////////////////////////////////////////////
+  HOME: {
+    BSK: '💡Bite-sized Knowledge',
+    BSK_DESC: 'Learn Something New in Minutes',
+    CREATOR: 'Creators You Might Like🎨',
+    CREATOR_DESC: 'Explore Skills & Knowledge from Creators'
+  },
+  /////////////////////////////////////////////////////
+  GENERAL: {
+    SEE_MORE: 'see more',
+    FREE: 'Free',
+    UNLOCKED_LOWER: 'unlocked',
+    UNLOCKED_UPPER: 'Unlocked',
+    PURCHASED: 'purchased',
+    UNLOCK: 'Unlock'
   },
   HEADER_TITLE: {
     CREATE_FUNDME: 'Create FundMe',

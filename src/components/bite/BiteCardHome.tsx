@@ -55,7 +55,7 @@ const BiteCardHome = (props: any) => {
                 let res = CONSTANT.CURRENCIES[index] + ' ' + CONSTANT.CURRENCY_SYMBOLS[index]
                 return res + localPrice.toFixed(2)
             }
-        } return "FREE"
+        } return contexts.GENERAL.FREE
     }
 
     const lock = useMemo(() => {
@@ -117,7 +117,7 @@ const BiteCardHome = (props: any) => {
                             <div className="lock-btn">
                                 <div className={`button ${hover ? 'hover' : ''}`}>
                                     {hover ? <UnlockIcon color="white" width={21} height={20} /> : <LockedIcon color="#EFA058" width={20} height={20} />}
-                                    <span>Unlock</span>
+                                    <span>{contexts.GENERAL.UNLOCK}</span>
                                 </div>
                             </div>
                         }
@@ -132,8 +132,8 @@ const BiteCardHome = (props: any) => {
                     </div>
                 </div>
                 <div className={bite.currency ? !lock ? "price-unlocked" : "price-purchased" : !lock ? "price-unlocked" : "price-free"}>
-                    <span>{!lock ? 'Unlocked' : displayPrice(bite.currency, bite.price, user ? user.currency : 'usd')}</span>
-                    {bite.purchasedUsers.length > 0 && <span style={{ marginLeft: '10px' }}><NoOfPeopleIcon color="white" width={18} height={18} />&nbsp;{bite.purchasedUsers.length} {bite.currency ? "purchased" : "unlocked"}</span>}
+                    <span>{!lock ? contexts.GENERAL.UNLOCKED_UPPER : displayPrice(bite.currency, bite.price, user ? user.currency : 'usd')}</span>
+                    {bite.purchasedUsers.length > 0 && <span style={{ marginLeft: '10px' }}><NoOfPeopleIcon color="white" width={18} height={18} />&nbsp;{bite.purchasedUsers.length} {bite.currency ? contexts.GENERAL.PURCHASED : contexts.GENERAL.UNLOCKED_LOWER}</span>}
                 </div>
                 <div className="bite-title">
                     <span>{bite.title}</span>

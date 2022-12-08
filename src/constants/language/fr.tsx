@@ -1,13 +1,21 @@
 export const FR = {
   CREATOR_CATEGORY_LIST: ["Blogger", "Chef", "Designer", "Fashionista", "Finance Advisor", "Fitness Trainer", "Gadgets Lover", "Gamer", "Illustrator", "Interview Coach", "Life Coach", "Live Streamer", "Musician", "Photographer", "Podcaster", "Teacher", "Tutor", "Writer", "Videographer"],
   PAYMENT_CURRENCIES: ['美元', '印度盧比', '新台幣', '港幣', '馬幣'],
-  HOME_LETTER: {
-    DAREME_LIST: 'DareMe - 參與內容創作',
-    LETS_STARTED: "開始使用Creato吧!",
-    PURCHASE_DONUTS: '購買甜甜圈支持創作者!',
-    FUNDME_LIST: 'FundMe - 讓創作點子成真',
-    CREATORS_YOU_LIKE: '你可能喜愛的創作者們🎨',
-    POST_ON_FANWALL: 'Fanwall 上的帖子',
+  //////////////////////////////////////////////////////
+  HOME: {
+    BSK: '💡Connaissances en bouchées',
+    BSK_DESC: 'Apprenez quelque chose de nouveau en quelques minutes',
+    CREATOR: 'Créateurs que vous pourriez aimer🎨',
+    CREATOR_DESC: 'Explorez les compétences et les connaissances des créateurs'
+  },
+  //////////////////////////////////////////////////////
+  GENERAL: {
+    SEE_MORE: 'voir plus',
+    FREE: 'Gratuit',
+    UNLOCKED_LOWER: 'déverrouillé',
+    UNLOCKED_UPPER: 'Déverrouillé',
+    PURCHASED: 'acheté',
+    UNLOCK: 'Ouvrir'
   },
   HEADER_TITLE: {
     CREATE_FUNDME: '創建 FundMe',
