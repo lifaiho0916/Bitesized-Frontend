@@ -7,9 +7,8 @@ import { LanguageContext } from "../../routes/authRoute"
 import { SET_LANGUAGE } from "../../redux/types"
 import "../../assets/styles/langDialogStyle.scss"
 
-
 const LangDialog = (props: any) => {
-  const { langauge, display, exit, wrapExit, title, buttons } = props
+  const { langauge, display, exit, wrapExit, title } = props
   const [lang, setLang] = useState(langauge)
   const contexts = useContext(LanguageContext)
   const dispatch = useDispatch()
@@ -20,14 +19,8 @@ const LangDialog = (props: any) => {
       <div className="lang-dialog-main" onClick={e => e.stopPropagation()}>
         {(title || exit) &&
           <div className="lang-dialog-header" style={exit ? { marginBottom: '16px' } : { justifyContent: 'center', marginBottom: '8px' }}>
-            <div className="lang-dialog-title">
-              {title}
-            </div>
-            {exit &&
-              <div onClick={exit}>
-                <CloseIcon color="black" />
-              </div>
-            }
+            <div className="lang-dialog-title">{title}</div>
+            {exit && <div onClick={exit}><CloseIcon color="black" /></div>}
           </div>
         }
         <div className="lang-dlg-language">
@@ -49,7 +42,7 @@ const LangDialog = (props: any) => {
             shape="rounded"
             fillStyle="fill"
             width="190px"
-            text={contexts.GENERAL_LETTER.SAVE}
+            text={contexts.GENERAL.SAVE}
             handleSubmit={() => {
               dispatch({ type: SET_LANGUAGE, payload: lang });
               exit()

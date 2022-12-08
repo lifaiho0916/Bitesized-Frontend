@@ -1,16 +1,19 @@
+import { useContext } from "react"
 import Button from "../general/button"
 import { CloseIcon, RewardIcon, BiteIcon, NotificationSubscribedIcon } from "../../assets/svg"
+import { LanguageContext } from "../../routes/authRoute"
 import "../../assets/styles/modals/UnLockModalStyle.scss"
 
 const UnLockModal = (props: any) => {
     const { show, onClose, bite, handleSubmit, subscribed } = props
+    const contexts = useContext(LanguageContext)
 
     return (
         <div className={`modal${show ? ' show' : ''}`} onClick={onClose}>
             <div id="unlock">
                 <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                     <div className="modal-header">
-                        <span className="title">Successful</span>
+                        <span className="title">{contexts.GENERAL.SUCCESSFUL}</span>
                         <div className="close-btn" onClick={onClose}>
                             <CloseIcon color="black" width={30} height={30} />
                         </div>
@@ -34,7 +37,7 @@ const UnLockModal = (props: any) => {
                         </div>
                         <div className="check-profile-btn">
                             <Button
-                                text="Check on profile"
+                                text={contexts.MODALS.CHECK_ON_PROFILE}
                                 shape="rounded"
                                 color="primary"
                                 fillStyle="outline"
@@ -44,7 +47,7 @@ const UnLockModal = (props: any) => {
                         </div>
                         <div className="check-profile-btn">
                             <Button
-                                text="Watch the content"
+                                text={contexts.MODALS.WATCH_THE_CONTENT}
                                 shape="rounded"
                                 color="primary"
                                 fillStyle="fill"

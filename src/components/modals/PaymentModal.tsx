@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { loadStripe } from "@stripe/stripe-js"
 import {
@@ -13,6 +13,7 @@ import Button from "../general/button"
 import { SET_LOADING_TRUE, SET_LOADING_FALSE } from "../../redux/types"
 import { CloseIcon, VisaCardIcon, VisaCardActiveIcon, MasterCardIcon, MasterCardActiveIcon, AECardIcon, AECardActiveIcon, UnionPayCardIcon, UnionPayCardActiveIcon } from "../../assets/svg"
 import { biteAction } from "../../redux/actions/biteActions"
+import { LanguageContext } from "../../routes/authRoute"
 import "../../assets/styles/modals/AddCardModalStyle.scss"
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY}`)
@@ -26,6 +27,7 @@ const PaymentForm = (props: any) => {
     const [holder, setHolder] = useState("")
     const elements = useElements()
     const stripe = useStripe()
+    const { contexts } = props
     const checkBoxRef = useRef(null)
     const [saveCheck, setSaveCheck] = useState(false)
     const { currencyRate } = loadState
@@ -82,7 +84,7 @@ const PaymentForm = (props: any) => {
         <form onSubmit={handleSubmit}>
             <div className="card-types">
                 <div className="letter">
-                    <span>Card Number</span>
+                    <span>{contexts.PAYMENTS.CARD_NUMBER}</span>
                 </div>
                 <div className="card-type">
                     <div className="card">{cardType === "visa" ? <VisaCardActiveIcon /> : <VisaCardIcon />}</div>
@@ -103,20 +105,20 @@ const PaymentForm = (props: any) => {
             </div>
             <div className="card-holder-name">
                 <div className="letter">
-                    <span>Name of Card Holder</span>
+                    <span>{contexts.PAYMENTS.CARD_HOLDER}</span>
                 </div>
                 <div className="holder-name">
                     <input
                         value={holder}
                         onChange={(e: any) => setHolder(e.target.value)}
-                        placeholder="Card holder name"
+                        placeholder={contexts.PAYMENTS.CARD_HOLDER_NAME}
                     />
                 </div>
             </div>
             <div className="expire-cvv">
                 <div className="expire">
                     <div className="letter">
-                        <span>Expiry</span>
+                        <span>{contexts.PAYMENTS.EXPIRY}</span>
                     </div>
                     <div className="expire-ele">
                         <CardExpiryElement
@@ -130,7 +132,7 @@ const PaymentForm = (props: any) => {
                 </div>
                 <div className="cvv">
                     <div className="letter">
-                        <span>CVC</span>
+                        <span>{contexts.PAYMENTS.CVC}</span>
                     </div>
                     <div className="cvv-ele">
                         <CardCvcElement
@@ -147,13 +149,13 @@ const PaymentForm = (props: any) => {
                 <div className="check-box">
                     <label className="checkbox">
                         <input type="checkbox" id="save_card" ref={checkBoxRef} checked={saveCheck} onChange={(e) => { setSaveCheck(e.target.checked) }} />
-                        <span className="letter">&nbsp;Save this card for future purchases</span>
+                        <span className="letter">&nbsp;{contexts.PAYMENTS.SAVE_CARD_DESC}</span>
                     </label>
                 </div>
             }
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
                 <Button
-                    text={"Pay"}
+                    text={contexts.GENERAL.PAY}
                     fillStyle="fill"
                     color="primary"
                     shape="rounded"
@@ -167,6 +169,7 @@ const PaymentForm = (props: any) => {
 
 const PaymentModal = (props: any) => {
     const { show, onClose } = props
+    const contexts = useContext(LanguageContext)
 
     return (
         <div className={`modal${show ? ' show' : ''}`} onClick={onClose}>
@@ -180,10 +183,10 @@ const PaymentModal = (props: any) => {
                     </div>
                     <div className="modal-body">
                         <div className="header-card-title">
-                            <span>Enter your card details.</span>
+                            <span>{contexts.PAYMENTS.ENTER_CARD_DETAIL}</span>
                         </div>
                         <Elements stripe={stripePromise}>
-                            <PaymentForm {...props} />
+                            <PaymentForm {...props} contexts={contexts} />
                         </Elements>
                     </div>
                 </div>

@@ -58,6 +58,24 @@ export const EN = {
     MY_PURCHASES: 'My Purchases',
     MY_BITES: 'My Bites'
   },
+  //////////////////////////////////////////////////
+  PAYMENTS: {
+    ADD_NEW_CARD: 'Add a new card',
+    ENTER_CARD_DETAIL: 'Enter your card details.',
+    SAVE_CARD_DESC: 'Save this card for future purchases',
+    CARD_NUMBER: 'Card Number',
+    CARD_HOLDER: 'Name of Card Holder',
+    CARD_HOLDER_NAME: 'Card holder name',
+    EXPIRY: 'Expiry',
+    CVC: 'CVC',
+  },
+  //////////////////////////////////////////////////
+  MODALS: {
+    CHECK_ON_PROFILE: 'Check on profile',
+    WATCH_THE_CONTENT: 'Watch the content',
+    DRAFT_NOT_SAVE: 'Your draft will not be saved.',
+    POST_NOT_EDIT: 'Post can not be edited afterwards.',
+  },
   /////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'see more',
@@ -68,6 +86,13 @@ export const EN = {
     UNLOCK: 'Unlock',
     SUBSCRIBE: 'Subscribe',
     COMMENTS: 'Comments',
+    SAVE: 'Save',
+    PAY: 'Pay',
+    SUCCESSFUL: 'Successful',
+    QUIT: 'Quit',
+    CANCEL: 'Cancel',
+    PUBLISH: 'Publish',
+    CONFIRM: 'Confirm',
   },
   HEADER_TITLE: {
     CREATE_FUNDME: 'Create FundMe',

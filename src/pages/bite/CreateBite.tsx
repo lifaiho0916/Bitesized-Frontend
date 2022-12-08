@@ -1,4 +1,4 @@
-import { useEffect, useState, useLayoutEffect, useRef, useMemo } from "react"
+import { useEffect, useState, useLayoutEffect, useRef, useMemo, useContext } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import ReactPlayer from "react-player"
@@ -13,6 +13,7 @@ import Button from "../../components/general/button"
 import PublishBiteModal from "../../components/modals/PublishBiteModal"
 import { AddIcon, BackIcon, PlayIcon, RemoveIcon, DragHandleIcon } from "../../assets/svg"
 import { biteAction } from "../../redux/actions/biteActions"
+import { LanguageContext } from "../../routes/authRoute"
 import { SET_BITE, SET_PREVIOUS_ROUTE, SET_SELECTED_INDEXES, SET_VIDEO_ALIGNS } from "../../redux/types"
 import CONSTANT from "../../constants/constant"
 import "../../assets/styles/bite/CreateBiteStyle.scss"
@@ -39,6 +40,7 @@ const CreateBite = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const location = useLocation()
+    const contexts = useContext(LanguageContext)
 
     const fileInputRef = useRef<HTMLInputElement>(null)
     const biteState = useSelector((state: any) => state.bite)
@@ -229,16 +231,17 @@ const CreateBite = () => {
             />
             <Dialog
                 display={openQuit}
+                exit={() => setOpenQuit(false)}
                 wrapExit={() => setOpenQuit(false)}
-                title="Quit?"
-                context="Your draft will not be saved."
+                title={`${contexts.GENERAL.QUIT}?`}
+                context={contexts.MODALS.DRAFT_NOT_SAVE}
                 buttons={[
                     {
-                        text: 'Quit',
+                        text: contexts.GENERAL.QUIT,
                         handleClick: () => navigate('/bite/create-type')
                     },
                     {
-                        text: 'Cancel',
+                        text: contexts.GENERAL.CANCEL,
                         handleClick: () => setOpenQuit(false)
                     }
                 ]}

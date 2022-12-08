@@ -58,6 +58,24 @@ export const FR = {
     MY_PURCHASES: 'Mes achats',
     MY_BITES: 'Mes vidéos'
   },
+  //////////////////////////////////////////////////
+  PAYMENTS: {
+    ADD_NEW_CARD: 'Ajouter une nouvelle carte',
+    ENTER_CARD_DETAIL: 'Veuillez entrer les détails de votre carte.',
+    SAVE_CARD_DESC: 'Enregistrer cette carte pour vos futurs achats',
+    CARD_NUMBER: 'Numéro de carte',
+    CARD_HOLDER: 'Nom du titulaire de la carte',
+    CARD_HOLDER_NAME: 'Nom du titulaire',
+    EXPIRY: `Date d'expiration`,
+    CVC: 'CVC',
+  },
+  //////////////////////////////////////////////////
+  MODALS: {
+    CHECK_ON_PROFILE: 'Vérifier le profil',
+    WATCH_THE_CONTENT: 'Regarder le contenu',
+    DRAFT_NOT_SAVE: 'Votre brouillon ne sera pas enregistré.',
+    POST_NOT_EDIT: 'Le message ne pourra pas être modifié par la suite.',
+  },
   //////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'voir plus',
@@ -68,6 +86,13 @@ export const FR = {
     UNLOCK: 'Déverrouiller',
     SUBSCRIBE: `S'abonner`,
     COMMENTS: 'Commentaires',
+    SAVE: 'Sauvegarder',
+    PAY: 'Payer',
+    SUCCESSFUL: 'Succès',
+    QUIT: 'Quitter',
+    CANCEL: 'Annuler',
+    PUBLISH: 'Publier',
+    CONFIRM: 'Confirmer',
   },
   HEADER_TITLE: {
     CREATE_FUNDME: '創建 FundMe',

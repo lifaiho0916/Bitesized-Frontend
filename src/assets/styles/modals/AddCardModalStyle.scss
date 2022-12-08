@@ -190,8 +190,11 @@
                         justify-content: center;
 
                         .letter {
+                            margin-left: 5px;
                             display: flex;
+                            max-width: 200px;
                             align-items: center;
+                            text-align: center;
                             font-family: 'Lato';
                             font-style: normal;
                             font-weight: 400;
