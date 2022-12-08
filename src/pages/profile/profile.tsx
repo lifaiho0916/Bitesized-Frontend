@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useRef } from "react";
+import { useEffect, useMemo, useState, useRef, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import ReactPaginate from 'react-paginate'
@@ -26,6 +26,7 @@ import { authAction } from "../../redux/actions/authActions";
 import { subScriptionAction } from "../../redux/actions/subScriptionActions";
 import { paymentAction } from "../../redux/actions/paymentActions";
 import subscriptionImg from "../../assets/img/subscription.png";
+import { LanguageContext } from "../../routes/authRoute";
 import { getLocalCurrency } from "../../constants/functions";
 import { SET_DIALOG_STATE, SET_PREVIOUS_ROUTE, SET_SUBSCRIPTION, SET_TOTAL_SUBSCRIBERS } from "../../redux/types";
 import "../../assets/styles/profile/profileStyle.scss";
@@ -51,6 +52,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const contexts = useContext(LanguageContext);
   const { pathname } = location;
   const biteState = useSelector((state: any) => state.bite);
   const userState = useSelector((state: any) => state.auth);
@@ -166,12 +168,12 @@ const Profile = () => {
             <ProfileMenu
               selectedText={
                 code === null
-                  ? "My Purchases"
+                  ? contexts.PROFILE.MY_PURCHASES
                   : code === "mybites"
-                  ? "My Bites"
+                  ? contexts.PROFILE.MY_BITES
                   : "Subscription"
               }
-              texts={["My Purchases", "My Bites", "Subscription"]}
+              texts={[contexts.PROFILE.MY_PURCHASES, contexts.PROFILE.MY_BITES, "Subscription"]}
               urls={
                 authuser
                   ? [

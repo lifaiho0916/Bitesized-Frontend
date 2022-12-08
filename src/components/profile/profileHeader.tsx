@@ -253,7 +253,7 @@ const ProfileHeader = (props: any) => {
             dispatch({ type: SET_URL_EXIST, payload: false })
             navigate('/myaccount/edit')
           }}>
-            <EditIcon color="white" />&nbsp;<span>Edit profile</span>
+            <EditIcon color="white" />&nbsp;<span>{contexts.PROFILE.EDIT_PROFILE}</span>
           </div>
         </div>
       }

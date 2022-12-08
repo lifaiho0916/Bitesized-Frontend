@@ -52,6 +52,12 @@ export const FR = {
     SETTING: 'Paramètres',
     LOGOUT: 'Se déconnecter'
   },
+   //////////////////////////////////////////////////
+   PROFILE: {
+    EDIT_PROFILE: 'Modifier le profil',
+    MY_PURCHASES: 'Mes achats',
+    MY_BITES: 'Mes vidéos'
+  },
   //////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'voir plus',

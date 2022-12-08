@@ -52,6 +52,12 @@ export const EN = {
     SETTING: 'Setting',
     LOGOUT: 'Logout'
   },
+  //////////////////////////////////////////////////
+  PROFILE: {
+    EDIT_PROFILE: 'Edit Profile',
+    MY_PURCHASES: 'My Purchases',
+    MY_BITES: 'My Bites'
+  },
   /////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'see more',
