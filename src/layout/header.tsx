@@ -1,4 +1,4 @@
-import { useEffect, useState, useLayoutEffect, useContext } from "react";
+import { useEffect, useState, useLayoutEffect, useContext, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import decode from "jwt-decode";
@@ -11,7 +11,7 @@ import { authAction } from "../redux/actions/authActions";
 import { LogoIcon, AddIcon, LanguageIcon, SearchIcon, BackIcon } from "../assets/svg";
 import { biteAction } from "../redux/actions/biteActions";
 import { LanguageContext } from "../routes/authRoute";
-import { SET_PREVIOUS_ROUTE } from "../redux/types";
+import { SET_PREVIOUS_ROUTE, SET_SEARCH_RESULTS } from "../redux/types";
 import "../assets/styles/headerStyle.scss";
 
 const useWindowSize = () => {
@@ -25,12 +25,30 @@ const useWindowSize = () => {
   return size;
 };
 
+const useOutsideAlerter = (ref: any, moreInfo: any) => {
+  const [more, setMore] = useState(moreInfo)
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      setMore(moreInfo)
+      if (ref.current && !ref.current.contains(event.target)) {
+        if (moreInfo) setMore(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [ref, moreInfo])
+  return more
+}
+
 const Header = () => {
   const width = useWindowSize()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const location = useLocation()
   const userState = useSelector((state: any) => state.auth)
+  const loadState = useSelector((state: any) => state.load)
   const contexts = useContext(LanguageContext)
   const [openSideMenu, setOpenSideMenu] = useState<boolean>(false)
   const [openLangSelect, setOpenLangSelect] = useState(false)
@@ -38,6 +56,10 @@ const Header = () => {
   const { user, lang } = userState
   const [openSearch, setOpenSearch] = useState(false)
   const [search, setSearch] = useState("")
+  const { searchResults } = loadState
+  const [searchResult, setSearchResult] = useState(false)
+  const wrapRef = useRef<any>(null)
+  const res = useOutsideAlerter(wrapRef, searchResult)
 
   const handleSubmit = () => {
     dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
@@ -55,10 +77,8 @@ const Header = () => {
   const gotoAdminHome = () => { navigate('/admin/check-bite') }
   const gotoCreate = () => { navigate("/bite/create-type") }
 
-  const setLang = () => {
-    setOpenLangSelect(true);
-  }
-
+  const setLang = () => { setOpenLangSelect(true) }
+  useEffect(() => { if (!res) setSearchResult(res) }, [res])
   useEffect(() => {
     const token = localStorage.getItem(`${process.env.REACT_APP_CREATO_TOKEN}`)
     if (token) {
@@ -67,7 +87,11 @@ const Header = () => {
     }
   }, [location, dispatch]);
 
-  useEffect(() => { if(search !== "") dispatch(biteAction.getSearchResult(search))}, [search])
+  useEffect(() => { dispatch(biteAction.getSearchResult(search)) }, [search])
+  useEffect(() => {
+    if (searchResults.length > 0) setSearchResult(true)
+    else setSearchResult(false)
+  }, [searchResults])
 
   return (
     <div className="header-padding">
@@ -86,7 +110,10 @@ const Header = () => {
               marginRight: openSearch ? 0 : `${-width * 2}px`
             }}
           >
-            <div className="back-icon" onClick={() => setOpenSearch(false)}>
+            <div className="back-icon" onClick={() => {
+              setOpenSearch(false)
+              setSearch("")
+            }}>
               <BackIcon color="black" width={25} height={25} />
             </div>
             <div className="search-input">
@@ -94,11 +121,24 @@ const Header = () => {
                 <SearchIcon color="#7E7875" />
               </div>
               <div className="input-text">
-                <input defaultValue={search} onChange={(e) => setSearch(e.target.value)} />
+                <input value={search} onChange={(e) => setSearch(e.target.value)} />
               </div>
             </div>
             <div className="search-icon">
               <SearchIcon color="#7E7875" />
+            </div>
+            <div className="search-result" style={searchResult === true ? { visibility: 'visible', opacity: 1 } : {}}>
+              {searchResults.map((result: any, index: any) => (
+                <div className="search-item" key={index} onClick={() => {
+                  navigate(result.url)
+                  dispatch({ type: SET_SEARCH_RESULTS, payload: [] })
+                  setSearch("")
+                }}>
+                  <span>
+                    {result.text}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
           <div className="user-header">
@@ -121,11 +161,24 @@ const Header = () => {
                           <SearchIcon color="#7E7875" />
                         </div>
                         <div className="input-text">
-                          <input defaultValue={search} onChange={(e) => setSearch(e.target.value)} />
+                          <input value={search} onChange={(e) => setSearch(e.target.value)} />
                         </div>
                       </div>
                       <div className="search-icon">
                         <SearchIcon color="#7E7875" />
+                      </div>
+                      <div className="search-result" style={searchResult === true ? { visibility: 'visible', opacity: 1 } : {}} ref={wrapRef}>
+                        {searchResults.map((result: any, index: any) => (
+                          <div className="search-item" key={index} onClick={() => {
+                            navigate(result.url)
+                            dispatch({ type: SET_SEARCH_RESULTS, payload: [] })
+                            setSearch("")
+                          }}>
+                            <span>
+                              {result.text}
+                            </span>
+                          </div>
+                        ))}
                       </div>
                     </div>
                     <div className="desktop-create-btn" onClick={gotoCreate}>
