@@ -1,11 +1,12 @@
 import axios from 'axios';
-import { useEffect, useMemo } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google'
 import { useNavigate } from 'react-router-dom';
 import { BackIcon } from '../../../assets/svg';
 import YoutubeBtn from "../../../assets/svg/youtube.svg"
 import IgBtn from "../../../assets/svg/ig.svg"
+import { LanguageContext } from '../../../routes/authRoute';
 import { accountAction } from '../../../redux/actions/socialAccountActions';
 import InstagramLogin from './InstagramLogin'
 import '../../../assets/styles/profile/socialAccountStyle.scss';
@@ -17,6 +18,7 @@ const Socialaccount = () => {
   const accountState = useSelector((state: any) => state.account);
   const { account } = accountState;
   const { user } = userState;
+  const contexts = useContext(LanguageContext)
 
   const hasYoutubeData: any = useMemo(() => {
     if (account && account.social && account.social.youtube) return true
@@ -25,7 +27,8 @@ const Socialaccount = () => {
 
   const removeYoutube = () => { if(hasYoutubeData) dispatch(accountAction.removeAccount(account._id, "youtube"))}
 
-  const CustomGoogleLogin = () => {
+  const CustomGoogleLogin = (props: any) => {
+    const { contexts } = props
     const googleLogin = useGoogleLogin({
       onSuccess: async tokenResponse => {
         try {
@@ -50,7 +53,7 @@ const Socialaccount = () => {
 
     return (
       <div className='connect-btn' onClick={() => googleLogin()}>
-        <span>Connect</span>
+        <span>{contexts.GENERAL.CONNECT}</span>
       </div>
     )
   }
@@ -64,7 +67,7 @@ const Socialaccount = () => {
           <BackIcon color='black' />
         </div>
         <div className='page-title'>
-          <span>Social Accounts</span>
+          <span>{contexts.SOCIAL.SOCIAL_ACCOUNTS}</span>
         </div>
         <div style={{ width: '24px' }}></div>
       </div>
@@ -78,7 +81,7 @@ const Socialaccount = () => {
               <div className='title'>Instagram</div>
             </div>
             <div className="btn">
-              <InstagramLogin account={account} />
+              <InstagramLogin account={account} contexts={contexts} />
             </div>
           </div>
           <div className='content'>
@@ -95,7 +98,7 @@ const Socialaccount = () => {
                 </div>
               ) : (
                 <GoogleOAuthProvider clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}>
-                  <CustomGoogleLogin />
+                  <CustomGoogleLogin contexts={contexts} />
                 </GoogleOAuthProvider>
               )}
             </div>

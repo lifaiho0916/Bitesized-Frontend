@@ -56,7 +56,10 @@ export const EN = {
   PROFILE: {
     EDIT_PROFILE: 'Edit Profile',
     MY_PURCHASES: 'My Purchases',
-    MY_BITES: 'My Bites'
+    MY_BITES: 'My Bites',
+    DISPLAY_NAME: 'Display Name',
+    PERSONAL_URL: 'Personalized URL',
+    LINK_SOCIAL: 'Link Social Accounts',
   },
   //////////////////////////////////////////////////
   PAYMENTS: {
@@ -81,6 +84,10 @@ export const EN = {
   SOCIAL: {
     SOCIAL_ACCOUNTS: 'Social Accounts'
   },
+  CREATOR_CATEGORY: {
+    CHOOSE_CATEGORY: 'Choose categories',
+    CATEGORY_DESC: 'Please select Categories of your content, choosing a maximum 3 categories will increase search rate & create more accurate suggestions.'
+  },
   //////////////////////////////////////////////////
   MODALS: {
     CHECK_ON_PROFILE: 'Check on profile',
@@ -91,6 +98,16 @@ export const EN = {
     SELECT_CURRENCY: 'Select Currency',
     YOU_WILL_PAY_IN: 'You will pay in:',
     INCLUDE_PROCESSFEE: '(Including processing fee)',
+  },
+  /////////////////////////////////////////////////////
+  PAYOUT: {
+    PAYOUT: 'Payout',
+    STRIPE_ACCOUNT: 'Stripe account',
+    STRIPE_DESC1: 'Get paid direcly to local bank account',
+    STRIPE_DESC2: 'Processing fee: ~3.4% + 2.35HKD',
+    ALTER_PAYOUT: 'Alternative Payout Methods',
+    ALTER_DESC1: 'Let us know and we will get back within 24 hours.',
+    CONTACT_US: 'Contact Us',
   },
   /////////////////////////////////////////////////////
   GENERAL: {
@@ -110,6 +127,8 @@ export const EN = {
     PUBLISH: 'Publish',
     CONFIRM: 'Confirm',
     NEXT: 'Next',
+    CONNECT: 'Connect',
+    CATEGORIES: 'Categories'
   },
   HEADER_TITLE: {
     CREATE_FUNDME: 'Create FundMe',

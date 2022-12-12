@@ -58,8 +58,9 @@
 
           .connect-btn {
             cursor: pointer;
-            width: 80px;
+            width: fit-content;
             height: 40px;
+            padding: 0px 16px;
             display: flex;
             align-items: center;
             justify-content: center;

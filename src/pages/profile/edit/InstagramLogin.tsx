@@ -5,7 +5,7 @@ import { accountAction } from "../../../redux/actions/socialAccountActions";
 import IgBtn from "../../../assets/svg/ig.svg";
 
 export const InstagramLogin = (props: any) => {
-  const { account } = props
+  const { account, contexts } = props
   const [searchParams] = useSearchParams();
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -88,7 +88,7 @@ export const InstagramLogin = (props: any) => {
       className={hasInstagram ? "remove-btn" : "connect-btn"}
       onClick={hasInstagram ? removeHandler : clickHandler}
     >
-      {hasInstagram ? <span>Remove</span> : <span>Connect</span>}
+      {hasInstagram ? <span>Remove</span> : <span>{contexts.GENERAL.CONNECT}</span>}
     </div>
   );
 };

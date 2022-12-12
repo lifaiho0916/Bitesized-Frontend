@@ -52,11 +52,11 @@ const Categories = () => {
           if (state) navigate(`/admin/profile-user/edit`, { state: { index: state.index } })
           else navigate(`/myaccount/edit`)
         }}><BackIcon color="black" /></div>
-        <div className="page-title"><span>{contexts.HEADER_TITLE.CHOOSE_CATEGORY}</span></div>
+        <div className="page-title"><span>{contexts.CREATOR_CATEGORY.CHOOSE_CATEGORY}</span></div>
         <div style={{ width: '24px' }}></div>
       </div>
       <div className="categories-body">
-        <div className="description">{contexts.EDIT_PROFILE_LETTER.CATEGORY_LETTER}</div>
+        <div className="description">{contexts.CREATOR_CATEGORY.CATEGORY_DESC}</div>
         <div className="categories">
           {contexts.CREATOR_CATEGORY_LIST.map((title: any, i: any) => (
             <div className="category" key={i} onClick={() => { selectCategory(i) }}>
@@ -67,7 +67,7 @@ const Categories = () => {
         <div className="save-btn">
           <Button
             fillStyle="fill"
-            text={contexts.GENERAL_LETTER.SAVE}
+            text={contexts.GENERAL.SAVE}
             color="primary"
             shape="rounded"
             width="100px"

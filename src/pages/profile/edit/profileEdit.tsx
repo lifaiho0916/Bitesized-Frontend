@@ -81,7 +81,7 @@ const ProfileEdit = () => {
     <div className="profile-edit-wrapper">
       <div className="page-header">
         <div onClick={() => navigate(`/${user.personalisedUrl}`)}><BackIcon color="black" /></div>
-        <div className="page-title"><span>Edit Profile</span></div>
+        <div className="page-title"><span>{contexts.PROFILE.EDIT_PROFILE}</span></div>
         <div style={{ width: '24px' }}></div>
       </div>
       <div className="profile-edit">
@@ -124,9 +124,9 @@ const ProfileEdit = () => {
         <div className="display-name">
           <Input
             type="input"
-            placeholder={contexts.EDIT_PROFILE_LETTER.EDIT_HERE}
+            placeholder={contexts.PROFILE.DISPLAY_NAME}
             size="small"
-            label={contexts.EDIT_PROFILE_LETTER.DISPLAY_NAME}
+            label={contexts.PROFILE.DISPLAY_NAME}
             wordCount={20}
             title={name ? name : ''}
             setTitle={setName}
@@ -141,8 +141,8 @@ const ProfileEdit = () => {
         <div className="url">
           <Input
             type="input"
-            placeholder="bitesized.creatogether.io/jackychan"
-            label={contexts.EDIT_PROFILE_LETTER.PERSONALISED_URL}
+            placeholder="creatogether.io/jackychan"
+            label={contexts.PROFILE.PERSONAL_URL}
             wordCount={40}
             size="small"
             title={url ? url : ''}
@@ -188,7 +188,7 @@ const ProfileEdit = () => {
           <ContainerBtn
             styleType="outline"
             icon={[<AddIcon color="#efa058" />, <AddIcon color="white" />, <AddIcon color="white" />]}
-            text={contexts.EDIT_PROFILE_LETTER.LINK_SOCIAL_ACCOUNT}
+            text={contexts.PROFILE.LINK_SOCIAL}
           />
         </div>
         <div
@@ -199,12 +199,12 @@ const ProfileEdit = () => {
             navigate(`/myaccount/edit/categories`)
           }}
         >
-          <ContainerBtn styleType="outline" text={contexts.EDIT_PROFILE_LETTER.CATEGORIES} />
+          <ContainerBtn styleType="outline" text={contexts.GENERAL.CATEGORIES} />
         </div>
         <div className="save-btn">
           <Button
             fillStyle="fill"
-            text={contexts.GENERAL_LETTER.SAVE}
+            text={contexts.GENERAL.SAVE}
             color="primary"
             shape="rounded"
             width="100px"

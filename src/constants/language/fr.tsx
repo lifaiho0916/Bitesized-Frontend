@@ -56,7 +56,10 @@ export const FR = {
   PROFILE: {
     EDIT_PROFILE: 'Modifier le profil',
     MY_PURCHASES: 'Mes achats',
-    MY_BITES: 'Mes vidéos'
+    MY_BITES: 'Mes vidéos',
+    DISPLAY_NAME: 'Afficher le nom',
+    PERSONAL_URL: 'URL personnalisée',
+    LINK_SOCIAL: 'Associer des comptes sociaux',
   },
   //////////////////////////////////////////////////
   PAYMENTS: {
@@ -81,6 +84,10 @@ export const FR = {
   SOCIAL: {
     SOCIAL_ACCOUNTS: 'Comptes sociaux'
   },
+  CREATOR_CATEGORY: {
+    CHOOSE_CATEGORY: 'Choisissez les catégories',
+    CATEGORY_DESC: 'Veuillez sélectionner les catégories de votre contenu, choisir un maximum de 3 catégories augmentera le taux de recherche et créera des suggestions plus précises.'
+  },
   //////////////////////////////////////////////////
   MODALS: {
     CHECK_ON_PROFILE: 'Vérifier le profil',
@@ -91,6 +98,16 @@ export const FR = {
     SELECT_CURRENCY: 'Sélectionner la devise',
     YOU_WILL_PAY_IN: 'Vous paierez en :',
     INCLUDE_PROCESSFEE: '(Frais de traitement inclus)',
+  },
+  /////////////////////////////////////////////////////
+  PAYOUT: {
+    PAYOUT: 'Paiement',
+    STRIPE_ACCOUNT: 'Compte Stripe',
+    STRIPE_DESC1: 'Soyez payé directement sur le compte bancaire local',
+    STRIPE_DESC2: 'Frais de traitement : ~3,4 % + 2,35 HKD',
+    ALTER_PAYOUT: 'Méthodes de paiement alternatives',
+    ALTER_DESC1: 'Faites-le nous savoir et nous vous répondrons dans les 24 heures.',
+    CONTACT_US: 'Nous contacter',
   },
   //////////////////////////////////////////////////////
   GENERAL: {
@@ -109,7 +126,9 @@ export const FR = {
     CANCEL: 'Annuler',
     PUBLISH: 'Publier',
     CONFIRM: 'Confirmer',
-    NEXT: 'Suivant'
+    NEXT: 'Suivant',
+    CONNECT: 'Se connecter',
+    CATEGORIES: 'Catégories'
   },
   HEADER_TITLE: {
     CREATE_FUNDME: '創建 FundMe',

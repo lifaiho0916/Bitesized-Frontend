@@ -1,19 +1,21 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Dialog from "../../components/general/dialog"
 import Button from "../../components/general/button"
+import { LanguageContext } from "../../routes/authRoute"
 import { BackIcon, StripeIcon, SpreadIcon } from "../../assets/svg"
 import "../../assets/styles/profile/PayoutStyle.scss"
 
 const Payout = () => {
     const navigate = useNavigate()
     const [openConnectStripe, setOpenConnectStripe] = useState(false)
+    const contexts = useContext(LanguageContext)
 
     return (
         <div className="payout-wrapper">
             <div className="page-header">
                 <div onClick={() => navigate('/myaccount/setting')}><BackIcon color="black" /></div>
-                <div className="page-title"><span>Payout</span></div>
+                <div className="page-title"><span>{contexts.PAYOUT.PAYOUT}</span></div>
                 <div style={{ width: '24px' }}></div>
             </div>
             <Dialog
@@ -30,17 +32,17 @@ const Payout = () => {
             <div className="payout-main">
                 <div className="payout-form">
                     <div className="payout-title">
-                        <StripeIcon /><span>Stripe account</span>
+                        <StripeIcon /><span>{contexts.PAYOUT.STRIPE_ACCOUNT}</span>
                     </div>
                     <div className="payout-description">
                         <ul>
-                            <li>Get paid direcly to local bank account</li>
-                            <li>Processing fee: ~3.4% + 2.35HKD</li>
+                            <li>{contexts.PAYOUT.STRIPE_DESC1}</li>
+                            <li>{contexts.PAYOUT.STRIPE_DESC2}</li>
                         </ul>
                     </div>
                     <div className="payout-btn">
                         <Button
-                            text="Connect"
+                            text={contexts.GENERAL.CONNECT}
                             fillStyle="fill"
                             color="primary"
                             width="270px"
@@ -51,16 +53,16 @@ const Payout = () => {
                 </div>
                 <div className="payout-form" style={{ marginTop: '25px' }}>
                     <div className="payout-title">
-                        <span>Alternative Payout Methods</span>
+                        <span>{contexts.PAYOUT.ALTER_PAYOUT}</span>
                     </div>
                     <div className="payout-description">
                         <ul>
-                            <li>Let us know and we will get back within 24 hours.</li>
+                            <li>{contexts.PAYOUT.ALTER_DESC1}</li>
                         </ul>
                     </div>
                     <div className="payout-btn">
                         <Button
-                            text="Contact Us"
+                            text={contexts.PAYOUT.CONTACT_US}
                             fillStyle="fill"
                             color="primary"
                             width="270px"
