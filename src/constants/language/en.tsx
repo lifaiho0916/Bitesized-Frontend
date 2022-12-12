@@ -109,6 +109,44 @@ export const EN = {
     ALTER_DESC1: 'Let us know and we will get back within 24 hours.',
     CONTACT_US: 'Contact Us',
   },
+  ////////////////////////////////////////////////////
+  WALLET: {
+    MY_WALLET: 'My Wallet',
+    CASHABLE: 'Cashable amount',
+    NO_RECORD: 'No record so far',
+    TRANSACTION_HISTORY: 'Transaction history',
+    PAYMENT_DETAIL: 'Payment details',
+    ADD_NEW_CARD: 'Add new card',
+    CASH_OUT: 'Cash out',
+    FEE: 'Fee',
+    DETAIL: 'Detail',
+    DATE: 'Date',
+    EARNING_FROM: 'Earning from',
+    UNLOCK_PAID_BITE: 'Unlock Paid Bite',
+    NAME: 'Name:',
+    REMOVE_CARD: 'Remove card',
+    FIRST_PERIOD: 'Past 30 days',
+    SECOND_PERIOD: 'Past 60 days',
+    ANYTIME: 'Anytime'
+  },
+  /////////////////////////////////////////////////////
+  LANG_CURRENCY: {
+    LANG_SETTING: 'Language Settings',
+    ENGLISH: 'English',
+    FRENCH: 'French',
+    CURRENCY_SETTING: 'Currency Settings',
+    CURRECNY_DESC: 'Select the currency you want to shop with.',
+  },
+  /////////////////////////////////////////////////////
+  SETTING: {
+    SETTING: 'Settings',
+    PAYOUT: 'Payout',
+    LANG_CURRENCY: 'Language and currency',
+    ABOUT_US: 'About Us',
+    TANDC: 'Terms & Conditions',
+    PRIVACY: 'Privacy Policies',
+    CONTACT_US_HELP: 'Contact Us / Help',
+  },
   /////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'see more',
@@ -128,7 +166,7 @@ export const EN = {
     CONFIRM: 'Confirm',
     NEXT: 'Next',
     CONNECT: 'Connect',
-    CATEGORIES: 'Categories'
+    CATEGORIES: 'Categories',
   },
   HEADER_TITLE: {
     CREATE_FUNDME: 'Create FundMe',

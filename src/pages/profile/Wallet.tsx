@@ -91,7 +91,7 @@ const Wallet = () => {
         <div className="profile-wallet-wrapper">
             <div className="page-header">
                 <div onClick={() => navigate(`/${user.personalisedUrl}`)}><BackIcon color="black" /></div>
-                <div className="page-title"><span>My Wallet</span></div>
+                <div className="page-title"><span>{contexts.WALLET.MY_WALLET}</span></div>
                 <div style={{ width: '24px' }}></div>
             </div>
             <div className="profile-wallet">
@@ -132,7 +132,7 @@ const Wallet = () => {
                 />
                 {(user && user.earnings > 0) &&
                     <div className="cashable">
-                        <div className="title">Cashable amount</div>
+                        <div className="title">{contexts.WALLET.CASHABLE}</div>
                         <div className="content">
                             <div className="part">
                                 <div className="icon">
@@ -157,7 +157,7 @@ const Wallet = () => {
                                     color="primary"
                                     fillStyle="outline"
                                     shape="rounded"
-                                    text={contexts.WALLET_LETTER.CASH_OUT}
+                                    text={contexts.WALLET.CASH_OUT}
                                     handleSubmit={() => navigate('/myaccount/setting/payout')}
                                 />
                             </div>
@@ -170,28 +170,28 @@ const Wallet = () => {
                 <div className="transaction-history">
                     <div className="header">
                         <div className="coin-icon"></div>
-                        <div className="title">Transaction history</div>
+                        <div className="title">{contexts.WALLET.TRANSACTION_HISTORY}</div>
                         <div className="time-period">
                             <select onChange={(e) => { setPeriod(Number(e.target.value)) }}>
-                                <option value="30">Past 30 days</option>
-                                <option value="60">Past 60 days</option>
-                                <option value="-1">Anytime</option>
+                                <option value="30">{contexts.WALLET.FIRST_PERIOD}</option>
+                                <option value="60">{contexts.WALLET.SECOND_PERIOD}</option>
+                                <option value="-1">{contexts.WALLET.ANYTIME}</option>
                             </select>
                         </div>
                     </div>
                     <div className="transactions-data">
                         {transactions.length === 0 ?
-                            <div className="no-transaction">No record so far</div>
+                            <div className="no-transaction">{contexts.WALLET.NO_RECORD}</div>
                             :
                             <div className="data-table scroll-bar" style={transactions.length <= 5 ? { height: 'fit-content' } : {}}>
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Fee</th>
-                                            <th>Detail</th>
+                                            <th>{contexts.WALLET.FEE}</th>
+                                            <th>{contexts.WALLET.DETAIL}</th>
                                             <th>
                                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                                    <span>Date</span>
+                                                    <span>{contexts.WALLET.DATE}</span>
                                                     <div style={{ cursor: 'pointer' }}
                                                         onClick={() => setSort(-sort)}
                                                     >
@@ -212,8 +212,8 @@ const Wallet = () => {
                                                 </td>
                                                 <td>
                                                     <span className="detail">
-                                                        {transaction.type === 2 && `Unlock Paid bite${transaction.bite.subscription ? '(Subscription)' : ''}: [${transaction.bite.title}]`}
-                                                        {transaction.type === 3 && `Earnings from${transaction.bite.subscription ? '(Subscription)' : ''}: [${transaction.bite.title}]`}
+                                                        {transaction.type === 2 && `${contexts.WALLET.UNLOCK_PAID_BITE}${transaction.bite.subscription ? '(Subscription)' : ''}: [${transaction.bite.title}]`}
+                                                        {transaction.type === 3 && `${contexts.WALLET.EARNING_FROM}${transaction.bite.subscription ? '(Subscription)' : ''}: [${transaction.bite.title}]`}
                                                         {(transaction.type === 6 && transaction.currency) && `Subscription fee of: [${transaction.subscription.owner.name} - ${transaction.subscription.planName}]`}
                                                         {(transaction.type === 6 && transaction.currency === undefined) &&`Subscription from: [${transaction.subscription.subscriber.name}]`}
                                                     </span>
@@ -231,7 +231,7 @@ const Wallet = () => {
                     <div className="card-info-header">
                         <div className="coin-icon"></div>
                         <div className="title">
-                            <span>Payment details</span>
+                            <span>{contexts.WALLET.PAYMENT_DETAIL}</span>
                         </div>
                         {payment ?
                             <div className="more-icon">
@@ -240,7 +240,7 @@ const Wallet = () => {
                                     <div className="list" onClick={() => {
                                         setRemoveCard(false)
                                         setOpenRemoveCard(true)
-                                    }}>Remove card</div>
+                                    }}>{contexts.WALLET.REMOVE_CARD}</div>
                                 </div>
                             </div> :
                             <div style={{ width: '22px' }}></div>
@@ -256,16 +256,16 @@ const Wallet = () => {
                             </div>
                             <div className="card-number">
                                 <span>···· ···· ···· {payment.stripe.cardNumber}</span><br />
-                                <span>Name: {payment.stripe.cardHolder}</span>
+                                <span>{`${contexts.WALLET.NAME} ${payment.stripe.cardHolder}`}</span>
                             </div>
                         </div> :
                         <>
                             <div className="no-records">
-                                <span>No record so far</span>
+                                <span>{contexts.WALLET.NO_RECORD}</span>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'center' }}>
                                 <Button
-                                    text="Add new card"
+                                    text={contexts.WALLET.ADD_NEW_CARD}
                                     fillStyle="fill"
                                     color="primary"
                                     shape="rounded"

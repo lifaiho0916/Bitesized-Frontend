@@ -109,6 +109,44 @@ export const FR = {
     ALTER_DESC1: 'Faites-le nous savoir et nous vous répondrons dans les 24 heures.',
     CONTACT_US: 'Nous contacter',
   },
+  ////////////////////////////////////////////////////
+  WALLET: {
+    MY_WALLET: 'Mon portefeuille',
+    CASHABLE: 'Montant encaissable',
+    NO_RECORD: `Pas d'opération à ce jour`,
+    TRANSACTION_HISTORY: 'Historique des transactions',
+    PAYMENT_DETAIL: 'Détails de paiement',
+    ADD_NEW_CARD: 'Ajouter une nouvelle carte',
+    CASH_OUT: 'Encaisser',
+    FEE: 'Frais',
+    DETAIL: 'Détail',
+    DATE: 'Date',
+    EARNING_FROM: 'Gains de',
+    UNLOCK_PAID_BITE: 'Débloquer Module payant',
+    NAME: 'Nom:',
+    REMOVE_CARD: 'Supprimer la carte',
+    FIRST_PERIOD: '30 derniers jours',
+    SECOND_PERIOD: '60 derniers jours',
+    ANYTIME: `N'importe quand`
+  },
+  /////////////////////////////////////////////////////
+  LANG_CURRENCY: {
+    LANG_SETTING: 'Paramètres de langue',
+    ENGLISH: 'Anglais',
+    FRENCH: 'Français',
+    CURRENCY_SETTING: 'Paramètres de devise',
+    CURRECNY_DESC: 'Sélectionnez la devise avec laquelle vous souhaitez effectuer vos achats.',
+  },
+  /////////////////////////////////////////////////////
+  SETTING: {
+    SETTING: 'Réglages',
+    PAYOUT: 'Paiement',
+    LANG_CURRENCY: 'Langue et devise',
+    ABOUT_US: 'À propos de nous',
+    TANDC: 'Termes et Conditions',
+    PRIVACY: 'Les politiques de confidentialité',
+    CONTACT_US_HELP: 'Contactez-nous / Aide',
+  },
   //////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'voir plus',
@@ -128,7 +166,7 @@ export const FR = {
     CONFIRM: 'Confirmer',
     NEXT: 'Suivant',
     CONNECT: 'Se connecter',
-    CATEGORIES: 'Catégories'
+    CATEGORIES: 'Catégories',
   },
   HEADER_TITLE: {
     CREATE_FUNDME: '創建 FundMe',

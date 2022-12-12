@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { CheckOnIcon, CheckOffIcon, BackIcon } from "../../../assets/svg"
@@ -6,6 +6,7 @@ import { useSelector } from "react-redux"
 import Button from "../../../components/general/button"
 import CurrencySelect from "../../../components/stripe/CurrencySelect"
 import { authAction } from "../../../redux/actions/authActions"
+import { LanguageContext } from "../../../routes/authRoute"
 import CONSTANT from "../../../constants/constant"
 import "../../../assets/styles/profile/languageStyle.scss"
 
@@ -18,6 +19,7 @@ const LanguageCurrency = () => {
   const { user } = userState
   const [lang, setLang] = useState(user ? user.language : 'EN')
   const [option, setOption] = useState(0)
+  const contexts = useContext(LanguageContext)
   
   const saveSetting = () => {
     dispatch(authAction.setLanguageCurrency(lang, CONSTANT.CURRENCIES[option].toLowerCase(), navigate))
@@ -40,24 +42,24 @@ const LanguageCurrency = () => {
       {user &&
         <div className="lang-currency">
           <div className="lang-currency-title">
-            <span>Language Settings</span>
+            <span>{contexts.LANG_CURRENCY.LANG_SETTING}</span>
           </div>
           <div className="lang-setting">
             <div className="language" onClick={() => setLang('EN')}>
               <div style={{ width: '24px', display: 'flex', justifyContent: 'center' }}>
                 {lang === 'EN' ? <CheckOnIcon color="#EFA058" /> : <CheckOffIcon color="#EFA058" />}
               </div>
-              <label>English</label>
+              <label>{contexts.LANG_CURRENCY.ENGLISH}</label>
             </div>
             <div className="language" onClick={() => setLang('FR')}>
               <div style={{ width: '24px', display: 'flex', justifyContent: 'center' }}>
                 {lang === 'EN' ? <CheckOffIcon color="#EFA058" /> : <CheckOnIcon color="#EFA058" />}
               </div>
-              <label>Français</label>
+              <label>{contexts.LANG_CURRENCY.FRENCH}</label>
             </div>
           </div>
           <div className="lang-currency-title">
-            <span>Currency Settings</span>
+            <span>{contexts.LANG_CURRENCY.CURRENCY_SETTING}</span>
           </div>
           <div className="currency-setting">
             <CurrencySelect
@@ -65,12 +67,12 @@ const LanguageCurrency = () => {
               option={option}
               setOption={setOption}
               width={'100%'}
-              label="Select the currency you want to shop with."
+              label={contexts.LANG_CURRENCY.CURRECNY_DESC}
             />
           </div>
           <div className="buttons">
             <Button
-              text="Cancel"
+              text={contexts.GENERAL.CANCEL}
               fillStyle="outline"
               color="primary"
               shape="rounded"
@@ -78,7 +80,7 @@ const LanguageCurrency = () => {
               handleSubmit={() => navigate(prevRoute)}
             />
             <Button
-              text="Save Changes"
+              text={contexts.GENERAL.SAVE}
               fillStyle="fill"
               color="primary"
               shape="rounded"

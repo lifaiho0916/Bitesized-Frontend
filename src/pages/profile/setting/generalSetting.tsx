@@ -25,7 +25,7 @@ const GeneralSetting = () => {
     <div className="setting-wrapper">
       <div className="page-header">
         <div onClick={() => navigate(`/${user.personalisedUrl}`)}><BackIcon color="black" /></div>
-        <div className="page-title"><span>{contexts.HEADER_TITLE.SETTINGS}</span></div>
+        <div className="page-title"><span>{contexts.SETTING.SETTING}</span></div>
         <div style={{ width: '24px' }}></div>
       </div>
       <div className="setting-general">
@@ -33,7 +33,7 @@ const GeneralSetting = () => {
           <div className="setting" onClick={() => navigate(`/myaccount/setting/payout`)}>
             <div className="part" style={{ marginLeft: '4px' }}>
               <WalletIcon color="black" />
-              <div className="title">{contexts.SETTINGS_LETTER.PAYOUT}</div>
+              <div className="title">{contexts.SETTING.PAYOUT}</div>
             </div>
             <ForwardIcon color="black" />
           </div>
@@ -46,7 +46,7 @@ const GeneralSetting = () => {
           >
             <div className="part">
               <LanguageIcon color="black" />
-              <div className="title">Language and Currency</div>
+              <div className="title">{contexts.SETTING.LANG_CURRENCY}</div>
             </div>
             <ForwardIcon color="black" />
           </div>
@@ -54,7 +54,7 @@ const GeneralSetting = () => {
             <div className="setting">
               <div className="part">
                 <CreatoCoinIcon color="black" />
-                <div className="title">{contexts.SETTINGS_LETTER.ABOUT_US}</div>
+                <div className="title">{contexts.SETTING.ABOUT_US}</div>
               </div>
             </div>
           </a>
@@ -62,7 +62,7 @@ const GeneralSetting = () => {
             <div className="setting">
               <div className="part">
                 <NoOfPeopleIcon color="" />
-                <div className="title">{contexts.SETTINGS_LETTER.TERMS_CONDITIONS}</div>
+                <div className="title">{contexts.SETTING.TANDC}</div>
               </div>
             </div>
           </Link>
@@ -70,7 +70,7 @@ const GeneralSetting = () => {
             <div className="setting">
               <div className="part">
                 <NoOfPeopleIcon color="" />
-                <div className="title">{contexts.SETTINGS_LETTER.PRIVACY_POLICIES}</div>
+                <div className="title">{contexts.SETTING.PRIVACY}</div>
               </div>
             </div>
           </Link>
@@ -78,7 +78,7 @@ const GeneralSetting = () => {
             <div className="setting">
               <div className="part">
                 <AlertIcon color="black" />
-                <div className="title">{contexts.SETTINGS_LETTER.CONTACT_US}</div>
+                <div className="title">{contexts.SETTING.CONTACT_US_HELP}</div>
               </div>
             </div>
           </a>
