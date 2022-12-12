@@ -366,18 +366,6 @@ export const EN = {
     LINE4: '4. Enjoy!🍩🎊',
     OK: 'Ok',
   },
-  DONUTS_RECEIVED: 'Donuts Received',
-  YOU_NEED_MORE_DONUTS_TO_SUPPORT_CREATORS: 'You need more donuts to support creators!',
-  THE_BEST_WAY_FOR_CREATORS_FANS: `The best way for Creators & Fans Communities to create together. 🙌🏻`,
-  DONUTS_HAVE_BEEN_TIPPED: 'Donuts have been tipped',
-  PROCEED_WITHOUT_MESSAGE_TO_CREATOR: 'Proceed without a message to creator?',
-  PAY_WITH_SAVED_CARD_DETAILS: 'Pay with saved Card Details:',
-  TIP_CREATOR: 'Tip Creator',
-  SAY_SOMETHING_TO_SUPPORT: 'Say something to support!',
-  MESSAGE_TO_CREATORS: 'Message to Creators',
-  EG_30_100: 'e.g. 30, 100',
-  LET_THEM_KNOW_WHO_YOU_ARE: 'Let them know who you are😊',
-  PICK_DONUT_PACKAGE: 'Pick a Donut package 🍩',
   SEE_MORE: 'See More',
   CHARACTERS: 'characters',
   TOP_UP_NOW: 'Top up now',
@@ -385,7 +373,6 @@ export const EN = {
   BACK_TO_PROFILE: 'Back to Profile',
   JOIN_CREATO: 'Join Creato',
   SIGN_UP: 'Sign Up',
-  CONTINUE_AS_VISITOR: 'Continue as Visitor',
   NICKNAME: 'Nickname',
   CONFIRM: 'Confirm',
   YES: 'Yes',
@@ -411,34 +398,6 @@ export const EN = {
       AGO: ' ago',
     }
   },
-  INVITE_FRIEND_LETTER: {
-    HEADER_TITLE: 'Earn Donuts while referring\nfriends to join Creato!',
-    SHARING: 'Sharing is caring',
-    SHARING_LETTER: 'Invite your friends to join Creato!',
-    GET_FREE_DONUTS: 'Get free Donuts',
-    GET_FREE_DONUTS_LETTER: 'Both of you earn Donuts when they first sign up at Creato!',
-    DARE_CREATORS: 'Dare Creators',
-    DARE_CREATORS_LETTER: 'Are you ready to dare your favourite Creators & create together?! LFG! :)',
-    COPY: 'Copy',
-    COPIED: 'Copied'
-  },
-  NOTIFICATIONS_LETTER: {
-    UNREAD: 'Unread:',
-    READ: 'Read:'
-  },
-  SHOP_DONUTS: {
-    HOT_DEALS: 'Hot Deals:',
-    DISCOUNT: 'Discounted packages:',
-    STANDARDS: 'Standards:'
-  },
-  SIDE_MENU: {
-    PROFILE: 'My Profile',
-    DONUTS: 'My Donuts',
-    SHOP: 'Shop Donuts',
-    NOTIFICATION: 'Notifications',
-    SETTING: 'Setting',
-    LOG_OUT: 'Log out'
-  },
   PROFILE_LETTER: {
     COPY_PROFILE_LINK: 'Copy Profile URL',
     CANCEL: 'Cancel',
@@ -462,82 +421,6 @@ export const EN = {
     URL_ERROR: 'This URL handle already existed! Please use another one.',
     CATEGORY_LETTER: 'Please select Categories of your content, choosing a maximum 3 categories will increase search rate & create more accurate suggestions.',
   },
-  CREATE_DAREME_LETTER: {
-    DEADLINE: 'Deadline',
-    DAREME_TITLE: 'DareMe Title',
-    CATEGORY: 'Category',
-    UPLOAD_TEASER_VIDEO: 'Upload a teaser video',
-    TEASER_VIDEO_UPLOADED: 'Teaser uploaded',
-    CHANGE_TEASER: 'Change teaser',
-    CHOOSE_COVER: 'Choose a cover',
-    FIRST_DARE_OPTION: '1st Dare Option',
-    SECOND_DARE_OPTION: '2nd Dare Option',
-    SELECT_DARE_OPTION: 'Select dare option',
-    BACK_TO_EDIT_MODE: 'Back to edit mode',
-  },
-  DAREME_TITLE_LETTER: {
-    TITLE_PLACEHOLDER: 'Tell us about this title...',
-    RECENT_TITLE: 'Recent Titles:',
-  },
-  DARE_OPTIONS_LETTER: {
-    EXPLAIN: 'Start the game with 2 Dare options, your fans will be able to propose new Dares once the game started.',
-    FIRST_DARE: 'What is your 1st Dare?',
-    SECOND_DARE: 'What is your 2nd Dare?',
-    RECENT_DARES: 'Recent Dares:',
-  },
-  UPLOAD_TEASER_LETTER: {
-    EXPLAIN: 'Tell your fans about this DareMe.\nGet them excited to take part in your content creation!',
-    CHOOSE_COVER: 'Choose a cover',
-    FUNDME_EXPLAIN: 'Tell your fans about this FundMe.\nGet them excited to take part in your content creation!'
-  },
-  CHOOSE_COVER_LETTER: {
-    DONE: 'Done'
-  },
-  DAREME_DETAILS: {
-    HAVE_IDEA: 'I have an idea!',
-    DARE_DISABLE: 'Dare requests not allowed\nin the last 24 hours!',
-    VOTE_NOW: 'Vote now',
-    SEE_REQUESTS: 'See Requests'
-  },
-  SUPPORT_CREATOR: {
-    HOW_IT_WORKS: 'How it works?',
-    DONUT_FREE: 'Donuts x1',
-    DONUT_FREE_LETTER: 'Support the creator for free! We will give 1 donut on your behalf to the creator.',
-    DONUT_SUPER: 'Donut x50',
-    DONUT_SUPER_LETTER: 'As a SuperFan of the creator, you support the creator with 50 donuts ($5 USD)! Stay tuned to get shouted out by the creators!'
-  },
-  DARE_CREATOR: {
-    TELL_ABOUT_IDEA: 'Tell them about your ideas!',
-    SUPPORT_WITH_DONUTS: 'Support with donuts! 🍩',
-    WHAT_DO_YOU_PROPOSE: 'What do you propose..?',
-    EX_50DONUTS: 'e.g. 10 donuts',
-    DARE_LETTER: 'Support with at least 10 donuts ($1 USD).\n\nYou’re welcome to give more support to creators!\n\nIt is only non-refundable when creators accepted your Dare!',
-    DARE_CREATOR_BTN: 'Dare creator now!',
-  },
-  DAREME_FINISHED: {
-    VIEW_ON_FANWALL: 'View on Fanwall',
-    BEFORE_CREATOR_NAME: 'There is a tie.',
-    AFTER_CREATOR_NAME: 'will decide which dare wins this DareMe!',
-    POST_ON_FANWALL: 'Post on Fanwall',
-    TIE_OWNER_DECIDE: 'Please decide which Dare option wins!'
-  },
-  GAME_ON: {
-    GAME_ON_LETTER: 'We will let you know once Creator accepted your request!\n\nYour donuts will be refuneded if your proposed dare does not get accepted.',
-    COPY_SHARE_LINK: 'Copy link to share',
-    COPIED: 'Copied',
-    BACK_TO_DAREME: 'Back to DareMe'
-  },
-  POSTING_ON_FANWALL: {
-    URL_PLACEHOLDER: 'Paste the video URL here :)',
-    FOR_SUPERFAN_ONLY: 'For SuperFans Only',
-    EXCLUSIVE_VIDEO: 'Exclusive video',
-    MESSAGE_TO_FANS: 'Message to Fans 🎉',
-    MESSAGE_PLACEHOLDER: '- Details about exclusive experiences /\n  content etc.\n- Paste URLs of events, perks etc.\n- literally anything! :)',
-    POST_NOW: 'Post now'
-  },
-  EXCLUSIVE_VIDEO_UPLOAD: {
-    UPLOAD_VIDEO: 'Upload exclusive video to fans!',
-  },
   WALLET_LETTER: {
     TOTAL_NUMBER: 'Total number of donuts:',
     CASHABLE_DONUTS: 'Cashable donuts',
@@ -552,15 +435,6 @@ export const EN = {
     FIRST_DAYS: '30 days',
     SECOND_DAYS: '60 days',
     ALL_DAYS: 'All time'
-  },
-  SETTINGS_LETTER: {
-    INVITE_FRIENDS: 'Invite Friends',
-    PAYOUT: 'Payout',
-    LANGUAGE: 'Language',
-    ABOUT_US: 'About Us',
-    TERMS_CONDITIONS: 'Terms & Conditions',
-    PRIVACY_POLICIES: 'Privacy Policy',
-    CONTACT_US: 'Contact Us / Help'
   },
   PAYMENT: {
     PAYMENT_TITLE: "Payment",
@@ -654,29 +528,6 @@ export const EN = {
       DELETE: 'Delete',
       CANCEL: 'Cancel'
     }
-  },
-  HINT: {
-    TITLE: {
-      WHAT_IS_FUNDME: 'What is a FundMe?',
-      GOAL: 'Goal',
-      WHAT_IS_DAREME: 'What is a DareMe?',
-      DAREME_TITLE: 'DareMe Title?',
-      FUNDME_TITLE: 'FundMe Title?',
-      DARE_OPTIONS: 'Dare options?',
-      WHAT_IS_TEASER: 'What is a teaser video?',
-      WHAT_IS_SUPERFAN: 'What is SuperFan?',
-    },
-    BODY_LETTER: {
-      GOAL: 'Set a Donut amount for funding goal. You will still receive your funding even though the goal has not been met.\n\n10 Donuts = ~$1 USD',
-      WHAT_IS_FUNDME: 'It is a space for creators & fans to bring creative content to life.\n\nAudience who pay to support will get exclusive rewards offered by creators.',
-      WHAT_IS_DAREME: 'It is where you and your audience community to curate content together.\n\nShare what you are thinking with them & let the curation begins!',
-      DAREME_TITLE: 'A short description with keywords helps your fans to start taking part in your content creation. 🎨🖌️',
-      FUNDME_TITLE: 'A short description with keywords helps your fans to start taking part in your content creation. 🎨🖌️',
-      DARE_OPTIONS: 'Start the game with 2 Dare options. ⚖️\n\nOnce the DareMe started, your fans will be able to propose new Dares to you for your consideration. 💭',
-      WHAT_IS_TEASER: 'Tell your fans about your ideas 😛\n\nBe concise & fun!\n\nIdeally make it under 20 seconds! 🤳🏻',
-      WHAT_IS_SUPERFAN: 'SuperFan is whoever that will support you wholeheartedly in your creation journey.\n\nSet a Donut amount for your audience to become SuperFans & enjoy your exclusive content & experience!',
-    }
-
   },
   PUBLISH: 'Publish'
 };

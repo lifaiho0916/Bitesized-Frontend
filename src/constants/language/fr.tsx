@@ -366,18 +366,6 @@ export const FR = {
     LINE4: '4. 請慢用! 🍩🎊',
     OK: '好的',
   },
-  DONUTS_RECEIVED: '已贊助的甜甜圈',
-  YOU_NEED_MORE_DONUTS_TO_SUPPORT_CREATORS: '你需要更多的甜甜圈來支持創作者！',
-  THE_BEST_WAY_FOR_CREATORS_FANS: `創作者和粉絲共同創作的最佳方式。🙌🏻`,
-  DONUTS_HAVE_BEEN_TIPPED: '已贊助甜甜圈',
-  PROCEED_WITHOUT_MESSAGE_TO_CREATOR: '不給創作者留言嗎？',
-  PAY_WITH_SAVED_CARD_DETAILS: '使用已保存的卡付款：',
-  TIP_CREATOR: '贊助創作者',
-  SAY_SOMETHING_TO_SUPPORT: '給鼓勵說話！',
-  MESSAGE_TO_CREATORS: '給創作者的話',
-  EG_30_100: '例如 30,100',
-  LET_THEM_KNOW_WHO_YOU_ARE: '讓他們知道你是誰😊',
-  PICK_DONUT_PACKAGE: '選擇甜甜圈贊助禮包🍩',
   SEE_MORE: '看更多',
   CHARACTERS: '字數',
   TOP_UP_NOW: '立刻儲值',
@@ -385,7 +373,6 @@ export const FR = {
   BACK_TO_PROFILE: '返回個人資料',
   JOIN_CREATO: '加入Creato',
   SIGN_UP: '登入',
-  CONTINUE_AS_VISITOR: '以訪客身分繼續',
   NICKNAME: '暱稱',
   YES: '是',
   NO: '否',
@@ -410,34 +397,6 @@ export const FR = {
       AGO: '',
     },
   },
-  INVITE_FRIEND_LETTER: {
-    HEADER_TITLE: '推薦朋友賺取冬甩吧!',
-    SHARING: '分享給朋友',
-    SHARING_LETTER: '邀請朋友加入Creato!',
-    GET_FREE_DONUTS: '賺取免費冬甩',
-    GET_FREE_DONUTS_LETTER: '當他們通過您的邀請鏈結加入 Creato，您們都會獲贈免費冬甩！',
-    DARE_CREATORS: '挑戰 Creators',
-    DARE_CREATORS_LETTER: '大膽挑戰你喜歡的創作者吧！',
-    COPY: '複製',
-    COPIED: '已復制'
-  },
-  NOTIFICATIONS_LETTER: {
-    UNREAD: '未讀:',
-    READ: '已讀:'
-  },
-  SHOP_DONUTS: {
-    HOT_DEALS: '熱門優惠:',
-    DISCOUNT: '其他優惠:',
-    STANDARDS: '標準:'
-  },
-  SIDE_MENU: {
-    PROFILE: '我的帳戶',
-    DONUTS: '我的冬甩',
-    SHOP: '冬甩店',
-    NOTIFICATION: '通知',
-    SETTING: '設定',
-    LOG_OUT: '登出'
-  },
   PROFILE_LETTER: {
     COPY_PROFILE_LINK: '複製連結',
     CANCEL: '取消',
@@ -461,82 +420,6 @@ export const FR = {
     URL_ERROR: '專屬Creato網址已存在, 請重新輸入!',
     CATEGORY_LETTER: '請選擇類別來界定你的內容，最多三項類別。將用作提高搜索率並提供更準確的建議。',
   },
-  CREATE_DAREME_LETTER: {
-    DEADLINE: '期限',
-    DAREME_TITLE: 'DareMe 標題',
-    CATEGORY: '類別',
-    UPLOAD_TEASER_VIDEO: '上載預告短片',
-    TEASER_VIDEO_UPLOADED: '預告短片已上載',
-    CHANGE_TEASER: '更改預告短片',
-    CHOOSE_COVER: '選擇封面',
-    FIRST_DARE_OPTION: '輸入DareMe選項',
-    SECOND_DARE_OPTION: '輸入DareMe選項',
-    SELECT_DARE_OPTION: '選擇 dare 選項',
-    BACK_TO_EDIT_MODE: '返回編輯模式',
-  },
-  DAREME_TITLE_LETTER: {
-    TITLE_PLACEHOLDER: '描述你的想法...',
-    RECENT_TITLE: '建議:',
-  },
-  DARE_OPTIONS_LETTER: {
-    EXPLAIN: '請輸入兩個選項，之後觀眾可以對你作出挑戰，把他們的想法和創意告訴你',
-    FIRST_DARE: '第一個Dare選項...',
-    SECOND_DARE: '第二個Dare選項...',
-    RECENT_DARES: '建議:',
-  },
-  UPLOAD_TEASER_LETTER: {
-    EXPLAIN: '邀請觀眾發揮下他們的創意，再把他們的主意注入你的內容！',
-    CHOOSE_COVER: '選擇封面',
-    FUNDME_EXPLAIN: 'Tell your fans about this FundMe.\nGet them excited to take part in your content creation!'
-  },
-  CHOOSE_COVER_LETTER: {
-    DONE: '完成'
-  },
-  DAREME_DETAILS: {
-    HAVE_IDEA: '我有新的點子',
-    DARE_DISABLE: '最後24小時不可發送挑戰!',
-    VOTE_NOW: '用冬甩支持吧',
-    SEE_REQUESTS: '你的挑戰'
-  },
-  SUPPORT_CREATOR: {
-    HOW_IT_WORKS: '如何運作？',
-    DONUT_FREE: '冬甩 x1',
-    DONUT_FREE_LETTER: '免費支持創作者！我們將代表您向創作者贈送 1 個冬甩。',
-    DONUT_SUPER: '冬甩 x50',
-    DONUT_SUPER_LETTER: '作為創作者的超級觀眾，您用 50 個冬甩（5 美元）支持Creator！'
-  },
-  DARE_CREATOR: {
-    TELL_ABOUT_IDEA: '你想挑戰Creator什麼!',
-    SUPPORT_WITH_DONUTS: '用冬甩支持 🍩',
-    WHAT_DO_YOU_PROPOSE: '你的點子是..?',
-    EX_50DONUTS: 'e.g. 10 冬甩',
-    DARE_LETTER: '最少支持10個冬甩 ($1 美金)! 如果Creator沒有接受你的挑戰，全部冬甩將會退回你的帳戶。',
-    DARE_CREATOR_BTN: '挑戰 Creator!'
-  },
-  DAREME_FINISHED: {
-    VIEW_ON_FANWALL: '在 Fanwall 上查看',
-    BEFORE_CREATOR_NAME: '打和！',
-    AFTER_CREATOR_NAME: '會作出最後決定。',
-    POST_ON_FANWALL: '發佈到 Fanwall',
-    TIE_OWNER_DECIDE: '結果是打平！請決定那一個Dare勝出？'
-  },
-  GAME_ON: {
-    GAME_ON_LETTER: '當Creater對你的挑戰作出回應，我們會立即通知你。\n\nCreato只會在Creator接受挑戰後才會在你的帳戶扣除相應數量的冬甩。如果Creator沒有接受你的挑戰，全部冬甩將會退回你的帳戶。',
-    COPY_SHARE_LINK: '複製鏈結',
-    COPIED: '已複製',
-    BACK_TO_DAREME: '回到 DareMe'
-  },
-  POSTING_ON_FANWALL: {
-    URL_PLACEHOLDER: '貼影片到這裡 :)',
-    FOR_SUPERFAN_ONLY: '給超級觀眾的:',
-    EXCLUSIVE_VIDEO: '獨家影片',
-    MESSAGE_TO_FANS: '有什麼想跟觀眾說 🎉',
-    MESSAGE_PLACEHOLDER: "- 有關獨家體驗/內容等\n- 貼活動、福利以及任何內容的 URL! :)",
-    POST_NOW: '發佈'
-  },
-  EXCLUSIVE_VIDEO_UPLOAD: {
-    UPLOAD_VIDEO: '上傳影片給粉絲吧!',
-  },
   WALLET_LETTER: {
     TOTAL_NUMBER: '冬甩總數:',
     CASHABLE_DONUTS: '可對換現金金額:',
@@ -551,15 +434,6 @@ export const FR = {
     FIRST_DAYS: '30 日',
     SECOND_DAYS: '60 日',
     ALL_DAYS: '所有時間'
-  },
-  SETTINGS_LETTER: {
-    INVITE_FRIENDS: '邀請朋友',
-    PAYOUT: '連接銀行戶口',
-    LANGUAGE: '語言',
-    ABOUT_US: '關於我們',
-    TERMS_CONDITIONS: '條款和細則',
-    PRIVACY_POLICIES: '私隱政策',
-    CONTACT_US: '聯絡我們'
   },
   PAYMENT: {
     PAYMENT_TITLE: "支付方法",
@@ -653,28 +527,6 @@ export const FR = {
       DELETE: '刪除',
       CANCEL: '取消'
     },
-  },
-  HINT: {
-    TITLE: {
-      WHAT_IS_FUNDME: 'What is a FundMe?',
-      GOAL: 'Goal',
-      WHAT_IS_DAREME: '什麼是 DareMe?',
-      DAREME_TITLE: '什麼是DareMe 標題?',
-      FUNDME_TITLE: 'FundMe Title?',
-      DARE_OPTIONS: '什麼是DareMe 選項?',
-      WHAT_IS_TEASER: '什麼是預告?',
-      WHAT_IS_SUPERFAN: '什麼是獎勵超級粉絲?',
-    },
-    BODY_LETTER: {
-      GOAL: '為創作目標設置一個甜甜圈金額。即使目標尚未實現，您仍將收到您的甜甜圈 \n i.e. 10 甜甜圈 = $1 美元',
-      WHAT_IS_FUNDME: 'Creato是創作者和粉絲將創作點子變為現實的共創空間, 付費支持的觀眾將獲得創作者提供的獨家獎勵',
-      WHAT_IS_DAREME: 'DareMe是您和您的觀眾共同策劃內容創作的地方\n\n與他們分享您的想法，一起 create together 吧！',
-      DAREME_TITLE: '簡短描述一下你的想法\n\n幫助粉絲參與您的內容創作 🎨🖌️',
-      FUNDME_TITLE: 'A short description with keywords helps your fans to start taking part in your content creation. 🎨🖌️',
-      DARE_OPTIONS: '提出兩個 Dare 來開始 DareMe. ⚖️\n\nDareMe 開始後, 您的粉絲將可向您提出新的 Dare 給您考慮. 💭',
-      WHAT_IS_TEASER: '分享您的想法給觀眾們 😛\n\n把預告短片在 20 秒內完成! 🤳🏻',
-      WHAT_IS_SUPERFAN: '超級粉絲 (SuperFan) 是在你的創作過程中全心全意支持你的人。\n\n為您的觀眾設置一個甜甜圈數量，使其成為超級粉絲並享受您的獨家內容和體驗！',
-    }
   },
   PUBLISH: '發佈'
 };
