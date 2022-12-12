@@ -11,6 +11,8 @@ API.interceptors.request.use((req: any) => {
     return req
 })
 
+export const searchResult = (search: any) => API.get(`/api/search?search=${search}`)
+
 export const uploadVideo = (data: any, config: any) => API.post('/api/bite/upload/video', data, config)
 export const uploadCover = (data: any, config: any) => API.post('/api/bite/upload/cover', data, config)
 export const CreateBite = (data: any) => API.post('/api/bite/create', data)

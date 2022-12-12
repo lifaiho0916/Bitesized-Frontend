@@ -1,8 +1,21 @@
 import { Dispatch } from "redux"
 import * as api from "../../api"
-import { SET_LOADING_TRUE, SET_LOADING_FALSE, SET_BITES, SET_DIALOG_STATE, SET_BITE, SET_BITE_INITIAL, SET_UPLOADED_PROCESS, SET_UPLOADING } from "../types"
+import { SET_LOADING_TRUE, SET_LOADING_FALSE, SET_BITES, SET_DIALOG_STATE, SET_BITE, SET_BITE_INITIAL, SET_UPLOADED_PROCESS, SET_UPLOADING, SET_SEARCH_RESULTS } from "../types"
 
 export const biteAction = {
+    getSearchResult: (search: any) => async (dispatch: Dispatch<any>) => {
+        try {
+            const response = await api.searchResult(search)
+            const { data } = response
+            if (data.success) {
+                const { payload } = data
+                dispatch({ type: SET_SEARCH_RESULTS, payload: payload.result })
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    },
+
     saveBite: (bite: any, personalisedUrl: any, navigate: any) => async (dispatch: Dispatch<any>) => {
         try {
             dispatch({ type: SET_UPLOADING, payload: true })
@@ -67,7 +80,7 @@ export const biteAction = {
             let len = 0
 
             bite.videos.forEach((video: any, index: any) => {
-                if(typeof video.coverUrl === "object") {
+                if (typeof video.coverUrl === "object") {
                     uploadFiles.push({
                         index: index,
                         type: 'image',
@@ -222,7 +235,7 @@ export const biteAction = {
             dispatch({ type: SET_BITES, payload: [] })
             const response = await api.getBitesByPersonalisedUrl(url, userId, tab)
             const { data } = response
-            if(data.success) {
+            if (data.success) {
                 const { payload } = data
                 dispatch({ type: SET_BITES, payload: payload.bites })
             }

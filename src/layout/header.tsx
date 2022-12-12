@@ -9,6 +9,7 @@ import Avatar from "../components/general/avatar";
 import LangDialog from "../components/general/langDialog"
 import { authAction } from "../redux/actions/authActions";
 import { LogoIcon, AddIcon, LanguageIcon, SearchIcon, BackIcon } from "../assets/svg";
+import { biteAction } from "../redux/actions/biteActions";
 import { LanguageContext } from "../routes/authRoute";
 import { SET_PREVIOUS_ROUTE } from "../redux/types";
 import "../assets/styles/headerStyle.scss";
@@ -36,6 +37,7 @@ const Header = () => {
   const sideMenuRightPosition = openSideMenu === true ? "0px" : "-300px"
   const { user, lang } = userState
   const [openSearch, setOpenSearch] = useState(false)
+  const [search, setSearch] = useState("")
 
   const handleSubmit = () => {
     dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
@@ -65,6 +67,8 @@ const Header = () => {
     }
   }, [location, dispatch]);
 
+  useEffect(() => { if(search !== "") dispatch(biteAction.getSearchResult(search))}, [search])
+
   return (
     <div className="header-padding">
       <div className="header-wrapper">
@@ -90,7 +94,7 @@ const Header = () => {
                 <SearchIcon color="#7E7875" />
               </div>
               <div className="input-text">
-                <input />
+                <input defaultValue={search} onChange={(e) => setSearch(e.target.value)} />
               </div>
             </div>
             <div className="search-icon">
@@ -117,7 +121,7 @@ const Header = () => {
                           <SearchIcon color="#7E7875" />
                         </div>
                         <div className="input-text">
-                          <input />
+                          <input defaultValue={search} onChange={(e) => setSearch(e.target.value)} />
                         </div>
                       </div>
                       <div className="search-icon">
@@ -180,7 +184,7 @@ const Header = () => {
                       />
                       :
                       <div className="mobile-btn" onClick={setLang}>
-                          <LanguageIcon color="white" />,
+                        <LanguageIcon color="white" />,
                       </div>
                     }
                   </div>

@@ -6,6 +6,7 @@ const INITIAL_STATE: any = {
     prevRoute: "/",
     dlgState: "",
     currencyRate: null,
+    searchResults: [],
     uploadProcess: [0, 0, 0]
 }
 
@@ -50,6 +51,11 @@ const loadRedcuer = (state: any = INITIAL_STATE, action: any) => {
             return {
                 ...state,
                 uploading: payload
+            }
+        case actionTypes.SET_SEARCH_RESULTS:
+            return {
+                ...state,
+                searchResults: payload
             }
         default:
             return state;
