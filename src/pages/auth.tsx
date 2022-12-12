@@ -221,10 +221,10 @@ const Auth = (props: any) => {
           </div>
         ) : (
           <h2>
-            {contexts.AUTH_LETTER.WELCOME_BACK}
+            {contexts.AUTH.HEADER}
             <br />
             <br />
-            {contexts.AUTH_LETTER.LOGIN_WITH}
+            {contexts.AUTH.LOGIN_WITH}
           </h2>
         )}
         <div className="icons">

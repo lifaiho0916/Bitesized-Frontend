@@ -70,11 +70,27 @@ export const EN = {
     CVC: 'CVC',
   },
   //////////////////////////////////////////////////
+  BITETYPE: {
+    MAKE_BITE: 'Make a Bite',
+    SHARE_FREE: 'Share my knowledge for free',
+    FREE_BITE: 'FREE Bite',
+    SHARE_EARNING: 'Share my knowledge for earnings',
+    PAID_BITE: 'Paid Bite'
+  },
+  //////////////////////////////////////////////////
+  SOCIAL: {
+    SOCIAL_ACCOUNTS: 'Social Accounts'
+  },
+  //////////////////////////////////////////////////
   MODALS: {
     CHECK_ON_PROFILE: 'Check on profile',
     WATCH_THE_CONTENT: 'Watch the content',
     DRAFT_NOT_SAVE: 'Your draft will not be saved.',
     POST_NOT_EDIT: 'Post can not be edited afterwards.',
+    PURCHASE_BITE: 'Purcahse a Bite',
+    SELECT_CURRENCY: 'Select Currency',
+    YOU_WILL_PAY_IN: 'You will pay in:',
+    INCLUDE_PROCESSFEE: '(Including processing fee)',
   },
   /////////////////////////////////////////////////////
   GENERAL: {
@@ -93,6 +109,7 @@ export const EN = {
     CANCEL: 'Cancel',
     PUBLISH: 'Publish',
     CONFIRM: 'Confirm',
+    NEXT: 'Next',
   },
   HEADER_TITLE: {
     CREATE_FUNDME: 'Create FundMe',

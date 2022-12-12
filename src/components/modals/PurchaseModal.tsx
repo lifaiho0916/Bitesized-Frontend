@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import Avatar from "../general/avatar"
 import CurrencySelect from "../stripe/CurrencySelect"
 import Button from "../general/button"
 import { CloseIcon } from "../../assets/svg"
+import { LanguageContext } from "../../routes/authRoute"
 import CONSTANT from "../../constants/constant"
 import "../../assets/styles/modals/PurchaseModalStyle.scss"
 
@@ -16,6 +17,7 @@ const PurchaseModal = (props: any) => {
     const { currencyRate } = loadState
     const { user } = userState
     const [option, setOption] = useState(0)
+    const contexts = useContext(LanguageContext)
 
     const displayPrice = (currency: any, price: any) => {
         if (currency) {
@@ -54,7 +56,7 @@ const PurchaseModal = (props: any) => {
                     </div>
                     <div className="modal-body">
                         <div className="sub-title">
-                            <span>Purchase a Bite</span>
+                            <span>{contexts.MODALS.PURCHASE_BITE}</span>
                         </div>
                         <div className="purchase-card">
                             <Avatar
@@ -77,11 +79,11 @@ const PurchaseModal = (props: any) => {
                         <div className="divider"></div>
 
                         <div className="sub-title">
-                            <span>Select Currency</span>
+                            <span>{contexts.MODALS.SELECT_CURRENCY}</span>
                         </div>
 
                         <CurrencySelect
-                            label="You will pay in:"
+                            label={contexts.MODALS.YOU_WILL_PAY_IN}
                             option={option}
                             setOption={setOption}
                             options={CONSTANT.DISPLAY_CURRENCIES}
@@ -94,14 +96,14 @@ const PurchaseModal = (props: any) => {
                             <span>&nbsp;in {CONSTANT.CURRENCIES[option]}</span>
                         </div>
                         <div className="charge-amount" style={{ marginTop: '0px' }}>
-                            <span>(Including processing fee)</span>
+                            <span>{contexts.MODALS.INCLUDE_PROCESSFEE}</span>
                         </div>
                         <div className="terms-and-privacy">
                             <span>By Clicking Next, you agree to <Link to="/terms">Creato’s Terms & Conditions</Link>, and <Link to="/privacy-policy">Privacy Policy</Link>, and for payment processor - Stripe to charge your payment method.</span>
                         </div>
                         <div className="next-btn" style={{ marginBottom: '15px' }}>
                             <Button
-                                text="Next"
+                                text={contexts.GENERAL.NEXT}
                                 fillStyle="fill"
                                 color="primary"
                                 shape="rounded"

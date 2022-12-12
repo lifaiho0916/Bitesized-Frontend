@@ -52,8 +52,8 @@ export const FR = {
     SETTING: 'Paramètres',
     LOGOUT: 'Se déconnecter'
   },
-   //////////////////////////////////////////////////
-   PROFILE: {
+  //////////////////////////////////////////////////
+  PROFILE: {
     EDIT_PROFILE: 'Modifier le profil',
     MY_PURCHASES: 'Mes achats',
     MY_BITES: 'Mes vidéos'
@@ -70,11 +70,27 @@ export const FR = {
     CVC: 'CVC',
   },
   //////////////////////////////////////////////////
+  BITETYPE: {
+    MAKE_BITE: 'Faire un module',
+    SHARE_FREE: 'Partagez mes connaissances gratuitement',
+    FREE_BITE: 'Module GRATUIT',
+    SHARE_EARNING: 'Partager mes connaissances contre des rémunérations',
+    PAID_BITE: 'Module PAYANT'
+  },
+  //////////////////////////////////////////////////
+  SOCIAL: {
+    SOCIAL_ACCOUNTS: 'Comptes sociaux'
+  },
+  //////////////////////////////////////////////////
   MODALS: {
     CHECK_ON_PROFILE: 'Vérifier le profil',
     WATCH_THE_CONTENT: 'Regarder le contenu',
     DRAFT_NOT_SAVE: 'Votre brouillon ne sera pas enregistré.',
     POST_NOT_EDIT: 'Le message ne pourra pas être modifié par la suite.',
+    PURCHASE_BITE: 'Acheter un module',
+    SELECT_CURRENCY: 'Sélectionner la devise',
+    YOU_WILL_PAY_IN: 'Vous paierez en :',
+    INCLUDE_PROCESSFEE: '(Frais de traitement inclus)',
   },
   //////////////////////////////////////////////////////
   GENERAL: {
@@ -93,6 +109,7 @@ export const FR = {
     CANCEL: 'Annuler',
     PUBLISH: 'Publier',
     CONFIRM: 'Confirmer',
+    NEXT: 'Suivant'
   },
   HEADER_TITLE: {
     CREATE_FUNDME: '創建 FundMe',

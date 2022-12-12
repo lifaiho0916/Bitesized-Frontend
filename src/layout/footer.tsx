@@ -155,7 +155,7 @@ const Footer = () => {
         <h3>C R E A T O</h3>
         <h5>BETA</h5>
         <br/>
-        <p>©{new Date().getFullYear()}, Creato {contexts.FOOTER.ALL_RESERVED}</p>
+        <p>©2022-2023, ESSAA Limited {contexts.FOOTER.ALL_RESERVED}</p>
       </div>
     </div>
   );
