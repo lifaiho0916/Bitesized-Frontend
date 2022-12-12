@@ -185,7 +185,7 @@ const Header = () => {
                       <ContainerBtn
                         icon={[<AddIcon color="white" />, <AddIcon color="white" />]}
                         styleType="fill"
-                        text={contexts.GENERAL_LETTER.CREATE}
+                        text={contexts.GENERAL.CREATE}
                       />
                     </div>
                     <div className="mobile-search-icon" onClick={() => setOpenSearch(true)}>
@@ -243,7 +243,7 @@ const Header = () => {
                   </div>
                   <div>
                     <Button
-                      text={contexts.DIALOG.BUTTON_LETTER.SIGN_IN}
+                      text={contexts.GENERAL.SIGN_IN}
                       fillStyle="fill"
                       color="primary"
                       shape="rounded"

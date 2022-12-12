@@ -33,7 +33,7 @@ const Creator = (props: any) => {
       </div>
       <div className="buttons">
         <Button
-          text={"Profile"}
+          text={contexts.GENERAL.PROFILE}
           fillStyle="outline"
           color="primary"
           width={"80px"}

@@ -80,7 +80,7 @@ const Input = (props: any) => {
         </div>
         {wordCount !== undefined ?
           <div className="word-count">
-            ({words}/{wordCount} {contexts.CHARACTERS})
+            ({words}/{wordCount} {contexts.GENERAL.WORDS})
           </div>
           :
           <div></div>

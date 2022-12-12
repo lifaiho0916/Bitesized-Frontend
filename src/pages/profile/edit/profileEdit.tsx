@@ -111,7 +111,7 @@ const ProfileEdit = () => {
               />
             }
           </div>
-          <div className="description" onClick={() => fileInputRef.current?.click()}>{contexts.EDIT_PROFILE_LETTER.EDIT}</div>
+          <div className="description" onClick={() => fileInputRef.current?.click()}>{contexts.GENERAL.EDIT}</div>
           <input
             hidden
             ref={fileInputRef}

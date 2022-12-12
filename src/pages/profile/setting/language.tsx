@@ -36,7 +36,7 @@ const LanguageCurrency = () => {
     <div className="lang-currency-wrapper">
       <div className="page-header">
         <div onClick={() => navigate(prevRoute)}><BackIcon color="black" /></div>
-        <div className="page-title"><span>Language and Currency</span></div>
+        <div className="page-title"><span>{contexts.SIDEMENU.LANGUAGE_CURRENCY}</span></div>
         <div style={{ width: '24px' }}></div>
       </div>
       {user &&

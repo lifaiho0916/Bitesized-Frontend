@@ -409,7 +409,7 @@ const CreateBite = () => {
 
                 <div className="first-divider"></div>
                 <div className="session-title">
-                    <span>Category</span>
+                    <span>{contexts.GENERAL.CATEGORY}</span>
                 </div>
                 <div className="currency-selection">
                     <Select

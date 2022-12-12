@@ -432,7 +432,7 @@ const Profile = () => {
                     }}
                   >
                     <Button
-                      text="Create"
+                      text={contexts.GENERAL.CREATE}
                       fillStyle="fill"
                       color="primary"
                       shape="rounded"

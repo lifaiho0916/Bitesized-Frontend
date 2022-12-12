@@ -272,37 +272,13 @@ export const FR = {
     NEXT: 'Suivant',
     CONNECT: 'Se connecter',
     CATEGORIES: 'Catégories',
-    PREVIOUS: 'Précédent'
-  },
-  HEADER_TITLE: {
-    CREATE_FUNDME: '創建 FundMe',
-    CREATE_DAREME: '創建 DareMe',
-    DAREME_TITLE: 'DareMe 標題',
-    FUNDME_TITLE: 'FundMe 標題',
-    FUNDME_RESULT: "FundMe 結果",
-    FUNDME_DETAIL: 'FundMe 選項',
-    REWARDS_TITLE: '獎勵',
-    DARE_OPTIONS: 'DareMe 選項',
-    UPLOAD_TEASER: '上載10秒預告（少於20秒）',
-    UPLOAD_TEASER_FUNDME: 'Upload a teaser video\n(10~15sec is the best!)',
-    CHOOSE_COVER: '選擇封面',
-    DAREME_DETAILS: 'DareMe 選項',
-    DAREME_OPTION: 'DareMe option',
-    DARE_CREATOR: '挑戰 Creator! 💪🏻',
-    DARE_REQUEST: '你的挑戰',
-    DAREME_RESULT: 'DareMe 結果',
-    POSTING_ON_FANWALL: '發佈到 Fanwall🎨️',
-    EXCLUSIVE_VIDEO_UPLOAD: '上傳獨家影片',
-    MY_DONUTS: '我的冬甩',
-    SHOP_DONUTS: '冬甩店',
-    POST_DETAILS: '帖子內容',
-    EDIT_PROFILE: '編輯個人檔案',
-    NOTIFICATIONS: '通知',
-    INVITE_FRIENDS: '邀請朋友',
-    SETTINGS: '設定',
-    LANGUAGE: '語言',
-    DONUTS_YOU_LIKE: '隨你喜歡的甜甜圈數量',
-    CHOOSE_CATEGORY: '選擇類別',
+    PREVIOUS: 'Précédent',
+    CREATE: 'Créer',
+    SIGN_IN: 'S’inscrire',
+    EDIT: 'Éditer',
+    WORDS: 'mots',
+    PROFILE: 'Profil',
+    CATEGORY: 'Catégorie',
   },
   GENERAL_LETTER: {
     CREATE: '創建',
@@ -371,11 +347,6 @@ export const FR = {
     TERMS: '使用條款',
     AND: '及',
     PRIVACY_POLICY: '私隱政策。',
-    WELCOME_BACK: '歡迎回來Creato!',
-    LOGIN_WITH: '快速登入:',
-    NEW_CREATO: '新用戶? 立刻',
-    SIGN_UP: '註冊',
-    NOW: '!'
   },
   REVIEW_LETTER: {
     DONUTS_NUMBER: '甜甜圈數量',
@@ -394,47 +365,6 @@ export const FR = {
     LINE4: '4. 請慢用! 🍩🎊',
     OK: '好的',
   },
-  FUNDME_REWARDS: [
-    "獨家幕後影片 📽️",
-    "實時聊天 🖥️",
-    "從未發布的照片 📷",
-    "感謝語 📥",
-    "限量版 T-shirt 👕👚"
-  ],
-  PYRAMID_TOP_LETTERS: [
-    "頭號粉絲",
-    "忠實粉絲",
-    "最強支援",
-    "群眾之力",
-    "群情洶湧"
-  ],
-  PYRAMID_SUPERFAN_LETTERS: [
-    {
-      FIRST_PART: '霸氣外露！您在此 DareMe 帖子中 ',
-      SECOND_PART: '% SuperFans 的其中之一。',
-      THIRD_PART: ''
-    },
-    {
-      FIRST_PART: '一馬當先！您在此 DareMe 帖子中 ',
-      SECOND_PART: '% SuperFans 的其中之一。',
-      THIRD_PART: ''
-    },
-    {
-      FIRST_PART: '出色！您在此 DareMe 帖子中 ',
-      SECOND_PART: '% SuperFans 的其中之一。',
-      THIRD_PART: ''
-    },
-    {
-      FIRST_PART: '團結就是力量！您在此 DareMe 帖子中 ',
-      SECOND_PART: '% SuperFans 的其中之一。',
-      THIRD_PART: ''
-    },
-    {
-      FIRST_PART: '團結就是力量！您在此 DareMe 帖子中 ',
-      SECOND_PART: '% SuperFans 的其中之一。',
-      THIRD_PART: ''
-    },
-  ],
   DONUTS_RECEIVED: '已贊助的甜甜圈',
   YOU_NEED_MORE_DONUTS_TO_SUPPORT_CREATORS: '你需要更多的甜甜圈來支持創作者！',
   THE_BEST_WAY_FOR_CREATORS_FANS: `創作者和粉絲共同創作的最佳方式。🙌🏻`,
@@ -458,13 +388,6 @@ export const FR = {
   NICKNAME: '暱稱',
   YES: '是',
   NO: '否',
-  CREATE_LETTER: {
-    DAREME_TITLE_LETTER: 'DareMe',
-    DAREME_BODY_LETTER: '誠邀粉絲參與我的內容創作',
-    FUNDME_TITLE_LETTER: 'FundMe',
-    FUNDME_BODY_LETTER: '支持我的創作點子變為現實',
-    FUNDME_REWARDS: 'e.g. exclusive chat, signed postcard etc',
-  },
   GENERAL_COMPONENT: {
     MOBILE_VIDEO_CARD: {
       DARE: '挑戰',

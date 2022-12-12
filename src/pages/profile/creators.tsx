@@ -37,13 +37,13 @@ const Creators = () => {
     <div className="creator-wrapper">
       <div className="page-header">
         <div onClick={() => { navigate('/') }}><BackIcon color="black" /></div>
-        <div className="page-title"><span>List of Creators</span></div>
+        <div className="page-title"><span>{contexts.SIDEMENU.LIST_OF_CREATORS}</span></div>
         <div style={{ width: '24px' }}></div>
       </div>
       <div className="list-menu">
         <ProfileMenu
-          selectedText="Creators"
-          texts={["Creators", "Bites"]}
+          selectedText={contexts.BITE_LIST.CREATORS}
+          texts={[contexts.BITE_LIST.CREATORS, contexts.BITE_LIST.BITES]}
           urls={["creators", "bites"]}
         />
       </div>

@@ -272,37 +272,13 @@ export const EN = {
     NEXT: 'Next',
     CONNECT: 'Connect',
     CATEGORIES: 'Categories',
-    PREVIOUS: 'Previous'
-  },
-  HEADER_TITLE: {
-    CREATE_FUNDME: 'Create FundMe',
-    CREATE_DAREME: 'Create DareMe',
-    DAREME_TITLE: 'DareMe Title',
-    FUNDME_TITLE: 'FundMeTitle',
-    FUNDME_DETAIL: 'Fundme Details',
-    FUNDME_RESULT: "FundMe Result",
-    REWARDS_TITLE: 'Rewards',
-    DARE_OPTIONS: 'Dare options',
-    UPLOAD_TEASER: 'Upload a teaser video (ideally <20 seconds)',
-    UPLOAD_TEASER_FUNDME: 'Upload a teaser video\n(10~15sec is the best!)',
-    CHOOSE_COVER: 'Choose a cover',
-    DAREME_DETAILS: 'DareMe details',
-    DAREME_OPTION: 'DareMe option',
-    DARE_CREATOR: 'Dare this Creator 💪🏻',
-    DARE_REQUEST: 'Dare Requests',
-    DAREME_RESULT: 'DareMe Results',
-    POSTING_ON_FANWALL: 'Posting on Fanwall 🎨️',
-    EXCLUSIVE_VIDEO_UPLOAD: 'Exclusive video',
-    MY_DONUTS: 'My Donuts',
-    SHOP_DONUTS: 'Shop Donuts',
-    POST_DETAILS: 'Post Details',
-    EDIT_PROFILE: 'Edit Profile',
-    NOTIFICATIONS: 'Notifications',
-    INVITE_FRIENDS: 'Invite Friends',
-    SETTINGS: 'Settings',
-    LANGUAGE: 'Language',
-    DONUTS_YOU_LIKE: 'Donuts As You Like',
-    CHOOSE_CATEGORY: 'Choose categories',
+    PREVIOUS: 'Previous',
+    CREATE: 'Create',
+    SIGN_IN: 'Sign in',
+    EDIT: 'Edit',
+    WORDS: 'words',
+    PROFILE: 'Profile',
+    CATEGORY: 'Category',
   },
   GENERAL_LETTER: {
     CREATE: 'Create',
@@ -371,11 +347,6 @@ export const EN = {
     TERMS: 'terms',
     AND: ' and ',
     PRIVACY_POLICY: 'privacy policy.',
-    WELCOME_BACK: 'Welcome Back!',
-    LOGIN_WITH: 'Login with:',
-    NEW_CREATO: 'New to Creato? ',
-    SIGN_UP: 'Sign up',
-    NOW: ' now!'
   },
   REVIEW_LETTER: {
     DONUTS_NUMBER: 'Number of Donuts',
@@ -394,47 +365,6 @@ export const EN = {
     LINE4: '4. Enjoy!🍩🎊',
     OK: 'Ok',
   },
-  FUNDME_REWARDS: [
-    "Behind-the-scene videos 📽️",
-    "Live chat session 🖥️",
-    "Photos I have not released before 📷",
-    "Private Thank-you message 📥",
-    "Limited edition T-shirt 👕👚"
-  ],
-  PYRAMID_TOP_LETTERS: [
-    "Top Fans",
-    "Loyalty Fans",
-    "Strongest Support",
-    "Full Team Assist",
-    "Groundswell of Support"
-  ],
-  PYRAMID_SUPERFAN_LETTERS: [
-    {
-      FIRST_PART: 'Excellent! You are one of the ',
-      SECOND_PART: '% SuperFans of ',
-      THIRD_PART: ' in this DareMe post.'
-    },
-    {
-      FIRST_PART: 'Mavellous! You are one of the ',
-      SECOND_PART: '% SuperFans of ',
-      THIRD_PART: ' in this DareMe post.'
-    },
-    {
-      FIRST_PART: 'Fantastics! You are one of the ',
-      SECOND_PART: '% SuperFans of ',
-      THIRD_PART: ' in this DareMe post.'
-    },
-    {
-      FIRST_PART: 'Amazing! You are one of the ',
-      SECOND_PART: '% SuperFans of ',
-      THIRD_PART: ' in this DareMe post.'
-    },
-    {
-      FIRST_PART: 'Wow! You are one of the ',
-      SECOND_PART: '% SuperFans of ',
-      THIRD_PART: ' in this DareMe post.'
-    }
-  ],
   DONUTS_RECEIVED: 'Donuts Received',
   YOU_NEED_MORE_DONUTS_TO_SUPPORT_CREATORS: 'You need more donuts to support creators!',
   THE_BEST_WAY_FOR_CREATORS_FANS: `The best way for Creators & Fans Communities to create together. 🙌🏻`,
@@ -459,13 +389,6 @@ export const EN = {
   CONFIRM: 'Confirm',
   YES: 'Yes',
   NO: 'No',
-  CREATE_LETTER: {
-    DAREME_TITLE_LETTER: 'DareMe',
-    DAREME_BODY_LETTER: 'Let fans be part of my creative journey!',
-    FUNDME_TITLE_LETTER: 'FundMe',
-    FUNDME_BODY_LETTER: 'Support my creative content & get rewarded!',
-    FUNDME_REWARDS: 'e.g. exclusive chat, signed postcard etc',
-  },
   GENERAL_COMPONENT: {
     MOBILE_VIDEO_CARD: {
       DARE: 'Dare',

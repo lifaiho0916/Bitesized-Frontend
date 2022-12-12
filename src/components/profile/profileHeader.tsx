@@ -262,7 +262,7 @@ const ProfileHeader = (props: any) => {
           navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/${profileUser.personalisedUrl}`)
           setMoreInfo(false)
         }}>{"Copy link"}</div>
-        <div className="list" onClick={() => { setMoreInfo(false) }}>{contexts.PROFILE_LETTER.CANCEL}</div>
+        <div className="list" onClick={() => { setMoreInfo(false) }}>{contexts.GENERAL.CANCEL}</div>
       </div>
     </div >
   )
