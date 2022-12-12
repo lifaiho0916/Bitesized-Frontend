@@ -147,6 +147,111 @@ export const FR = {
     PRIVACY: 'Les politiques de confidentialité',
     CONTACT_US_HELP: 'Contactez-nous / Aide',
   },
+  /////////////////////////////////////////////////////
+  UPLOADING: {
+    UPLOADING_LETTER: [
+      {
+        letter: "“ Je suis toujours prêt à apprendre même si je n'aime pas toujours qu'on me donne des leçons. ”",
+        owner: "- Winston Churchill"
+      },
+      {
+        letter: "“ Apprendre, c'est unifier des idées et des données qui en apparence semblent divergentes.”",
+        owner: "- Terry Heick"
+      },
+      {
+        letter: "“ Soyez insatiables. Soyez fous. ”",
+        owner: "- Steve Jobs"
+      },
+      {
+        letter: "“ Le monde entier est un laboratoire pour l'esprit curieux. ”",
+        owner: "- Martin Fisher"
+      },
+      {
+        letter: "“ Je n'ai pas de talents particuliers. Je suis seulement passionnément curieux. ”",
+        owner: "- Albert Einstein"
+      },
+      {
+        letter: "“ Je n'ai jamais appris d'un homme qui était d'accord avec moi. ”",
+        owner: "- Robert A. Heinlein"
+      },
+      {
+        letter: "“ C'est ce que vous apprenez après avoir tout compris qui compte. ”",
+        owner: "- Harry S. Truman"
+      },
+      {
+        letter: "“ Plus tu lis, plus tu sauras de choses. Plus tu apprends, à plus d’endroits tu iras.”",
+        owner: "- Dr. Seuss"
+      },
+      {
+        letter: "“ La connaissance, qui s'acquiert sous la contrainte, n'obtient aucune emprise sur l'esprit. ”",
+        owner: "- Plato"
+      },
+      {
+        letter: "“ Tout apprentissage a une base émotionnelle. ”",
+        owner: "- Voltaire"
+      },
+      {
+        letter: "“ La connaissance, qui s'acquiert sous la contrainte, n'obtient aucune emprise sur l'esprit. ”",
+        owner: "- Plato"
+      },
+      {
+        letter: "“ La sagesse consiste à apprendre ce qu'il faut négliger. ”",
+        owner: "- William James"
+      },
+      {
+        letter: "“ Savoir ne suffit pas ; nous devons appliquer. Vouloir ne suffit pas ; nous devons faire. ”",
+        owner: "- Bruce Lee"
+      },
+      {
+        letter: "“ La sagesse consiste à apprendre ce qu'il faut négliger. ”",
+        owner: "- William James"
+      },
+      {
+        letter: "“ Chaque élève peut apprendre, mais pas le même jour, ni de la même manière. ”",
+        owner: "- George Evans"
+      },
+      {
+        letter: "“ Ne laissez jamais l'éducation formelle entraver votre apprentissage. ”",
+        owner: "- Mark Twain"
+      },
+      {
+        letter: "“ Nous devons apprendre à vivre ensemble comme des frères ou périr ensemble comme des imbéciles. ”",
+        owner: "- Martin Luther King, Jr."
+      },
+      {
+        letter: "“Ce n'est pas de nous-mêmes que nous apprenons à être meilleurs que nous ne le sommes.”",
+        owner: "- Wendell Berry"
+      },
+      {
+        letter: "“ Le génie imposant dédaigne les sentiers battus. ”",
+        owner: "- Abraham Lincoln"
+      },
+      {
+        letter: "“ Être ignorant n'est pas tant une honte que de ne pas vouloir apprendre.”",
+        owner: "- Benjamin Franklin"
+      },
+      {
+        letter: "“  L'intelligence est la capacité à s'adapter au changement. ”",
+        owner: "- Stephen Hawking"
+      }
+    ],
+    UPLOADING_DESC: 'Votre module est en cours de traitement, veuillez patienter'
+  },
+  /////////////////////////////////////////////////////
+  POST_BITE: {
+    POSTING_BITE: 'Publier un module',
+    UPLOAD_VIDEO: 'Télécharger une vidéo',
+    BITE_TITLE: 'Titre du module',
+    TELL_STORY: `Raconte l'histoire...`,
+    PRICE_UNLOCK: 'Prix en $ pour débloquer',
+    SELECT_CURRENCY: 'Sélectionner la devise',
+    CURRENCY_DESC: '(Nous convertirons votre prix en USD par défaut)',
+    EDIT_THUMBNAIL: 'Modifier la vignette',
+    FIT_WITH_WIDTH: 'Adapter à la largeur',
+    FIT_WITH_HEIGHT: 'Adapter à la hauteur',
+    UPLOAD_NEW: 'Télécharger une nouvelle vignette',
+    SAVE_ALL_CHANGE: 'Enregistrer toutes les modifications'
+  },
   //////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'voir plus',
@@ -167,6 +272,7 @@ export const FR = {
     NEXT: 'Suivant',
     CONNECT: 'Se connecter',
     CATEGORIES: 'Catégories',
+    PREVIOUS: 'Précédent'
   },
   HEADER_TITLE: {
     CREATE_FUNDME: '創建 FundMe',

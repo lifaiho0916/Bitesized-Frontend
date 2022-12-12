@@ -1,14 +1,15 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState, useContext } from "react"
 import { useSelector } from "react-redux"
-import CONSTANT from "../../constants/constant"
+import { LanguageContext } from "../../routes/authRoute"
 import "../../assets/styles/UploadingStyle.scss"
 
 const Uploading = () => {
   const loadState = useSelector((state: any) => state.load)
   const biteState = useSelector((state: any) => state.bite)
+  const contexts = useContext(LanguageContext)
   const { bite } = biteState
   const { uploadProcess } = loadState
-  const [index, setIndex] = useState(Math.floor(Math.random() * (CONSTANT.UPLOADING_LETTERS.length - 1)))
+  const [index, setIndex] = useState(Math.floor(Math.random() * (contexts.UPLOADING.UPLOADING_LETTER.length - 1)))
 
   const percent = useMemo(() => {
     const len = bite.videos.length === 0 ? 1 : bite.videos.length
@@ -21,7 +22,7 @@ const Uploading = () => {
 
   useEffect(() => {
     const timerId = setInterval(() => {
-      setIndex(Math.floor(Math.random() * (CONSTANT.UPLOADING_LETTERS.length - 1)))
+      setIndex(Math.floor(Math.random() * (contexts.UPLOADING.UPLOADING_LETTER.length - 1)))
     }, 10000)
 
     return () => {
@@ -46,14 +47,14 @@ const Uploading = () => {
           </div>
         </div>
         <div className="uploading-description">
-          <span>Your Bite is under processing, please wait</span>
+          <span>{contexts.UPLOADING.UPLOADING_DESC}</span>
         </div>
         <div className="said-letter">
           <div className="letter">
-            <span>{CONSTANT.UPLOADING_LETTERS[index].letter}</span>
+            <span>{contexts.UPLOADING.UPLOADING_LETTER[index].letter}</span>
           </div>
           <div className="owner">
-            <span>{CONSTANT.UPLOADING_LETTERS[index].owner}</span>
+            <span>{contexts.UPLOADING.UPLOADING_LETTER[index].owner}</span>
           </div>
         </div>
       </div>

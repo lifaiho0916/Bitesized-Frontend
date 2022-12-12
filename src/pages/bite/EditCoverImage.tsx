@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useContext } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
@@ -13,6 +13,7 @@ import {
     SET_SELECTED_INDEXES,
     SET_VIDEO_ALIGNS,
 } from "../../redux/types"
+import { LanguageContext } from "../../routes/authRoute"
 import "../../assets/styles/bite/EditCoverStyle.scss"
 
 const EditCoverImage = () => {
@@ -33,6 +34,7 @@ const EditCoverImage = () => {
     const [videoIndex, setVideoIndex] = useState(0)
     const [blobFiles, setBlobFiles] = useState<any>([null, null, null])
     const [coverImages, setCoverImages] = useState<any>([null, null, null])
+    const contexts = useContext(LanguageContext)
 
     const NextCover = async () => {
         if (videoIndex < bite.videos.length - 1) {
@@ -140,7 +142,7 @@ const EditCoverImage = () => {
         <div className="edit-cover-wrapper">
             <div className="page-header" style={location.state ? { maxWidth: '100%', margin: '25px 20px' } : {}}>
                 <div onClick={() => navigate(prevRoute, { state: { user: location.state ? location.state.user : null } })}><BackIcon color="black" /></div>
-                <div className="page-title"><span>Edit thumbnail</span></div>
+                <div className="page-title"><span>{contexts.POST_BITE.EDIT_THUMBNAIL}</span></div>
                 <div style={{ width: '24px' }}></div>
             </div>
             <div className="edit-cover">
@@ -217,19 +219,19 @@ const EditCoverImage = () => {
                 />
                 <div style={{ display: 'flex', justifyContent: 'space-between', margin: '20px auto 0px auto', width: '320px' }}>
                     <Button
-                        text="< Prev"
+                        text={`< ${contexts.GENERAL.PREVIOUS}`}
                         shape="rounded"
                         fillStyle={videoIndex > 0 ? 'fill' : undefined}
                         color="primary"
-                        width={videoIndex > 0 ? videoIndex === bite.videos.length - 1 ? '155px' : '100px' : '100px'}
+                        width={videoIndex > 0 ? videoIndex === bite.videos.length - 1 ? '135px' : '100px' : '100px'}
                         handleSubmit={PrevCover}
                     />
                     <Button
-                        text="Next >"
+                        text={`${contexts.GENERAL.NEXT} >`}
                         shape="rounded"
                         color="primary"
                         fillStyle={videoIndex < bite.videos.length - 1 ? 'fill' : undefined}
-                        width={videoIndex < bite.videos.length - 1 ? videoIndex === 0 ? '155px' : '100px' : '100px'}
+                        width={videoIndex < bite.videos.length - 1 ? videoIndex === 0 ? '135px' : '100px' : '100px'}
                         handleSubmit={NextCover}
                     />
                 </div>
@@ -262,7 +264,7 @@ const EditCoverImage = () => {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
                     <Button
-                        text={aligns[videoIndex] ? 'Fit with width' : 'Fit with height'}
+                        text={aligns[videoIndex] ? contexts.POST_BITE.FIT_WITH_WIDTH : contexts.POST_BITE.FIT_WITH_HEIGHT}
                         fillStyle="fill"
                         color="primary"
                         shape="rounded"
@@ -276,7 +278,7 @@ const EditCoverImage = () => {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
                     <Button
-                        text="Upload a new thumbnail"
+                        text={contexts.POST_BITE.UPLOAD_NEW}
                         fillStyle="fill"
                         color="primary"
                         shape="rounded"
@@ -295,7 +297,7 @@ const EditCoverImage = () => {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
                     <Button
-                        text="Save all changes"
+                        text={contexts.POST_BITE.SAVE_ALL_CHANGE}
                         fillStyle="fill"
                         color="primary"
                         shape="rounded"

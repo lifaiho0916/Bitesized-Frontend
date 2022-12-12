@@ -218,7 +218,7 @@ const CreateBite = () => {
         <div className="create-bite-wrapper">
             <div className="page-header">
                 <div onClick={() => setOpenQuit(true)}><BackIcon color="black" /></div>
-                <div className="page-title"><span>Posting on Bite</span></div>
+                <div className="page-title"><span>{contexts.POST_BITE.POSTING_BITE}</span></div>
                 <div style={{ width: '24px' }}></div>
             </div>
             <TeaserCardPopUp
@@ -348,7 +348,7 @@ const CreateBite = () => {
                     {bite.videos.length > 0 &&
                         <div className="upload-btn">
                             <Button
-                                text="Edit thumbnail"
+                                text={contexts.POST_BITE.EDIT_THUMBNAIL}
                                 width={280}
                                 shape="rounded"
                                 fillStyle="fill"
@@ -360,7 +360,7 @@ const CreateBite = () => {
                     {bite.videos.length < 3 &&
                         <div className="upload-btn">
                             <Button
-                                text="Upload Bite Videos"
+                                text={contexts.POST_BITE.UPLOAD_VIDEO}
                                 width={280}
                                 shape="rounded"
                                 fillStyle="fill"
@@ -394,14 +394,14 @@ const CreateBite = () => {
 
                 <div className="first-divider"></div>
                 <div className="session-title">
-                    <span>Bite Title</span>
+                    <span>{contexts.POST_BITE.BITE_TITLE}</span>
                 </div>
                 <div className="session-input">
                     <Input
                         type="input"
                         width={'100%'}
                         wordCount={100}
-                        placeholder="Tell the story..."
+                        placeholder={contexts.POST_BITE.TELL_STORY}
                         title={title}
                         setTitle={setTitle}
                     />
@@ -425,7 +425,7 @@ const CreateBite = () => {
                     <div>
                         <div className="second-divider"></div>
                         <div className="session-title">
-                            <span> $ Price to unlock</span>
+                            <span>{contexts.POST_BITE.PRICE_UNLOCK}</span>
                         </div>
                         <div className="session-input">
                             <Input
@@ -453,7 +453,7 @@ const CreateBite = () => {
 
                         <div className="firth-divider"></div>
                         <div className="currency-description">
-                            <span>(We will convert your price in USD as default)</span>
+                            <span>{contexts.POST_BITE.CURRECNY_DESC}</span>
                         </div>
                     </div>
                 }
@@ -463,7 +463,7 @@ const CreateBite = () => {
                     <ContainerBtn
                         styleType="fill"
                         color="primary"
-                        text="Publish"
+                        text={contexts.GENERAL.PUBLISH}
                         disabled={!publishEnable}
                     />
                 </div>
