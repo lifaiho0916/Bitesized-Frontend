@@ -57,7 +57,7 @@ const Bites = () => {
             </div>
             <div className="creator-list">
                 <div className="sort-item">
-                    <div className="sort-letter">Sort by:</div>
+                    <div className="sort-letter">{contexts.GENERAL.SORT_BY}:</div>
                     {sortedCategories.map((category: any, index: any) => (
                         <div className="item" key={index} onClick={() => { selectCategory(category.index) }}>
                             <CategoryBtn text={category.text} pressed={includeCategory(category.index) ? true : false} />

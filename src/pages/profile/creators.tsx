@@ -49,7 +49,7 @@ const Creators = () => {
       </div>
       <div className="creator-list">
         <div className="sort-item">
-          <div className="sort-letter">Sort by:</div>
+          <div className="sort-letter">{contexts.GENERAL.SORT_BY}:</div>
           {contexts.CREATOR_CATEGORY_LIST.map((category: any, index: any) => (
             <div className="item" key={index} onClick={() => { selectCategory(index) }}>
               <CategoryBtn text={category} pressed={includeCategory(index) ? true : false} />

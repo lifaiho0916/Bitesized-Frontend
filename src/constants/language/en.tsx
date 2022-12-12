@@ -279,6 +279,7 @@ export const EN = {
     WORDS: 'words',
     PROFILE: 'Profile',
     CATEGORY: 'Category',
+    SORT_BY: 'Sort by'
   },
   GENERAL_LETTER: {
     CREATE: 'Create',

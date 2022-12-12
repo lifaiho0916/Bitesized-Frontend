@@ -1,5 +1,5 @@
 export const FR = {
-  CREATOR_CATEGORY_LIST: ["Blogger", "Chef", "Designer", "Fashionista", "Finance Advisor", "Fitness Trainer", "Gadgets Lover", "Gamer", "Illustrator", "Interview Coach", "Life Coach", "Live Streamer", "Musician", "Photographer", "Podcaster", "Teacher", "Tutor", "Writer", "Videographer"],
+  CREATOR_CATEGORY_LIST: ["Blogueur", "Chef", "Designer", "Passionnée de mode", "Conseiller financier", "Coach sportif", "Amateur de gadgets", "Joueur", "Illustrateur", "Coach pour entretien", "Coach de vie", "Live Streamer", "Musicien", "Photographe", "Podcasteur", "Professeur", "Tuteur", "Écrivain", "Vidéaste"],
   PAYMENT_CURRENCIES: ['美元', '印度盧比', '新台幣', '港幣', '馬幣'],
   //////////////////////////////////////////////////////
   HOME: {
@@ -279,6 +279,7 @@ export const FR = {
     WORDS: 'mots',
     PROFILE: 'Profil',
     CATEGORY: 'Catégorie',
+    SORT_BY: 'Trier par'
   },
   GENERAL_LETTER: {
     CREATE: '創建',
