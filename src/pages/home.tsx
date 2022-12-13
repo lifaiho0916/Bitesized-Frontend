@@ -142,7 +142,7 @@ const Home = () => {
           <div className="see-more-btn">{width < 680 ? '··· ' : ''}{contexts.GENERAL.SEE_MORE}</div>
         </div>
         <div className="underline"></div>
-        {/* <div className="bite-tags">
+        <div className="bite-tags">
           <div
             className={biteFilter === -1 ? "tag active" : "tag"}
             onClick={() => setBiteFilter(-1)}
@@ -164,7 +164,7 @@ const Home = () => {
               <span>{category}</span>
             </div>
           ))}
-        </div> */}
+        </div>
         {bites.length === 1 ?
           <div className="daremes scroll-bar" style={width < 680 ? { justifyContent: 'center', height: '650px', position: 'relative' } : {}}>
             {bites.map((bite: any, i: any) => (
