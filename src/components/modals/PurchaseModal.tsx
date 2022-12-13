@@ -86,7 +86,7 @@ const PurchaseModal = (props: any) => {
                             label={contexts.MODALS.YOU_WILL_PAY_IN}
                             option={option}
                             setOption={setOption}
-                            options={CONSTANT.DISPLAY_CURRENCIES}
+                            options={contexts.DISPLAY_CURRENCIES}
                             width={'100%'}
                         />
 

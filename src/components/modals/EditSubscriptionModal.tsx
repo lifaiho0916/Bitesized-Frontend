@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react"
+import { useState, useMemo, useEffect, useContext } from "react"
 import TextareaAutosize from "react-textarea-autosize";
 import Button from "../general/button"
 import Input from "../general/input"
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import CONSTANT from "../../constants/constant"
 import { EditorState, convertFromRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
+import { LanguageContext } from "../../routes/authRoute";
 import { subScriptionAction } from "../../redux/actions/subScriptionActions";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../assets/styles/modals/EditSubscriptionModalStyle.scss"
@@ -23,6 +24,7 @@ const EditSubscriptionModal = (props: any) => {
     const [editorState, setEditorState] = useState<any>(EditorState.createEmpty());
     const [description, setDescription] = useState<any>(null);
     const [benefits, setBenefits] = useState<any>([ "1 month FREE pass to all Bite content" ]);
+    const contexts = useContext(LanguageContext)
 
     const onEditorStateChange = (state: any) => {
         const text = state.getCurrentContent().getPlainText("");
@@ -130,7 +132,7 @@ const EditSubscriptionModal = (props: any) => {
                                 <CurrencySelect
                                     option={option}
                                     setOption={setOption}
-                                    options={CONSTANT.DISPLAY_CURRENCIES}
+                                    options={contexts.DISPLAY_CURRENCIES}
                                     width={"100%"}
                                 />
                                 <p>( We will convert your price in USD as default)</p>

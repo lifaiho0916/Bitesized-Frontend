@@ -166,37 +166,37 @@ const Profile = () => {
         {isSame && (
           <div className="profile-menu">
             <ProfileMenu
-              selectedText={
-                code === null
-                  ? contexts.PROFILE.MY_PURCHASES
-                  : code === "mybites"
-                  ? contexts.PROFILE.MY_BITES
-                  : "Subscription"
-              }
-              texts={[contexts.PROFILE.MY_PURCHASES, contexts.PROFILE.MY_BITES, "Subscription"]}
-              urls={
-                authuser
-                  ? [
-                      authuser.personalisedUrl,
-                      `${authuser.personalisedUrl}?tab=mybites`,
-                      `${authuser.personalisedUrl}?tab=subscription`,
-                    ]
-                  : ["", "", ""]
-              }
               // selectedText={
               //   code === null
-              //     ? "My Purchases"
-              //     : "My Bites"
+              //     ? contexts.PROFILE.MY_PURCHASES
+              //     : code === "mybites"
+              //     ? contexts.PROFILE.MY_BITES
+              //     : "Subscription"
               // }
-              // texts={["My Purchases", "My Bites"]}
+              // texts={[contexts.PROFILE.MY_PURCHASES, contexts.PROFILE.MY_BITES, "Subscription"]}
               // urls={
               //   authuser
               //     ? [
               //         authuser.personalisedUrl,
               //         `${authuser.personalisedUrl}?tab=mybites`,
+              //         `${authuser.personalisedUrl}?tab=subscription`,
               //       ]
-              //     : ["", ""]
+              //     : ["", "", ""]
               // }
+              selectedText={
+                code === null
+                  ? contexts.PROFILE.MY_PURCHASES
+                  : contexts.PROFILE.MY_BITES
+              }
+              texts={[contexts.PROFILE.MY_PURCHASES, contexts.PROFILE.MY_BITES]}
+              urls={
+                authuser
+                  ? [
+                      authuser.personalisedUrl,
+                      `${authuser.personalisedUrl}?tab=mybites`,
+                    ]
+                  : ["", ""]
+              }
             />
           </div>
         )}

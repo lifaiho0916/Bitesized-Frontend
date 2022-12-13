@@ -63,7 +63,7 @@ const LanguageCurrency = () => {
           </div>
           <div className="currency-setting">
             <CurrencySelect
-              options={CONSTANT.DISPLAY_CURRENCIES}
+              options={contexts.DISPLAY_CURRENCIES}
               option={option}
               setOption={setOption}
               width={'100%'}

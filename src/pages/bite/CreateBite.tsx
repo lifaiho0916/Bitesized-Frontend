@@ -447,7 +447,7 @@ const CreateBite = () => {
                                 width={'100%'}
                                 option={currency}
                                 setOption={setCurrency}
-                                options={CONSTANT.DISPLAY_CURRENCIES}
+                                options={contexts.DISPLAY_CURRENCIES}
                             />
                         </div>
 

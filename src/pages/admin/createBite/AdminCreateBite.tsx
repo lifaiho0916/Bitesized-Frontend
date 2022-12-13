@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useLocation } from "react-router-dom"
 import CreatorLg from "../../../components/general/CreatorLg"
@@ -13,6 +13,7 @@ import Button from "../../../components/general/button"
 import { BackIcon, RemoveIcon, AddIcon, PlayIcon, DragHandleIcon } from "../../../assets/svg"
 import { biteAction } from "../../../redux/actions/biteActions"
 import CONSTANT from "../../../constants/constant"
+import { LanguageContext } from "../../../routes/authRoute"
 import { SET_BITE, SET_PREVIOUS_ROUTE, SET_VIDEO_ALIGNS, SET_SELECTED_INDEXES } from "../../../redux/types"
 import "../../../assets/styles/admin/createBite/AdminCreateBiteStyle.scss"
 
@@ -42,6 +43,7 @@ const AdminCreateBite = () => {
     const [free, setFree] = useState(false)
     const [videoIndex, setVideoIndex] = useState(-1)
     const [openPublish, setOpenPublish] = useState(false)
+    const contexts = useContext(LanguageContext)
 
     const publish = () => {
         if (!publishEnable) return
@@ -408,7 +410,7 @@ const AdminCreateBite = () => {
                             width={'100%'}
                             option={currency}
                             setOption={setCurrency}
-                            options={CONSTANT.DISPLAY_CURRENCIES}
+                            options={contexts.DISPLAY_CURRENCIES}
                         />
                     </div>
 

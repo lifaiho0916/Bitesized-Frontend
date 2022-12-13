@@ -1,6 +1,25 @@
 export const EN = {
   CREATOR_CATEGORY_LIST: ["Blogger", "Chef", "Designer", "Fashionista", "Finance Advisor", "Fitness Trainer", "Gadgets Lover", "Gamer", "Illustrator", "Interview Coach", "Life Coach", "Live Streamer", "Musician", "Photographer", "Podcaster", "Teacher", "Tutor", "Writer", "Videographer"],
-  PAYMENT_CURRENCIES: ['USD', 'INR', 'TWD', 'HKD', 'MYR'],
+  DISPLAY_CURRENCIES: [
+    'USD - US Dollar',
+    'INR - Indian Rupee',
+    'TWD - New Taiwan Dollar',
+    'HKD - Hong Kong Dollar',
+    'MYR - Malaysian Ringgit',
+    'AUD - Australian Dollar',
+    'EUR - European Euro',
+    'GBP - British Pound',
+    'CAD - Canadian Dollar',
+    'ZAR - South African Rand',
+    'JPY - Japanese Yen',
+    'CHF - Swiss Franc',
+    'NZD - New Zealand Dollar',
+    'CNY - Chinese Yuan',
+    'SGD - Singapore Dollar',
+    'THB - Thai Baht',
+    'PHP - Philippine Peso',
+    'IDR - Indonesian Rupiah'
+  ],
   //////////////////////////////////////////////////////
   HOME: {
     BSK: '💡Bite-sized Knowledge',

@@ -181,6 +181,7 @@ const BiteDetail = () => {
         if (dlgState === 'unlock_bite') {
             setOpenFreeUnLock(true)
             // dispatch(biteAction.getBiteById(biteId))
+            navigate(location.pathname)
         }
     }, [dlgState])
     useEffect(() => { if (isOwner) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort)) }, [isOwner, biteId, sort, dispatch])
@@ -458,16 +459,18 @@ const BiteDetail = () => {
                                                 className="react-player"
                                                 url={video.videoUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.videoUrl}` : ''}
                                                 playing={true}
-                                                config={{
-                                                    file: {
-                                                        attributes: {
-                                                            controlsList: 'nodownload noremoteplayback noplaybackrate',
-                                                            disablePictureInPicture: true,
-                                                        }
-                                                    }
-                                                }}
+                                                // config={{
+                                                //     file: {
+                                                //         attributes: {
+                                                //             controlsList: 'nodownload noremoteplayback noplaybackrate',
+                                                //             disablePictureInPicture: true,
+                                                //         }
+                                                //     }
+                                                // }}
+                                                // stopOnUnmount={false}
+                                                previewTabIndex={0}
                                                 muted={true}
-                                                playsInline={true}
+                                                playsinline={true}
                                                 light={video.coverUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.coverUrl}` : ''}
                                                 controls
                                             />

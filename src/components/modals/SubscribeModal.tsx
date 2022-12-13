@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useContext } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import draftToHtml from "draftjs-to-html";
@@ -6,6 +6,7 @@ import Avatar from "../general/avatar";
 import CurrencySelect from "../stripe/CurrencySelect";
 import Button from "../general/button";
 import { CloseIcon } from "../../assets/svg";
+import { LanguageContext } from "../../routes/authRoute";
 import CONSTANT from "../../constants/constant";
 import "../../assets/styles/modals/SubscribeModalStyle.scss";
 
@@ -24,6 +25,7 @@ const SubscribeModal = (props: any) => {
   const { currencyRate } = loadState;
   const { user } = userState;
   const [option, setOption] = useState(0);
+  const contexts = useContext(LanguageContext)
 
   const displayPrice = (currency: any, price: any) => {
     if (currency) {
@@ -134,7 +136,7 @@ const SubscribeModal = (props: any) => {
                     label="You will pay in:"
                     option={option}
                     setOption={setOption}
-                    options={CONSTANT.DISPLAY_CURRENCIES}
+                    options={contexts.DISPLAY_CURRENCIES}
                     width={"100%"}
                   />
 

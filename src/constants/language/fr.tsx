@@ -1,6 +1,25 @@
 export const FR = {
   CREATOR_CATEGORY_LIST: ["Blogueur", "Chef", "Designer", "Passionnée de mode", "Conseiller financier", "Coach sportif", "Amateur de gadgets", "Joueur", "Illustrateur", "Coach pour entretien", "Coach de vie", "Live Streamer", "Musicien", "Photographe", "Podcasteur", "Professeur", "Tuteur", "Écrivain", "Vidéaste"],
-  PAYMENT_CURRENCIES: ['美元', '印度盧比', '新台幣', '港幣', '馬幣'],
+  DISPLAY_CURRENCIES: [
+    'USD - Dollar américain',
+    'INR - Roupie indienne',
+    'TWD - Nouveau dollar de Taïwan',
+    'HKD - Dollar de Hong Kong',
+    'MYR - Ringgit malais',
+    'AUD - Dollar australien',
+    'EUR - Euro européen',
+    'GBP - Livre sterling',
+    'CAD - Dollar canadien',
+    'ZAR - Rand sud-africain',
+    'JPY - Yen japonais',
+    'CHF - Franc suisse',
+    'NZD - Dollar néo-zélandais',
+    'CNY - Yuan chinois',
+    'SGD - Dollar de Singapour',
+    'THB - Baht thaïlandais',
+    'PHP - Peso philippin',
+    'IDR - Roupie indonésienne'
+  ],
   //////////////////////////////////////////////////////
   HOME: {
     BSK: '💡Connaissances en bouchées',

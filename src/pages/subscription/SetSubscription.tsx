@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
@@ -10,6 +10,7 @@ import { subScriptionAction } from "../../redux/actions/subScriptionActions";
 import CONSTANT from "../../constants/constant";
 import { EditorState, convertFromRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
+import { LanguageContext } from "../../routes/authRoute";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../assets/styles/subscription/SetSubscriptionStyle.scss";
 
@@ -20,6 +21,7 @@ const SetSubscription = (props: any) => {
   const subScriptionState = useSelector((state: any) => state.subScription)
   const { user } = userState;
   const { subScription } = subScriptionState
+  const contexts = useContext(LanguageContext)
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -145,7 +147,7 @@ const SetSubscription = (props: any) => {
             <CurrencySelect
               option={option}
               setOption={setOption}
-              options={CONSTANT.DISPLAY_CURRENCIES}
+              options={contexts.DISPLAY_CURRENCIES}
               width={"100%"}
             />
             <p>( We will convert your price in USD as default)</p>
