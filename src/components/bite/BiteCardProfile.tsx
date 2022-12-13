@@ -1,15 +1,18 @@
 import { useState, useContext, useMemo } from "react"
-import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate, useLocation } from "react-router-dom"
 import { LanguageContext } from "../../routes/authRoute"
 import { ClockIcon, NoOfPeopleIcon, UnlockIcon, LockedIcon } from "../../assets/svg"
 import NextBtn from "../../assets/img/next-bright.png"
 import CONSTANT from "../../constants/constant"
+import { SET_PREVIOUS_ROUTE } from "../../redux/types"
 import "../../assets/styles/bite/BiteCardProfileStyle.scss"
 
 const BiteCardProfile = (props: any) => {
     const { bite, same } = props
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const location = useLocation()
     const contexts = useContext(LanguageContext)
     const userState = useSelector((state: any) => state.auth)
     const loadState = useSelector((state: any) => state.load)
@@ -59,7 +62,10 @@ const BiteCardProfile = (props: any) => {
         return bite.purchasedUsers.every((purchaseInfo: any) => String(purchaseInfo.purchasedBy) !== String(user.id))
     }, [user, bite])
 
-    const clickCard = () => { navigate(`/bite/detail/${bite._id}`) }
+    const clickCard = () => { 
+        dispatch({ type: SET_PREVIOUS_ROUTE, payload: location.pathname })
+        navigate(`/bite/detail/${bite._id}`)
+    }
 
     return (
         <div

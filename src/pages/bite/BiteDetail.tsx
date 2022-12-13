@@ -466,7 +466,7 @@ const BiteDetail = () => {
                                                         }
                                                     }
                                                 }}
-                                                // muted={true}
+                                                muted={true}
                                                 playsInline={true}
                                                 light={video.coverUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.coverUrl}` : ''}
                                                 controls
