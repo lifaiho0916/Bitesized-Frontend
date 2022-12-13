@@ -20,7 +20,15 @@ export const FR = {
     LOGIN_WITH: 'Connectez-vous avec :',
     SIGN_UP_PART1: 'Nouveau sur Creato ?',
     SIGN_UP_PART2: `S'inscrire`,
-    SIGN_UP_PART3: 'maintenant !'
+    SIGN_UP_PART3: 'maintenant !',
+    SIGN_UP_WITH: `S'inscrire maintenant`,
+    SIGN_UP_DESC1: `✅ Acquérir des connaissances de la taille d'une bouchée en quelques secondes.`,
+    SIGN_UP_DESC2: '✅ Explorez les compétences et les connaissances des créateurs',
+    SIGN_UP_DESC3: '✅ Apprenez quelque chose de nouveau tous les jours',
+    BY_SIGN_UP: 'Cliquez pour accepter nos ',
+    TERMS: 'conditions',
+    AND: ' et ',
+    PRIVACY_POLICY: 'politique de confidentialité.',
   },
   ////////////////////////////////////////////////////
   FOOTER: {
@@ -98,8 +106,15 @@ export const FR = {
     POST_NOT_EDIT: 'Le message ne pourra pas être modifié par la suite.',
     PURCHASE_BITE: 'Acheter un module',
     SELECT_CURRENCY: 'Sélectionner la devise',
+    YOU_WILL_CHARGE_FOR: 'Vous serez facturé pour ',
+    IN: ' en ',
     YOU_WILL_PAY_IN: 'Vous paierez en :',
     INCLUDE_PROCESSFEE: '(Frais de traitement inclus)',
+    PURCHASE_TANDC_PART1: 'En cliquant sur Suivant, vous acceptez les ',
+    PURCHASE_TANDC_PART2: 'conditions générales',
+    PURCHASE_TANDC_PART3: ' et la ',
+    PURCHASE_TANDC_PART4: 'Politique de confidentialité',
+    PURCHASE_TANDC_PART5: ' de Creato, et vous acceptez que le processeur de paiement - Stripe débite votre mode de paiement..'
   },
   /////////////////////////////////////////////////////
   PAYOUT: {
@@ -308,17 +323,6 @@ export const FR = {
     SAVE: '儲存',
     NEXT: '下一步',
     OFF: '折扣'
-  },
-  AUTH_LETTER: {
-    SIGN_UP_TO_ENJOY: '現在註冊可享有:',
-    SIGN_UP_LETTER1: '✅ 10 甜甜圈 (~$1美元)',
-    SIGN_UP_LETTER2: '✅ 支持創作者 和 實現共同創作',
-    SIGN_UP_LETTER3: '✅ 創作者和粉絲的私人空間',
-    SIGN_UP_WITH: '第三方帳戶登記: ',
-    BY_SIGN_UP: '透過註冊Creato賬號, 即表示你已閱讀並同意Creato的',
-    TERMS: '使用條款',
-    AND: '及',
-    PRIVACY_POLICY: '私隱政策。',
   },
   WELCOME_DLG: {
     TITLE: '歡迎回來Creato!',

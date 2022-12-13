@@ -20,7 +20,15 @@ export const EN = {
     LOGIN_WITH: 'Login with:',
     SIGN_UP_PART1: 'New to Creato?',
     SIGN_UP_PART2: 'Sign up',
-    SIGN_UP_PART3: 'now!'
+    SIGN_UP_PART3: 'now!',
+    SIGN_UP_WITH: 'Sign up with:',
+    SIGN_UP_DESC1: '✅ Gain bite-sized knowledge in seconds.',
+    SIGN_UP_DESC2: '✅ Learn skills curated by Creators.',
+    SIGN_UP_DESC3: '✅ Few minutes well spent in daily learning.',
+    BY_SIGN_UP: 'By signing up, you agree to our',
+    TERMS: 'terms',
+    AND: ' and ',
+    PRIVACY_POLICY: 'privacy policy.',
   },
   ////////////////////////////////////////////////////
   FOOTER: {
@@ -98,8 +106,15 @@ export const EN = {
     POST_NOT_EDIT: 'Post can not be edited afterwards.',
     PURCHASE_BITE: 'Purcahse a Bite',
     SELECT_CURRENCY: 'Select Currency',
+    YOU_WILL_CHARGE_FOR: 'You will be charged for ',
+    IN: ' in ',
     YOU_WILL_PAY_IN: 'You will pay in:',
     INCLUDE_PROCESSFEE: '(Including processing fee)',
+    PURCHASE_TANDC_PART1: 'By Clicking Next, you agree to Creato’s ',
+    PURCHASE_TANDC_PART2: 'Terms & Conditions',
+    PURCHASE_TANDC_PART3: ', and ',
+    PURCHASE_TANDC_PART4: 'Privacy Policy',
+    PURCHASE_TANDC_PART5: ', and for payment processor - Stripe to charge your payment method.'
   },
   /////////////////////////////////////////////////////
   PAYOUT: {
@@ -308,17 +323,6 @@ export const EN = {
     SAVE: 'Save',
     NEXT: 'Next',
     OFF: 'OFF'
-  },
-  AUTH_LETTER: {
-    SIGN_UP_TO_ENJOY: 'Sign up to enjoy:',
-    SIGN_UP_LETTER1: '✅ 10 Donuts for free (~$1USD)',
-    SIGN_UP_LETTER2: '✅ Support & create with Creators',
-    SIGN_UP_LETTER3: '✅ A private space for fans & creators',
-    SIGN_UP_WITH: 'Sign up with: ',
-    BY_SIGN_UP: 'By signing up, you agree to our',
-    TERMS: 'terms',
-    AND: ' and ',
-    PRIVACY_POLICY: 'privacy policy.',
   },
   WELCOME_DLG: {
     TITLE: 'Welcome back!',

@@ -212,12 +212,13 @@ const Auth = (props: any) => {
             <h4>{contexts.AUTH.SIGN_UP_TO_ENJOY}</h4>
             <br />
             <ul>
-              <li>✅ Gain bite-sized knowledge in seconds.</li>
-              <li>✅ Learn skills curated by Creators.</li>
-              <li>✅ Few minutes well spent in daily learning.</li>
+              <li>{contexts.AUTH.SIGN_UP_DESC1}</li>
+              <li>{contexts.AUTH.SIGN_UP_DESC2}</li>
+              <li>{contexts.AUTH.SIGN_UP_DESC3}</li>
+              <li></li>
             </ul>
             <br />
-            <h2>{contexts.AUTH_LETTER.SIGN_UP_WITH}</h2>
+            <h2>{contexts.AUTH.SIGN_UP_WITH}</h2>
           </div>
         ) : (
           <h2>
@@ -276,7 +277,7 @@ const Auth = (props: any) => {
         </div>
         {props.isSignin === false ? (
           <p>
-            {contexts.AUTH_LETTER.BY_SIGN_UP}
+            {contexts.AUTH.BY_SIGN_UP}
             <Link
               onMouseOver={() => setIsHover(true)}
               onMouseLeave={() => setIsHover(false)}
@@ -284,16 +285,16 @@ const Auth = (props: any) => {
               to="/terms"
             >
               {" "}
-              {contexts.AUTH_LETTER.TERMS}
+              {contexts.AUTH.TERMS}
             </Link>
-            {contexts.AUTH_LETTER.AND}
+            {contexts.AUTH.AND}
             <Link
               onMouseOver={() => setIsHover1(true)}
               onMouseLeave={() => setIsHover1(false)}
               style={aStyle1}
               to="/privacy-policy"
             >
-              {contexts.AUTH_LETTER.PRIVACY_POLICY}
+              {contexts.AUTH.PRIVACY_POLICY}
             </Link>
           </p>
         ) : (

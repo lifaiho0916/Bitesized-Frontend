@@ -91,15 +91,15 @@ const PurchaseModal = (props: any) => {
                         />
 
                         <div className="charge-amount">
-                            <span>You will be charged for&nbsp;</span>
+                            <span>{contexts.MODALS.YOU_WILL_CHARGE_FOR}</span>
                             <span style={{ color: '#EF4444' }}>{bite.owner ? displaySelectedPrice(bite.currency, bite.price) : ''}</span>
-                            <span>&nbsp;in {CONSTANT.CURRENCIES[option]}</span>
+                            <span>{contexts.MODALS.IN}{CONSTANT.CURRENCIES[option]}</span>
                         </div>
                         <div className="charge-amount" style={{ marginTop: '0px' }}>
                             <span>{contexts.MODALS.INCLUDE_PROCESSFEE}</span>
                         </div>
                         <div className="terms-and-privacy">
-                            <span>By Clicking Next, you agree to <Link to="/terms">Creato’s Terms & Conditions</Link>, and <Link to="/privacy-policy">Privacy Policy</Link>, and for payment processor - Stripe to charge your payment method.</span>
+                            <span>{contexts.MODALS.PURCHASE_TANDC_PART1}<Link to="/terms">{contexts.MODALS.PURCHASE_TANDC_PART2}</Link>{contexts.MODALS.PURCHASE_TANDC_PART3}<Link to="/privacy-policy">{contexts.MODALS.PURCHASE_TANDC_PART4}</Link>{contexts.MODALS.PURCHASE_TANDC_PART5}</span>
                         </div>
                         <div className="next-btn" style={{ marginBottom: '15px' }}>
                             <Button
