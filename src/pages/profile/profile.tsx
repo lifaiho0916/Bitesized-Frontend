@@ -422,7 +422,7 @@ const Profile = () => {
               </div>
             ) : (
               <div className="no-data">
-                <span>There is no "Bite" yet </span>
+                <span>{contexts.PROFILE.NO_BITE}</span>
                 {code === "mybites" && (
                   <div
                     style={{

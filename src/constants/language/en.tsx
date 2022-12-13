@@ -60,6 +60,8 @@ export const EN = {
     DISPLAY_NAME: 'Display Name',
     PERSONAL_URL: 'Personalized URL',
     LINK_SOCIAL: 'Link Social Accounts',
+    NO_BITE: 'There is no "bite" yet',
+    COPY_LINK: 'Copy link'
   },
   //////////////////////////////////////////////////
   PAYMENTS: {
@@ -253,6 +255,21 @@ export const EN = {
     SAVE_ALL_CHANGE: 'Save all changes'
   },
   /////////////////////////////////////////////////////
+  ITEM_CARD: {
+    POSTED: 'Posted',
+    MONTHS: ' months',
+    MONTH: ' month',
+    WEEKS: ' weeks',
+    WEEK: ' week',
+    MINS: ' mins',
+    MIN: ' min',
+    HOURS: ' hours',
+    HOUR: ' hour',
+    DAYS: ' days',
+    DAY: ' day',
+    AGO: ' ago',
+  },
+  /////////////////////////////////////////////////////
   GENERAL: {
     SEE_MORE: 'see more',
     FREE: 'Free',
@@ -284,18 +301,6 @@ export const EN = {
   GENERAL_LETTER: {
     CREATE: 'Create',
     PUBLISH: 'Publish',
-    DONUTS: 'Donuts',
-    NUMBER_OF_DONUTS: 'Number of Donuts',
-    FREE_SUPPORT: 'Donut x1 (Free!)',
-    DONUTX1: 'Donut x1:',
-    DONUTX1_LETTER: 'Supporting the creator for Free! This 1 Donut will be donated by Creato!',
-    DONUTS_SUPERFAN_PART1: 'Donut x',
-    DONUTS_SUPERFAN_PART2: '(SuperFan!)',
-    SUPERFANS: 'SuperFans:',
-    SUPERFANS_LETTER: 'Support creators by giving specific amount of donut and get exclusive content.',
-    DONUTS_YOU_LIKE: 'Donuts as you like!',
-    DONUTS_YOU_LIKE_LETTER: 'Support any number of Donuts as you wish!',
-    GIVE_DONUTS_AS_YOU_LIKE: 'Give Donuts as you like:',
     SEND: 'Send',
     CLEAR_ALL: 'Clear all',
     PREVIEW: 'Preview',
@@ -303,40 +308,6 @@ export const EN = {
     SAVE: 'Save',
     NEXT: 'Next',
     OFF: 'OFF'
-  },
-  ITEM_CARD: {
-    DARE: 'Dare',
-    VOTE_NOW: 'Vote Now',
-    FUND_NOW: 'Fund Now',
-    SEE_MORE: 'See More',
-    SEE_RESULTS: 'See Results',
-    VIEW_POST: 'View Post',
-    ENDED: 'Ended',
-    LEFT: 'left',
-    MONTHS: ' months',
-    MONTH: ' month',
-    WEEKS: ' weeks',
-    WEEK: ' week',
-    MINS: ' mins',
-    MIN: ' min',
-    HOURS: ' hours',
-    HOUR: ' hour',
-    DAYS: ' days',
-    DAY: ' day',
-    AGO: ' ago',
-  },
-  CREATE_FUNDME_LETTER: {
-    PERIOD: 'Period',
-    TITLE: 'FundMe Title',
-    FUNDING_GOAL: 'Goal',
-    GOAL_REACHED: 'Goal Reached',
-    GOAL_LETTER: 'Set an achievable goal for creative content!\ni.e. 10 Donut = $1 USD\ne.g. 3,000 Donuts = ~$2,300 HKD\ne.g. 10,000 Donuts = ~$7,800 HKD',
-    GOAL_PLACEHOLDER: 'e.g. 8,000 Donuts',
-    CATEGORY: 'Category',
-    UPLOAD_TEASER_VIDEO: 'Upload a teaser video',
-    TEASER_VIDEO_UPLOADED: 'Teaser video uploaded',
-    CHANGE_TEASER: 'Change teaser',
-    CHOOSE_COVER: 'Choose a cover',
   },
   AUTH_LETTER: {
     SIGN_UP_TO_ENJOY: 'Sign up to enjoy:',
@@ -348,13 +319,6 @@ export const EN = {
     TERMS: 'terms',
     AND: ' and ',
     PRIVACY_POLICY: 'privacy policy.',
-  },
-  REVIEW_LETTER: {
-    DONUTS_NUMBER: 'Number of Donuts',
-    DNUTS: 'Donuts',
-    AUDIENCE_LETTER: 'For audience to entitle as a SuperFan.',
-    REWARDS: 'Reward For SuperFans',
-    EXCLUSIVE_CHAT: 'e.g. exclusive chat, signed postcard etc'
   },
   WELCOME_DLG: {
     TITLE: 'Welcome back!',
@@ -377,27 +341,6 @@ export const EN = {
   CONFIRM: 'Confirm',
   YES: 'Yes',
   NO: 'No',
-  GENERAL_COMPONENT: {
-    MOBILE_VIDEO_CARD: {
-      DARE: 'Dare',
-      SEE_MORE: 'See More',
-      SEE_RESULTS: 'See Results',
-      VIEW_POST: 'View Post',
-      ENDED: 'Ended',
-      LEFT: 'left',
-      MONTHS: ' months',
-      MONTH: ' month',
-      WEEKS: ' weeks',
-      WEEK: ' week',
-      MINS: ' mins',
-      MIN: ' min',
-      HOURS: ' hours',
-      HOUR: ' hour',
-      DAYS: ' days',
-      DAY: ' day',
-      AGO: ' ago',
-    }
-  },
   PROFILE_LETTER: {
     COPY_PROFILE_LINK: 'Copy Profile URL',
     CANCEL: 'Cancel',
