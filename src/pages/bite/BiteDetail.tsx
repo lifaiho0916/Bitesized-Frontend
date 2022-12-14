@@ -456,18 +456,14 @@ const BiteDetail = () => {
                                             <ReactPlayer
                                                 className="react-player"
                                                 url={video.videoUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.videoUrl}` : ''}
-                                                playing={true}
                                                 config={{
                                                     file: {
                                                         attributes: {
-                                                            controlsList: 'nodownload noremoteplayback noplaybackrate',
-                                                            disablePictureInPicture: true,
+                                                            controlsList: 'nodownload noremoteplayback noplaybackrate'
                                                         }
                                                     }
                                                 }}
-                                                muted={true}
                                                 playsinline={true}
-                                                light={video.coverUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.coverUrl}` : ''}
                                                 controls
                                             />
                                         }
