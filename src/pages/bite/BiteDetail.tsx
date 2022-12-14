@@ -104,7 +104,7 @@ const BiteDetail = () => {
             const rate = bite.currency === 'usd' ? 1.0 : currencyRate[`${bite.currency}`]
             const usdAmount = bite.price / rate
             let rate1: any
-            if(user) rate1 = user.currency === 'usd' ? 1.0 : currencyRate[`${user.currency}`]
+            if (user) rate1 = user.currency === 'usd' ? 1.0 : currencyRate[`${user.currency}`]
             else rate1 = 1.0
             const price = usdAmount * rate1
             return price.toFixed(2)
@@ -112,25 +112,25 @@ const BiteDetail = () => {
     }, [bite, user, currencyRate])
 
     const subscribed = useMemo(() => {
-        if(subScription && user) {
-          const fitlers = subScription.subscribers.filter((subscriber: any) => (String(subscriber.user) === String(user.id)) && subscriber.status === true)
-          if(fitlers.length > 0) return true
-          else return false
+        if (subScription && user) {
+            const fitlers = subScription.subscribers.filter((subscriber: any) => (String(subscriber.user) === String(user.id)) && subscriber.status === true)
+            if (fitlers.length > 0) return true
+            else return false
         } return false
     }, [subScription, user])
 
     const subscriptionEnable = useMemo(() => {
-        if(subScription && user) {
-          const fitlers = subScription.subscribers.filter((subscriber: any) => (String(subscriber.user) === String(user.id)) && new Date(subscriber.nextInvoiceAt).getTime() > new Date().getTime())
-          if(fitlers.length > 0) return true
-          else return false
+        if (subScription && user) {
+            const fitlers = subScription.subscribers.filter((subscriber: any) => (String(subscriber.user) === String(user.id)) && new Date(subscriber.nextInvoiceAt).getTime() > new Date().getTime())
+            if (fitlers.length > 0) return true
+            else return false
         } return false
     }, [subScription, user])
 
     const unLockBite = () => {
         if (user) {
             if (bite.currency) {
-                if(subscribed) dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null, null, null, true))
+                if (subscribed) dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null, null, null, true))
                 else setOpenPurchaseModal(true)
             }
             else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null, null, null, false))
@@ -146,13 +146,13 @@ const BiteDetail = () => {
     }
 
     const subscribe = () => {
-        if(user) setOpenSubscribeModal(true)
+        if (user) setOpenSubscribeModal(true)
         else navigate('/auth/signup')
     }
 
     const handleSubscribe = () => {
         setOpenSubscribeModal(false)
-        if(payment) dispatch(subScriptionAction.subscribePlan(subScription._id, currency))
+        if (payment) dispatch(subScriptionAction.subscribePlan(subScription._id, currency))
         else {
             setCard(true)
             setOpenAddCardModal(true)
@@ -161,34 +161,30 @@ const BiteDetail = () => {
 
     const categoryText = useMemo(() => {
         if (bite.owner) {
-          if (bite.owner.categories.length === 0) return ""
-          else {
-            let categories = bite.owner.categories
-            let texts = ""
-            categories.sort((a: any, b: any) => { return a > b ? 1 : a < b ? -1 : 0 })
-            categories.forEach((categoryIndex: any, index: any) => {
-              texts += contexts.CREATOR_CATEGORY_LIST[categoryIndex]
-              if (index < categories.length - 1) texts += "/"
-            })
-            return texts
-          }
+            if (bite.owner.categories.length === 0) return ""
+            else {
+                let categories = bite.owner.categories
+                let texts = ""
+                categories.sort((a: any, b: any) => { return a > b ? 1 : a < b ? -1 : 0 })
+                categories.forEach((categoryIndex: any, index: any) => {
+                    texts += contexts.CREATOR_CATEGORY_LIST[categoryIndex]
+                    if (index < categories.length - 1) texts += "/"
+                })
+                return texts
+            }
         }
-      }, [bite, contexts.CREATOR_CATEGORY_LIST])
+    }, [bite, contexts.CREATOR_CATEGORY_LIST])
 
-    useEffect(() => {if (user) dispatch(paymentAction.getPayment())}, [dispatch, user])
-    useEffect(() => { dispatch(biteAction.getBiteById(biteId)) }, [biteId, dispatch])
-    useEffect(() => { 
-        if (dlgState === 'unlock_bite') {
-            setOpenFreeUnLock(true)
-            // dispatch(biteAction.getBiteById(biteId))
-            navigate(location.pathname)
+    useEffect(() => { if (user) dispatch(paymentAction.getPayment()) }, [dispatch, user, location])
+    useEffect(() => { dispatch(biteAction.getBiteById(biteId)) }, [biteId, dispatch, location])
+    useEffect(() => { if (dlgState === 'unlock_bite') setOpenFreeUnLock(true) }, [dlgState])
+    useEffect(() => { if (isOwner) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort)) }, [isOwner, biteId, sort, dispatch, location])
+    useEffect(() => {
+        if (bite.owner && isOwner === false) {
+            dispatch(biteAction.getBitesByUserIdAndCategory(bite.owner._id, bite._id))
+            dispatch(subScriptionAction.getSubScription(bite.owner._id))
         }
-    }, [dlgState])
-    useEffect(() => { if (isOwner) dispatch(transactionAction.getTransactionsByBiteId(biteId, sort)) }, [isOwner, biteId, sort, dispatch])
-    useEffect(() => { if (bite.owner && isOwner === false) {
-        dispatch(biteAction.getBitesByUserIdAndCategory(bite.owner._id, bite._id)) 
-        dispatch(subScriptionAction.getSubScription(bite.owner._id))
-    }}, [bite.title, isOwner, dispatch])
+    }, [bite.title, isOwner, dispatch, location])
     useEffect(() => {
         if (bite.comments && bite.comments.length) {
             const buffer: any = document.getElementById("scroll")
@@ -196,11 +192,11 @@ const BiteDetail = () => {
         }
     }, [bite])
     useEffect(() => {
-        if(payment && card) {
-          dispatch(subScriptionAction.subscribePlan(subScription._id, currency))
-          setCard(false)
+        if (payment && card) {
+            dispatch(subScriptionAction.subscribePlan(subScription._id, currency))
+            setCard(false)
         }
-      }, [payment, card, currency, subScription, dispatch])
+    }, [payment, card, currency, subScription, dispatch])
 
     const displayEmptyRow = (count: any) => {
         var indents: any = []
@@ -240,13 +236,14 @@ const BiteDetail = () => {
                         creatorName={bite.owner.name}
                         subscriptionName={subScription?.name}
                         onClose={() => {
-                        dispatch({ type: SET_DIALOG_STATE, payload: "" })
-                        setOpenSubscribeSuccessModal(false)}
+                            dispatch({ type: SET_DIALOG_STATE, payload: "" })
+                            setOpenSubscribeSuccessModal(false)
+                        }
                         }
                         handleSubmit={() => {
-                        dispatch({ type: SET_DIALOG_STATE, payload: "" })
-                        setOpenSubscribeSuccessModal(false)
-                        navigate(`/${user?.personalisedUrl}?tab=subscription`)
+                            dispatch({ type: SET_DIALOG_STATE, payload: "" })
+                            setOpenSubscribeSuccessModal(false)
+                            navigate(`/${user?.personalisedUrl}?tab=subscription`)
                         }}
                     />
                     <UnLockFreeModal
@@ -254,6 +251,7 @@ const BiteDetail = () => {
                         onClose={() => {
                             setOpenFreeUnLock(false)
                             dispatch({ type: SET_DIALOG_STATE, payload: "" })
+                            navigate(location.pathname)
                         }}
                         bite={bite}
                         subscribed={subscriptionEnable}
@@ -299,24 +297,24 @@ const BiteDetail = () => {
                                     avatarStyle={"horizontal"}
                                     handleClick={() => navigate(`/${bite.owner.personalisedUrl}`)}
                                 />
-                                 {(subScription && subScription.visible) &&
+                                {(subScription && subScription.visible) &&
                                     <>
                                         {subscribed ?
                                             <Button
-                                            text="Subscribed"
-                                            fillStyle="outline"
-                                            color="primary"
-                                            shape="rounded"
-                                            icon={[<CheckIcon color="#EFA058"/>, <CheckIcon color="white"/>, <CheckIcon color="white"/>]}
-                                            handleSubmit={() => navigate(`/${user.personalisedUrl}?tab=subscription`)}
+                                                text="Subscribed"
+                                                fillStyle="outline"
+                                                color="primary"
+                                                shape="rounded"
+                                                icon={[<CheckIcon color="#EFA058" />, <CheckIcon color="white" />, <CheckIcon color="white" />]}
+                                                handleSubmit={() => navigate(`/${user.personalisedUrl}?tab=subscription`)}
                                             />
                                             :
                                             <Button
-                                            text={contexts.GENERAL.SUBSCRIBE}
-                                            fillStyle="fill"
-                                            color="primary"
-                                            shape="rounded"
-                                            handleSubmit={subscribe}
+                                                text={contexts.GENERAL.SUBSCRIBE}
+                                                fillStyle="fill"
+                                                color="primary"
+                                                shape="rounded"
+                                                handleSubmit={subscribe}
                                             />
                                         }
                                     </>
@@ -339,7 +337,7 @@ const BiteDetail = () => {
                         {lock &&
                             <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
                                 <Button
-                                    text={ subscriptionEnable ? "Unlock this bite for free" : "Unlock this bite"}
+                                    text={subscriptionEnable ? "Unlock this bite for free" : "Unlock this bite"}
                                     fillStyle="outline"
                                     color="primary"
                                     shape="rounded"
@@ -459,16 +457,14 @@ const BiteDetail = () => {
                                                 className="react-player"
                                                 url={video.videoUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.videoUrl}` : ''}
                                                 playing={true}
-                                                // config={{
-                                                //     file: {
-                                                //         attributes: {
-                                                //             controlsList: 'nodownload noremoteplayback noplaybackrate',
-                                                //             disablePictureInPicture: true,
-                                                //         }
-                                                //     }
-                                                // }}
-                                                // stopOnUnmount={false}
-                                                previewTabIndex={0}
+                                                config={{
+                                                    file: {
+                                                        attributes: {
+                                                            controlsList: 'nodownload noremoteplayback noplaybackrate',
+                                                            disablePictureInPicture: true,
+                                                        }
+                                                    }
+                                                }}
                                                 muted={true}
                                                 playsinline={true}
                                                 light={video.coverUrl ? `${process.env.REACT_APP_SERVER_URL}/${video.coverUrl}` : ''}
