@@ -72,11 +72,11 @@ export const InstagramLogin = (props: any) => {
 		[dispatch, pathname, navigate]
 	);
 
-	const openInstagramProfile = () => {
-		const data = accounts.find((acc: any) => acc.name === "instagram");
-		const { username } = JSON.parse(data.metadata);
-		window.open(`https://www.instagram.com/${username}`);
-	};
+	// const openInstagramProfile = () => {
+	// 	const data = accounts.find((acc: any) => acc.name === "instagram");
+	// 	const { username } = JSON.parse(data.metadata);
+	// 	window.open(`https://www.instagram.com/${username}`);
+	// };
 
 	const onFailure = useCallback(() => {
 		if (searchParams.get("error")) {
