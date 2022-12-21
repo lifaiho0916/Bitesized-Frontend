@@ -223,17 +223,14 @@ export const FR = {
         owner: "- Plato"
       },
       {
-        letter: "“ Tout apprentissage a une base émotionnelle. ”",
-        owner: "- Voltaire"
-      },
-      {
-        letter: "“ La connaissance, qui s'acquiert sous la contrainte, n'obtient aucune emprise sur l'esprit. ”",
-        owner: "- Plato"
-      },
-      {
         letter: "“ La sagesse consiste à apprendre ce qu'il faut négliger. ”",
         owner: "- William James"
       },
+      {
+        letter: "“ Tout apprentissage a une base émotionnelle. ”",
+        owner: "- Plato"
+      },
+      
       {
         letter: "“ Savoir ne suffit pas ; nous devons appliquer. Vouloir ne suffit pas ; nous devons faire. ”",
         owner: "- Bruce Lee"

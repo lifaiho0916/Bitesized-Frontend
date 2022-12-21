@@ -223,16 +223,12 @@ export const EN = {
         owner: "- Plato"
       },
       {
-        letter: "“ All learning has an emotional base ”",
-        owner: "- Voltaire"
-      },
-      {
-        letter: "“ Knowledge, which is acquired under compulsion, obtains no hold on the mind. ”",
-        owner: "- Plato"
-      },
-      {
         letter: "“ Wisdom is learning what to overlook. ”",
         owner: "- William James"
+      },
+      {
+        letter: "“ All learning has an emotional base. ”",
+        owner: "- Plato"
       },
       {
         letter: "“ Knowing is not enough; We must apply. Willing is not enough; We must do. ”",
