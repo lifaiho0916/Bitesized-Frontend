@@ -105,7 +105,7 @@ const AdminSubscriptionDetail = () => {
                                 </div>
                                 <div>
                                     <h6 className="color-nuetral-level8 bold-sm">Subscription earning</h6>
-                                    <h4 className="color-primary-level5 bold-lg">{getLocalCurrency(subScription.currency) + Math.round(totalEarning)}</h4>
+                                    <h4 className="color-primary-level5 bold-lg">{getLocalCurrency(subScription.currency) + totalEarning.toFixed(0.1)}</h4>
                                 </div>
                             </div>
                             <div>

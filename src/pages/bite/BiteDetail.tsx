@@ -130,7 +130,7 @@ const BiteDetail = () => {
     const unLockBite = () => {
         if (user) {
             if (bite.currency) {
-                if (subscribed) dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null, null, null, true))
+                if (subscriptionEnable) dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null, null, null, true))
                 else setOpenPurchaseModal(true)
             }
             else dispatch(biteAction.unLockBite(bite._id, bite.currency, bite.price, null, null, null, null, false))
